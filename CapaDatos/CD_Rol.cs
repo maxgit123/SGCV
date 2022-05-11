@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+//Lo que agregue:
+using CapaEntidad;
+using System.Data;
+using System.Data.SQLite;
+
+
+namespace CapaDatos
+{
+    public class CD_Rol
+    {
+        public List<CE_Rol> Listar()
+        {
+            List<CE_Rol> lista = new List<CE_Rol>();
+            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaSQL))
+            {
+                try
+                {
+                    string query = "SELECT ID_Rol, NomRol FROM ROL";
+                    SQLiteCommand cmd = new SQLiteCommand(query, oConexion);
+                    cmd.CommandType = CommandType.Text;
+                    oConexion.Open();
+
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            lista.Add(new CE_Rol()
+                            {
+                                ID_Rol = Convert.ToInt32(reader["ID_Rol"]),
+                                NomRol = reader["NomRol"].ToString(),
+                            });
+                        }
+                    }
+                }
+                catch (SQLiteException ex)
+                {
+                    lista = new List<CE_Rol>();
+                }
+                finally
+                {
+                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
+                        oConexion.Close();
+                }
+            }
+            return lista;
+        }
+    }
+}
