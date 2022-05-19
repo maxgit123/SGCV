@@ -18,17 +18,16 @@ namespace CapaPresentacion.Formularios
         {
             CE_Usuario oUsuario = new CN_Usuario().Listar().FirstOrDefault(u => u.Documento == txtDocumento.Text.Trim() && u.Clave == txtClave.Text.Trim()); //Expresion lambda.
             //FirstOrDefault te regresa el elemento o null.
-            if (oUsuario != null) //Y si es diferente a null . . . es porque si existe.
-            {
-                Dashboard form = new Dashboard(oUsuario);
-                form.Show(); //Muestra el dashboard
-                this.Hide(); //y oculta el login.
-                form.FormClosing += frm_closing; //Cuando se cierra el dashboard vuelve a mostrar el form de login que se oculto.
-            }
-            else
+
+            if (oUsuario == null) //Clausula de guarda.
             {
                 MessageBox.Show("DNI y/o Clave invalidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
+            this.Hide(); //Oculta el Login.
+            Dashboard form = new Dashboard(oUsuario);
+            form.FormClosing += frm_closing; //Cuando se cierra el dashboard vuelve a mostrar el form de login que se oculto.
+            form.Show(); //Muestra el Dashboard.
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {

@@ -87,49 +87,46 @@ namespace CapaPresentacion.Formularios.Usuarios
         }
         private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e) //Boton Editar y Eliminar.
         {
-            int indice = e.RowIndex;
+            if (e.ColumnIndex < 0 || e.ColumnIndex != dgvUsuarios.Columns["btnEditar"].Index || e.ColumnIndex != dgvUsuarios.Columns["btnEliminar"].Index)
+                return;
 
-            if (indice >= 0)
+            if (e.ColumnIndex == dgvUsuarios.Columns["btnEditar"].Index){
+                //Labels de ayuda para ver el indice del DGV y el ID del usuario.
+                lblIndice.Text = e.RowIndex.ToString();
+                lblID_Usuario.Text = dgvUsuarios.Rows[e.RowIndex].Cells["ID_Usuario"].Value.ToString();
+
+                txtDocumento.Text = dgvUsuarios.Rows[e.RowIndex].Cells["Documento"].Value.ToString();
+                txtNombre.Text = dgvUsuarios.Rows[e.RowIndex].Cells["Nombre"].Value.ToString();
+                txtApellido.Text = dgvUsuarios.Rows[e.RowIndex].Cells["Apellido"].Value.ToString();
+                txtClave.Text = dgvUsuarios.Rows[e.RowIndex].Cells["Clave"].Value.ToString();
+                foreach (OpcionCombo oc in cbRol.Items)
+                {
+                    if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvUsuarios.Rows[e.RowIndex].Cells["ID_Rol"].Value))
+                    {
+                        int indice_combo = cbRol.Items.IndexOf(oc);
+                        cbRol.SelectedIndex = indice_combo; //Se selecciona el que encontro.
+                        break; //Cuando la relacion sea correcta se corta el foreach.
+                    }
+                }
+            }
+            else if (e.ColumnIndex == dgvUsuarios.Columns["btnEliminar"].Index)
             {
-                if (dgvUsuarios.Columns[e.ColumnIndex].Name == "btnEditar")
-                {
-                    //Labels de ayuda para ver el indice del DGV y el ID del usuario.
-                    lblIndice.Text = indice.ToString();
-                    lblID_Usuario.Text = dgvUsuarios.Rows[indice].Cells["ID_Usuario"].Value.ToString();
+                if (MessageBox.Show("¿Desea eliminar al usuario " + dgvUsuarios.Rows[e.RowIndex].Cells["Nombre"].Value.ToString() + "?", "Eliminar Usuario", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    return;
 
-                    txtDocumento.Text = dgvUsuarios.Rows[indice].Cells["Documento"].Value.ToString();
-                    txtNombre.Text = dgvUsuarios.Rows[indice].Cells["Nombre"].Value.ToString();
-                    txtApellido.Text = dgvUsuarios.Rows[indice].Cells["Apellido"].Value.ToString();
-                    txtClave.Text = dgvUsuarios.Rows[indice].Cells["Clave"].Value.ToString();
-                    foreach (OpcionCombo oc in cbRol.Items)
-                    {
-                        if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvUsuarios.Rows[indice].Cells["ID_Rol"].Value))
-                        {
-                            int indice_combo = cbRol.Items.IndexOf(oc);
-                            cbRol.SelectedIndex = indice_combo; //Se selecciona el que encontro.
-                            break; //Cuando la relacion sea correcta se corta el foreach.
-                        }
-                    }
-                }
-                else if (dgvUsuarios.Columns[e.ColumnIndex].Name == "btnEliminar")
-                {
-                    if (MessageBox.Show("¿Desea eliminar al usuario " + dgvUsuarios.Rows[indice].Cells["Nombre"].Value.ToString() + "?", "Eliminar Usuario", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        string mensaje = string.Empty;
+                string mensaje = string.Empty;
 
-                        CE_Usuario oUsuario = new CE_Usuario() //Se crea un nueva instancia
-                        { //de la que solo se necesita el ID del usuario.
-                            ID_Usuario = int.Parse(dgvUsuarios.Rows[indice].Cells["ID_Usuario"].Value.ToString())
-                        };
+                CE_Usuario oUsuario = new CE_Usuario() //Se crea un nueva instancia
+                { //de la que solo se necesita el ID del usuario.
+                    ID_Usuario = int.Parse(dgvUsuarios.Rows[e.RowIndex].Cells["ID_Usuario"].Value.ToString())
+                };
 
-                        bool respuesta = new CN_Usuario().Eliminar(oUsuario, out mensaje);
+                bool respuesta = new CN_Usuario().Eliminar(oUsuario, out mensaje);
 
-                        if (respuesta) //Si se elimino correctamente (Eliminar retorna respuesta bool):
-                            dgvUsuarios.Rows.RemoveAt(Convert.ToInt32(indice)); //se elimina la fila del DGV.
-                        else
-                            MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-                }
+                if (respuesta) //Si se elimino correctamente (Eliminar retorna respuesta bool):
+                    dgvUsuarios.Rows.RemoveAt(Convert.ToInt32(e.RowIndex)); //se elimina la fila del DGV.
+                else
+                    MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
         private void btnGuardar_Click(object sender, EventArgs e)
