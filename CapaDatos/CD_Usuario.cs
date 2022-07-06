@@ -30,15 +30,15 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Usuario()
                             {
-                                ID_Usuario = Convert.ToInt32(reader["ID_Usuario"]),
+                                IdUsuario = Convert.ToInt32(reader["ID_Usuario"]),
                                 Documento = reader["Documento"].ToString(),
                                 Nombre = reader["Nombre"].ToString(),
                                 Apellido = reader["Apellido"].ToString(),
                                 Clave = reader["Clave"].ToString(),
-                                FechaRegistro = reader["FechaRegistro"].ToString(),
+                                FechaCreacion = reader["FechaRegistro"].ToString(),
                                 oRol = new CE_Rol()
                                 {
-                                    ID_Rol = Convert.ToInt32(reader["ID_Rol"]),
+                                    IdRol = Convert.ToInt32(reader["ID_Rol"]),
                                     NomRol = reader["NomRol"].ToString()
                                 }
                             });
@@ -80,7 +80,7 @@ namespace CapaDatos
                     cmd.Parameters.Add(new SQLiteParameter("@Apellido", oUsuario.Apellido));
                     cmd.Parameters.Add(new SQLiteParameter("@Clave", oUsuario.Clave));
                     cmd.Parameters.Add(new SQLiteParameter("@FechaRegistro", DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss")));
-                    cmd.Parameters.Add(new SQLiteParameter("@ID_Rol", oUsuario.oRol.ID_Rol));
+                    cmd.Parameters.Add(new SQLiteParameter("@ID_Rol", oUsuario.oRol.IdRol));
                     cmd.CommandType = CommandType.Text;
 
                     respuesta = Convert.ToInt32(cmd.ExecuteScalar().ToString());
@@ -124,8 +124,8 @@ namespace CapaDatos
                     cmd.Parameters.Add(new SQLiteParameter("@Nombre", oUsuario.Nombre));
                     cmd.Parameters.Add(new SQLiteParameter("@Apellido", oUsuario.Apellido));
                     cmd.Parameters.Add(new SQLiteParameter("@Clave", oUsuario.Clave));
-                    cmd.Parameters.Add(new SQLiteParameter("@ID_Rol", oUsuario.oRol.ID_Rol));
-                    cmd.Parameters.Add(new SQLiteParameter("@ID_Usuario", oUsuario.ID_Usuario));
+                    cmd.Parameters.Add(new SQLiteParameter("@ID_Rol", oUsuario.oRol.IdRol));
+                    cmd.Parameters.Add(new SQLiteParameter("@ID_Usuario", oUsuario.IdUsuario));
 
                     cmd.CommandType = CommandType.Text;
                     respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
@@ -157,7 +157,7 @@ namespace CapaDatos
                     StringBuilder query = new StringBuilder();
                     query.AppendLine("DELETE FROM USUARIO WHERE ID_Usuario = @ID_Usuario;");
                     SQLiteCommand cmd = new SQLiteCommand(query.ToString(), oConexion);
-                    cmd.Parameters.Add(new SQLiteParameter("@ID_Usuario", oUsuario.ID_Usuario));
+                    cmd.Parameters.Add(new SQLiteParameter("@ID_Usuario", oUsuario.IdUsuario));
                     cmd.CommandType = CommandType.Text;
                     respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
                     cmd.Parameters.Clear();

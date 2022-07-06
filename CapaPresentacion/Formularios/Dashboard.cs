@@ -15,20 +15,21 @@ namespace CapaPresentacion.Formularios
         private static CE_Usuario usuarioActual;
         private static IconMenuItem menuActivo = null;
         private static Form formularioActivo = null;
-        public Dashboard(CE_Usuario objusuario)
+        public Dashboard(CE_Usuario oUsuario)
         {
-            usuarioActual = objusuario;
+            usuarioActual = oUsuario;
             InitializeComponent();
         }
         private void Dashboard_Load(object sender, EventArgs e)
         {
             menuTituloUsuario.Text = usuarioActual.Apellido + ", " + usuarioActual.Nombre;
+            smenuRol.Text = usuarioActual.oRol.NomRol;
             //----Muestra el menu segun los permisos del usuario----
-            List<CE_Permiso> ListaPermisos = new CN_Permiso().Listar(usuarioActual.ID_Usuario); //Obtiene los permisos del usuario.
+            List<CE_Modulo> ListaPermisos = new CN_Permiso().Listar(usuarioActual.IdUsuario); //Obtiene los permisos del usuario.
 
             foreach (IconMenuItem iconmenu in menuPrincipal.Items) //En cada uno comprueba
             {
-                bool encontrado = ListaPermisos.Any(m => m.NomMenu == iconmenu.Name); //que el nombre sea el mismo
+                bool encontrado = ListaPermisos.Any(m => m.Nombre == iconmenu.Name); //que el nombre sea el mismo
                 if (encontrado == false) //si no lo encuentra
                     iconmenu.Visible = false; //lo oculta.
             }

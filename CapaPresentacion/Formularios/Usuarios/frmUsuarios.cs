@@ -21,7 +21,7 @@ namespace CapaPresentacion.Formularios.Usuarios
 
             foreach (CE_Rol item in listaRol)
             {
-                cbRol.Items.Add(new OpcionCombo() { Valor = item.ID_Rol, Texto = item.NomRol });
+                cbRol.Items.Add(new OpcionCombo() { Valor = item.IdRol, Texto = item.NomRol });
                 cbRol.DisplayMember = "Texto";
                 cbRol.ValueMember = "Valor";
                 cbRol.SelectedIndex = 0;
@@ -45,13 +45,13 @@ namespace CapaPresentacion.Formularios.Usuarios
             foreach (CE_Usuario item in listaUsuario)
             {
                 dgvUsuarios.Rows.Add(new object[] { //Poner los TODOS los items EN ORDEN.
-                    item.ID_Usuario,
+                    item.IdUsuario,
                     item.Documento,
                     item.Nombre,
                     item.Apellido,
                     item.Clave,
-                    item.FechaRegistro,
-                    item.oRol.ID_Rol,
+                    item.FechaCreacion,
+                    item.oRol.IdRol,
                     item.oRol.NomRol,
                     "","" //Botones Editar y Elimiar.
                 });
@@ -118,7 +118,7 @@ namespace CapaPresentacion.Formularios.Usuarios
 
                 CE_Usuario oUsuario = new CE_Usuario() //Se crea un nueva instancia
                 { //de la que solo se necesita el ID del usuario.
-                    ID_Usuario = int.Parse(dgvUsuarios.Rows[e.RowIndex].Cells["ID_Usuario"].Value.ToString())
+                    IdUsuario = int.Parse(dgvUsuarios.Rows[e.RowIndex].Cells["ID_Usuario"].Value.ToString())
                 };
 
                 bool respuesta = new CN_Usuario().Eliminar(oUsuario, out mensaje);
@@ -135,15 +135,15 @@ namespace CapaPresentacion.Formularios.Usuarios
 
             CE_Usuario oUsuario = new CE_Usuario() //Se crea un obj de la clase Usuario
             { //y se le asignan los valores del formulario.
-                ID_Usuario = Convert.ToInt32(lblID_Usuario.Text),
+                IdUsuario = Convert.ToInt32(lblID_Usuario.Text),
                 Documento = txtDocumento.Text.Trim(),
                 Nombre = txtNombre.Text.Trim(),
                 Apellido = txtApellido.Text.Trim(),
                 Clave = txtClave.Text.Trim(),
-                oRol = new CE_Rol() {ID_Rol = Convert.ToInt32(((OpcionCombo)cbRol.SelectedItem).Valor)},
+                oRol = new CE_Rol() {IdRol = Convert.ToInt32(((OpcionCombo)cbRol.SelectedItem).Valor)},
             };
             
-            if (oUsuario.ID_Usuario == 0) //Si es un usuario nuevo:
+            if (oUsuario.IdUsuario == 0) //Si es un usuario nuevo:
             {
                 //Se ejecuta el metodo Crear que retorna el ID del usuario creado que se genera desde la BD.
                 int idUsuarioCreado = new CN_Usuario().Crear(oUsuario, out mensaje);

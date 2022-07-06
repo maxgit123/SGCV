@@ -50,12 +50,12 @@ namespace CapaDatos
                                 oDireccion = new CE_Direccion()
                                 {
                                     IdDireccion = Convert.ToInt32(reader["ID_Direccion"]),
-                                    NomCalle = reader["NomCalle"].ToString(),
-                                    NumCalle = reader["NumCalle"].ToString(),
+                                    Calle = reader["NomCalle"].ToString(),
+                                    Numero = reader["NumCalle"].ToString(),
                                 },
                                 oLocalidad = new CE_Localidad()
                                 {
-                                    IdLocCP = Convert.ToInt32(reader["ID_LocCP"]),
+                                    IdLocalidad = Convert.ToInt32(reader["ID_LocCP"]),
                                     NomLocalidad = reader["NomLocalidad"].ToString(),
                                 },
                                 oProvincia = new CE_Provincia()
@@ -115,7 +115,7 @@ namespace CapaDatos
                     cmd.Parameters.Add(new SQLiteParameter("@InicioAct", oComercio.InicioAct));
                     cmd.Parameters.Add(new SQLiteParameter("@PuntoVenta", oComercio.PuntoVenta));
                     cmd.Parameters.Add(new SQLiteParameter("@ID_Direccion", oComercio.oDireccion.IdDireccion));
-                    cmd.Parameters.Add(new SQLiteParameter("@ID_LocCP", oComercio.oLocalidad.IdLocCP));
+                    cmd.Parameters.Add(new SQLiteParameter("@ID_LocCP", oComercio.oLocalidad.IdLocalidad));
                     cmd.Parameters.Add(new SQLiteParameter("@ID_Provincia", oComercio.oProvincia.IdProvincia));
                     cmd.Parameters.Add(new SQLiteParameter("@ID_Contacto", oComercio.oContacto.IdContacto));
                     cmd.Parameters.Add(new SQLiteParameter("@ID_Comercio", oComercio.IdComercio));

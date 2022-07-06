@@ -33,9 +33,9 @@ namespace CapaDatos
                             lista.Add(new CE_Producto()
                             {
                                 IdProducto = Convert.ToInt32(reader["ID_Producto"]),
-                                Descripcion = reader["Descripcion"].ToString(),
-                                PrecioCompra = Convert.ToDecimal(reader["PrecioCompra"]),
-                                PrecioVenta = Convert.ToDecimal(reader["PrecioVenta"]),
+                                Nombre = reader["Descripcion"].ToString(),
+                                Costo = Convert.ToDecimal(reader["PrecioCompra"]),
+                                Precio = Convert.ToDecimal(reader["PrecioVenta"]),
                                 Stock = Convert.ToInt32(reader["Stock"]),
                                 QuiebreStock = Convert.ToInt32(reader["QuiebreStock"]),
                                 oCategoria = new CE_Categoria()
@@ -77,7 +77,7 @@ namespace CapaDatos
                     //last_insert_rowid retorna el ultimo row id que se inserto.
                     SQLiteCommand cmd = new SQLiteCommand(query.ToString(), oConexion);
 
-                    cmd.Parameters.Add(new SQLiteParameter("@Descripcion", oProducto.Descripcion));
+                    cmd.Parameters.Add(new SQLiteParameter("@Descripcion", oProducto.Nombre));
                     cmd.Parameters.Add(new SQLiteParameter("@QuiebreStock", oProducto.QuiebreStock));
                     cmd.Parameters.Add(new SQLiteParameter("@ID_Categoria", oProducto.oCategoria.IdCategoria));
                     cmd.CommandType = CommandType.Text;
@@ -117,7 +117,7 @@ namespace CapaDatos
                                      + "WHERE ID_Producto = @ID_Producto");
                     SQLiteCommand cmd = new SQLiteCommand(query.ToString(), oConexion);
 
-                    cmd.Parameters.Add(new SQLiteParameter("@Descripcion", oProducto.Descripcion));
+                    cmd.Parameters.Add(new SQLiteParameter("@Descripcion", oProducto.Nombre));
                     cmd.Parameters.Add(new SQLiteParameter("@QuiebreStock", oProducto.QuiebreStock));
                     cmd.Parameters.Add(new SQLiteParameter("@ID_Categoria", oProducto.oCategoria.IdCategoria));
                     cmd.Parameters.Add(new SQLiteParameter("@ID_Producto", oProducto.IdProducto));

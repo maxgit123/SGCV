@@ -65,9 +65,9 @@ namespace CapaPresentacion.Formularios.Comercio
             txtIngBrutos.Text = oComercio.IngBrutos;
             dtInicioAct.Value = DateTime.ParseExact(oComercio.InicioAct, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             numPuntoVenta.Value = oComercio.PuntoVenta;
-            txtNomCalle.Text = oComercio.oDireccion.NomCalle;
-            txtNumCalle.Text = oComercio.oDireccion.NumCalle;
-            txtCP.Text = oComercio.oLocalidad.IdLocCP.ToString();
+            txtNomCalle.Text = oComercio.oDireccion.Calle;
+            txtNumCalle.Text = oComercio.oDireccion.Numero;
+            txtCP.Text = oComercio.oLocalidad.IdLocalidad.ToString();
             txtCiudad.Text = oComercio.oLocalidad.NomLocalidad;
             cbRespIVA.SelectedIndex = oComercio.oRespIVA.IdRespIVA - 1;
             cbProvincia.SelectedIndex = oComercio.oProvincia.IdProvincia - 1;
@@ -101,8 +101,8 @@ namespace CapaPresentacion.Formularios.Comercio
                 InicioAct = dtInicioAct.Value.ToString("dd/MM/yyyy"),
                 PuntoVenta = (int)numPuntoVenta.Value,
                 oRespIVA = new CE_RespIVA() { IdRespIVA = Convert.ToInt32(((OpcionCombo)cbRespIVA.SelectedItem).Valor) },
-                oDireccion = new CE_Direccion() { IdDireccion = 1, NomCalle = txtNomCalle.Text, NumCalle = txtNumCalle.Text },
-                oLocalidad = new CE_Localidad() { IdLocCP = Convert.ToInt32(txtCP.Text), NomLocalidad = txtCiudad.Text},
+                oDireccion = new CE_Direccion() { IdDireccion = 1, Calle = txtNomCalle.Text, Numero = txtNumCalle.Text },
+                oLocalidad = new CE_Localidad() { IdLocalidad = Convert.ToInt32(txtCP.Text), NomLocalidad = txtCiudad.Text},
                 oProvincia = new CE_Provincia() { IdProvincia = Convert.ToInt32(((OpcionCombo)cbProvincia.SelectedItem).Valor)},
                 oContacto = new CE_Contacto() { IdContacto = 1, Telefono = txtTelefono.Text, Correo = txtCorreo.Text }
             };

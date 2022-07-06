@@ -46,8 +46,9 @@
     <Compile Include="CE_Comercio.cs" />
     <Compile Include="CE_Contacto.cs" />
     <Compile Include="CE_Direccion.cs" />
+    <Compile Include="CE_Estado.cs" />
     <Compile Include="CE_Localidad.cs" />
-    <Compile Include="CE_Permiso.cs" />
+    <Compile Include="CE_Modulo.cs" />
     <Compile Include="CE_Producto.cs" />
     <Compile Include="CE_Proveedor.cs" />
     <Compile Include="CE_Provincia.cs" />

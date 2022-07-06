@@ -48,6 +48,7 @@
             this.smenuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.panelDashboard = new System.Windows.Forms.Panel();
+            this.smenuRol = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPrincipal.SuspendLayout();
             this.menuTitulo.SuspendLayout();
             this.SuspendLayout();
@@ -65,7 +66,7 @@
             this.menuClientes});
             this.menuPrincipal.Location = new System.Drawing.Point(0, 48);
             this.menuPrincipal.Name = "menuPrincipal";
-            this.menuPrincipal.Size = new System.Drawing.Size(1207, 61);
+            this.menuPrincipal.Size = new System.Drawing.Size(952, 61);
             this.menuPrincipal.TabIndex = 0;
             this.menuPrincipal.Text = "Menu";
             // 
@@ -230,13 +231,14 @@
             this.menuTitulo.Location = new System.Drawing.Point(0, 0);
             this.menuTitulo.Name = "menuTitulo";
             this.menuTitulo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.menuTitulo.Size = new System.Drawing.Size(1207, 48);
+            this.menuTitulo.Size = new System.Drawing.Size(952, 48);
             this.menuTitulo.TabIndex = 1;
             this.menuTitulo.Text = "menuStrip2";
             // 
             // menuTituloUsuario
             // 
             this.menuTituloUsuario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.smenuRol,
             this.smenuCerrarSesion});
             this.menuTituloUsuario.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuTituloUsuario.ForeColor = System.Drawing.SystemColors.Control;
@@ -247,7 +249,7 @@
             // smenuCerrarSesion
             // 
             this.smenuCerrarSesion.Name = "smenuCerrarSesion";
-            this.smenuCerrarSesion.Size = new System.Drawing.Size(172, 26);
+            this.smenuCerrarSesion.Size = new System.Drawing.Size(180, 26);
             this.smenuCerrarSesion.Text = "Cerrar sesion";
             this.smenuCerrarSesion.Click += new System.EventHandler(this.smenuCerrarSesion_Click);
             // 
@@ -269,14 +271,20 @@
             this.panelDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDashboard.Location = new System.Drawing.Point(0, 109);
             this.panelDashboard.Name = "panelDashboard";
-            this.panelDashboard.Size = new System.Drawing.Size(1207, 479);
+            this.panelDashboard.Size = new System.Drawing.Size(952, 479);
             this.panelDashboard.TabIndex = 3;
+            // 
+            // smenuRol
+            // 
+            this.smenuRol.Name = "smenuRol";
+            this.smenuRol.Size = new System.Drawing.Size(180, 26);
+            this.smenuRol.Text = "Rol";
             // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1207, 588);
+            this.ClientSize = new System.Drawing.Size(952, 588);
             this.Controls.Add(this.panelDashboard);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.menuPrincipal);
@@ -317,5 +325,6 @@
         private System.Windows.Forms.ToolStripMenuItem registrarVentaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listaDeVentasToolStripMenuItem;
         private FontAwesome.Sharp.IconMenuItem smenuProductos;
+        private System.Windows.Forms.ToolStripMenuItem smenuRol;
     }
 }

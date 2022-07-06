@@ -12,9 +12,9 @@ namespace CapaDatos
 {
     public class CD_Permiso
     {
-        public List<CE_Permiso> Listar(int idUsuario)
+        public List<CE_Modulo> Listar(int idUsuario)
         {
-            List<CE_Permiso> lista = new List<CE_Permiso>();
+            List<CE_Modulo> lista = new List<CE_Modulo>();
             using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaSQL))
             {
                 try
@@ -34,17 +34,17 @@ namespace CapaDatos
                     {
                         while (reader.Read())
                         {
-                            lista.Add(new CE_Permiso()
+                            lista.Add(new CE_Modulo()
                             {
-                                oRol = new CE_Rol() { ID_Rol = Convert.ToInt32( reader ["ID_Rol"])},
-                                NomMenu = reader["NomMenu"].ToString(),
+                                oRol = new CE_Rol() { IdRol = Convert.ToInt32( reader ["ID_Rol"])},
+                                Nombre = reader["NomMenu"].ToString(),
                             });
                         }
                     }
                 }
                 catch (SQLiteException ex)
                 {
-                    lista = new List<CE_Permiso>();
+                    lista = new List<CE_Modulo>();
                 }
                 finally
                 {

@@ -50,9 +50,9 @@ namespace CapaPresentacion.Formularios.Productos
             {
                 dgvProductos.Rows.Add(new object[] { //Acordate de poner los TODOS los items EN ORDEN
                     item.IdProducto,
-                    item.Descripcion,
-                    item.PrecioCompra,
-                    item.PrecioVenta,
+                    item.Nombre,
+                    item.Costo,
+                    item.Precio,
                     item.Stock,
                     item.QuiebreStock,
                     item.oCategoria.IdCategoria,
@@ -144,7 +144,7 @@ namespace CapaPresentacion.Formularios.Productos
                 CE_Producto oProducto = new CE_Producto() //Se crea un obj de la clase Producto
                 { //y se le asignan los valores del formulario.
                     IdProducto = Convert.ToInt32(lblID_Producto.Text),
-                    Descripcion = txtDescripcion.Text.Trim(),
+                    Nombre = txtDescripcion.Text.Trim(),
                     QuiebreStock = Convert.ToInt32(txtQuiebreStock.Text.Trim()),
                     oCategoria = new CE_Categoria() { IdCategoria = Convert.ToInt32(((OpcionCombo)cbCategoria.SelectedItem).Valor) },
                 };
