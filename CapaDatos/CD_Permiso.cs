@@ -15,7 +15,7 @@ namespace CapaDatos
         public List<CE_Modulo> Listar(int idUsuario)
         {
             List<CE_Modulo> lista = new List<CE_Modulo>();
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaSQL))
+            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
             {
                 try
                 {

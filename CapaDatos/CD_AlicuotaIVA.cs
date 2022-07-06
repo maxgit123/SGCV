@@ -12,7 +12,7 @@ namespace CapaDatos
         public List<CE_AlicuotaIVA> Listar()
         {
             List<CE_AlicuotaIVA> lista = new List<CE_AlicuotaIVA>();
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaSQL))
+            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
             {
                 try
                 {

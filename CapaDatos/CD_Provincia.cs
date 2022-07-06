@@ -12,7 +12,7 @@ namespace CapaDatos
         public List<CE_Provincia> Listar()
         {
             List<CE_Provincia> lista = new List<CE_Provincia>();
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaSQL))
+            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
             {
                 try
                 {

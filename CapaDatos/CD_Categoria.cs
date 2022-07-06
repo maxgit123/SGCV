@@ -13,7 +13,7 @@ namespace CapaDatos
         public List<CE_Categoria> Listar()
         {
             List<CE_Categoria> lista = new List<CE_Categoria>();
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaSQL))
+            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
             {
                 try
                 {
@@ -58,7 +58,7 @@ namespace CapaDatos
             mensaje = string.Empty;
             int respuesta = 0;
 
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaSQL))
+            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
             {
                 try
                 {
@@ -97,7 +97,7 @@ namespace CapaDatos
             bool respuesta = false;
             mensaje = string.Empty;
 
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaSQL))
+            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
             {
                 try
                 {
@@ -135,7 +135,7 @@ namespace CapaDatos
             bool respuesta = false;
             mensaje = String.Empty;
 
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaSQL))
+            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
             {
                 try
                 {

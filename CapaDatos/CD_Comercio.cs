@@ -12,7 +12,7 @@ namespace CapaDatos
         public CE_Comercio Leer()
         {
             CE_Comercio oComercio = new CE_Comercio();
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaSQL))
+            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
             {
                 try
                 {
@@ -90,7 +90,7 @@ namespace CapaDatos
             bool respuesta = true;
             mensaje = string.Empty;
 
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaSQL))
+            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
             {
                 try
                 {
@@ -141,7 +141,7 @@ namespace CapaDatos
         {
             leido = true;
             byte[] LogoBytes = new byte[0];
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaSQL))
+            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
             {
                 try
                 {
@@ -179,7 +179,7 @@ namespace CapaDatos
         {
             mensaje = string.Empty;
             bool respuesta = true;
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaSQL))
+            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
             {
                 try
                 {

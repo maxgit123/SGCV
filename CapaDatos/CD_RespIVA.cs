@@ -12,7 +12,7 @@ namespace CapaDatos
         public List<CE_RespIVA> Listar()
         {
             List<CE_RespIVA> lista = new List<CE_RespIVA>();
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaSQL))
+            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
             {
                 try
                 {

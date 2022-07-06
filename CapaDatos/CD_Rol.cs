@@ -16,7 +16,7 @@ namespace CapaDatos
         public List<CE_Rol> Listar()
         {
             List<CE_Rol> lista = new List<CE_Rol>();
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaSQL))
+            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
             {
                 try
                 {
