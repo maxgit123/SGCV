@@ -25,11 +25,11 @@ namespace CapaPresentacion.Formularios
             menuTituloUsuario.Text = usuarioActual.Apellido + ", " + usuarioActual.Nombre;
             smenuRol.Text = usuarioActual.oRol.NomRol;
             //----Muestra el menu segun los permisos del usuario----
-            List<CE_Modulo> ListaPermisos = new CN_Permiso().Listar(usuarioActual.IdUsuario); //Obtiene los permisos del usuario.
+            List<CE_Modulo> ListaModulos = new CN_Modulo().Listar(usuarioActual.IdUsuario); //Obtiene los permisos del usuario.
 
             foreach (IconMenuItem iconmenu in menuPrincipal.Items) //En cada uno comprueba
             {
-                bool encontrado = ListaPermisos.Any(m => m.Nombre == iconmenu.Name); //que el nombre sea el mismo
+                bool encontrado = ListaModulos.Any(m => m.Nombre == iconmenu.Name); //que el nombre sea el mismo
                 if (encontrado == false) //si no lo encuentra
                     iconmenu.Visible = false; //lo oculta.
             }

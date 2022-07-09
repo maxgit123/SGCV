@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 //Lo que agregue:
 using CapaEntidad;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 
 
 namespace CapaDatos
@@ -16,28 +13,28 @@ namespace CapaDatos
         public List<CE_Rol> Listar()
         {
             List<CE_Rol> lista = new List<CE_Rol>();
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
+            using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
                 try
                 {
-                    string query = "SELECT ID_Rol, NomRol FROM ROL";
-                    SQLiteCommand cmd = new SQLiteCommand(query, oConexion);
+                    string query = "SELECT id, nombre FROM cRol";
+                    SqlCommand cmd = new SqlCommand(query, oConexion);
                     cmd.CommandType = CommandType.Text;
                     oConexion.Open();
 
-                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             lista.Add(new CE_Rol()
                             {
-                                IdRol = Convert.ToInt32(reader["ID_Rol"]),
-                                NomRol = reader["NomRol"].ToString(),
+                                IdRol = Convert.ToInt32(reader["id"]),
+                                NomRol = reader["nombre"].ToString(),
                             });
                         }
                     }
                 }
-                catch (SQLiteException ex)
+                catch (SqlException ex)
                 {
                     lista = new List<CE_Rol>();
                 }

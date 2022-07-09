@@ -3,7 +3,7 @@ using System.Text;
 //Lo que agregue:
 using CapaEntidad;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 
 namespace CapaDatos
 {
@@ -12,7 +12,7 @@ namespace CapaDatos
         public CE_Comercio Leer()
         {
             CE_Comercio oComercio = new CE_Comercio();
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
+            using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
                 try
                 {
@@ -26,11 +26,11 @@ namespace CapaDatos
                     query.AppendLine("INNER JOIN PROVINCIA p ON p.ID_Provincia = c.ID_Provincia");
                     query.AppendLine("INNER JOIN CONTACTO o ON o.ID_Contacto = c.ID_Contacto;");
                   
-                    SQLiteCommand cmd = new SQLiteCommand(query.ToString(), oConexion);
+                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
                     cmd.CommandType = CommandType.Text;
                     oConexion.Open();
 
-                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -73,7 +73,7 @@ namespace CapaDatos
                         }
                     }
                 }
-                catch (SQLiteException ex)
+                catch (SqlException ex)
                 {
                     oComercio = new CE_Comercio(); //Si hay un error lo retorna vacio.
                 }
@@ -90,7 +90,7 @@ namespace CapaDatos
             bool respuesta = true;
             mensaje = string.Empty;
 
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
+            using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
                 try
                 {
@@ -107,24 +107,24 @@ namespace CapaDatos
                                      + "ID_Provincia = @ID_Provincia, "
                                      + "ID_Contacto = @ID_Contacto "
                                      + "WHERE ID_Comercio = @ID_Comercio");
-                    SQLiteCommand cmd = new SQLiteCommand(query.ToString(), oConexion);
+                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
 
-                    cmd.Parameters.Add(new SQLiteParameter("@RazonSocial", oComercio.RazonSocial));
-                    cmd.Parameters.Add(new SQLiteParameter("@Cuit", oComercio.Cuit));
-                    cmd.Parameters.Add(new SQLiteParameter("@IngBrutos", oComercio.IngBrutos));
-                    cmd.Parameters.Add(new SQLiteParameter("@InicioAct", oComercio.InicioAct));
-                    cmd.Parameters.Add(new SQLiteParameter("@PuntoVenta", oComercio.PuntoVenta));
-                    cmd.Parameters.Add(new SQLiteParameter("@ID_Direccion", oComercio.oDireccion.IdDireccion));
-                    cmd.Parameters.Add(new SQLiteParameter("@ID_LocCP", oComercio.oLocalidad.IdLocalidad));
-                    cmd.Parameters.Add(new SQLiteParameter("@ID_Provincia", oComercio.oProvincia.IdProvincia));
-                    cmd.Parameters.Add(new SQLiteParameter("@ID_Contacto", oComercio.oContacto.IdContacto));
-                    cmd.Parameters.Add(new SQLiteParameter("@ID_Comercio", oComercio.IdComercio));
+                    cmd.Parameters.Add(new SqlParameter("@RazonSocial", oComercio.RazonSocial));
+                    cmd.Parameters.Add(new SqlParameter("@Cuit", oComercio.Cuit));
+                    cmd.Parameters.Add(new SqlParameter("@IngBrutos", oComercio.IngBrutos));
+                    cmd.Parameters.Add(new SqlParameter("@InicioAct", oComercio.InicioAct));
+                    cmd.Parameters.Add(new SqlParameter("@PuntoVenta", oComercio.PuntoVenta));
+                    cmd.Parameters.Add(new SqlParameter("@ID_Direccion", oComercio.oDireccion.IdDireccion));
+                    cmd.Parameters.Add(new SqlParameter("@ID_LocCP", oComercio.oLocalidad.IdLocalidad));
+                    cmd.Parameters.Add(new SqlParameter("@ID_Provincia", oComercio.oProvincia.IdProvincia));
+                    cmd.Parameters.Add(new SqlParameter("@ID_Contacto", oComercio.oContacto.IdContacto));
+                    cmd.Parameters.Add(new SqlParameter("@ID_Comercio", oComercio.IdComercio));
                     cmd.CommandType = CommandType.Text;
 
                     respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
                     cmd.Parameters.Clear();
                 }
-                catch (SQLiteException ex)
+                catch (SqlException ex)
                 {
                     respuesta = false;
                     mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
@@ -141,16 +141,16 @@ namespace CapaDatos
         {
             leido = true;
             byte[] LogoBytes = new byte[0];
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
+            using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
                 try
                 {
                     oConexion.Open();
                     string query = "SELECT Logo FROM COMERCIO WHERE ID_Comercio = 1;";
-                    SQLiteCommand cmd = new SQLiteCommand(query, oConexion);
+                    SqlCommand cmd = new SqlCommand(query, oConexion);
                     cmd.CommandType = CommandType.Text;
 
-                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -162,7 +162,7 @@ namespace CapaDatos
                     }
 
                 }
-                catch (SQLiteException ex)
+                catch (SqlException ex)
                 {
                     leido = false;
                     LogoBytes = new byte[0];
@@ -179,14 +179,14 @@ namespace CapaDatos
         {
             mensaje = string.Empty;
             bool respuesta = true;
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
+            using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
                 try
                 {
                     oConexion.Open();
                     string query = "UPDATE COMERCIO SET Logo = @imagen WHERE ID_Comercio = 1;";
-                    SQLiteCommand cmd = new SQLiteCommand(query, oConexion);
-                    SQLiteParameter parameter = new SQLiteParameter("@imagen", DbType.Binary);
+                    SqlCommand cmd = new SqlCommand(query, oConexion);
+                    SqlParameter parameter = new SqlParameter("@imagen", DbType.Binary);
                     parameter.Value = imagen;
                     cmd.Parameters.Add(parameter);
                     cmd.CommandType = CommandType.Text;
@@ -201,7 +201,7 @@ namespace CapaDatos
 
                     cmd.Parameters.Clear();
                 }
-                catch (SQLiteException ex)
+                catch (SqlException ex)
                 {
                     respuesta = false;
                     mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;

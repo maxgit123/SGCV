@@ -3,7 +3,7 @@ using System.Collections.Generic;
 //Lo que agregue:
 using CapaEntidad;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 
 namespace CapaDatos
 {
@@ -12,16 +12,16 @@ namespace CapaDatos
         public List<CE_RespIVA> Listar()
         {
             List<CE_RespIVA> lista = new List<CE_RespIVA>();
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
+            using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
                 try
                 {
                     string query = "SELECT * FROM RESP_IVA";
-                    SQLiteCommand cmd = new SQLiteCommand(query, oConexion);
+                    SqlCommand cmd = new SqlCommand(query, oConexion);
                     cmd.CommandType = CommandType.Text;
                     oConexion.Open();
 
-                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -33,7 +33,7 @@ namespace CapaDatos
                         }
                     }
                 }
-                catch (SQLiteException ex)
+                catch (SqlException ex)
                 {
                     lista = new List<CE_RespIVA>();
                 }

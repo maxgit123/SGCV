@@ -4,7 +4,7 @@ using System.Text;
 //Lo que agregue:
 using CapaEntidad;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 
 namespace CapaDatos
 {
@@ -13,18 +13,18 @@ namespace CapaDatos
         public List<CE_Cliente> Listar()
         {
             List<CE_Cliente> lista = new List<CE_Cliente>();
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
+            using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
                 try
                 {
                     StringBuilder query = new StringBuilder();
                     query.AppendLine("SELECT c.ID_Cliente,c.Documento,c.Nombre,c.Apellido,r.ID_RespIVA,r.ResponsableIVA FROM CLIENTE c");
                     query.AppendLine("INNER JOIN RESP_IVA r on r.ID_RespIVA = c.ID_RespIVA");
-                    SQLiteCommand cmd = new SQLiteCommand(query.ToString(), oConexion);
+                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
                     cmd.CommandType = CommandType.Text;
                     oConexion.Open();
 
-                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -43,7 +43,7 @@ namespace CapaDatos
                         }
                     }
                 }
-                catch (SQLiteException ex)
+                catch (SqlException ex)
                 {
                     lista = new List<CE_Cliente>();
                 }
@@ -60,7 +60,7 @@ namespace CapaDatos
             mensaje = string.Empty;
             int respuesta = 0;
 
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
+            using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
                 try
                 {
@@ -71,19 +71,19 @@ namespace CapaDatos
                         "VALUES (@Documento,@Nombre,@Apellido,@ID_RespIVA);");
                     query.AppendLine("SELECT last_insert_rowid();");
 
-                    SQLiteCommand cmd = new SQLiteCommand(query.ToString(), oConexion);
+                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
 
-                    cmd.Parameters.Add(new SQLiteParameter("@Documento", oCliente.Documento));
-                    cmd.Parameters.Add(new SQLiteParameter("@Nombre", oCliente.Nombre));
-                    cmd.Parameters.Add(new SQLiteParameter("@Apellido", oCliente.Apellido));
-                    cmd.Parameters.Add(new SQLiteParameter("@ID_RespIVA", oCliente.oRespIVA.IdRespIVA));
+                    cmd.Parameters.Add(new SqlParameter("@Documento", oCliente.Documento));
+                    cmd.Parameters.Add(new SqlParameter("@Nombre", oCliente.Nombre));
+                    cmd.Parameters.Add(new SqlParameter("@Apellido", oCliente.Apellido));
+                    cmd.Parameters.Add(new SqlParameter("@ID_RespIVA", oCliente.oRespIVA.IdRespIVA));
                     cmd.CommandType = CommandType.Text;
 
                     respuesta = Convert.ToInt32(cmd.ExecuteScalar().ToString());
                     //ExecuteScalar devuelve la 1ra columna de la 1ra fila. En este caso el ID del Cliente.
                     cmd.Parameters.Clear();
                 }
-                catch (SQLiteException ex)
+                catch (SqlException ex)
                 {
                     respuesta = 0;
                     mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
@@ -101,7 +101,7 @@ namespace CapaDatos
             bool respuesta = false;
             mensaje = string.Empty;
 
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
+            using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
                 try
                 {
@@ -113,19 +113,19 @@ namespace CapaDatos
                                      + "Apellido = @Apellido, "
                                      + "ID_RespIVA = @ID_RespIVA "
                                      + "WHERE ID_Cliente = @ID_Cliente");
-                    SQLiteCommand cmd = new SQLiteCommand(query.ToString(), oConexion);
+                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
 
-                    cmd.Parameters.Add(new SQLiteParameter("@Documento", oCliente.Documento));
-                    cmd.Parameters.Add(new SQLiteParameter("@Nombre", oCliente.Nombre));
-                    cmd.Parameters.Add(new SQLiteParameter("@Apellido", oCliente.Apellido));
-                    cmd.Parameters.Add(new SQLiteParameter("@ID_RespIVA", oCliente.oRespIVA.IdRespIVA));
-                    cmd.Parameters.Add(new SQLiteParameter("@ID_Cliente", oCliente.IdCliente));
+                    cmd.Parameters.Add(new SqlParameter("@Documento", oCliente.Documento));
+                    cmd.Parameters.Add(new SqlParameter("@Nombre", oCliente.Nombre));
+                    cmd.Parameters.Add(new SqlParameter("@Apellido", oCliente.Apellido));
+                    cmd.Parameters.Add(new SqlParameter("@ID_RespIVA", oCliente.oRespIVA.IdRespIVA));
+                    cmd.Parameters.Add(new SqlParameter("@ID_Cliente", oCliente.IdCliente));
 
                     cmd.CommandType = CommandType.Text;
                     respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
                     cmd.Parameters.Clear();
                 }
-                catch (SQLiteException ex)
+                catch (SqlException ex)
                 {
                     respuesta = false;
                     mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
@@ -143,20 +143,20 @@ namespace CapaDatos
             bool respuesta = false;
             mensaje = String.Empty;
 
-            using (SQLiteConnection oConexion = new SQLiteConnection(Conexion.cadenaDB))
+            using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
                 try
                 {
                     oConexion.Open();
                     StringBuilder query = new StringBuilder();
                     query.AppendLine("DELETE FROM CLIENTE WHERE ID_Cliente = @ID_Cliente;");
-                    SQLiteCommand cmd = new SQLiteCommand(query.ToString(), oConexion);
-                    cmd.Parameters.Add(new SQLiteParameter("@ID_Cliente", oCliente.IdCliente));
+                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
+                    cmd.Parameters.Add(new SqlParameter("@ID_Cliente", oCliente.IdCliente));
                     cmd.CommandType = CommandType.Text;
                     respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
                     cmd.Parameters.Clear();
                 }
-                catch (SQLiteException ex)
+                catch (SqlException ex)
                 {
                     respuesta = false;
                     mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
