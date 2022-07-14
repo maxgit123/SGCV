@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-//Lo que agregue:
 using CapaEntidad;
 using CapaNegocio;
 using FontAwesome.Sharp;
 
 namespace CapaPresentacion.Formularios
 {
-    public partial class Dashboard : Form
+    public partial class fmrDashboard : Form
     {
         private static CE_Usuario usuarioActual;
         private static IconMenuItem menuActivo = null;
         private static Form formularioActivo = null;
-        public Dashboard(CE_Usuario oUsuario)
+        public fmrDashboard(CE_Usuario oUsuario)
         {
             usuarioActual = oUsuario;
             InitializeComponent();
@@ -25,7 +24,7 @@ namespace CapaPresentacion.Formularios
             menuTituloUsuario.Text = usuarioActual.Apellido + ", " + usuarioActual.Nombre;
             smenuRol.Text = usuarioActual.oRol.NomRol;
             //----Muestra el menu segun los permisos del usuario----
-            List<CE_Modulo> ListaModulos = new CN_Modulo().Listar(usuarioActual.IdUsuario); //Obtiene los permisos del usuario.
+            List<CE_Modulo> ListaModulos = new CN_Modulo().Listar(usuarioActual.Id); //Obtiene los permisos del usuario.
 
             foreach (IconMenuItem iconmenu in menuPrincipal.Items) //En cada uno comprueba
             {

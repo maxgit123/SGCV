@@ -2,7 +2,7 @@
 {
     public class CE_Estado
     {
-        public bool IdEstado { get; set; }
+        public bool Id { get; set; }
         public string Nombre { get; set; }
     }
 }

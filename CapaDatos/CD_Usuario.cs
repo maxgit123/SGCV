@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-//Lo que agregue:
 using CapaEntidad;
 using System.Data;
 using System.Data.SqlClient;
@@ -17,12 +16,9 @@ namespace CapaDatos
             {
                 try
                 {
-                    StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT u.id,u.documento,u.nombre,u.apellido,u.clave,u.fechaCreacion,r.nombre AS [rol],e.nombre AS [estado] FROM Usuario u");
-                    query.AppendLine("INNER JOIN cRol r ON r.id = u.rol_id");
-                    query.AppendLine("INNER JOIN cEstado e ON e.id = u.estado_id;");
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
-                    cmd.CommandType = CommandType.Text;
+                    SqlCommand cmd = new SqlCommand("usp_listarusuario", oConexion)
+                    { CommandType = CommandType.StoredProcedure };
+
                     oConexion.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -31,7 +27,7 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Usuario()
                             {
-                                IdUsuario = Convert.ToInt32(reader["id"]),
+                                Id = Convert.ToInt32(reader["id"]),
                                 Documento = reader["documento"].ToString(),
                                 Nombre = reader["nombre"].ToString(),
                                 Apellido = reader["apellido"].ToString(),
@@ -44,7 +40,7 @@ namespace CapaDatos
                                 },
                                 oEstado = new CE_Estado()
                                 {
-                                    IdEstado = Convert.ToBoolean(reader["id"]),
+                                    Id = Convert.ToBoolean(reader["id"]),
                                     Nombre = reader["estado"].ToString()
                                 }
                             });
@@ -65,37 +61,33 @@ namespace CapaDatos
         }
         public int Crear(CE_Usuario oUsuario, out string mensaje)
         {
+            int idUsuarioCreado = 0;
             mensaje = string.Empty;
-            int respuesta = 0;
-
+            
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
                 try
                 {
+                    SqlCommand cmd = new SqlCommand("usp_crearusuario", oConexion)
+                    { CommandType = CommandType.StoredProcedure };
+
+                    cmd.Parameters.AddWithValue("@documento", oUsuario.Documento);
+                    cmd.Parameters.AddWithValue("@nombre", oUsuario.Nombre);
+                    cmd.Parameters.AddWithValue("@apellido", oUsuario.Apellido);
+                    cmd.Parameters.AddWithValue("@clave", oUsuario.Clave);
+                    cmd.Parameters.AddWithValue("@rol_id", oUsuario.oRol.IdRol);
+                    cmd.Parameters.Add("@idUsuarioGenerado", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar).Direction = ParameterDirection.Output;
+
                     oConexion.Open();
-                    StringBuilder query = new StringBuilder();
-
-                    query.AppendLine("INSERT INTO USUARIO (Documento,Nombre,Apellido,Clave,FechaRegistro,ID_Rol)" +
-                        "VALUES (@Documento,@Nombre,@Apellido,@Clave,@FechaRegistro,@ID_Rol);");
-                    query.AppendLine("SELECT last_insert_rowid();");
-
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
-
-                    cmd.Parameters.Add(new SqlParameter("@Documento", oUsuario.Documento));
-                    cmd.Parameters.Add(new SqlParameter("@Nombre", oUsuario.Nombre));
-                    cmd.Parameters.Add(new SqlParameter("@Apellido", oUsuario.Apellido));
-                    cmd.Parameters.Add(new SqlParameter("@Clave", oUsuario.Clave));
-                    cmd.Parameters.Add(new SqlParameter("@FechaRegistro", DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss")));
-                    cmd.Parameters.Add(new SqlParameter("@ID_Rol", oUsuario.oRol.IdRol));
-                    cmd.CommandType = CommandType.Text;
-
-                    respuesta = Convert.ToInt32(cmd.ExecuteScalar().ToString());
-                    //ExecuteScalar devuelve la 1ra columna de la 1ra fila. En este caso el ID del usuario.
+                    cmd.ExecuteNonQuery();
+                    idUsuarioCreado = Convert.ToInt32(cmd.Parameters["@idUsuarioCreado"].Value);
+                    mensaje = cmd.Parameters["@mensaje"].Value.ToString();
                     cmd.Parameters.Clear();
                 }
                 catch (SqlException ex)
                 {
-                    respuesta = 0;
+                    idUsuarioCreado = 0;
                     mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
                 }
                 finally
@@ -104,7 +96,7 @@ namespace CapaDatos
                         oConexion.Close();
                 }
             }
-            return respuesta;
+            return idUsuarioCreado;
         }
         public bool Actualizar(CE_Usuario oUsuario, out string mensaje)
         {
@@ -115,26 +107,22 @@ namespace CapaDatos
             {
                 try
                 {
+                    SqlCommand cmd = new SqlCommand("usp_listarusuario", oConexion)
+                    { CommandType = CommandType.StoredProcedure };
+
+                    cmd.Parameters.AddWithValue("@documento", oUsuario.Documento);
+                    cmd.Parameters.AddWithValue("@nombre", oUsuario.Nombre);
+                    cmd.Parameters.AddWithValue("@apellido", oUsuario.Apellido);
+                    cmd.Parameters.AddWithValue("@clave", oUsuario.Clave);
+                    cmd.Parameters.AddWithValue("@rol_id", oUsuario.oRol.IdRol);
+                    cmd.Parameters.AddWithValue("@id", oUsuario.Id);
+                    cmd.Parameters.Add("@respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar).Direction = ParameterDirection.Output;
+
                     oConexion.Open();
-                    StringBuilder query = new StringBuilder();
-                    query.AppendLine("UPDATE USUARIO SET "
-                                     + "Documento = @Documento, "
-                                     + "Nombre = @Nombre, "
-                                     + "Apellido = @Apellido, "
-                                     + "Clave = @Clave, "
-                                     + "ID_Rol = @ID_Rol "
-                                     + "WHERE ID_Usuario = @ID_Usuario");
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
-
-                    cmd.Parameters.Add(new SqlParameter("@Documento", oUsuario.Documento));
-                    cmd.Parameters.Add(new SqlParameter("@Nombre", oUsuario.Nombre));
-                    cmd.Parameters.Add(new SqlParameter("@Apellido", oUsuario.Apellido));
-                    cmd.Parameters.Add(new SqlParameter("@Clave", oUsuario.Clave));
-                    cmd.Parameters.Add(new SqlParameter("@ID_Rol", oUsuario.oRol.IdRol));
-                    cmd.Parameters.Add(new SqlParameter("@ID_Usuario", oUsuario.IdUsuario));
-
-                    cmd.CommandType = CommandType.Text;
-                    respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
+                    cmd.ExecuteNonQuery();
+                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
+                    mensaje = cmd.Parameters["@mensaje"].Value.ToString();
                     cmd.Parameters.Clear();
                 }
                 catch (SqlException ex)
@@ -159,13 +147,53 @@ namespace CapaDatos
             {
                 try
                 {
+                    SqlCommand cmd = new SqlCommand("usp_eliminarusuario", oConexion)
+                    { CommandType = CommandType.StoredProcedure };
+
+                    cmd.Parameters.AddWithValue("@id", oUsuario.Id);
+                    cmd.Parameters.Add("@respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar).Direction = ParameterDirection.Output;
+
                     oConexion.Open();
-                    StringBuilder query = new StringBuilder();
-                    query.AppendLine("DELETE FROM USUARIO WHERE ID_Usuario = @ID_Usuario;");
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
-                    cmd.Parameters.Add(new SqlParameter("@ID_Usuario", oUsuario.IdUsuario));
-                    cmd.CommandType = CommandType.Text;
-                    respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
+                    cmd.ExecuteNonQuery();
+                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
+                    mensaje = cmd.Parameters["@mensaje"].Value.ToString();
+                    cmd.Parameters.Clear();
+                }
+                catch (SqlException ex)
+                {
+                    respuesta = false;
+                    mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
+                }
+                finally
+                {
+                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
+                        oConexion.Close();
+                }
+            }
+            return respuesta;
+        }
+        public bool CambiarEstado(CE_Usuario oUsuario, out string mensaje)
+        {
+            bool respuesta = false;
+            mensaje = string.Empty;
+
+            using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_estadousuario", oConexion)
+                    { CommandType = CommandType.StoredProcedure };
+                    
+                    cmd.Parameters.AddWithValue("@id", oUsuario.Id);
+                    cmd.Parameters.AddWithValue("@estado_id", oUsuario.oEstado.Id);
+                    cmd.Parameters.Add("@respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar).Direction = ParameterDirection.Output;
+
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
+                    mensaje = cmd.Parameters["@mensaje"].Value.ToString();
                     cmd.Parameters.Clear();
                 }
                 catch (SqlException ex)

@@ -1,6 +1,6 @@
 ﻿namespace CapaPresentacion.Formularios
 {
-    partial class Dashboard
+    partial class fmrDashboard
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmrDashboard));
             this.menuPrincipal = new System.Windows.Forms.MenuStrip();
             this.menuComercio = new FontAwesome.Sharp.IconMenuItem();
             this.menuUsuarios = new FontAwesome.Sharp.IconMenuItem();
@@ -45,10 +45,10 @@
             this.menuClientes = new FontAwesome.Sharp.IconMenuItem();
             this.menuTitulo = new System.Windows.Forms.MenuStrip();
             this.menuTituloUsuario = new System.Windows.Forms.ToolStripMenuItem();
+            this.smenuRol = new System.Windows.Forms.ToolStripMenuItem();
             this.smenuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.panelDashboard = new System.Windows.Forms.Panel();
-            this.smenuRol = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPrincipal.SuspendLayout();
             this.menuTitulo.SuspendLayout();
             this.SuspendLayout();
@@ -66,7 +66,7 @@
             this.menuClientes});
             this.menuPrincipal.Location = new System.Drawing.Point(0, 48);
             this.menuPrincipal.Name = "menuPrincipal";
-            this.menuPrincipal.Size = new System.Drawing.Size(952, 61);
+            this.menuPrincipal.Size = new System.Drawing.Size(1086, 61);
             this.menuPrincipal.TabIndex = 0;
             this.menuPrincipal.Text = "Menu";
             // 
@@ -104,7 +104,7 @@
             this.menuProductos.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.smenuProductos,
             this.smenuCategorias});
-            this.menuProductos.IconChar = FontAwesome.Sharp.IconChar.Boxes;
+            this.menuProductos.IconChar = FontAwesome.Sharp.IconChar.BoxesAlt;
             this.menuProductos.IconColor = System.Drawing.Color.Black;
             this.menuProductos.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.menuProductos.IconSize = 38;
@@ -154,7 +154,7 @@
             this.menuCompras.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.smenuRegistCompra,
             this.listaDeComprasToolStripMenuItem});
-            this.menuCompras.IconChar = FontAwesome.Sharp.IconChar.DollyFlatbed;
+            this.menuCompras.IconChar = FontAwesome.Sharp.IconChar.CartFlatbed;
             this.menuCompras.IconColor = System.Drawing.Color.Black;
             this.menuCompras.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.menuCompras.IconSize = 38;
@@ -231,7 +231,7 @@
             this.menuTitulo.Location = new System.Drawing.Point(0, 0);
             this.menuTitulo.Name = "menuTitulo";
             this.menuTitulo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.menuTitulo.Size = new System.Drawing.Size(952, 48);
+            this.menuTitulo.Size = new System.Drawing.Size(1086, 48);
             this.menuTitulo.TabIndex = 1;
             this.menuTitulo.Text = "menuStrip2";
             // 
@@ -246,10 +246,16 @@
             this.menuTituloUsuario.Size = new System.Drawing.Size(76, 44);
             this.menuTituloUsuario.Text = "Usuario";
             // 
+            // smenuRol
+            // 
+            this.smenuRol.Name = "smenuRol";
+            this.smenuRol.Size = new System.Drawing.Size(172, 26);
+            this.smenuRol.Text = "Rol";
+            // 
             // smenuCerrarSesion
             // 
             this.smenuCerrarSesion.Name = "smenuCerrarSesion";
-            this.smenuCerrarSesion.Size = new System.Drawing.Size(180, 26);
+            this.smenuCerrarSesion.Size = new System.Drawing.Size(172, 26);
             this.smenuCerrarSesion.Text = "Cerrar sesion";
             this.smenuCerrarSesion.Click += new System.EventHandler(this.smenuCerrarSesion_Click);
             // 
@@ -271,27 +277,21 @@
             this.panelDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDashboard.Location = new System.Drawing.Point(0, 109);
             this.panelDashboard.Name = "panelDashboard";
-            this.panelDashboard.Size = new System.Drawing.Size(952, 479);
+            this.panelDashboard.Size = new System.Drawing.Size(1086, 479);
             this.panelDashboard.TabIndex = 3;
             // 
-            // smenuRol
-            // 
-            this.smenuRol.Name = "smenuRol";
-            this.smenuRol.Size = new System.Drawing.Size(180, 26);
-            this.smenuRol.Text = "Rol";
-            // 
-            // Dashboard
+            // fmrDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(952, 588);
+            this.ClientSize = new System.Drawing.Size(1086, 588);
             this.Controls.Add(this.panelDashboard);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.menuPrincipal);
             this.Controls.Add(this.menuTitulo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuPrincipal;
-            this.Name = "Dashboard";
+            this.Name = "fmrDashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SGCV";
             this.Load += new System.EventHandler(this.Dashboard_Load);

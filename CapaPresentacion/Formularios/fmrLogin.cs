@@ -7,26 +7,26 @@ using CapaEntidad;
 
 namespace CapaPresentacion.Formularios
 {
-    public partial class Login : Form
+    public partial class fmrLogin : Form
     {
-        public Login()
+        public fmrLogin()
         {
             InitializeComponent();
         }
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            CE_Usuario oUsuario = new CN_Usuario().Listar().FirstOrDefault(u => u.Documento == txtDocumento.Text.Trim() && u.Clave == txtClave.Text.Trim()); //Expresion lambda.
+            CE_Usuario oUsuario = new CN_Usuario().Listar().FirstOrDefault(u => u.Documento == txtDocumento.Text.Trim() && u.Clave == txtClave.Text.Trim());
             //FirstOrDefault te regresa el elemento o null.
 
-            if (oUsuario == null) //Clausula de guarda.
+            if (oUsuario == null)
             {
                 MessageBox.Show("DNI y/o Clave invalidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            this.Hide(); //Oculta el Login.
-            Dashboard form = new Dashboard(oUsuario);
+            this.Hide();
+            fmrDashboard form = new fmrDashboard(oUsuario);
             form.FormClosing += frm_closing; //Cuando se cierra el dashboard vuelve a mostrar el form de login que se oculto.
-            form.Show(); //Muestra el Dashboard.
+            form.Show();
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -34,8 +34,8 @@ namespace CapaPresentacion.Formularios
         }
         private void frm_closing(object sender, FormClosingEventArgs e)
         {
-            txtDocumento.Text = ""; //Se limpian las cajas de texto para evitar
-            txtClave.Text = ""; //que quede los datos del usuario en el form.
+            txtDocumento.Text = "";
+            txtClave.Text = "";
             this.Show();
         }
         private void txtDocumento_KeyPress(object sender, KeyPressEventArgs e)
