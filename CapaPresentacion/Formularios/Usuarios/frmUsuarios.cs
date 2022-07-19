@@ -55,7 +55,6 @@ namespace CapaPresentacion.Formularios.Usuarios
                 txtDocumento.Text = dgvUsuarios.Rows[e.RowIndex].Cells["Documento"].Value.ToString();
                 txtNombre.Text = dgvUsuarios.Rows[e.RowIndex].Cells["Nombre"].Value.ToString();
                 txtApellido.Text = dgvUsuarios.Rows[e.RowIndex].Cells["Apellido"].Value.ToString();
-                txtClave.Text = dgvUsuarios.Rows[e.RowIndex].Cells["Clave"].Value.ToString();
                 foreach (OpcionCombo oc in cbRol.Items)
                 {
                     if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvUsuarios.Rows[e.RowIndex].Cells["ID_Rol"].Value))
@@ -66,6 +65,7 @@ namespace CapaPresentacion.Formularios.Usuarios
                     }
                 }
                 HabilitarForm();
+                txtClave.Enabled = false;
             }
             else if (e.ColumnIndex == dgvUsuarios.Columns["btnEliminar"].Index)
             {

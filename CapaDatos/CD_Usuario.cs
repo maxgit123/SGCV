@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CapaEntidad;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
 
 namespace CapaDatos
 {
@@ -114,7 +115,6 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("@documento", oUsuario.Documento);
                     cmd.Parameters.AddWithValue("@nombre", oUsuario.Nombre);
                     cmd.Parameters.AddWithValue("@apellido", oUsuario.Apellido);
-                    cmd.Parameters.AddWithValue("@clave", oUsuario.Clave);
                     cmd.Parameters.AddWithValue("@rol_id", oUsuario.oRol.IdRol);
                     cmd.Parameters.Add("@respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
@@ -194,6 +194,43 @@ namespace CapaDatos
                     cmd.ExecuteNonQuery();
                     respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
                     mensaje = cmd.Parameters["@mensaje"].Value.ToString();
+                    cmd.Parameters.Clear();
+                }
+                catch (SqlException ex)
+                {
+                    respuesta = false;
+                    mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
+                }
+                finally
+                {
+                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
+                        oConexion.Close();
+                }
+            }
+            return respuesta;
+        }
+        public bool CambiarClave(CE_Usuario oUsuario, out string mensaje)
+        {
+            bool respuesta = false;
+            mensaje = string.Empty;
+
+            using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("UPDATE Usuario SET ");
+                    query.AppendLine("clave = @clave ");
+                    query.AppendLine("WHERE id = @id;");
+
+                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
+                    { CommandType = CommandType.Text };
+
+                    cmd.Parameters.AddWithValue("@id", oUsuario.Id);
+                    cmd.Parameters.AddWithValue("@clave", oUsuario.Clave);
+
+                    oConexion.Open();
+                    respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
                     cmd.Parameters.Clear();
                 }
                 catch (SqlException ex)

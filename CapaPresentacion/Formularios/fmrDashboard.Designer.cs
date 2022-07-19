@@ -49,6 +49,7 @@
             this.smenuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.panelDashboard = new System.Windows.Forms.Panel();
+            this.cambiarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPrincipal.SuspendLayout();
             this.menuTitulo.SuspendLayout();
             this.SuspendLayout();
@@ -239,6 +240,7 @@
             // 
             this.menuTituloUsuario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.smenuRol,
+            this.cambiarContraseñaToolStripMenuItem,
             this.smenuCerrarSesion});
             this.menuTituloUsuario.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuTituloUsuario.ForeColor = System.Drawing.SystemColors.Control;
@@ -249,13 +251,13 @@
             // smenuRol
             // 
             this.smenuRol.Name = "smenuRol";
-            this.smenuRol.Size = new System.Drawing.Size(172, 26);
+            this.smenuRol.Size = new System.Drawing.Size(219, 26);
             this.smenuRol.Text = "Rol";
             // 
             // smenuCerrarSesion
             // 
             this.smenuCerrarSesion.Name = "smenuCerrarSesion";
-            this.smenuCerrarSesion.Size = new System.Drawing.Size(172, 26);
+            this.smenuCerrarSesion.Size = new System.Drawing.Size(219, 26);
             this.smenuCerrarSesion.Text = "Cerrar sesion";
             this.smenuCerrarSesion.Click += new System.EventHandler(this.smenuCerrarSesion_Click);
             // 
@@ -279,6 +281,13 @@
             this.panelDashboard.Name = "panelDashboard";
             this.panelDashboard.Size = new System.Drawing.Size(1086, 479);
             this.panelDashboard.TabIndex = 3;
+            // 
+            // cambiarContraseñaToolStripMenuItem
+            // 
+            this.cambiarContraseñaToolStripMenuItem.Name = "cambiarContraseñaToolStripMenuItem";
+            this.cambiarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
+            this.cambiarContraseñaToolStripMenuItem.Text = "Cambiar contraseña";
+            this.cambiarContraseñaToolStripMenuItem.Click += new System.EventHandler(this.cambiarContraseñaToolStripMenuItem_Click);
             // 
             // fmrDashboard
             // 
@@ -326,5 +335,6 @@
         private System.Windows.Forms.ToolStripMenuItem listaDeVentasToolStripMenuItem;
         private FontAwesome.Sharp.IconMenuItem smenuProductos;
         private System.Windows.Forms.ToolStripMenuItem smenuRol;
+        private System.Windows.Forms.ToolStripMenuItem cambiarContraseñaToolStripMenuItem;
     }
 }

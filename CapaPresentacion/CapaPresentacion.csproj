@@ -154,11 +154,11 @@
     <Compile Include="Formularios\Proveedores\frmProveedores.Designer.cs">
       <DependentUpon>frmProveedores.cs</DependentUpon>
     </Compile>
-    <Compile Include="Formularios\Usuarios\frmCrearUsuario.cs">
+    <Compile Include="Formularios\Usuarios\frmCambiarClave.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formularios\Usuarios\frmCrearUsuario.Designer.cs">
-      <DependentUpon>frmCrearUsuario.cs</DependentUpon>
+    <Compile Include="Formularios\Usuarios\frmCambiarClave.Designer.cs">
+      <DependentUpon>frmCambiarClave.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\Usuarios\frmUsuarios.cs">
       <SubType>Form</SubType>
@@ -198,8 +198,8 @@
     <EmbeddedResource Include="Formularios\Proveedores\frmProveedores.resx">
       <DependentUpon>frmProveedores.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\Usuarios\frmCrearUsuario.resx">
-      <DependentUpon>frmCrearUsuario.cs</DependentUpon>
+    <EmbeddedResource Include="Formularios\Usuarios\frmCambiarClave.resx">
+      <DependentUpon>frmCambiarClave.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Usuarios\frmUsuarios.resx">
       <DependentUpon>frmUsuarios.cs</DependentUpon>

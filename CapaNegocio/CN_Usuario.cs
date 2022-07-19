@@ -16,7 +16,6 @@ namespace CapaNegocio
         {
             mensaje = string.Empty;
 
-            //Validaciones de campos del formulario.
             if (oUsuario.Documento == "")
                 mensaje += "Ingrese un nº de documento.\n";
             if (oUsuario.Nombre == "")
@@ -25,7 +24,6 @@ namespace CapaNegocio
                 mensaje += "Ingrese el Apellido del usuario.\n";
             if (oUsuario.Clave == "")
                 mensaje += "Ingrese la clave del usuario.\n";
-            //Va concatenando con saltos de linea los mensajes de error que surjan.
 
             if (mensaje == string.Empty)
                 return oCD_Usuario.Crear(oUsuario, out mensaje);
@@ -43,9 +41,8 @@ namespace CapaNegocio
                 mensaje += "Ingrese el nombre del usuario.\n";
             if (oUsuario.Apellido == "")
                 mensaje += "Ingrese el Apellido del usuario.\n";
-            if (oUsuario.Clave == "")
-                mensaje += "Ingrese la clave del usuario.\n";
-            //Va concatenando con saltos de linea los mensajes de error que surjan.
+            //if (oUsuario.Clave == "")
+            //    mensaje += "Ingrese la clave del usuario.\n";
 
             if (mensaje == string.Empty)
                 return oCD_Usuario.Actualizar(oUsuario, out mensaje);
@@ -55,6 +52,25 @@ namespace CapaNegocio
         public bool Eliminar(CE_Usuario oUsuario, out string mensaje)
         {
             return oCD_Usuario.Eliminar(oUsuario, out mensaje);
+        }
+        public bool CambiarClave(CE_Usuario oUsuario, string claveActual, string claveNueva, out string mensaje)
+        {
+            mensaje = string.Empty;
+
+            claveActual = claveActual.Trim();
+            claveNueva = claveNueva.Trim();
+
+            if (oUsuario.Clave == "")
+                mensaje += "Ingrese su clave actual.\n";
+            if (claveNueva == "")
+                mensaje += "Ingrese la clave nueva.\n";
+            if (oUsuario.Clave != claveActual)
+                mensaje += "La clave actual es incorrecta.\n";
+
+            if (mensaje == string.Empty)
+                return oCD_Usuario.CambiarClave(oUsuario, out mensaje);
+            else
+                return false;
         }
     }
 }

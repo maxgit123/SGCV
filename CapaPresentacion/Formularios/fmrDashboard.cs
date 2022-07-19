@@ -84,5 +84,10 @@ namespace CapaPresentacion.Formularios
         {
             this.Close();
         }
+        private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form form = new Usuarios.frmCambiarClave(usuarioActual);
+            form.ShowDialog();
+        }
     }
 }

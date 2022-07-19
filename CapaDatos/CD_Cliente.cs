@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-//Lo que agregue:
 using CapaEntidad;
 using System.Data;
 using System.Data.SqlClient;
