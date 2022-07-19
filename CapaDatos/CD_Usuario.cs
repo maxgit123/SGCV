@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using CapaEntidad;
 using System.Data;
 using System.Data.SqlClient;
@@ -45,6 +44,7 @@ namespace CapaDatos
                                 }
                             });
                         }
+                        reader.Close();
                     }
                 }
                 catch (SqlException ex)
@@ -76,8 +76,8 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("@apellido", oUsuario.Apellido);
                     cmd.Parameters.AddWithValue("@clave", oUsuario.Clave);
                     cmd.Parameters.AddWithValue("@rol_id", oUsuario.oRol.IdRol);
-                    cmd.Parameters.Add("@idUsuarioGenerado", SqlDbType.Int).Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@idUsuarioCreado", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
 
                     oConexion.Open();
                     cmd.ExecuteNonQuery();
@@ -107,17 +107,17 @@ namespace CapaDatos
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("usp_listarusuario", oConexion)
+                    SqlCommand cmd = new SqlCommand("usp_actualizarusuario", oConexion)
                     { CommandType = CommandType.StoredProcedure };
 
+                    cmd.Parameters.AddWithValue("@id", oUsuario.Id);
                     cmd.Parameters.AddWithValue("@documento", oUsuario.Documento);
                     cmd.Parameters.AddWithValue("@nombre", oUsuario.Nombre);
                     cmd.Parameters.AddWithValue("@apellido", oUsuario.Apellido);
                     cmd.Parameters.AddWithValue("@clave", oUsuario.Clave);
                     cmd.Parameters.AddWithValue("@rol_id", oUsuario.oRol.IdRol);
-                    cmd.Parameters.AddWithValue("@id", oUsuario.Id);
                     cmd.Parameters.Add("@respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
 
                     oConexion.Open();
                     cmd.ExecuteNonQuery();
@@ -141,7 +141,7 @@ namespace CapaDatos
         public bool Eliminar(CE_Usuario oUsuario, out string mensaje)
         {
             bool respuesta = false;
-            mensaje = String.Empty;
+            mensaje = string.Empty;
 
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
@@ -152,7 +152,7 @@ namespace CapaDatos
 
                     cmd.Parameters.AddWithValue("@id", oUsuario.Id);
                     cmd.Parameters.Add("@respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
 
                     oConexion.Open();
                     cmd.ExecuteNonQuery();
@@ -188,7 +188,7 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("@id", oUsuario.Id);
                     cmd.Parameters.AddWithValue("@estado_id", oUsuario.oEstado.Id);
                     cmd.Parameters.Add("@respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar,500).Direction = ParameterDirection.Output;
 
                     oConexion.Open();
                     cmd.ExecuteNonQuery();

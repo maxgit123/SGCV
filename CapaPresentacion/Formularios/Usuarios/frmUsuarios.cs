@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
@@ -37,25 +36,7 @@ namespace CapaPresentacion.Formularios.Usuarios
             cbBuscar.ValueMember = "Valor";
             cbBuscar.SelectedIndex = 0;
 
-            //Muestra los usuarios de la base de datos en el dgv
-            List<CE_Usuario> listaUsuario = new CN_Usuario().Listar();
-
-            foreach (CE_Usuario item in listaUsuario)
-            {
-                dgvUsuarios.Rows.Add(new object[] { //Poner los TODOS los items EN ORDEN.
-                    item.Id,
-                    item.Documento,
-                    item.Nombre,
-                    item.Apellido,
-                    item.Clave,
-                    item.FechaCreacion,
-                    item.oRol.IdRol,
-                    item.oRol.NomRol,
-                    item.oEstado.Id,
-                    item.oEstado.Nombre,
-                    "","" //Botones Editar y Elimiar.
-                });
-            }
+            MostrarListaUsuarios();
         }
         private void dgvUsuarios_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
@@ -84,6 +65,7 @@ namespace CapaPresentacion.Formularios.Usuarios
                         break;
                     }
                 }
+                HabilitarForm();
             }
             else if (e.ColumnIndex == dgvUsuarios.Columns["btnEliminar"].Index)
             {
@@ -92,25 +74,27 @@ namespace CapaPresentacion.Formularios.Usuarios
 
                 string mensaje = string.Empty;
 
-                CE_Usuario oUsuario = new CE_Usuario() //Se crea un nueva instancia
-                { //de la que solo se necesita el ID del usuario.
+                CE_Usuario oUsuario = new CE_Usuario()
+                {
                     Id = int.Parse(dgvUsuarios.Rows[e.RowIndex].Cells["ID_Usuario"].Value.ToString())
                 };
 
                 bool respuesta = new CN_Usuario().Eliminar(oUsuario, out mensaje);
 
-                if (respuesta) //Si se elimino correctamente (Eliminar retorna respuesta bool):
-                    dgvUsuarios.Rows.RemoveAt(Convert.ToInt32(e.RowIndex)); //se elimina la fila del DGV.
+                if (respuesta)
+                    dgvUsuarios.Rows.RemoveAt(Convert.ToInt32(e.RowIndex));
                 else
                     MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                LimpiaryDeshabilitarForm();
             }
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             string mensaje = string.Empty;
 
-            CE_Usuario oUsuario = new CE_Usuario() //Se crea un obj de la clase Usuario
-            { //y se le asignan los valores del formulario.
+            CE_Usuario oUsuario = new CE_Usuario()
+            {
                 Id = Convert.ToInt32(lblID_Usuario.Text),
                 Documento = txtDocumento.Text.Trim(),
                 Nombre = txtNombre.Text.Trim(),
@@ -119,58 +103,89 @@ namespace CapaPresentacion.Formularios.Usuarios
                 oRol = new CE_Rol() {IdRol = Convert.ToInt32(((OpcionCombo)cbRol.SelectedItem).Valor)},
             };
             
-            if (oUsuario.Id == 0) //Si es un usuario nuevo:
+            if (oUsuario.Id == 0)
             {
-                //Se ejecuta el metodo Crear que retorna el ID del usuario creado que se genera desde la BD.
                 int idUsuarioCreado = new CN_Usuario().Crear(oUsuario, out mensaje);
 
-                if (idUsuarioCreado != 0) //Si se agrego correctamente
-                { //Se agregan los datos al DGV.
-                    dgvUsuarios.Rows.Add(new object[] { //Nota: el orden es importante.
-                        idUsuarioCreado,
-                        txtDocumento.Text.Trim(),
-                        txtNombre.Text.Trim(),
-                        txtApellido.Text.Trim(),
-                        txtClave.Text.Trim(),
-                        DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss"),
-                        ((OpcionCombo)cbRol.SelectedItem).Valor.ToString(),
-                        ((OpcionCombo)cbRol.SelectedItem).Texto.ToString(),
-                        "","" //Lo dos botones (Editar y Eliminar):
-                    });
-
-                    LimpiarForm(); //Limpia los campos del formulario.
-                }
-                else //MessageBox que muestra un error sqlite.
+                if (idUsuarioCreado == 0)
+                {
                     MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                MostrarListaUsuarios();
+                LimpiaryDeshabilitarForm();
             }
-            else //Si su ID no es 0, se ejecuta el metodo Actualizar.
+            else
             {
                 bool resultado = new CN_Usuario().Actualizar(oUsuario, out mensaje);
 
-                if (resultado) //Si se actualizo correctamente, se agregan los datos a la lista.
-                {
-                    DataGridViewRow row = dgvUsuarios.Rows[Convert.ToInt32(lblIndice.Text)];
-                    row.Cells["ID_Usuario"].Value = lblID_Usuario.Text;
-                    row.Cells["Documento"].Value = txtDocumento.Text.Trim();
-                    row.Cells["Nombre"].Value = txtNombre.Text.Trim();
-                    row.Cells["Apellido"].Value = txtApellido.Text.Trim();
-                    row.Cells["Clave"].Value = txtClave.Text.Trim();
-                    row.Cells["ID_Rol"].Value = ((OpcionCombo)cbRol.SelectedItem).Valor.ToString();
-                    row.Cells["Rol"].Value = ((OpcionCombo)cbRol.SelectedItem).Texto.ToString();
-
-                    LimpiarForm();
-                }
-                else
+                if (!resultado)
                 {
                     MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
                 }
+                MostrarListaUsuarios();
+                LimpiaryDeshabilitarForm();
             }
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            LimpiarForm();
+            LimpiaryDeshabilitarForm();
         }
-        private void LimpiarForm()
+        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvUsuarios.Rows.Count < 0)
+                    return;
+
+                string columnaFiltro = ((OpcionCombo)cbBuscar.SelectedItem).Valor.ToString();
+                foreach (DataGridViewRow row in dgvUsuarios.Rows) //Recorre cada fila que encuentre en dgvUsuarios.
+                {
+                    if (row.Cells[columnaFiltro].Value.ToString().Trim().ToUpper().Contains(txtBuscar.Text.Trim().ToUpper()))
+                        //Se hace el filtro por la columnaFiltro si contiene lo que se encuentra en txtBuscar.
+                        row.Visible = true;
+                    else
+                        row.Visible = false;
+                }
+            }
+        }
+        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
+        { //Se elimina el filtro.
+            txtBuscar.Text = "";
+            foreach (DataGridViewRow row in dgvUsuarios.Rows)
+            {
+                row.Visible = true;
+            }
+        }
+        private void btnCrear_Click(object sender, EventArgs e)
+        {
+            HabilitarForm();
+        }
+        private void MostrarListaUsuarios()
+        {
+            dgvUsuarios.Rows.Clear();
+            List<CE_Usuario> listaUsuario = new CN_Usuario().Listar();
+
+            foreach (CE_Usuario item in listaUsuario)
+            {
+                dgvUsuarios.Rows.Add(new object[] { //Poner los TODOS los items EN ORDEN.
+                    item.Id,
+                    item.Documento,
+                    item.Nombre,
+                    item.Apellido,
+                    item.Clave,
+                    item.FechaCreacion,
+                    item.oRol.IdRol,
+                    item.oRol.NomRol,
+                    item.oEstado.Id,
+                    item.oEstado.Nombre,
+                    "","" //Botones Editar y Elimiar.
+                });
+            }
+        }
+        private void LimpiaryDeshabilitarForm()
         {
             lblIndice.Text = "-1"; //Se setea en -1 xq el indice empieza en 0.
             lblID_Usuario.Text = "0"; //Se setea en 0 para que el boton guardar sepa si debe crear o actualizar.
@@ -180,34 +195,23 @@ namespace CapaPresentacion.Formularios.Usuarios
             txtClave.Text = "";
             cbRol.SelectedIndex = 0;
             txtDocumento.Select();
+            txtDocumento.Enabled = false;
+            txtNombre.Enabled = false;
+            txtApellido.Enabled = false;
+            txtClave.Enabled = false;
+            cbRol.Enabled = false;
+            btnGuardar.Enabled = false;
+            btnCancelar.Enabled = false;
         }
-        private void btnBuscar_Click(object sender, EventArgs e)
+        private void HabilitarForm()
         {
-            string columnaFiltro = ((OpcionCombo)cbBuscar.SelectedItem).Valor.ToString();
-            if (dgvUsuarios.Rows.Count > 0) //Si no hay elementos en la tabla no tiene sentido hacer la busqueda.
-            {
-                foreach (DataGridViewRow row in dgvUsuarios.Rows) //Recorre cada fila que encuentre en dgvUsuarios.
-                {
-                    if (row.Cells[columnaFiltro].Value.ToString().Trim().ToUpper().Contains(txtBuscar.Text.Trim().ToUpper()))
-                    //Se hace el filtro por la columnaFiltro si contiene lo que se encuentra en txtBuscar.
-                        row.Visible = true;
-                    else
-                        row.Visible = false;
-                }
-            }
-        }
-        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
-        { //Limpia el textbox de busqueda y se elimina el filtro.
-            txtBuscar.Text = "";
-            foreach (DataGridViewRow row in dgvUsuarios.Rows)
-            {
-                row.Visible = true;
-            }
-        }
-        private void btnCrear_Click(object sender, EventArgs e)
-        {
-            Form form = new frmCrearUsuario();
-            form.Show();
+            txtDocumento.Enabled = true;
+            txtNombre.Enabled = true;
+            txtApellido.Enabled = true;
+            txtClave.Enabled = true;
+            cbRol.Enabled = true;
+            btnGuardar.Enabled = true;
+            btnCancelar.Enabled = true;
         }
     }
 }
