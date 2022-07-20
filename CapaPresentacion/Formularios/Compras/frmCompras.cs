@@ -55,5 +55,19 @@ namespace CapaPresentacion.Formularios.Compras
                 }
             }
         }
+        private void btnBuscarProducto_Click(object sender, EventArgs e)
+        {
+            using (var modal = new mdProducto())
+            {
+                var result = modal.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    txtIdProducto.Text = modal.Producto.Id.ToString();
+                    txtDescProducto.Text = modal.Producto.Descripcion;
+                    txtCosto.Select();
+                }
+            }
+        }
     }
 }

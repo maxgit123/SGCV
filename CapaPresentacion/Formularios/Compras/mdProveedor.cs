@@ -27,7 +27,6 @@ namespace CapaPresentacion.Formularios.Compras
             cbBuscar.ValueMember = "Valor";
             cbBuscar.SelectedIndex = 0;
 
-            dgvProveedores.Rows.Clear();
             List<CE_Proveedor> listaProveedor = new CN_Proveedor().Listar();
 
             foreach (CE_Proveedor item in listaProveedor)

@@ -167,7 +167,7 @@ namespace CapaPresentacion.Formularios.Productos
 
             foreach (CE_Producto item in listaProducto)
             {
-                dgvProductos.Rows.Add(new object[] { //Acordate de poner los TODOS los items EN ORDEN
+                dgvProductos.Rows.Add(new object[] {
                     item.Id,
                     item.Codigo,
                     item.Descripcion,
