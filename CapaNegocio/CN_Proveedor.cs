@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-//Lo que agregue:
 using CapaDatos;
 using CapaEntidad;
 
@@ -11,7 +10,6 @@ namespace CapaNegocio
         public List<CE_Proveedor> Listar()
         {
             return oCD_Proveedor.Listar();
-            //Retorna la lista que tiene la clase CD_Proveedor de la capa de datos.
         }
         public int Crear(CE_Proveedor oProveedor, out string mensaje)
         {
@@ -20,7 +18,6 @@ namespace CapaNegocio
             //Validaciones de campos del formulario.
             if (oProveedor.RazonSocial == "")
                 mensaje += "Ingrese la razón social.\n";
-            //Va concatenando con saltos de linea los mensajes de error que surjan.
 
             if (mensaje == string.Empty)
                 return oCD_Proveedor.Crear(oProveedor, out mensaje);
@@ -31,10 +28,8 @@ namespace CapaNegocio
         {
             mensaje = string.Empty;
 
-            //Validaciones de campos del formulario.
             if (oProveedor.RazonSocial == "")
                 mensaje += "Ingrese la razón social.\n";
-            //Va concatenando con saltos de linea los mensajes de error que surjan.
 
             if (mensaje == string.Empty)
                 return oCD_Proveedor.Actualizar(oProveedor, out mensaje);

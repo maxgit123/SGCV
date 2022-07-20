@@ -7,26 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CapaEntidad;
 
 namespace CapaPresentacion.Formularios.Compras
 {
     public partial class frmCompras : Form
     {
-        public frmCompras()
+        private readonly CE_Usuario usuario;
+        public frmCompras(CE_Usuario oUsuario = null)
         {
+            usuario = oUsuario;
             InitializeComponent();
         }
-
         private void frmCompras_Load(object sender, EventArgs e)
         {
-            DataGridViewRow fila = new DataGridViewRow();
-            fila.CreateCells(dgvProductos);
-            fila.Cells[0].Value = "Pepsi 2 lts";
-            fila.Cells[1].Value = "320,00";
-            fila.Cells[2].Value = "10";
-            fila.Cells[3].Value = "3200,00";
-
-            dgvProductos.Rows.Add(fila);
+            dtpPedido.Value = DateTime.Now;
         }
         private void dgvProductos_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
@@ -45,6 +40,19 @@ namespace CapaPresentacion.Formularios.Compras
 
                 e.Graphics.DrawImage(Properties.Resources.delete16, new Rectangle(x, y, w, h));
                 e.Handled = true;
+            }
+        }
+        private void btnBuscarProveedor_Click(object sender, EventArgs e)
+        {
+            using (var modal = new mdProveedor())
+            {
+                var result = modal.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    txtIdProveedor.Text = modal.Proveedor.Id.ToString();
+                    txtRazonSocial.Text = modal.Proveedor.RazonSocial;
+                }
             }
         }
     }

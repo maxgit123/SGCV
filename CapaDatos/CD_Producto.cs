@@ -30,16 +30,16 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Producto()
                             {
-                                IdProducto = Convert.ToInt32(reader["ID_Producto"]),
-                                Nombre = reader["Descripcion"].ToString(),
+                                Id = Convert.ToInt32(reader["ID_Producto"]),
+                                Descripcion = reader["Descripcion"].ToString(),
                                 Costo = Convert.ToDecimal(reader["PrecioCompra"]),
                                 Precio = Convert.ToDecimal(reader["PrecioVenta"]),
                                 Stock = Convert.ToInt32(reader["Stock"]),
                                 QuiebreStock = Convert.ToInt32(reader["QuiebreStock"]),
                                 oCategoria = new CE_Categoria()
                                 {
-                                    IdCategoria = Convert.ToInt32(reader["ID_Categoria"]),
-                                    NomCategoria = reader["NomCategoria"].ToString()
+                                    Id = Convert.ToInt32(reader["ID_Categoria"]),
+                                    Nombre = reader["NomCategoria"].ToString()
                                 }
                             });
                         }
@@ -75,9 +75,9 @@ namespace CapaDatos
                     //last_insert_rowid retorna el ultimo row id que se inserto.
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
 
-                    cmd.Parameters.Add(new SqlParameter("@Descripcion", oProducto.Nombre));
+                    cmd.Parameters.Add(new SqlParameter("@Descripcion", oProducto.Descripcion));
                     cmd.Parameters.Add(new SqlParameter("@QuiebreStock", oProducto.QuiebreStock));
-                    cmd.Parameters.Add(new SqlParameter("@ID_Categoria", oProducto.oCategoria.IdCategoria));
+                    cmd.Parameters.Add(new SqlParameter("@ID_Categoria", oProducto.oCategoria.Id));
                     cmd.CommandType = CommandType.Text;
 
                     respuesta = Convert.ToInt32(cmd.ExecuteScalar().ToString());
@@ -115,10 +115,10 @@ namespace CapaDatos
                                      + "WHERE ID_Producto = @ID_Producto");
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
 
-                    cmd.Parameters.Add(new SqlParameter("@Descripcion", oProducto.Nombre));
+                    cmd.Parameters.Add(new SqlParameter("@Descripcion", oProducto.Descripcion));
                     cmd.Parameters.Add(new SqlParameter("@QuiebreStock", oProducto.QuiebreStock));
-                    cmd.Parameters.Add(new SqlParameter("@ID_Categoria", oProducto.oCategoria.IdCategoria));
-                    cmd.Parameters.Add(new SqlParameter("@ID_Producto", oProducto.IdProducto));
+                    cmd.Parameters.Add(new SqlParameter("@ID_Categoria", oProducto.oCategoria.Id));
+                    cmd.Parameters.Add(new SqlParameter("@ID_Producto", oProducto.Id));
                     cmd.CommandType = CommandType.Text;
 
                     respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
@@ -150,7 +150,7 @@ namespace CapaDatos
                     StringBuilder query = new StringBuilder();
                     query.AppendLine("DELETE FROM PRODUCTO WHERE ID_Producto = @ID_Producto;");
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
-                    cmd.Parameters.Add(new SqlParameter("@ID_Producto", oProducto.IdProducto));
+                    cmd.Parameters.Add(new SqlParameter("@ID_Producto", oProducto.Id));
                     cmd.CommandType = CommandType.Text;
                     respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
                     cmd.Parameters.Clear();

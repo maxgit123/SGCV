@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
-//Lo que agregue:
-using CapaEntidad;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using CapaEntidad;
 
 namespace CapaDatos
 {
@@ -18,10 +17,10 @@ namespace CapaDatos
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT p.ID_Proveedor,p.RazonSocial,c.ID_Contacto,c.Telefono,c.Correo FROM PROVEEDOR p");
-                    query.AppendLine("INNER JOIN CONTACTO c on c.ID_Contacto = p.ID_Contacto");
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
-                    cmd.CommandType = CommandType.Text;
+                    query.AppendLine("SELECT p.id,p.razonSocial,p.observacion,p.fechaCreacion,p.telefono,p.correo,e.nombre AS [estado] FROM Proveedor p");
+                    query.AppendLine("INNER JOIN cEstado e ON e.id = p.estado_id;");
+                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
+                    { CommandType = CommandType.Text };
                     oConexion.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -30,16 +29,20 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Proveedor()
                             {
-                                IdProveedor = Convert.ToInt32(reader["ID_Proveedor"]),
-                                RazonSocial = reader["RazonSocial"].ToString(),
-                                oContacto = new CE_Contacto()
+                                Id = Convert.ToInt32(reader["id"]),
+                                RazonSocial = reader["razonSocial"].ToString(),
+                                Observacion = reader["observacion"].ToString(),
+                                FechaCreacion = reader["fechaCreacion"].ToString(),
+                                Telefono = reader["telefono"].ToString(),
+                                Correo = reader["correo"].ToString(),
+                                oEstado = new CE_Estado()
                                 {
-                                    IdContacto = Convert.ToInt32(reader["ID_Contacto"]),
-                                    Telefono = reader["Telefono"].ToString(),
-                                    Correo = reader["Correo"].ToString()
+                                    Id = Convert.ToBoolean(reader["id"]),
+                                    Nombre = reader["estado"].ToString()
                                 }
                             });
                         }
+                        reader.Close();
                     }
                 }
                 catch (SqlException ex)
@@ -63,19 +66,22 @@ namespace CapaDatos
             {
                 try
                 {
-                    oConexion.Open();
                     StringBuilder query = new StringBuilder();
 
-                    query.AppendLine("INSERT INTO PROVEEDOR (RazonSocial,ID_Contacto");
-                    query.AppendLine("VALUES (@RazonSocial,@ID_Contacto");
+                    query.AppendLine("INSERT INTO Proveedor (razonSocial,observacion,telefono,correo,estado_id");
+                    query.AppendLine("VALUES (@razonSocial,@observacion,@telefono,@correo,@estado_id;");
                     query.AppendLine("SELECT last_insert_rowid();");
 
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
+                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
+                    { CommandType = CommandType.Text };
 
-                    cmd.Parameters.Add(new SqlParameter("@RazonSocial", oProveedor.RazonSocial));
-                    cmd.Parameters.Add(new SqlParameter("@ID_Contacto", oProveedor.oContacto.IdContacto));
-                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@razonSocial", oProveedor.RazonSocial);
+                    cmd.Parameters.AddWithValue("@observacion", oProveedor.Observacion);
+                    cmd.Parameters.AddWithValue("@telefono", oProveedor.Telefono);
+                    cmd.Parameters.AddWithValue("@correo", oProveedor.Correo);
+                    cmd.Parameters.AddWithValue("@estado_id", oProveedor.oEstado.Id);
 
+                    oConexion.Open();
                     respuesta = Convert.ToInt32(cmd.ExecuteScalar().ToString());
                     //ExecuteScalar devuelve la 1ra columna de la 1ra fila. En este caso el ID del usuario.
                     cmd.Parameters.Clear();
@@ -104,17 +110,21 @@ namespace CapaDatos
                 {
                     oConexion.Open();
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("UPDATE PROVEEDOR SET "
-                                     + "RazonSocial = @RazonSocial, "
-                                     + "ID_Contacto = @ID_Contacto "
-                                     + "WHERE ID_Proveedor = @ID_Proveedor");
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
+                    query.AppendLine("UPDATE Proveedor SET "
+                                     + "razonSocial = @razonSocial, "
+                                     + "observacion = @obervacion, "
+                                     + "telefono = @telefono, "
+                                     + "correo = @correo, "
+                                     + "WHERE id = @id");
+                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
+                    { CommandType = CommandType.Text };
 
-                    cmd.Parameters.Add(new SqlParameter("@RazonSocial", oProveedor.RazonSocial));
-                    cmd.Parameters.Add(new SqlParameter("@ID_Contacto", oProveedor.oContacto.IdContacto));
-                    cmd.Parameters.Add(new SqlParameter("@ID_Proveedor", oProveedor.IdProveedor));
+                    cmd.Parameters.AddWithValue("@razonSocial", oProveedor.RazonSocial);
+                    cmd.Parameters.AddWithValue("@observacion", oProveedor.Observacion);
+                    cmd.Parameters.AddWithValue("@telefono", oProveedor.Telefono);
+                    cmd.Parameters.AddWithValue("@correo", oProveedor.Correo);
+                    cmd.Parameters.AddWithValue("@id", oProveedor.Id);
 
-                    cmd.CommandType = CommandType.Text;
                     respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
                     cmd.Parameters.Clear();
                 }
@@ -140,12 +150,13 @@ namespace CapaDatos
             {
                 try
                 {
-                    oConexion.Open();
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("DELETE FROM PROVEEDOR WHERE ID_Proveedor = @ID_Proveedor;");
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
-                    cmd.Parameters.Add(new SqlParameter("@ID_Proveedor", oProveedor.IdProveedor));
-                    cmd.CommandType = CommandType.Text;
+                    query.AppendLine("DELETE FROM Proveedor WHERE id = @id;");
+                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
+                    { CommandType = CommandType.Text };
+                    cmd.Parameters.AddWithValue("@id", oProveedor.Id);
+
+                    oConexion.Open();
                     respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
                     cmd.Parameters.Clear();
                 }

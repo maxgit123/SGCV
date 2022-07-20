@@ -49,8 +49,8 @@ namespace CapaPresentacion.Formularios.Productos
             foreach (CE_Categoria item in listaCategoria)
             {
                 dgvCategorias.Rows.Add(new object[] { //Acordate de poner los TODOS los items EN ORDEN
-                    item.IdCategoria,
-                    item.NomCategoria,
+                    item.Id,
+                    item.Nombre,
                     item.oAlicuotaIVA.IdAlicuotaIVA,
                     item.oAlicuotaIVA.PorcentajeIVA,
                     "","" //Boton editar y eliminar.
@@ -116,7 +116,7 @@ namespace CapaPresentacion.Formularios.Productos
 
                         CE_Categoria oCategoria = new CE_Categoria() //Se crea un nueva instancia
                         { //de la que solo se necesita el ID de la Categoria.
-                            IdCategoria = int.Parse(dgvCategorias.Rows[indice].Cells["ID_Categoria"].Value.ToString())
+                            Id = int.Parse(dgvCategorias.Rows[indice].Cells["ID_Categoria"].Value.ToString())
                         };
 
                         bool respuesta = new CN_Categoria().Eliminar(oCategoria, out mensaje);
@@ -135,12 +135,12 @@ namespace CapaPresentacion.Formularios.Productos
 
             CE_Categoria oCategoria = new CE_Categoria() //Se crea un obj de la clase Categoria
             { //y se le asignan los valores del formulario.
-                IdCategoria = Convert.ToInt32(lblID_Categoria.Text),
-                NomCategoria = txtNomCategoria.Text.Trim(),
+                Id = Convert.ToInt32(lblID_Categoria.Text),
+                Nombre = txtNomCategoria.Text.Trim(),
                 oAlicuotaIVA = new CE_AlicuotaIVA() { IdAlicuotaIVA = Convert.ToInt32(((OpcionCombo)cbAlicuotaIVA.SelectedItem).Valor) },
             };
 
-            if (oCategoria.IdCategoria == 0) //Si es una categoria nueva:
+            if (oCategoria.Id == 0) //Si es una categoria nueva:
             {
                 //Se ejecuta el metodo Crear que retorna el ID de la categoria creada que se genera desde la BD.
                 int idCategoriaCreada = new CN_Categoria().Crear(oCategoria, out mensaje);

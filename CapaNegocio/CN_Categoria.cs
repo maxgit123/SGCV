@@ -17,7 +17,7 @@ namespace CapaNegocio
             mensaje = string.Empty;
 
             //Validaciones de campos del formulario.
-            if (oCategoria.NomCategoria == "")
+            if (oCategoria.Nombre == "")
                 mensaje += "Ingrese un nombre de categoria.\n";
             //Va concatenando con saltos de linea los mensajes de error que surjan.
 
@@ -31,7 +31,7 @@ namespace CapaNegocio
             mensaje = string.Empty;
 
             //Validaciones de campos del formulario.
-            if (oCategoria.NomCategoria == "")
+            if (oCategoria.Nombre == "")
                 mensaje += "Ingrese un nombre de categoria.\n";
             //Va concatenando con saltos de linea los mensajes de error que surjan.
 

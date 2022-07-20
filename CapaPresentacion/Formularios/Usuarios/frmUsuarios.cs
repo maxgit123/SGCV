@@ -85,8 +85,6 @@ namespace CapaPresentacion.Formularios.Usuarios
                     dgvUsuarios.Rows.RemoveAt(Convert.ToInt32(e.RowIndex));
                 else
                     MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                LimpiaryDeshabilitarForm();
             }
         }
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -100,7 +98,10 @@ namespace CapaPresentacion.Formularios.Usuarios
                 Nombre = txtNombre.Text.Trim(),
                 Apellido = txtApellido.Text.Trim(),
                 Clave = txtClave.Text.Trim(),
-                oRol = new CE_Rol() {IdRol = Convert.ToInt32(((OpcionCombo)cbRol.SelectedItem).Valor)},
+                oRol = new CE_Rol()
+                {
+                    IdRol = Convert.ToInt32(((OpcionCombo)cbRol.SelectedItem).Valor)
+                }
             };
             
             if (oUsuario.Id == 0)
@@ -114,7 +115,8 @@ namespace CapaPresentacion.Formularios.Usuarios
                 }
 
                 MostrarListaUsuarios();
-                LimpiaryDeshabilitarForm();
+                LimpiarForm();
+                DeshabilitarForm();
             }
             else
             {
@@ -126,29 +128,27 @@ namespace CapaPresentacion.Formularios.Usuarios
                     return;
                 }
                 MostrarListaUsuarios();
-                LimpiaryDeshabilitarForm();
+                LimpiarForm();
+                DeshabilitarForm();
             }
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            LimpiaryDeshabilitarForm();
+            DeshabilitarForm();
         }
         private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (dgvUsuarios.Rows.Count < 0)
-                    return;
+            if (e.KeyCode != Keys.Enter || dgvUsuarios.Rows.Count < 0)
+                return;
 
-                string columnaFiltro = ((OpcionCombo)cbBuscar.SelectedItem).Valor.ToString();
-                foreach (DataGridViewRow row in dgvUsuarios.Rows) //Recorre cada fila que encuentre en dgvUsuarios.
-                {
-                    if (row.Cells[columnaFiltro].Value.ToString().Trim().ToUpper().Contains(txtBuscar.Text.Trim().ToUpper()))
-                        //Se hace el filtro por la columnaFiltro si contiene lo que se encuentra en txtBuscar.
-                        row.Visible = true;
-                    else
-                        row.Visible = false;
-                }
+            string columnaFiltro = ((OpcionCombo)cbBuscar.SelectedItem).Valor.ToString();
+            foreach (DataGridViewRow row in dgvUsuarios.Rows) //Recorre cada fila que encuentre en dgvUsuarios.
+            {
+                if (row.Cells[columnaFiltro].Value.ToString().Trim().ToUpper().Contains(txtBuscar.Text.Trim().ToUpper()))
+                    //Se hace el filtro por la columnaFiltro si contiene lo que se encuentra en txtBuscar.
+                    row.Visible = true;
+                else
+                    row.Visible = false;
             }
         }
         private void btnLimpiarBuscar_Click(object sender, EventArgs e)
@@ -161,6 +161,7 @@ namespace CapaPresentacion.Formularios.Usuarios
         }
         private void btnCrear_Click(object sender, EventArgs e)
         {
+            LimpiarForm();
             HabilitarForm();
         }
         private void MostrarListaUsuarios()
@@ -170,7 +171,7 @@ namespace CapaPresentacion.Formularios.Usuarios
 
             foreach (CE_Usuario item in listaUsuario)
             {
-                dgvUsuarios.Rows.Add(new object[] { //Poner los TODOS los items EN ORDEN.
+                dgvUsuarios.Rows.Add(new object[] {
                     item.Id,
                     item.Documento,
                     item.Nombre,
@@ -185,7 +186,7 @@ namespace CapaPresentacion.Formularios.Usuarios
                 });
             }
         }
-        private void LimpiaryDeshabilitarForm()
+        private void LimpiarForm()
         {
             lblIndice.Text = "-1"; //Se setea en -1 xq el indice empieza en 0.
             lblID_Usuario.Text = "0"; //Se setea en 0 para que el boton guardar sepa si debe crear o actualizar.
@@ -195,13 +196,6 @@ namespace CapaPresentacion.Formularios.Usuarios
             txtClave.Text = "";
             cbRol.SelectedIndex = 0;
             txtDocumento.Select();
-            txtDocumento.Enabled = false;
-            txtNombre.Enabled = false;
-            txtApellido.Enabled = false;
-            txtClave.Enabled = false;
-            cbRol.Enabled = false;
-            btnGuardar.Enabled = false;
-            btnCancelar.Enabled = false;
         }
         private void HabilitarForm()
         {
@@ -212,6 +206,16 @@ namespace CapaPresentacion.Formularios.Usuarios
             cbRol.Enabled = true;
             btnGuardar.Enabled = true;
             btnCancelar.Enabled = true;
+        }
+        private void DeshabilitarForm()
+        {
+            txtDocumento.Enabled = false;
+            txtNombre.Enabled = false;
+            txtApellido.Enabled = false;
+            txtClave.Enabled = false;
+            cbRol.Enabled = false;
+            btnGuardar.Enabled = false;
+            btnCancelar.Enabled = false;
         }
     }
 }

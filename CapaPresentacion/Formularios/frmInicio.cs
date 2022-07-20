@@ -9,12 +9,12 @@ using FontAwesome.Sharp;
 
 namespace CapaPresentacion.Formularios
 {
-    public partial class fmrDashboard : Form
+    public partial class frmInicio : Form
     {
         private static CE_Usuario usuarioActual;
         private static IconMenuItem menuActivo = null;
         private static Form formularioActivo = null;
-        public fmrDashboard(CE_Usuario oUsuario)
+        public frmInicio(CE_Usuario oUsuario)
         {
             usuarioActual = oUsuario;
             InitializeComponent();
@@ -74,7 +74,7 @@ namespace CapaPresentacion.Formularios
         }
         private void smenuRegistCompra_Click(object sender, EventArgs e)
         {
-            AbrirFormulario((IconMenuItem)sender, new Compras.frmCompras());
+            AbrirFormulario((IconMenuItem)sender, new Compras.frmCompras(usuarioActual));
         }
         private void menuClientes_Click(object sender, EventArgs e)
         {

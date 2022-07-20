@@ -130,11 +130,23 @@
     <Compile Include="Formularios\Compras\frmCompras.Designer.cs">
       <DependentUpon>frmCompras.cs</DependentUpon>
     </Compile>
-    <Compile Include="Formularios\fmrDashboard.cs">
+    <Compile Include="Formularios\Compras\mdProducto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formularios\fmrDashboard.Designer.cs">
-      <DependentUpon>fmrDashboard.cs</DependentUpon>
+    <Compile Include="Formularios\Compras\mdProducto.Designer.cs">
+      <DependentUpon>mdProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Compras\mdProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Compras\mdProveedor.Designer.cs">
+      <DependentUpon>mdProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmInicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmInicio.Designer.cs">
+      <DependentUpon>frmInicio.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\Productos\frmCategorias.cs">
       <SubType>Form</SubType>
@@ -166,11 +178,11 @@
     <Compile Include="Formularios\Usuarios\frmUsuarios.Designer.cs">
       <DependentUpon>frmUsuarios.cs</DependentUpon>
     </Compile>
-    <Compile Include="Formularios\fmrLogin.cs">
+    <Compile Include="Formularios\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formularios\fmrLogin.Designer.cs">
-      <DependentUpon>fmrLogin.cs</DependentUpon>
+    <Compile Include="Formularios\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -186,8 +198,14 @@
     <EmbeddedResource Include="Formularios\Compras\frmCompras.resx">
       <DependentUpon>frmCompras.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\fmrDashboard.resx">
-      <DependentUpon>fmrDashboard.cs</DependentUpon>
+    <EmbeddedResource Include="Formularios\Compras\mdProducto.resx">
+      <DependentUpon>mdProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Compras\mdProveedor.resx">
+      <DependentUpon>mdProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmInicio.resx">
+      <DependentUpon>frmInicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Productos\frmCategorias.resx">
       <DependentUpon>frmCategorias.cs</DependentUpon>
@@ -204,8 +222,8 @@
     <EmbeddedResource Include="Formularios\Usuarios\frmUsuarios.resx">
       <DependentUpon>frmUsuarios.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\fmrLogin.resx">
-      <DependentUpon>fmrLogin.cs</DependentUpon>
+    <EmbeddedResource Include="Formularios\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

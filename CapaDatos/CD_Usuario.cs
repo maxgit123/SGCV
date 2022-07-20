@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
-using CapaEntidad;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
+using CapaEntidad;
 
 namespace CapaDatos
 {

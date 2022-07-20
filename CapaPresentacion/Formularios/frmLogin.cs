@@ -7,9 +7,9 @@ using CapaEntidad;
 
 namespace CapaPresentacion.Formularios
 {
-    public partial class fmrLogin : Form
+    public partial class frmLogin : Form
     {
-        public fmrLogin()
+        public frmLogin()
         {
             InitializeComponent();
         }
@@ -24,7 +24,7 @@ namespace CapaPresentacion.Formularios
                 return;
             }
             this.Hide();
-            fmrDashboard form = new fmrDashboard(oUsuario);
+            frmInicio form = new frmInicio(oUsuario);
             form.FormClosing += frm_closing; //Cuando se cierra el dashboard vuelve a mostrar el form de login que se oculto.
             form.Show();
         }

@@ -30,8 +30,8 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Categoria()
                             {
-                                IdCategoria = Convert.ToInt32(reader["ID_Categoria"]),
-                                NomCategoria = reader["NomCategoria"].ToString(),
+                                Id = Convert.ToInt32(reader["ID_Categoria"]),
+                                Nombre = reader["NomCategoria"].ToString(),
                                 oAlicuotaIVA = new CE_AlicuotaIVA()
                                 {
                                     IdAlicuotaIVA = Convert.ToInt32(reader["ID_AlicuotaIVA"]),
@@ -71,7 +71,7 @@ namespace CapaDatos
                     //last_insert_rowid retorna el ultimo row id que se inserto.
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
 
-                    cmd.Parameters.Add(new SqlParameter("@NomCategoria", oCategoria.NomCategoria));
+                    cmd.Parameters.Add(new SqlParameter("@NomCategoria", oCategoria.Nombre));
                     cmd.Parameters.Add(new SqlParameter("@ID_AlicuotaIVA", oCategoria.oAlicuotaIVA.IdAlicuotaIVA));
                     cmd.CommandType = CommandType.Text;
 
@@ -109,9 +109,9 @@ namespace CapaDatos
                                      + "WHERE ID_Categoria = @ID_Categoria");
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
 
-                    cmd.Parameters.Add(new SqlParameter("@NomCategoria", oCategoria.NomCategoria));
+                    cmd.Parameters.Add(new SqlParameter("@NomCategoria", oCategoria.Nombre));
                     cmd.Parameters.Add(new SqlParameter("@ID_AlicuotaIVA", oCategoria.oAlicuotaIVA.IdAlicuotaIVA));
-                    cmd.Parameters.Add(new SqlParameter("@ID_Categoria", oCategoria.IdCategoria));
+                    cmd.Parameters.Add(new SqlParameter("@ID_Categoria", oCategoria.Id));
                     cmd.CommandType = CommandType.Text;
 
                     respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
@@ -143,7 +143,7 @@ namespace CapaDatos
                     StringBuilder query = new StringBuilder();
                     query.AppendLine("DELETE FROM CATEGORIA WHERE ID_Categoria = @ID_Categoria;");
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
-                    cmd.Parameters.Add(new SqlParameter("@ID_Categoria", oCategoria.IdCategoria));
+                    cmd.Parameters.Add(new SqlParameter("@ID_Categoria", oCategoria.Id));
                     cmd.CommandType = CommandType.Text;
                     respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
                     cmd.Parameters.Clear();

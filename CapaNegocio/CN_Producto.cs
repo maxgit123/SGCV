@@ -21,7 +21,7 @@ namespace CapaNegocio
             mensaje = string.Empty;
 
             //Validaciones de campos del formulario.
-            if (oProducto.Nombre == "")
+            if (oProducto.Descripcion == "")
                 mensaje += "Ingrese la descripcion del producto.\n";
             //Va concatenando con saltos de linea los mensajes de error que surjan.
 
@@ -35,7 +35,7 @@ namespace CapaNegocio
             mensaje = string.Empty;
 
             //Validaciones de campos del formulario.
-            if (oProducto.Nombre == "")
+            if (oProducto.Descripcion == "")
                 mensaje += "Ingrese la descripcion del producto.\n";
             //Va concatenando con saltos de linea los mensajes de error que surjan.
 
