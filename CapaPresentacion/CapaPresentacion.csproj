@@ -252,9 +252,6 @@
     <None Include="Resources\edit16.png" />
     <None Include="Resources\delete16.png" />
     <Content Include="icono.ico" />
-    <Content Include="sgcvDB.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

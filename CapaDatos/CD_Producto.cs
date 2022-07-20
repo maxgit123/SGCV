@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
-//Lo que agregue:
-using CapaEntidad;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using CapaEntidad;
 
 namespace CapaDatos
 {
@@ -18,10 +17,11 @@ namespace CapaDatos
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT p.ID_Producto,p.Descripcion,p.PrecioCompra,p.PrecioVenta,p.Stock,p.QuiebreStock,c.ID_Categoria,c.NomCategoria FROM PRODUCTO p");
-                    query.AppendLine("INNER JOIN CATEGORIA c on c.ID_Categoria = p.ID_Categoria");
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
-                    cmd.CommandType = CommandType.Text;
+                    query.AppendLine("SELECT p.id,p.descripcion,p.costo,p.precio,p.stock,p.quiebreStock,p.fechaCreacion,c.nombre AS [categoria],e.nombre AS [estado] FROM Producto p");
+                    query.AppendLine("INNER JOIN Categoria c ON c.id = p.categoria_id");
+                    query.AppendLine("INNER JOIN cEstado e ON e.id = p.estado_id;");
+                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
+                    { CommandType = CommandType.Text };
                     oConexion.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -30,19 +30,26 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Producto()
                             {
-                                Id = Convert.ToInt32(reader["ID_Producto"]),
-                                Descripcion = reader["Descripcion"].ToString(),
-                                Costo = Convert.ToDecimal(reader["PrecioCompra"]),
-                                Precio = Convert.ToDecimal(reader["PrecioVenta"]),
-                                Stock = Convert.ToInt32(reader["Stock"]),
-                                QuiebreStock = Convert.ToInt32(reader["QuiebreStock"]),
+                                Id = Convert.ToInt32(reader["id"]),
+                                Descripcion = reader["descripcion"].ToString(),
+                                Costo = Convert.ToDecimal(reader["costo"]),
+                                Precio = Convert.ToDecimal(reader["precio"]),
+                                Stock = Convert.ToInt32(reader["stock"]),
+                                QuiebreStock = Convert.ToInt32(reader["quiebreStock"]),
+                                FechaCreacion = reader["fechaCreacion"].ToString(),
                                 oCategoria = new CE_Categoria()
                                 {
-                                    Id = Convert.ToInt32(reader["ID_Categoria"]),
-                                    Nombre = reader["NomCategoria"].ToString()
+                                    Id = Convert.ToInt32(reader["id"]),
+                                    Nombre = reader["categoria"].ToString()
+                                },
+                                oEstado = new CE_Estado()
+                                {
+                                    Id = Convert.ToBoolean(reader["id"]),
+                                    Nombre = reader["estado"].ToString()
                                 }
                             });
                         }
+                        reader.Close();
                     }
                 }
                 catch (SqlException ex)
