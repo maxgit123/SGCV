@@ -18,10 +18,14 @@ namespace CapaDatos
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT u.ID_Categoria,u.NomCategoria,r.ID_AlicuotaIVA,r.PorcentajeIVA FROM CATEGORIA u");
-                    query.AppendLine("INNER JOIN ALICUOTA_IVA r on r.ID_AlicuotaIVA = u.ID_AlicuotaIVA");
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
-                    cmd.CommandType = CommandType.Text;
+                    query.AppendLine("SELECT c.id,c.nombre,c.alicuotaIVA_id,a.porcentaje,c.estado_id,e.nombre AS [estado] FROM Categoria c");
+                    query.AppendLine("INNER JOIN cAlicuotaIVA a ON a.id = c.alicuotaIVA_id");
+                    query.AppendLine("INNER JOIN cEstado e ON e.id = c.estado_id");
+                    query.AppendLine("WHERE c.estado_id = 1;");
+
+                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
+                    { CommandType = CommandType.Text };
+
                     oConexion.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -30,12 +34,17 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Categoria()
                             {
-                                Id = Convert.ToInt32(reader["ID_Categoria"]),
-                                Nombre = reader["NomCategoria"].ToString(),
+                                Id = Convert.ToInt32(reader["id"]),
+                                Nombre = reader["nombre"].ToString(),
                                 oAlicuotaIVA = new CE_AlicuotaIVA()
                                 {
-                                    IdAlicuotaIVA = Convert.ToInt32(reader["ID_AlicuotaIVA"]),
-                                    PorcentajeIVA = Convert.ToDecimal(reader["PorcentajeIVA"])
+                                    Id = Convert.ToInt32(reader["id"]),
+                                    Porcentaje = Convert.ToDecimal(reader["porcentaje"])
+                                },
+                                oEstado = new CE_Estado()
+                                {
+                                    Id = Convert.ToBoolean(reader["id"]),
+                                    Nombre = reader["nombre"].ToString(),
                                 }
                             });
                         }
@@ -72,7 +81,7 @@ namespace CapaDatos
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
 
                     cmd.Parameters.Add(new SqlParameter("@NomCategoria", oCategoria.Nombre));
-                    cmd.Parameters.Add(new SqlParameter("@ID_AlicuotaIVA", oCategoria.oAlicuotaIVA.IdAlicuotaIVA));
+                    cmd.Parameters.Add(new SqlParameter("@ID_AlicuotaIVA", oCategoria.oAlicuotaIVA.Id));
                     cmd.CommandType = CommandType.Text;
 
                     respuesta = Convert.ToInt32(cmd.ExecuteScalar().ToString());
@@ -110,7 +119,7 @@ namespace CapaDatos
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
 
                     cmd.Parameters.Add(new SqlParameter("@NomCategoria", oCategoria.Nombre));
-                    cmd.Parameters.Add(new SqlParameter("@ID_AlicuotaIVA", oCategoria.oAlicuotaIVA.IdAlicuotaIVA));
+                    cmd.Parameters.Add(new SqlParameter("@ID_AlicuotaIVA", oCategoria.oAlicuotaIVA.Id));
                     cmd.Parameters.Add(new SqlParameter("@ID_Categoria", oCategoria.Id));
                     cmd.CommandType = CommandType.Text;
 

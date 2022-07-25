@@ -20,7 +20,7 @@ namespace CapaPresentacion.Formularios.Productos
 
             foreach (CE_AlicuotaIVA item in listaAlicuotaIVA)
             {
-                cbAlicuotaIVA.Items.Add(new OpcionCombo() { Valor = item.IdAlicuotaIVA, Texto = Convert.ToString(item.PorcentajeIVA) });
+                cbAlicuotaIVA.Items.Add(new OpcionCombo() { Valor = item.Id, Texto = Convert.ToString(item.Porcentaje) });
                 cbAlicuotaIVA.DisplayMember = "Texto";
                 cbAlicuotaIVA.ValueMember = "Valor";
                 cbAlicuotaIVA.SelectedIndex = 0;
@@ -45,8 +45,8 @@ namespace CapaPresentacion.Formularios.Productos
                 dgvCategorias.Rows.Add(new object[] { //Acordate de poner los TODOS los items EN ORDEN
                     item.Id,
                     item.Nombre,
-                    item.oAlicuotaIVA.IdAlicuotaIVA,
-                    item.oAlicuotaIVA.PorcentajeIVA,
+                    item.oAlicuotaIVA.Id,
+                    item.oAlicuotaIVA.Porcentaje,
                     "","" //Boton editar y eliminar.
                 });
             }
@@ -131,7 +131,7 @@ namespace CapaPresentacion.Formularios.Productos
             { //y se le asignan los valores del formulario.
                 Id = Convert.ToInt32(lblID_Categoria.Text),
                 Nombre = txtNomCategoria.Text.Trim(),
-                oAlicuotaIVA = new CE_AlicuotaIVA() { IdAlicuotaIVA = Convert.ToInt32(((OpcionCombo)cbAlicuotaIVA.SelectedItem).Valor) },
+                oAlicuotaIVA = new CE_AlicuotaIVA() { Id = Convert.ToInt32(((OpcionCombo)cbAlicuotaIVA.SelectedItem).Valor) },
             };
 
             if (oCategoria.Id == 0) //Si es una categoria nueva:
@@ -180,10 +180,8 @@ namespace CapaPresentacion.Formularios.Productos
         {
             lblIndice.Text = "-1"; //Se setea en -1 xq el indice empieza en 0.
             lblID_Categoria.Text = "0"; //Se setea en 0 para que el boton guardar sepa si debe crear o actualizar.
-            //Se limpian los campos:
             txtNomCategoria.Text = "";
             cbAlicuotaIVA.SelectedIndex = 0;
-            //Y se vuelve a dejar seleccionado el primer textbox.
             txtNomCategoria.Select();
         }
         private void btnBuscar_Click(object sender, EventArgs e)

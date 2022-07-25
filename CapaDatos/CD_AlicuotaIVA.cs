@@ -27,8 +27,8 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_AlicuotaIVA()
                             {
-                                IdAlicuotaIVA = Convert.ToInt32(reader["ID_AlicuotaIVA"]),
-                                PorcentajeIVA = Convert.ToDecimal(reader["PorcentajeIVA"]),
+                                Id = Convert.ToInt32(reader["ID_AlicuotaIVA"]),
+                                Porcentaje = Convert.ToDecimal(reader["PorcentajeIVA"]),
                             });
                         }
                     }
