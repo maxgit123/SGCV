@@ -385,7 +385,7 @@
             this.btnCrear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCrear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCrear.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnCrear.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
+            this.btnCrear.IconChar = FontAwesome.Sharp.IconChar.Plus;
             this.btnCrear.IconColor = System.Drawing.SystemColors.Control;
             this.btnCrear.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnCrear.IconSize = 20;
