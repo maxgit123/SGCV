@@ -134,6 +134,7 @@ namespace CapaPresentacion.Formularios.Usuarios
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            LimpiarForm();
             DeshabilitarForm();
         }
         private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
