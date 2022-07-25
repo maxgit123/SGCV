@@ -38,18 +38,18 @@
             this.menuProveedores = new FontAwesome.Sharp.IconMenuItem();
             this.menuCompras = new FontAwesome.Sharp.IconMenuItem();
             this.smenuRegistCompra = new FontAwesome.Sharp.IconMenuItem();
-            this.listaDeComprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.smenuDetalleCompras = new FontAwesome.Sharp.IconMenuItem();
             this.menuVentas = new FontAwesome.Sharp.IconMenuItem();
-            this.registrarVentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listaDeVentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuClientes = new FontAwesome.Sharp.IconMenuItem();
             this.menuTitulo = new System.Windows.Forms.MenuStrip();
             this.menuTituloUsuario = new System.Windows.Forms.ToolStripMenuItem();
             this.smenuRol = new System.Windows.Forms.ToolStripMenuItem();
+            this.cambiarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smenuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.panelDashboard = new System.Windows.Forms.Panel();
-            this.cambiarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.smenuRegistrarVenta = new FontAwesome.Sharp.IconMenuItem();
             this.menuPrincipal.SuspendLayout();
             this.menuTitulo.SuspendLayout();
             this.SuspendLayout();
@@ -154,7 +154,7 @@
             this.menuCompras.AutoSize = false;
             this.menuCompras.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.smenuRegistCompra,
-            this.listaDeComprasToolStripMenuItem});
+            this.smenuDetalleCompras});
             this.menuCompras.IconChar = FontAwesome.Sharp.IconChar.CartFlatbed;
             this.menuCompras.IconColor = System.Drawing.Color.Black;
             this.menuCompras.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -175,17 +175,21 @@
             this.smenuRegistCompra.Text = "Registrar Compra";
             this.smenuRegistCompra.Click += new System.EventHandler(this.smenuRegistCompra_Click);
             // 
-            // listaDeComprasToolStripMenuItem
+            // smenuDetalleCompras
             // 
-            this.listaDeComprasToolStripMenuItem.Name = "listaDeComprasToolStripMenuItem";
-            this.listaDeComprasToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.listaDeComprasToolStripMenuItem.Text = "Lista de Compras";
+            this.smenuDetalleCompras.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.smenuDetalleCompras.IconColor = System.Drawing.Color.Black;
+            this.smenuDetalleCompras.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.smenuDetalleCompras.Name = "smenuDetalleCompras";
+            this.smenuDetalleCompras.Size = new System.Drawing.Size(166, 22);
+            this.smenuDetalleCompras.Text = "Detalle Compras";
+            this.smenuDetalleCompras.Click += new System.EventHandler(this.smenuDetalleCompras_Click);
             // 
             // menuVentas
             // 
             this.menuVentas.AutoSize = false;
             this.menuVentas.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.registrarVentaToolStripMenuItem,
+            this.smenuRegistrarVenta,
             this.listaDeVentasToolStripMenuItem});
             this.menuVentas.IconChar = FontAwesome.Sharp.IconChar.CashRegister;
             this.menuVentas.IconColor = System.Drawing.Color.Black;
@@ -197,16 +201,10 @@
             this.menuVentas.Text = "Ventas";
             this.menuVentas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // registrarVentaToolStripMenuItem
-            // 
-            this.registrarVentaToolStripMenuItem.Name = "registrarVentaToolStripMenuItem";
-            this.registrarVentaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.registrarVentaToolStripMenuItem.Text = "Registrar Venta";
-            // 
             // listaDeVentasToolStripMenuItem
             // 
             this.listaDeVentasToolStripMenuItem.Name = "listaDeVentasToolStripMenuItem";
-            this.listaDeVentasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.listaDeVentasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.listaDeVentasToolStripMenuItem.Text = "Lista de Ventas";
             // 
             // menuClientes
@@ -254,6 +252,13 @@
             this.smenuRol.Size = new System.Drawing.Size(219, 26);
             this.smenuRol.Text = "Rol";
             // 
+            // cambiarContraseñaToolStripMenuItem
+            // 
+            this.cambiarContraseñaToolStripMenuItem.Name = "cambiarContraseñaToolStripMenuItem";
+            this.cambiarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
+            this.cambiarContraseñaToolStripMenuItem.Text = "Cambiar contraseña";
+            this.cambiarContraseñaToolStripMenuItem.Click += new System.EventHandler(this.cambiarContraseñaToolStripMenuItem_Click);
+            // 
             // smenuCerrarSesion
             // 
             this.smenuCerrarSesion.Name = "smenuCerrarSesion";
@@ -282,14 +287,17 @@
             this.panelDashboard.Size = new System.Drawing.Size(1086, 479);
             this.panelDashboard.TabIndex = 3;
             // 
-            // cambiarContraseñaToolStripMenuItem
+            // smenuRegistrarVenta
             // 
-            this.cambiarContraseñaToolStripMenuItem.Name = "cambiarContraseñaToolStripMenuItem";
-            this.cambiarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
-            this.cambiarContraseñaToolStripMenuItem.Text = "Cambiar contraseña";
-            this.cambiarContraseñaToolStripMenuItem.Click += new System.EventHandler(this.cambiarContraseñaToolStripMenuItem_Click);
+            this.smenuRegistrarVenta.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.smenuRegistrarVenta.IconColor = System.Drawing.Color.Black;
+            this.smenuRegistrarVenta.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.smenuRegistrarVenta.Name = "smenuRegistrarVenta";
+            this.smenuRegistrarVenta.Size = new System.Drawing.Size(180, 22);
+            this.smenuRegistrarVenta.Text = "Registrar Venta";
+            this.smenuRegistrarVenta.Click += new System.EventHandler(this.smenuRegistrarVenta_Click);
             // 
-            // fmrDashboard
+            // frmInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -300,7 +308,7 @@
             this.Controls.Add(this.menuTitulo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuPrincipal;
-            this.Name = "fmrDashboard";
+            this.Name = "frmInicio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SGCV";
             this.Load += new System.EventHandler(this.Dashboard_Load);
@@ -330,11 +338,11 @@
         private System.Windows.Forms.ToolStripMenuItem smenuCerrarSesion;
         private FontAwesome.Sharp.IconMenuItem smenuCategorias;
         private FontAwesome.Sharp.IconMenuItem smenuRegistCompra;
-        private System.Windows.Forms.ToolStripMenuItem listaDeComprasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem registrarVentaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listaDeVentasToolStripMenuItem;
         private FontAwesome.Sharp.IconMenuItem smenuProductos;
         private System.Windows.Forms.ToolStripMenuItem smenuRol;
         private System.Windows.Forms.ToolStripMenuItem cambiarContraseñaToolStripMenuItem;
+        private FontAwesome.Sharp.IconMenuItem smenuDetalleCompras;
+        private FontAwesome.Sharp.IconMenuItem smenuRegistrarVenta;
     }
 }

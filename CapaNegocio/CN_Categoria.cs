@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-//Lo que agregue:
 using CapaDatos;
 using CapaEntidad;
 
@@ -11,15 +10,13 @@ namespace CapaNegocio
         public List<CE_Categoria> Listar()
         {
             return oCD_Categoria.Listar();
-        } //Retorna la lista que tiene la clase CD_Categoria de la capa de datos.
+        }
         public int Crear(CE_Categoria oCategoria, out string mensaje)
         {
             mensaje = string.Empty;
 
-            //Validaciones de campos del formulario.
             if (oCategoria.Nombre == "")
                 mensaje += "Ingrese un nombre de categoria.\n";
-            //Va concatenando con saltos de linea los mensajes de error que surjan.
 
             if (mensaje == string.Empty)
                 return oCD_Categoria.Crear(oCategoria, out mensaje);
@@ -30,10 +27,8 @@ namespace CapaNegocio
         {
             mensaje = string.Empty;
 
-            //Validaciones de campos del formulario.
             if (oCategoria.Nombre == "")
                 mensaje += "Ingrese un nombre de categoria.\n";
-            //Va concatenando con saltos de linea los mensajes de error que surjan.
 
             if (mensaje == string.Empty)
                 return oCD_Categoria.Actualizar(oCategoria, out mensaje);

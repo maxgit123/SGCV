@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-//Lo que agregue:
 using CapaDatos;
 using CapaEntidad;
 

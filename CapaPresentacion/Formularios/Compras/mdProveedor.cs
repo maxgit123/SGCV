@@ -16,6 +16,7 @@ namespace CapaPresentacion.Formularios.Compras
         }
         private void mdProveedor_Load(object sender, EventArgs e)
         {
+            /*
             foreach (DataGridViewColumn columna in dgvProveedores.Columns)
             {
                 if (columna.Visible == true && columna.HeaderText != "")
@@ -35,6 +36,20 @@ namespace CapaPresentacion.Formularios.Compras
                     item.Id,
                     item.RazonSocial
                 });
+            }
+            */
+            for (int i = 0; i < 1; i++)
+            {
+                if (i == 0)
+                {
+                    dgvProveedores.Rows.Add(new object[] {
+                        "",
+                        "",
+                        "Javier",
+                        "Maxwell",
+                        "33333333"
+                    });
+                }
             }
         }
         private void dgvProveedores_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)

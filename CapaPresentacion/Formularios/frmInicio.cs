@@ -89,5 +89,13 @@ namespace CapaPresentacion.Formularios
             Form form = new Usuarios.frmCambiarClave(usuarioActual);
             form.ShowDialog();
         }
+        private void smenuDetalleCompras_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario((IconMenuItem)sender, new Compras.frmDetalleCompra());
+        }
+        private void smenuRegistrarVenta_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario((IconMenuItem)sender, new Ventas.frmVentas(usuarioActual));
+        }
     }
 }

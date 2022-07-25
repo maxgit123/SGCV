@@ -65,13 +65,13 @@
             this.btnCrear = new FontAwesome.Sharp.IconButton();
             this.btnLimpiarBuscar = new FontAwesome.Sharp.IconButton();
             this.pnlUsuario = new System.Windows.Forms.Panel();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.btnGuardar = new FontAwesome.Sharp.IconButton();
-            this.lblDocumento = new System.Windows.Forms.Label();
-            this.txtDocumento = new System.Windows.Forms.TextBox();
-            this.lblAdmUsuario = new System.Windows.Forms.Label();
-            this.lblNombre = new System.Windows.Forms.Label();
             this.btnCancelar = new FontAwesome.Sharp.IconButton();
+            this.lblNombre = new System.Windows.Forms.Label();
+            this.lblAdmUsuario = new System.Windows.Forms.Label();
+            this.txtDocumento = new System.Windows.Forms.TextBox();
+            this.lblDocumento = new System.Windows.Forms.Label();
+            this.btnGuardar = new FontAwesome.Sharp.IconButton();
+            this.txtNombre = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
             this.pnlUsuario.SuspendLayout();
             this.SuspendLayout();
@@ -362,6 +362,7 @@
             this.lblID_Usuario.Size = new System.Drawing.Size(13, 13);
             this.lblID_Usuario.TabIndex = 230;
             this.lblID_Usuario.Text = "0";
+            this.lblID_Usuario.Visible = false;
             // 
             // lblIndice
             // 
@@ -371,6 +372,7 @@
             this.lblIndice.Size = new System.Drawing.Size(16, 13);
             this.lblIndice.TabIndex = 231;
             this.lblIndice.Text = "-1";
+            this.lblIndice.Visible = false;
             // 
             // btnCrear
             // 
@@ -440,14 +442,69 @@
             this.pnlUsuario.Size = new System.Drawing.Size(239, 405);
             this.pnlUsuario.TabIndex = 237;
             // 
-            // txtNombre
+            // btnCancelar
             // 
-            this.txtNombre.Enabled = false;
-            this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.Location = new System.Drawing.Point(16, 152);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(206, 26);
-            this.txtNombre.TabIndex = 215;
+            this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Enabled = false;
+            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.IconChar = FontAwesome.Sharp.IconChar.XmarkCircle;
+            this.btnCancelar.IconColor = System.Drawing.Color.Black;
+            this.btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.btnCancelar.IconSize = 20;
+            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnCancelar.Location = new System.Drawing.Point(127, 357);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(94, 31);
+            this.btnCancelar.TabIndex = 234;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // lblNombre
+            // 
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombre.Location = new System.Drawing.Point(13, 133);
+            this.lblNombre.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(59, 16);
+            this.lblNombre.TabIndex = 221;
+            this.lblNombre.Text = "Nombre:";
+            // 
+            // lblAdmUsuario
+            // 
+            this.lblAdmUsuario.AutoSize = true;
+            this.lblAdmUsuario.BackColor = System.Drawing.SystemColors.Control;
+            this.lblAdmUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdmUsuario.ForeColor = System.Drawing.Color.Black;
+            this.lblAdmUsuario.Location = new System.Drawing.Point(12, 20);
+            this.lblAdmUsuario.Name = "lblAdmUsuario";
+            this.lblAdmUsuario.Size = new System.Drawing.Size(212, 20);
+            this.lblAdmUsuario.TabIndex = 233;
+            this.lblAdmUsuario.Text = "Administrador de Usuario";
+            // 
+            // txtDocumento
+            // 
+            this.txtDocumento.Enabled = false;
+            this.txtDocumento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDocumento.Location = new System.Drawing.Point(16, 99);
+            this.txtDocumento.MaxLength = 8;
+            this.txtDocumento.Name = "txtDocumento";
+            this.txtDocumento.Size = new System.Drawing.Size(206, 26);
+            this.txtDocumento.TabIndex = 214;
+            // 
+            // lblDocumento
+            // 
+            this.lblDocumento.AutoSize = true;
+            this.lblDocumento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDocumento.Location = new System.Drawing.Point(13, 80);
+            this.lblDocumento.Name = "lblDocumento";
+            this.lblDocumento.Size = new System.Drawing.Size(33, 16);
+            this.lblDocumento.TabIndex = 219;
+            this.lblDocumento.Text = "DNI:";
             // 
             // btnGuardar
             // 
@@ -469,69 +526,14 @@
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // lblDocumento
+            // txtNombre
             // 
-            this.lblDocumento.AutoSize = true;
-            this.lblDocumento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDocumento.Location = new System.Drawing.Point(13, 80);
-            this.lblDocumento.Name = "lblDocumento";
-            this.lblDocumento.Size = new System.Drawing.Size(33, 16);
-            this.lblDocumento.TabIndex = 219;
-            this.lblDocumento.Text = "DNI:";
-            // 
-            // txtDocumento
-            // 
-            this.txtDocumento.Enabled = false;
-            this.txtDocumento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDocumento.Location = new System.Drawing.Point(16, 99);
-            this.txtDocumento.MaxLength = 8;
-            this.txtDocumento.Name = "txtDocumento";
-            this.txtDocumento.Size = new System.Drawing.Size(206, 26);
-            this.txtDocumento.TabIndex = 214;
-            // 
-            // lblAdmUsuario
-            // 
-            this.lblAdmUsuario.AutoSize = true;
-            this.lblAdmUsuario.BackColor = System.Drawing.SystemColors.Control;
-            this.lblAdmUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdmUsuario.ForeColor = System.Drawing.Color.Black;
-            this.lblAdmUsuario.Location = new System.Drawing.Point(12, 20);
-            this.lblAdmUsuario.Name = "lblAdmUsuario";
-            this.lblAdmUsuario.Size = new System.Drawing.Size(212, 20);
-            this.lblAdmUsuario.TabIndex = 233;
-            this.lblAdmUsuario.Text = "Administrador de Usuario";
-            // 
-            // lblNombre
-            // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombre.Location = new System.Drawing.Point(13, 133);
-            this.lblNombre.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(59, 16);
-            this.lblNombre.TabIndex = 221;
-            this.lblNombre.Text = "Nombre:";
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Enabled = false;
-            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.IconChar = FontAwesome.Sharp.IconChar.XmarkCircle;
-            this.btnCancelar.IconColor = System.Drawing.Color.Black;
-            this.btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.btnCancelar.IconSize = 20;
-            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCancelar.Location = new System.Drawing.Point(127, 357);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(94, 31);
-            this.btnCancelar.TabIndex = 234;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            this.txtNombre.Enabled = false;
+            this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombre.Location = new System.Drawing.Point(16, 152);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(206, 26);
+            this.txtNombre.TabIndex = 215;
             // 
             // frmUsuarios
             // 
