@@ -271,7 +271,7 @@
             this.dgvProductos.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvProductos.RowTemplate.Height = 28;
             this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProductos.Size = new System.Drawing.Size(1134, 285);
+            this.dgvProductos.Size = new System.Drawing.Size(852, 285);
             this.dgvProductos.TabIndex = 234;
             this.dgvProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellContentClick);
             this.dgvProductos.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvProductos_CellPainting);
@@ -282,7 +282,7 @@
             this.lblListaProductos.BackColor = System.Drawing.SystemColors.Control;
             this.lblListaProductos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblListaProductos.ForeColor = System.Drawing.Color.Black;
-            this.lblListaProductos.Location = new System.Drawing.Point(723, 24);
+            this.lblListaProductos.Location = new System.Drawing.Point(643, 24);
             this.lblListaProductos.Name = "lblListaProductos";
             this.lblListaProductos.Size = new System.Drawing.Size(159, 20);
             this.lblListaProductos.TabIndex = 235;
@@ -294,7 +294,7 @@
             this.lblBuscar.AutoSize = true;
             this.lblBuscar.BackColor = System.Drawing.SystemColors.Control;
             this.lblBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBuscar.Location = new System.Drawing.Point(1005, 74);
+            this.lblBuscar.Location = new System.Drawing.Point(723, 74);
             this.lblBuscar.Name = "lblBuscar";
             this.lblBuscar.Size = new System.Drawing.Size(90, 20);
             this.lblBuscar.TabIndex = 236;
@@ -304,7 +304,7 @@
             // 
             this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.Location = new System.Drawing.Point(1252, 68);
+            this.txtBuscar.Location = new System.Drawing.Point(970, 68);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(135, 26);
             this.txtBuscar.TabIndex = 8;
@@ -317,7 +317,7 @@
             this.cbBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbBuscar.FormattingEnabled = true;
-            this.cbBuscar.Location = new System.Drawing.Point(1101, 68);
+            this.cbBuscar.Location = new System.Drawing.Point(819, 68);
             this.cbBuscar.Name = "cbBuscar";
             this.cbBuscar.Size = new System.Drawing.Size(145, 26);
             this.cbBuscar.TabIndex = 7;
@@ -331,7 +331,7 @@
             this.btnLimpiarBuscar.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(63)))), ((int)(((byte)(84)))));
             this.btnLimpiarBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnLimpiarBuscar.IconSize = 18;
-            this.btnLimpiarBuscar.Location = new System.Drawing.Point(1393, 68);
+            this.btnLimpiarBuscar.Location = new System.Drawing.Point(1111, 68);
             this.btnLimpiarBuscar.Name = "btnLimpiarBuscar";
             this.btnLimpiarBuscar.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.btnLimpiarBuscar.Size = new System.Drawing.Size(37, 26);
@@ -387,21 +387,25 @@
             // 
             // ID_Producto
             // 
+            this.ID_Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.ID_Producto.HeaderText = "ID Producto";
             this.ID_Producto.Name = "ID_Producto";
             this.ID_Producto.ReadOnly = true;
             this.ID_Producto.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ID_Producto.Visible = false;
-            this.ID_Producto.Width = 80;
+            this.ID_Producto.Width = 99;
             // 
             // Codigo
             // 
+            this.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Codigo.HeaderText = "Código";
             this.Codigo.Name = "Codigo";
             this.Codigo.ReadOnly = true;
+            this.Codigo.Width = 74;
             // 
             // Descripcion
             // 
+            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
@@ -410,10 +414,10 @@
             this.Descripcion.Name = "Descripcion";
             this.Descripcion.ReadOnly = true;
             this.Descripcion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Descripcion.Width = 200;
             // 
             // Costo
             // 
+            this.Costo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
@@ -421,70 +425,82 @@
             this.Costo.HeaderText = "Costo";
             this.Costo.Name = "Costo";
             this.Costo.ReadOnly = true;
-            this.Costo.Width = 120;
+            this.Costo.Width = 66;
             // 
             // Precio
             // 
+            this.Precio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
             this.Precio.DefaultCellStyle = dataGridViewCellStyle5;
             this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
             this.Precio.ReadOnly = true;
-            this.Precio.Width = 120;
+            this.Precio.Width = 70;
             // 
             // Stock
             // 
+            this.Stock.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Stock.HeaderText = "Stock";
             this.Stock.Name = "Stock";
             this.Stock.ReadOnly = true;
             this.Stock.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Stock.Width = 70;
+            this.Stock.Width = 65;
             // 
             // QuiebreStock
             // 
+            this.QuiebreStock.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.QuiebreStock.HeaderText = "Quiebre de Stock";
             this.QuiebreStock.Name = "QuiebreStock";
             this.QuiebreStock.ReadOnly = true;
             this.QuiebreStock.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.QuiebreStock.Width = 110;
+            this.QuiebreStock.Width = 129;
             // 
             // FechaCreacion
             // 
+            this.FechaCreacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.FechaCreacion.HeaderText = "Fecha Creación";
             this.FechaCreacion.Name = "FechaCreacion";
             this.FechaCreacion.ReadOnly = true;
+            this.FechaCreacion.Width = 121;
             // 
             // ID_Categoria
             // 
+            this.ID_Categoria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.ID_Categoria.HeaderText = "ID Categoria";
             this.ID_Categoria.Name = "ID_Categoria";
             this.ID_Categoria.ReadOnly = true;
             this.ID_Categoria.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ID_Categoria.Visible = false;
+            this.ID_Categoria.Width = 103;
             // 
             // Categoria
             // 
+            this.Categoria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
             this.Categoria.DefaultCellStyle = dataGridViewCellStyle6;
             this.Categoria.HeaderText = "Categoría";
             this.Categoria.Name = "Categoria";
             this.Categoria.ReadOnly = true;
-            this.Categoria.Width = 150;
+            this.Categoria.Width = 88;
             // 
             // ID_Estado
             // 
+            this.ID_Estado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.ID_Estado.HeaderText = "ID Estado";
             this.ID_Estado.Name = "ID_Estado";
             this.ID_Estado.ReadOnly = true;
             this.ID_Estado.Visible = false;
+            this.ID_Estado.Width = 88;
             // 
             // Estado
             // 
+            this.Estado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Estado.HeaderText = "Estado";
             this.Estado.Name = "Estado";
             this.Estado.ReadOnly = true;
+            this.Estado.Width = 73;
             // 
             // btnEditar
             // 
@@ -507,7 +523,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(1442, 397);
+            this.ClientSize = new System.Drawing.Size(1160, 397);
             this.Controls.Add(this.btnCrear);
             this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.lblDescripcion);
