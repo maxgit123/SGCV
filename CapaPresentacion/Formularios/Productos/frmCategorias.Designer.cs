@@ -50,6 +50,8 @@
             this.btnLimpiarBuscar = new FontAwesome.Sharp.IconButton();
             this.btnCancelar = new FontAwesome.Sharp.IconButton();
             this.btnGuardar = new FontAwesome.Sharp.IconButton();
+            this.btnCrear = new FontAwesome.Sharp.IconButton();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.ID_Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NomCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaCreacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,8 +61,6 @@
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnCrear = new FontAwesome.Sharp.IconButton();
-            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -94,6 +94,7 @@
             this.lblIndice.Size = new System.Drawing.Size(16, 13);
             this.lblIndice.TabIndex = 254;
             this.lblIndice.Text = "-1";
+            this.lblIndice.Visible = false;
             // 
             // cbBuscar
             // 
@@ -114,6 +115,7 @@
             this.lblID_Categoria.Size = new System.Drawing.Size(13, 13);
             this.lblID_Categoria.TabIndex = 253;
             this.lblID_Categoria.Text = "0";
+            this.lblID_Categoria.Visible = false;
             // 
             // txtBuscar
             // 
@@ -230,7 +232,7 @@
             // 
             this.lblAlicuotaIVA.AutoSize = true;
             this.lblAlicuotaIVA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAlicuotaIVA.Location = new System.Drawing.Point(25, 133);
+            this.lblAlicuotaIVA.Location = new System.Drawing.Point(13, 133);
             this.lblAlicuotaIVA.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.lblAlicuotaIVA.Name = "lblAlicuotaIVA";
             this.lblAlicuotaIVA.Size = new System.Drawing.Size(82, 16);
@@ -304,78 +306,6 @@
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // ID_Categoria
-            // 
-            this.ID_Categoria.HeaderText = "ID";
-            this.ID_Categoria.Name = "ID_Categoria";
-            this.ID_Categoria.ReadOnly = true;
-            this.ID_Categoria.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ID_Categoria.Visible = false;
-            // 
-            // NomCategoria
-            // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            this.NomCategoria.DefaultCellStyle = dataGridViewCellStyle3;
-            this.NomCategoria.HeaderText = "Nombre";
-            this.NomCategoria.Name = "NomCategoria";
-            this.NomCategoria.ReadOnly = true;
-            this.NomCategoria.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.NomCategoria.Width = 70;
-            // 
-            // FechaCreacion
-            // 
-            this.FechaCreacion.HeaderText = "Fecha de creación";
-            this.FechaCreacion.Name = "FechaCreacion";
-            this.FechaCreacion.ReadOnly = true;
-            // 
-            // ID_AlicuotaIVA
-            // 
-            this.ID_AlicuotaIVA.HeaderText = "ID AlicuotaIVA";
-            this.ID_AlicuotaIVA.Name = "ID_AlicuotaIVA";
-            this.ID_AlicuotaIVA.ReadOnly = true;
-            this.ID_AlicuotaIVA.Visible = false;
-            // 
-            // AlicuotaIVA
-            // 
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            this.AlicuotaIVA.DefaultCellStyle = dataGridViewCellStyle4;
-            this.AlicuotaIVA.HeaderText = "Alicuota IVA";
-            this.AlicuotaIVA.Name = "AlicuotaIVA";
-            this.AlicuotaIVA.ReadOnly = true;
-            this.AlicuotaIVA.Width = 150;
-            // 
-            // ID_Estado
-            // 
-            this.ID_Estado.HeaderText = "ID Estado";
-            this.ID_Estado.Name = "ID_Estado";
-            this.ID_Estado.ReadOnly = true;
-            this.ID_Estado.Visible = false;
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.HeaderText = "";
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.ReadOnly = true;
-            this.btnEditar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.btnEditar.Width = 30;
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.HeaderText = "";
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.ReadOnly = true;
-            this.btnEliminar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.btnEliminar.Width = 30;
-            // 
             // btnCrear
             // 
             this.btnCrear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(96)))), ((int)(((byte)(132)))));
@@ -417,6 +347,84 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(249, 405);
             this.panel1.TabIndex = 259;
+            // 
+            // ID_Categoria
+            // 
+            this.ID_Categoria.HeaderText = "ID";
+            this.ID_Categoria.Name = "ID_Categoria";
+            this.ID_Categoria.ReadOnly = true;
+            this.ID_Categoria.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ID_Categoria.Visible = false;
+            // 
+            // NomCategoria
+            // 
+            this.NomCategoria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            this.NomCategoria.DefaultCellStyle = dataGridViewCellStyle3;
+            this.NomCategoria.HeaderText = "Nombre";
+            this.NomCategoria.Name = "NomCategoria";
+            this.NomCategoria.ReadOnly = true;
+            this.NomCategoria.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.NomCategoria.Width = 80;
+            // 
+            // FechaCreacion
+            // 
+            this.FechaCreacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.FechaCreacion.HeaderText = "Fecha de creación";
+            this.FechaCreacion.Name = "FechaCreacion";
+            this.FechaCreacion.ReadOnly = true;
+            this.FechaCreacion.Width = 136;
+            // 
+            // ID_AlicuotaIVA
+            // 
+            this.ID_AlicuotaIVA.HeaderText = "ID AlicuotaIVA";
+            this.ID_AlicuotaIVA.Name = "ID_AlicuotaIVA";
+            this.ID_AlicuotaIVA.ReadOnly = true;
+            this.ID_AlicuotaIVA.Visible = false;
+            // 
+            // AlicuotaIVA
+            // 
+            this.AlicuotaIVA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            this.AlicuotaIVA.DefaultCellStyle = dataGridViewCellStyle4;
+            this.AlicuotaIVA.HeaderText = "Alicuota IVA";
+            this.AlicuotaIVA.Name = "AlicuotaIVA";
+            this.AlicuotaIVA.ReadOnly = true;
+            this.AlicuotaIVA.Width = 98;
+            // 
+            // ID_Estado
+            // 
+            this.ID_Estado.HeaderText = "ID Estado";
+            this.ID_Estado.Name = "ID_Estado";
+            this.ID_Estado.ReadOnly = true;
+            this.ID_Estado.Visible = false;
+            // 
+            // Estado
+            // 
+            this.Estado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            this.Estado.Width = 73;
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.HeaderText = "";
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.ReadOnly = true;
+            this.btnEditar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.btnEditar.Width = 30;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.HeaderText = "";
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.ReadOnly = true;
+            this.btnEliminar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.btnEliminar.Width = 30;
             // 
             // frmCategorias
             // 
@@ -462,6 +470,8 @@
         private System.Windows.Forms.Label lblNomCategoria;
         private System.Windows.Forms.Label lblAlicuotaIVA;
         private System.Windows.Forms.ComboBox cbAlicuotaIVA;
+        private FontAwesome.Sharp.IconButton btnCrear;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID_Categoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn NomCategoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaCreacion;
@@ -471,7 +481,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewButtonColumn btnEditar;
         private System.Windows.Forms.DataGridViewButtonColumn btnEliminar;
-        private FontAwesome.Sharp.IconButton btnCrear;
-        private System.Windows.Forms.Panel panel1;
     }
 }

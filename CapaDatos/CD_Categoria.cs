@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
-//Lo que agregue:
-using CapaEntidad;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using CapaEntidad;
 
 namespace CapaDatos
 {
@@ -64,33 +63,30 @@ namespace CapaDatos
         }
         public int Crear(CE_Categoria oCategoria, out string mensaje)
         {
+            int idCreado = 0;
             mensaje = string.Empty;
-            int respuesta = 0;
 
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
                 try
                 {
+                    SqlCommand cmd = new SqlCommand("usp_crearcategoria", oConexion)
+                    { CommandType = CommandType.StoredProcedure };
+
+                    cmd.Parameters.AddWithValue("@nombre", oCategoria.Nombre);
+                    cmd.Parameters.AddWithValue("@alicuotaIVA_id", oCategoria.oAlicuotaIVA.Id);
+                    cmd.Parameters.Add("@idCreado", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+
                     oConexion.Open();
-                    StringBuilder query = new StringBuilder();
-
-                    query.AppendLine("INSERT INTO CATEGORIA (NomCategoria,ID_AlicuotaIVA)" +
-                        "VALUES (@NomCategoria,@ID_AlicuotaIVA);");
-                    query.AppendLine("SELECT last_insert_rowid();");
-                    //last_insert_rowid retorna el ultimo row id que se inserto.
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
-
-                    cmd.Parameters.Add(new SqlParameter("@NomCategoria", oCategoria.Nombre));
-                    cmd.Parameters.Add(new SqlParameter("@ID_AlicuotaIVA", oCategoria.oAlicuotaIVA.Id));
-                    cmd.CommandType = CommandType.Text;
-
-                    respuesta = Convert.ToInt32(cmd.ExecuteScalar().ToString());
-                    //ExecuteScalar devuelve la 1ra columna de la 1ra fila. En este caso el ID.
+                    cmd.ExecuteNonQuery();
+                    idCreado = Convert.ToInt32(cmd.Parameters["@idCreado"].Value);
+                    mensaje = cmd.Parameters["@mensaje"].Value.ToString();
                     cmd.Parameters.Clear();
                 }
                 catch (SqlException ex)
                 {
-                    respuesta = 0;
+                    idCreado = 0;
                     mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
                 }
                 finally
@@ -99,7 +95,7 @@ namespace CapaDatos
                         oConexion.Close();
                 }
             }
-            return respuesta;
+            return idCreado;
         }
         public bool Actualizar(CE_Categoria oCategoria, out string mensaje)
         {
@@ -110,20 +106,19 @@ namespace CapaDatos
             {
                 try
                 {
+                    SqlCommand cmd = new SqlCommand("usp_actualizarcategoria", oConexion)
+                    { CommandType = CommandType.StoredProcedure };
+
+                    cmd.Parameters.AddWithValue("@id", oCategoria.Id);
+                    cmd.Parameters.AddWithValue("@nombre", oCategoria.Nombre);
+                    cmd.Parameters.AddWithValue("@alicuotaIVA_id", oCategoria.oAlicuotaIVA.Id);
+                    cmd.Parameters.Add("@respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+
                     oConexion.Open();
-                    StringBuilder query = new StringBuilder();
-                    query.AppendLine("UPDATE CATEGORIA SET "
-                                     + "NomCategoria = @NomCategoria, "
-                                     + "ID_AlicuotaIVA = @ID_AlicuotaIVA "
-                                     + "WHERE ID_Categoria = @ID_Categoria");
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
-
-                    cmd.Parameters.Add(new SqlParameter("@NomCategoria", oCategoria.Nombre));
-                    cmd.Parameters.Add(new SqlParameter("@ID_AlicuotaIVA", oCategoria.oAlicuotaIVA.Id));
-                    cmd.Parameters.Add(new SqlParameter("@ID_Categoria", oCategoria.Id));
-                    cmd.CommandType = CommandType.Text;
-
-                    respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
+                    cmd.ExecuteNonQuery();
+                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
+                    mensaje = cmd.Parameters["@mensaje"].Value.ToString();
                     cmd.Parameters.Clear();
                 }
                 catch (SqlException ex)
@@ -142,19 +137,23 @@ namespace CapaDatos
         public bool Eliminar(CE_Categoria oCategoria, out string mensaje)
         {
             bool respuesta = false;
-            mensaje = String.Empty;
+            mensaje = string.Empty;
 
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
                 try
                 {
+                    SqlCommand cmd = new SqlCommand("usp_eliminarusuario", oConexion)
+                    { CommandType = CommandType.StoredProcedure };
+
+                    cmd.Parameters.AddWithValue("@id", oCategoria.Id);
+                    cmd.Parameters.Add("@respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+
                     oConexion.Open();
-                    StringBuilder query = new StringBuilder();
-                    query.AppendLine("DELETE FROM CATEGORIA WHERE ID_Categoria = @ID_Categoria;");
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
-                    cmd.Parameters.Add(new SqlParameter("@ID_Categoria", oCategoria.Id));
-                    cmd.CommandType = CommandType.Text;
-                    respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
+                    cmd.ExecuteNonQuery();
+                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
+                    mensaje = cmd.Parameters["@mensaje"].Value.ToString();
                     cmd.Parameters.Clear();
                 }
                 catch (SqlException ex)

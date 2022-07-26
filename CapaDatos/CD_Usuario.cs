@@ -62,7 +62,7 @@ namespace CapaDatos
         }
         public int Crear(CE_Usuario oUsuario, out string mensaje)
         {
-            int idUsuarioCreado = 0;
+            int idCreado = 0;
             mensaje = string.Empty;
             
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
@@ -82,13 +82,13 @@ namespace CapaDatos
 
                     oConexion.Open();
                     cmd.ExecuteNonQuery();
-                    idUsuarioCreado = Convert.ToInt32(cmd.Parameters["@idUsuarioCreado"].Value);
+                    idCreado = Convert.ToInt32(cmd.Parameters["@idUsuarioCreado"].Value);
                     mensaje = cmd.Parameters["@mensaje"].Value.ToString();
                     cmd.Parameters.Clear();
                 }
                 catch (SqlException ex)
                 {
-                    idUsuarioCreado = 0;
+                    idCreado = 0;
                     mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
                 }
                 finally
@@ -97,7 +97,7 @@ namespace CapaDatos
                         oConexion.Close();
                 }
             }
-            return idUsuarioCreado;
+            return idCreado;
         }
         public bool Actualizar(CE_Usuario oUsuario, out string mensaje)
         {
