@@ -26,7 +26,7 @@ namespace CapaPresentacion.Formularios.Usuarios
             }
 
             foreach (DataGridViewColumn columna in dgvUsuarios.Columns)
-            { //Se agrega al combobox de busqueda los encabezados visibles. 
+            {
                 if (columna.Visible == true && columna.HeaderText != "")
                 {
                     cbBuscar.Items.Add(new OpcionCombo() { Valor = columna.Name, Texto = columna.HeaderText });
@@ -42,13 +42,12 @@ namespace CapaPresentacion.Formularios.Usuarios
         {
             PintarDGV.PintarbtnEditarEliminar(sender, e, dgvUsuarios.ColumnCount);
         }
-        private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e) //Boton Editar y Eliminar.
+        private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex < 0 || (dgvUsuarios.Columns[e.ColumnIndex].Name != "btnEditar" && dgvUsuarios.Columns[e.ColumnIndex].Name != "btnEliminar"))
                 return;
 
             if (e.ColumnIndex == dgvUsuarios.Columns["btnEditar"].Index){
-                //Labels de ayuda para ver el indice del DGV y el ID del usuario.
                 lblIndice.Text = e.RowIndex.ToString();
                 lblID_Usuario.Text = dgvUsuarios.Rows[e.RowIndex].Cells["ID_Usuario"].Value.ToString();
 
@@ -60,7 +59,7 @@ namespace CapaPresentacion.Formularios.Usuarios
                     if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvUsuarios.Rows[e.RowIndex].Cells["ID_Rol"].Value))
                     {
                         int indice_combo = cbRol.Items.IndexOf(oc);
-                        cbRol.SelectedIndex = indice_combo; //Se selecciona el que encontro.
+                        cbRol.SelectedIndex = indice_combo;
                         break;
                     }
                 }
@@ -137,13 +136,13 @@ namespace CapaPresentacion.Formularios.Usuarios
             LimpiarForm();
             DeshabilitarForm();
         }
-        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
+        private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyCode != Keys.Enter || dgvUsuarios.Rows.Count < 0)
+            if (dgvUsuarios.Rows.Count < 0)
                 return;
 
             string columnaFiltro = ((OpcionCombo)cbBuscar.SelectedItem).Valor.ToString();
-            foreach (DataGridViewRow row in dgvUsuarios.Rows) //Recorre cada fila que encuentre en dgvUsuarios.
+            foreach (DataGridViewRow row in dgvUsuarios.Rows)
             {
                 if (row.Cells[columnaFiltro].Value.ToString().Trim().ToUpper().Contains(txtBuscar.Text.Trim().ToUpper()))
                     //Se hace el filtro por la columnaFiltro si contiene lo que se encuentra en txtBuscar.
@@ -183,7 +182,7 @@ namespace CapaPresentacion.Formularios.Usuarios
                     item.oRol.NomRol,
                     item.oEstado.Id,
                     item.oEstado.Nombre,
-                    "","" //Botones Editar y Elimiar.
+                    "",""
                 });
             }
         }
@@ -200,6 +199,7 @@ namespace CapaPresentacion.Formularios.Usuarios
         }
         private void HabilitarForm()
         {
+            txtDocumento.Select();
             txtDocumento.Enabled = true;
             txtNombre.Enabled = true;
             txtApellido.Enabled = true;
