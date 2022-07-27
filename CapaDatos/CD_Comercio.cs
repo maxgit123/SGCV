@@ -16,8 +16,8 @@ namespace CapaDatos
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT c.razonSocial,c.cuit,c.ingresosBrutos,c.inicioActividad,c.puntoVenta,c.telefono,c.correo,c.fechaActualizacion,");
-                    query.AppendLine("d.calle,d.numero,l.nombre,l.codigoPostal,p.nombre,r.nombre FROM Comercio c");
+                    query.AppendLine("SELECT c.idComercio,c.razonSocial,c.cuit,c.ingresosBrutos,c.inicioActividad,c.puntoVenta,c.telefono,c.correo,c.fechaActualizacion,");
+                    query.AppendLine("d.idDireccion,d.calle,d.numero,l.idLocalidad,l.nombre,l.codigoPostal,p.idProvincia,p.nombre,r.idResponsableIVA,r.nombre FROM Comercio c");
                     query.AppendLine("INNER JOIN Direccion d ON d.idDireccion = c.direccion_id");
                     query.AppendLine("INNER JOIN Localidad l ON l.idLocalidad = c.localidad_id");
                     query.AppendLine("INNER JOIN cProvincia p ON p.idProvincia = c.provincia_id");
@@ -180,7 +180,7 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "UPDATE Comercio SET logo = @imagen WHERE id = 1;";
+                    string query = "UPDATE Comercio SET logo = @imagen WHERE idComercio = 1;";
                     SqlCommand cmd = new SqlCommand(query, oConexion);
                     SqlParameter parameter = new SqlParameter("@imagen", DbType.Binary);
                     parameter.Value = imagen;
