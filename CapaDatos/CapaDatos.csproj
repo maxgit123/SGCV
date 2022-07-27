@@ -61,7 +61,7 @@
     <Compile Include="CD_Proveedor.cs" />
     <Compile Include="CD_Provincia.cs" />
     <Compile Include="CD_Rol.cs" />
-    <Compile Include="CD_RespIVA.cs" />
+    <Compile Include="CD_ResponsableIVA.cs" />
     <Compile Include="CD_Usuario.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

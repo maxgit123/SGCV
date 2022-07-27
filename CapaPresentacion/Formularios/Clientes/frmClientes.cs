@@ -16,11 +16,11 @@ namespace CapaPresentacion.Formularios.Clientes
         }
         private void frmClientes_Load(object sender, EventArgs e)
         {
-            List<CE_RespIVA> listaRespIVA = new CN_RespIVA().Listar();
+            List<CE_ResponsableIVA> listaRespIVA = new CN_ResponsableIVA().Listar();
 
-            foreach (CE_RespIVA item in listaRespIVA)
+            foreach (CE_ResponsableIVA item in listaRespIVA)
             {
-                cbRespIVA.Items.Add(new OpcionCombo() { Valor = item.IdRespIVA, Texto = item.ResponsableIVA });
+                cbRespIVA.Items.Add(new OpcionCombo() { Valor = item.Id, Texto = item.Nombre });
                 cbRespIVA.DisplayMember = "Texto";
                 cbRespIVA.ValueMember = "Valor";
                 cbRespIVA.SelectedIndex = 0;
@@ -48,8 +48,8 @@ namespace CapaPresentacion.Formularios.Clientes
                     item.Documento,
                     item.Nombre,
                     item.Apellido,
-                    item.oRespIVA.IdRespIVA,
-                    item.oRespIVA.ResponsableIVA,
+                    item.oRespIVA.Id,
+                    item.oRespIVA.Nombre,
                     "",""
                 });
             }
@@ -139,7 +139,7 @@ namespace CapaPresentacion.Formularios.Clientes
                 Documento = txtDocumento.Text.Trim(),
                 Nombre = txtNombre.Text.Trim(),
                 Apellido = txtApellido.Text.Trim(),
-                oRespIVA = new CE_RespIVA() { IdRespIVA = Convert.ToInt32(((OpcionCombo)cbRespIVA.SelectedItem).Valor) },
+                oRespIVA = new CE_ResponsableIVA() { Id = Convert.ToInt32(((OpcionCombo)cbRespIVA.SelectedItem).Valor) },
             };
 
             if (oCliente.IdCliente == 0) //Si es un Cliente nuevo:

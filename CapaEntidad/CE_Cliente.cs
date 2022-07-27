@@ -9,6 +9,6 @@
         public string FechaCreacion { get; set; }
         public CE_Estado oEstado { get; set; }
         public CE_Contacto oContacto { get; set; }
-        public CE_RespIVA oRespIVA { get; set; }
+        public CE_ResponsableIVA oRespIVA { get; set; }
     }
 }

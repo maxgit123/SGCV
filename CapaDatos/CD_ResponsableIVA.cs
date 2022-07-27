@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-//Lo que agregue:
-using CapaEntidad;
 using System.Data;
 using System.Data.SqlClient;
+using CapaEntidad;
 
 namespace CapaDatos
 {
-    public class CD_RespIVA
+    public class CD_ResponsableIVA
     {
-        public List<CE_RespIVA> Listar()
+        public List<CE_ResponsableIVA> Listar()
         {
-            List<CE_RespIVA> lista = new List<CE_RespIVA>();
+            List<CE_ResponsableIVA> lista = new List<CE_ResponsableIVA>();
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
                 try
@@ -25,17 +24,17 @@ namespace CapaDatos
                     {
                         while (reader.Read())
                         {
-                            lista.Add(new CE_RespIVA()
+                            lista.Add(new CE_ResponsableIVA()
                             {
-                                IdRespIVA = Convert.ToInt32(reader["ID_RespIVA"]),
-                                ResponsableIVA = reader["ResponsableIVA"].ToString(),
+                                Id = Convert.ToInt32(reader["ID_RespIVA"]),
+                                Nombre = reader["ResponsableIVA"].ToString(),
                             });
                         }
                     }
                 }
                 catch (SqlException ex)
                 {
-                    lista = new List<CE_RespIVA>();
+                    lista = new List<CE_ResponsableIVA>();
                 }
                 finally
                 {

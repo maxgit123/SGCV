@@ -27,8 +27,8 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Provincia()
                             {
-                                IdProvincia = Convert.ToInt32(reader["ID_Provincia"]),
-                                NomProvincia = reader["NomProvincia"].ToString(),
+                                Id = Convert.ToInt32(reader["ID_Provincia"]),
+                                Nombre = reader["NomProvincia"].ToString(),
                             });
                         }
                     }

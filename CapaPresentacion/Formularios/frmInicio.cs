@@ -86,7 +86,7 @@ namespace CapaPresentacion.Formularios
         }
         private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form form = new Usuarios.frmCambiarClave(usuarioActual);
+            Form form = new Usuarios.mdCambiarClave(usuarioActual);
             form.ShowDialog();
         }
         private void smenuDetalleCompras_Click(object sender, EventArgs e)

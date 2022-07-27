@@ -2,8 +2,8 @@
 {
     public class CE_Localidad
     {
-        public int IdLocalidad { get; set; }
-        public string NomLocalidad { get; set; }
+        public int Id { get; set; }
+        public string Nombre { get; set; }
         public string CodigoPostal { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace CapaPresentacion.Formularios.Usuarios
 {
-    partial class frmCambiarClave
+    partial class mdCambiarClave
     {
         /// <summary>
         /// Required designer variable.

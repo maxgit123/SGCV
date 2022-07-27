@@ -40,6 +40,7 @@
             this.smenuRegistCompra = new FontAwesome.Sharp.IconMenuItem();
             this.smenuDetalleCompras = new FontAwesome.Sharp.IconMenuItem();
             this.menuVentas = new FontAwesome.Sharp.IconMenuItem();
+            this.smenuRegistrarVenta = new FontAwesome.Sharp.IconMenuItem();
             this.listaDeVentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuClientes = new FontAwesome.Sharp.IconMenuItem();
             this.menuTitulo = new System.Windows.Forms.MenuStrip();
@@ -49,7 +50,6 @@
             this.smenuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.panelDashboard = new System.Windows.Forms.Panel();
-            this.smenuRegistrarVenta = new FontAwesome.Sharp.IconMenuItem();
             this.menuPrincipal.SuspendLayout();
             this.menuTitulo.SuspendLayout();
             this.SuspendLayout();
@@ -67,7 +67,7 @@
             this.menuClientes});
             this.menuPrincipal.Location = new System.Drawing.Point(0, 48);
             this.menuPrincipal.Name = "menuPrincipal";
-            this.menuPrincipal.Size = new System.Drawing.Size(1086, 61);
+            this.menuPrincipal.Size = new System.Drawing.Size(1159, 61);
             this.menuPrincipal.TabIndex = 0;
             this.menuPrincipal.Text = "Menu";
             // 
@@ -201,10 +201,20 @@
             this.menuVentas.Text = "Ventas";
             this.menuVentas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
+            // smenuRegistrarVenta
+            // 
+            this.smenuRegistrarVenta.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.smenuRegistrarVenta.IconColor = System.Drawing.Color.Black;
+            this.smenuRegistrarVenta.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.smenuRegistrarVenta.Name = "smenuRegistrarVenta";
+            this.smenuRegistrarVenta.Size = new System.Drawing.Size(152, 22);
+            this.smenuRegistrarVenta.Text = "Registrar Venta";
+            this.smenuRegistrarVenta.Click += new System.EventHandler(this.smenuRegistrarVenta_Click);
+            // 
             // listaDeVentasToolStripMenuItem
             // 
             this.listaDeVentasToolStripMenuItem.Name = "listaDeVentasToolStripMenuItem";
-            this.listaDeVentasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listaDeVentasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.listaDeVentasToolStripMenuItem.Text = "Lista de Ventas";
             // 
             // menuClientes
@@ -230,7 +240,7 @@
             this.menuTitulo.Location = new System.Drawing.Point(0, 0);
             this.menuTitulo.Name = "menuTitulo";
             this.menuTitulo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.menuTitulo.Size = new System.Drawing.Size(1086, 48);
+            this.menuTitulo.Size = new System.Drawing.Size(1159, 48);
             this.menuTitulo.TabIndex = 1;
             this.menuTitulo.Text = "menuStrip2";
             // 
@@ -284,24 +294,14 @@
             this.panelDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDashboard.Location = new System.Drawing.Point(0, 109);
             this.panelDashboard.Name = "panelDashboard";
-            this.panelDashboard.Size = new System.Drawing.Size(1086, 479);
+            this.panelDashboard.Size = new System.Drawing.Size(1159, 482);
             this.panelDashboard.TabIndex = 3;
-            // 
-            // smenuRegistrarVenta
-            // 
-            this.smenuRegistrarVenta.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.smenuRegistrarVenta.IconColor = System.Drawing.Color.Black;
-            this.smenuRegistrarVenta.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.smenuRegistrarVenta.Name = "smenuRegistrarVenta";
-            this.smenuRegistrarVenta.Size = new System.Drawing.Size(180, 22);
-            this.smenuRegistrarVenta.Text = "Registrar Venta";
-            this.smenuRegistrarVenta.Click += new System.EventHandler(this.smenuRegistrarVenta_Click);
             // 
             // frmInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1086, 588);
+            this.ClientSize = new System.Drawing.Size(1159, 591);
             this.Controls.Add(this.panelDashboard);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.menuPrincipal);

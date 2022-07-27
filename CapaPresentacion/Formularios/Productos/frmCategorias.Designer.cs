@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblAdmUsuario = new System.Windows.Forms.Label();
             this.txtNomCategoria = new System.Windows.Forms.TextBox();
             this.lblIndice = new System.Windows.Forms.Label();
@@ -44,14 +44,6 @@
             this.lblBuscar = new System.Windows.Forms.Label();
             this.lblListaCategoria = new System.Windows.Forms.Label();
             this.dgvCategorias = new System.Windows.Forms.DataGridView();
-            this.lblNomCategoria = new System.Windows.Forms.Label();
-            this.lblAlicuotaIVA = new System.Windows.Forms.Label();
-            this.cbAlicuotaIVA = new System.Windows.Forms.ComboBox();
-            this.btnLimpiarBuscar = new FontAwesome.Sharp.IconButton();
-            this.btnCancelar = new FontAwesome.Sharp.IconButton();
-            this.btnGuardar = new FontAwesome.Sharp.IconButton();
-            this.btnCrear = new FontAwesome.Sharp.IconButton();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.ID_Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NomCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaCreacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +53,14 @@
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.lblNomCategoria = new System.Windows.Forms.Label();
+            this.lblAlicuotaIVA = new System.Windows.Forms.Label();
+            this.cbAlicuotaIVA = new System.Windows.Forms.ComboBox();
+            this.btnLimpiarBuscar = new FontAwesome.Sharp.IconButton();
+            this.btnCancelar = new FontAwesome.Sharp.IconButton();
+            this.btnGuardar = new FontAwesome.Sharp.IconButton();
+            this.btnCrear = new FontAwesome.Sharp.IconButton();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -79,6 +79,7 @@
             // 
             // txtNomCategoria
             // 
+            this.txtNomCategoria.Enabled = false;
             this.txtNomCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNomCategoria.Location = new System.Drawing.Point(16, 99);
             this.txtNomCategoria.MaxLength = 8;
@@ -103,7 +104,7 @@
             this.cbBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbBuscar.FormattingEnabled = true;
-            this.cbBuscar.Location = new System.Drawing.Point(692, 67);
+            this.cbBuscar.Location = new System.Drawing.Point(819, 67);
             this.cbBuscar.Name = "cbBuscar";
             this.cbBuscar.Size = new System.Drawing.Size(145, 26);
             this.cbBuscar.TabIndex = 239;
@@ -122,7 +123,7 @@
             // 
             this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.Location = new System.Drawing.Point(843, 67);
+            this.txtBuscar.Location = new System.Drawing.Point(970, 67);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(135, 26);
             this.txtBuscar.TabIndex = 240;
@@ -134,7 +135,7 @@
             this.lblBuscar.AutoSize = true;
             this.lblBuscar.BackColor = System.Drawing.SystemColors.Control;
             this.lblBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBuscar.Location = new System.Drawing.Point(596, 73);
+            this.lblBuscar.Location = new System.Drawing.Point(723, 73);
             this.lblBuscar.Name = "lblBuscar";
             this.lblBuscar.Size = new System.Drawing.Size(90, 20);
             this.lblBuscar.TabIndex = 238;
@@ -146,7 +147,7 @@
             this.lblListaCategoria.BackColor = System.Drawing.SystemColors.Control;
             this.lblListaCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblListaCategoria.ForeColor = System.Drawing.Color.Black;
-            this.lblListaCategoria.Location = new System.Drawing.Point(572, 20);
+            this.lblListaCategoria.Location = new System.Drawing.Point(637, 20);
             this.lblListaCategoria.Name = "lblListaCategoria";
             this.lblListaCategoria.Size = new System.Drawing.Size(165, 20);
             this.lblListaCategoria.TabIndex = 237;
@@ -156,23 +157,23 @@
             // 
             this.dgvCategorias.AllowUserToAddRows = false;
             this.dgvCategorias.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvCategorias.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvCategorias.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle22;
             this.dgvCategorias.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCategorias.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCategorias.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle23.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCategorias.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
             this.dgvCategorias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvCategorias.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID_Categoria,
@@ -184,14 +185,14 @@
             this.Estado,
             this.btnEditar,
             this.btnEliminar});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCategorias.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCategorias.DefaultCellStyle = dataGridViewCellStyle26;
             this.dgvCategorias.EnableHeadersVisualStyles = false;
             this.dgvCategorias.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgvCategorias.Location = new System.Drawing.Point(290, 99);
@@ -199,28 +200,106 @@
             this.dgvCategorias.Name = "dgvCategorias";
             this.dgvCategorias.ReadOnly = true;
             this.dgvCategorias.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCategorias.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCategorias.RowHeadersDefaultCellStyle = dataGridViewCellStyle27;
             this.dgvCategorias.RowHeadersVisible = false;
             this.dgvCategorias.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvCategorias.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvCategorias.RowsDefaultCellStyle = dataGridViewCellStyle28;
             this.dgvCategorias.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.Control;
             this.dgvCategorias.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
             this.dgvCategorias.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvCategorias.RowTemplate.Height = 28;
             this.dgvCategorias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCategorias.Size = new System.Drawing.Size(731, 294);
+            this.dgvCategorias.Size = new System.Drawing.Size(858, 294);
             this.dgvCategorias.TabIndex = 236;
             this.dgvCategorias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategorias_CellContentClick);
             this.dgvCategorias.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvCategorias_CellPainting);
+            // 
+            // ID_Categoria
+            // 
+            this.ID_Categoria.HeaderText = "ID";
+            this.ID_Categoria.Name = "ID_Categoria";
+            this.ID_Categoria.ReadOnly = true;
+            this.ID_Categoria.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ID_Categoria.Visible = false;
+            // 
+            // NomCategoria
+            // 
+            this.NomCategoria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.Black;
+            this.NomCategoria.DefaultCellStyle = dataGridViewCellStyle24;
+            this.NomCategoria.HeaderText = "Nombre";
+            this.NomCategoria.Name = "NomCategoria";
+            this.NomCategoria.ReadOnly = true;
+            this.NomCategoria.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.NomCategoria.Width = 80;
+            // 
+            // FechaCreacion
+            // 
+            this.FechaCreacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.FechaCreacion.HeaderText = "Fecha de creación";
+            this.FechaCreacion.Name = "FechaCreacion";
+            this.FechaCreacion.ReadOnly = true;
+            this.FechaCreacion.Width = 136;
+            // 
+            // ID_AlicuotaIVA
+            // 
+            this.ID_AlicuotaIVA.HeaderText = "ID AlicuotaIVA";
+            this.ID_AlicuotaIVA.Name = "ID_AlicuotaIVA";
+            this.ID_AlicuotaIVA.ReadOnly = true;
+            this.ID_AlicuotaIVA.Visible = false;
+            // 
+            // AlicuotaIVA
+            // 
+            this.AlicuotaIVA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.Color.Black;
+            this.AlicuotaIVA.DefaultCellStyle = dataGridViewCellStyle25;
+            this.AlicuotaIVA.HeaderText = "Alicuota IVA";
+            this.AlicuotaIVA.Name = "AlicuotaIVA";
+            this.AlicuotaIVA.ReadOnly = true;
+            this.AlicuotaIVA.Width = 98;
+            // 
+            // ID_Estado
+            // 
+            this.ID_Estado.HeaderText = "ID Estado";
+            this.ID_Estado.Name = "ID_Estado";
+            this.ID_Estado.ReadOnly = true;
+            this.ID_Estado.Visible = false;
+            // 
+            // Estado
+            // 
+            this.Estado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            this.Estado.Width = 73;
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.HeaderText = "";
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.ReadOnly = true;
+            this.btnEditar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.btnEditar.Width = 30;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.HeaderText = "";
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.ReadOnly = true;
+            this.btnEliminar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.btnEliminar.Width = 30;
             // 
             // lblNomCategoria
             // 
@@ -246,6 +325,7 @@
             // cbAlicuotaIVA
             // 
             this.cbAlicuotaIVA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAlicuotaIVA.Enabled = false;
             this.cbAlicuotaIVA.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbAlicuotaIVA.FormattingEnabled = true;
             this.cbAlicuotaIVA.Location = new System.Drawing.Point(16, 152);
@@ -262,7 +342,7 @@
             this.btnLimpiarBuscar.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(63)))), ((int)(((byte)(84)))));
             this.btnLimpiarBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnLimpiarBuscar.IconSize = 18;
-            this.btnLimpiarBuscar.Location = new System.Drawing.Point(984, 67);
+            this.btnLimpiarBuscar.Location = new System.Drawing.Point(1111, 67);
             this.btnLimpiarBuscar.Name = "btnLimpiarBuscar";
             this.btnLimpiarBuscar.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.btnLimpiarBuscar.Size = new System.Drawing.Size(37, 26);
@@ -276,6 +356,7 @@
             // 
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Enabled = false;
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.IconChar = FontAwesome.Sharp.IconChar.XmarkCircle;
             this.btnCancelar.IconColor = System.Drawing.Color.Black;
@@ -295,6 +376,7 @@
             // btnGuardar
             // 
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGuardar.Enabled = false;
             this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardar.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
             this.btnGuardar.IconColor = System.Drawing.Color.Black;
@@ -338,6 +420,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel1.Controls.Add(this.btnGuardar);
             this.panel1.Controls.Add(this.cbAlicuotaIVA);
             this.panel1.Controls.Add(this.lblAlicuotaIVA);
@@ -350,86 +433,8 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(249, 405);
+            this.panel1.Size = new System.Drawing.Size(250, 405);
             this.panel1.TabIndex = 259;
-            // 
-            // ID_Categoria
-            // 
-            this.ID_Categoria.HeaderText = "ID";
-            this.ID_Categoria.Name = "ID_Categoria";
-            this.ID_Categoria.ReadOnly = true;
-            this.ID_Categoria.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ID_Categoria.Visible = false;
-            // 
-            // NomCategoria
-            // 
-            this.NomCategoria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            this.NomCategoria.DefaultCellStyle = dataGridViewCellStyle3;
-            this.NomCategoria.HeaderText = "Nombre";
-            this.NomCategoria.Name = "NomCategoria";
-            this.NomCategoria.ReadOnly = true;
-            this.NomCategoria.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.NomCategoria.Width = 80;
-            // 
-            // FechaCreacion
-            // 
-            this.FechaCreacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.FechaCreacion.HeaderText = "Fecha de creación";
-            this.FechaCreacion.Name = "FechaCreacion";
-            this.FechaCreacion.ReadOnly = true;
-            this.FechaCreacion.Width = 136;
-            // 
-            // ID_AlicuotaIVA
-            // 
-            this.ID_AlicuotaIVA.HeaderText = "ID AlicuotaIVA";
-            this.ID_AlicuotaIVA.Name = "ID_AlicuotaIVA";
-            this.ID_AlicuotaIVA.ReadOnly = true;
-            this.ID_AlicuotaIVA.Visible = false;
-            // 
-            // AlicuotaIVA
-            // 
-            this.AlicuotaIVA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            this.AlicuotaIVA.DefaultCellStyle = dataGridViewCellStyle4;
-            this.AlicuotaIVA.HeaderText = "Alicuota IVA";
-            this.AlicuotaIVA.Name = "AlicuotaIVA";
-            this.AlicuotaIVA.ReadOnly = true;
-            this.AlicuotaIVA.Width = 98;
-            // 
-            // ID_Estado
-            // 
-            this.ID_Estado.HeaderText = "ID Estado";
-            this.ID_Estado.Name = "ID_Estado";
-            this.ID_Estado.ReadOnly = true;
-            this.ID_Estado.Visible = false;
-            // 
-            // Estado
-            // 
-            this.Estado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
-            this.Estado.Width = 73;
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.HeaderText = "";
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.ReadOnly = true;
-            this.btnEditar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.btnEditar.Width = 30;
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.HeaderText = "";
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.ReadOnly = true;
-            this.btnEliminar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.btnEliminar.Width = 30;
             // 
             // frmCategorias
             // 
@@ -437,7 +442,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(1033, 405);
+            this.ClientSize = new System.Drawing.Size(1160, 405);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnCrear);
             this.Controls.Add(this.btnLimpiarBuscar);

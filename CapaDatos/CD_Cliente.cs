@@ -33,10 +33,10 @@ namespace CapaDatos
                                 Documento = reader["Documento"].ToString(),
                                 Nombre = reader["Nombre"].ToString(),
                                 Apellido = reader["Apellido"].ToString(),
-                                oRespIVA = new CE_RespIVA()
+                                oRespIVA = new CE_ResponsableIVA()
                                 {
-                                    IdRespIVA = Convert.ToInt32(reader["ID_RespIVA"]),
-                                    ResponsableIVA = reader["ResponsableIVA"].ToString()
+                                    Id = Convert.ToInt32(reader["ID_RespIVA"]),
+                                    Nombre = reader["ResponsableIVA"].ToString()
                                 }
                             });
                         }
@@ -75,7 +75,7 @@ namespace CapaDatos
                     cmd.Parameters.Add(new SqlParameter("@Documento", oCliente.Documento));
                     cmd.Parameters.Add(new SqlParameter("@Nombre", oCliente.Nombre));
                     cmd.Parameters.Add(new SqlParameter("@Apellido", oCliente.Apellido));
-                    cmd.Parameters.Add(new SqlParameter("@ID_RespIVA", oCliente.oRespIVA.IdRespIVA));
+                    cmd.Parameters.Add(new SqlParameter("@ID_RespIVA", oCliente.oRespIVA.Id));
                     cmd.CommandType = CommandType.Text;
 
                     respuesta = Convert.ToInt32(cmd.ExecuteScalar().ToString());
@@ -117,7 +117,7 @@ namespace CapaDatos
                     cmd.Parameters.Add(new SqlParameter("@Documento", oCliente.Documento));
                     cmd.Parameters.Add(new SqlParameter("@Nombre", oCliente.Nombre));
                     cmd.Parameters.Add(new SqlParameter("@Apellido", oCliente.Apellido));
-                    cmd.Parameters.Add(new SqlParameter("@ID_RespIVA", oCliente.oRespIVA.IdRespIVA));
+                    cmd.Parameters.Add(new SqlParameter("@ID_RespIVA", oCliente.oRespIVA.Id));
                     cmd.Parameters.Add(new SqlParameter("@ID_Cliente", oCliente.IdCliente));
 
                     cmd.CommandType = CommandType.Text;

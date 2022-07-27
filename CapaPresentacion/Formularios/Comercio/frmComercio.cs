@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
+using System.Globalization;
 using CapaEntidad;
 using CapaNegocio;
 using CapaPresentacion.Utilidades;
-using System.Globalization;
 
 namespace CapaPresentacion.Formularios.Comercio
 {
@@ -32,11 +32,11 @@ namespace CapaPresentacion.Formularios.Comercio
                 picLogo.Image = ByteToImage(byteimagen);
 
             //Carga la lista de responsable IVA
-            List<CE_RespIVA> listaRespIVA = new CN_RespIVA().Listar();
+            List<CE_ResponsableIVA> listaRespIVA = new CN_ResponsableIVA().Listar();
 
-            foreach (CE_RespIVA item in listaRespIVA)
+            foreach (CE_ResponsableIVA item in listaRespIVA)
             {
-                cbRespIVA.Items.Add(new OpcionCombo() { Valor = item.IdRespIVA, Texto = item.ResponsableIVA });
+                cbRespIVA.Items.Add(new OpcionCombo() { Valor = item.Id, Texto = item.Nombre });
                 cbRespIVA.DisplayMember = "Texto";
                 cbRespIVA.ValueMember = "Valor";
                 cbRespIVA.SelectedIndex = 0;
@@ -47,7 +47,7 @@ namespace CapaPresentacion.Formularios.Comercio
 
             foreach (CE_Provincia item in listaProvincia)
             {
-                cbProvincia.Items.Add(new OpcionCombo() { Valor = item.IdProvincia, Texto = item.NomProvincia });
+                cbProvincia.Items.Add(new OpcionCombo() { Valor = item.Id, Texto = item.Nombre });
                 cbProvincia.DisplayMember = "Texto";
                 cbProvincia.ValueMember = "Valor";
                 cbProvincia.SelectedIndex = 0;
@@ -61,12 +61,10 @@ namespace CapaPresentacion.Formularios.Comercio
             numPuntoVenta.Value = oComercio.PuntoVenta;
             txtNomCalle.Text = oComercio.oDireccion.Calle;
             txtNumCalle.Text = oComercio.oDireccion.Numero;
-            txtCP.Text = oComercio.oLocalidad.IdLocalidad.ToString();
-            txtCiudad.Text = oComercio.oLocalidad.NomLocalidad;
-            cbRespIVA.SelectedIndex = oComercio.oRespIVA.IdRespIVA - 1;
-            cbProvincia.SelectedIndex = oComercio.oProvincia.IdProvincia - 1;
-            txtTelefono.Text = oComercio.oContacto.Telefono;
-            txtCorreo.Text = oComercio.oContacto.Correo;
+            txtCP.Text = oComercio.oLocalidad.Id.ToString();
+            txtCiudad.Text = oComercio.oLocalidad.Nombre;
+            cbRespIVA.SelectedIndex = oComercio.oResponsableIVA.Id - 1;
+            cbProvincia.SelectedIndex = oComercio.oProvincia.Id - 1;
         }
         private void btnActLogo_Click(object sender, EventArgs e)
         {
@@ -88,17 +86,16 @@ namespace CapaPresentacion.Formularios.Comercio
             string mensaje = string.Empty;
             CE_Comercio oComercio = new CE_Comercio()
             {
-                IdComercio = 1,
+                Id = 1,
                 RazonSocial = txtRazonSocial.Text,
                 Cuit = txtCUIT.Text,
                 IngBrutos = txtIngBrutos.Text,
                 InicioAct = dtInicioAct.Value.ToString("dd/MM/yyyy"),
                 PuntoVenta = (int)numPuntoVenta.Value,
-                oRespIVA = new CE_RespIVA() { IdRespIVA = Convert.ToInt32(((OpcionCombo)cbRespIVA.SelectedItem).Valor) },
-                oDireccion = new CE_Direccion() { IdDireccion = 1, Calle = txtNomCalle.Text, Numero = txtNumCalle.Text },
-                oLocalidad = new CE_Localidad() { IdLocalidad = Convert.ToInt32(txtCP.Text), NomLocalidad = txtCiudad.Text},
-                oProvincia = new CE_Provincia() { IdProvincia = Convert.ToInt32(((OpcionCombo)cbProvincia.SelectedItem).Valor)},
-                oContacto = new CE_Contacto() { IdContacto = 1, Telefono = txtTelefono.Text, Correo = txtCorreo.Text }
+                oResponsableIVA = new CE_ResponsableIVA() { Id = Convert.ToInt32(((OpcionCombo)cbRespIVA.SelectedItem).Valor) },
+                oDireccion = new CE_Direccion() { Id = 1, Calle = txtNomCalle.Text, Numero = txtNumCalle.Text },
+                oLocalidad = new CE_Localidad() { Id = Convert.ToInt32(txtCP.Text), Nombre = txtCiudad.Text},
+                oProvincia = new CE_Provincia() { Id = Convert.ToInt32(((OpcionCombo)cbProvincia.SelectedItem).Valor)}
             };
             bool respuesta = new CN_Comercio().Actualizar(oComercio, out mensaje);
             if(respuesta)

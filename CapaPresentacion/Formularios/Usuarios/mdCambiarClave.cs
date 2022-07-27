@@ -12,10 +12,10 @@ using CapaNegocio;
 
 namespace CapaPresentacion.Formularios.Usuarios
 {
-    public partial class frmCambiarClave : Form
+    public partial class mdCambiarClave : Form
     {
         private static CE_Usuario usuarioActual;
-        public frmCambiarClave(CE_Usuario oUsuario)
+        public mdCambiarClave(CE_Usuario oUsuario)
         {
             usuarioActual = oUsuario;
             InitializeComponent();
