@@ -31,7 +31,6 @@ namespace CapaPresentacion.Formularios.Comercio
             if (leido) //y si cargo correctamente se lo transforma en imagen.
                 picLogo.Image = ByteToImage(byteimagen);
 
-            //Carga la lista de responsable IVA
             List<CE_ResponsableIVA> listaRespIVA = new CN_ResponsableIVA().Listar();
 
             foreach (CE_ResponsableIVA item in listaRespIVA)
@@ -42,7 +41,6 @@ namespace CapaPresentacion.Formularios.Comercio
                 cbRespIVA.SelectedIndex = 0;
             }
 
-            //Carga la lista de provincias
             List<CE_Provincia> listaProvincia = new CN_Provincia().Listar();
 
             foreach (CE_Provincia item in listaProvincia)

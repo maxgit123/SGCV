@@ -15,9 +15,10 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "SELECT * FROM RESP_IVA";
-                    SqlCommand cmd = new SqlCommand(query, oConexion);
-                    cmd.CommandType = CommandType.Text;
+                    string query = "SELECT * FROM cResponsableIVA;";
+                    SqlCommand cmd = new SqlCommand(query, oConexion)
+                    { CommandType = CommandType.Text };
+
                     oConexion.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -30,6 +31,7 @@ namespace CapaDatos
                                 Nombre = reader["ResponsableIVA"].ToString(),
                             });
                         }
+                        reader.Close();
                     }
                 }
                 catch (SqlException ex)
