@@ -16,12 +16,12 @@ namespace CapaDatos
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT c.id,c.razonSocial,c.cuit,c.ingresosBrutos,c.inicioActividad,c.puntoVenta,c.telefono,c.correo,c.fechaActualizacion,");
-                    query.AppendLine("d.id,d.calle,d.numero,l.id,l.nombre,p.id,p.nombre FROM Comercio c");
-                    query.AppendLine("INNER JOIN Direccion d ON d.id = c.direccion_id");
-                    query.AppendLine("INNER JOIN Localidad l ON l.id = c.localidad_id");
-                    query.AppendLine("INNER JOIN cProvincia p ON p.id = c.provincia_id");
-                    query.AppendLine("INNER JOIN cResponsableIVA r ON r.id = c.responsableIVA_id;");
+                    query.AppendLine("SELECT c.razonSocial,c.cuit,c.ingresosBrutos,c.inicioActividad,c.puntoVenta,c.telefono,c.correo,c.fechaActualizacion,");
+                    query.AppendLine("d.calle,d.numero,l.nombre,l.codigoPostal,p.nombre,r.nombre FROM Comercio c");
+                    query.AppendLine("INNER JOIN Direccion d ON d.idDireccion = c.direccion_id");
+                    query.AppendLine("INNER JOIN Localidad l ON l.idLocalidad = c.localidad_id");
+                    query.AppendLine("INNER JOIN cProvincia p ON p.idProvincia = c.provincia_id");
+                    query.AppendLine("INNER JOIN cResponsableIVA r ON r.idResponsableIVA = c.responsableIVA_id;");
 
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
                     { CommandType = CommandType.Text };
@@ -34,35 +34,36 @@ namespace CapaDatos
                         {
                             oComercio = new CE_Comercio()
                             {
-                                Id = Convert.ToInt32(reader["id"]),
+                                Id = Convert.ToInt32(reader["idComercio"]),
                                 RazonSocial = reader["razonSocial"].ToString(),
                                 Cuit = reader["cuit"].ToString(),
-                                IngBrutos = reader["ingresosBrutos"].ToString(),
-                                InicioAct = reader["inicioActividad"].ToString(),
+                                IngresosBrutos = reader["ingresosBrutos"].ToString(),
+                                InicioActividad = reader["inicioActividad"].ToString(),
                                 PuntoVenta = Convert.ToInt32(reader["puntoVenta"]),
                                 Telefono = reader["telefono"].ToString(),
                                 Correo = reader["correo"].ToString(),
                                 FechaActualizacion = reader["fechaActualizacion"].ToString(),
                                 oDireccion = new CE_Direccion()
                                 {
-                                    Id = Convert.ToInt32(reader["id"]),
+                                    Id = Convert.ToInt32(reader["idDireccion"]),
                                     Calle = reader["calle"].ToString(),
                                     Numero = reader["numero"].ToString()
                                 },
                                 oLocalidad = new CE_Localidad()
                                 {
-                                    Id = Convert.ToInt32(reader["id"]),
-                                    Nombre = reader["nombre"].ToString()
+                                    Id = Convert.ToInt32(reader["idLocalidad"]),
+                                    Nombre = reader["nombre"].ToString(),
+                                    CodigoPostal = reader["codigoPostal"].ToString(),
                                 },
                                 oProvincia = new CE_Provincia()
                                 {
-                                    Id = Convert.ToInt32(reader["id"]),
-                                    Nombre = reader["Nombre"].ToString()
+                                    Id = Convert.ToInt32(reader["idProvincia"]),
+                                    Nombre = reader["nombre"].ToString()
                                 },
                                 oResponsableIVA = new CE_ResponsableIVA()
                                 {
-                                    Id = Convert.ToInt32(reader["id"]),
-                                    Nombre = reader["ResponsableIVA"].ToString()
+                                    Id = Convert.ToInt32(reader["idResponsableIVA"]),
+                                    Nombre = reader["nombre"].ToString()
                                 }
                             };
                         }
@@ -107,8 +108,8 @@ namespace CapaDatos
 
                     cmd.Parameters.Add(new SqlParameter("@RazonSocial", oComercio.RazonSocial));
                     cmd.Parameters.Add(new SqlParameter("@Cuit", oComercio.Cuit));
-                    cmd.Parameters.Add(new SqlParameter("@IngBrutos", oComercio.IngBrutos));
-                    cmd.Parameters.Add(new SqlParameter("@InicioAct", oComercio.InicioAct));
+                    cmd.Parameters.Add(new SqlParameter("@IngBrutos", oComercio.IngresosBrutos));
+                    cmd.Parameters.Add(new SqlParameter("@InicioAct", oComercio.InicioActividad));
                     cmd.Parameters.Add(new SqlParameter("@PuntoVenta", oComercio.PuntoVenta));
                     cmd.Parameters.Add(new SqlParameter("@ID_Direccion", oComercio.oDireccion.Id));
                     cmd.Parameters.Add(new SqlParameter("@ID_LocCP", oComercio.oLocalidad.Id));
@@ -140,10 +141,11 @@ namespace CapaDatos
             {
                 try
                 {
+                    string query = "SELECT logo FROM Comercio WHERE id = 1;";
+                    SqlCommand cmd = new SqlCommand(query, oConexion) 
+                    { CommandType = CommandType.Text };
+
                     oConexion.Open();
-                    string query = "SELECT Logo FROM COMERCIO WHERE ID_Comercio = 1;";
-                    SqlCommand cmd = new SqlCommand(query, oConexion);
-                    cmd.CommandType = CommandType.Text;
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -154,8 +156,8 @@ namespace CapaDatos
                             //por eso la conversion a byte, pero de un formato de codigo
                             //no uno de base de datos.
                         }
+                        reader.Close();
                     }
-
                 }
                 catch (SqlException ex)
                 {
@@ -178,14 +180,14 @@ namespace CapaDatos
             {
                 try
                 {
-                    oConexion.Open();
-                    string query = "UPDATE COMERCIO SET Logo = @imagen WHERE ID_Comercio = 1;";
+                    string query = "UPDATE Comercio SET logo = @imagen WHERE id = 1;";
                     SqlCommand cmd = new SqlCommand(query, oConexion);
                     SqlParameter parameter = new SqlParameter("@imagen", DbType.Binary);
                     parameter.Value = imagen;
                     cmd.Parameters.Add(parameter);
                     cmd.CommandType = CommandType.Text;
 
+                    oConexion.Open();
                     respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
 
                     if (cmd.ExecuteNonQuery() < 1) //Si no actualizo ninguna fila:

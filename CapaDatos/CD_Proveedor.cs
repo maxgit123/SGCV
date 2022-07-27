@@ -19,8 +19,10 @@ namespace CapaDatos
                     StringBuilder query = new StringBuilder();
                     query.AppendLine("SELECT p.id,p.razonSocial,p.observacion,p.fechaCreacion,p.telefono,p.correo,e.nombre AS [estado] FROM Proveedor p");
                     query.AppendLine("INNER JOIN cEstado e ON e.id = p.estado_id;");
+
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
                     { CommandType = CommandType.Text };
+
                     oConexion.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())

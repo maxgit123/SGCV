@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using CapaEntidad;
 using System.Data;
 using System.Data.SqlClient;
+using CapaEntidad;
 
 namespace CapaDatos
 {
@@ -17,10 +17,14 @@ namespace CapaDatos
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT c.ID_Cliente,c.Documento,c.Nombre,c.Apellido,r.ID_RespIVA,r.ResponsableIVA FROM CLIENTE c");
-                    query.AppendLine("INNER JOIN RESP_IVA r on r.ID_RespIVA = c.ID_RespIVA");
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
-                    cmd.CommandType = CommandType.Text;
+                    query.AppendLine("SELECT c.idCliente,c.documento,c.nombre,c.apellido,c.telefono,c.correo,c.fechaCreacion,");
+                    query.AppendLine("r.idResponsableIVA,r.nombre,e.idEstado,e.nombre FROM Cliente c");
+                    query.AppendLine("INNER JOIN cResponsableIVA r on r.idResponsableIVA = c.responsableIVA_id");
+                    query.AppendLine("INNER JOIN cEstado e ON e.idEstado = c.estado_id;");
+
+                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
+                    { CommandType = CommandType.Text };
+
                     oConexion.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -29,17 +33,26 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Cliente()
                             {
-                                IdCliente = Convert.ToInt32(reader["ID_Cliente"]),
-                                Documento = reader["Documento"].ToString(),
-                                Nombre = reader["Nombre"].ToString(),
-                                Apellido = reader["Apellido"].ToString(),
+                                IdCliente = Convert.ToInt32(reader["idCliente"]),
+                                Documento = reader["documento"].ToString(),
+                                Nombre = reader["nombre"].ToString(),
+                                Apellido = reader["apellido"].ToString(),
+                                Telefono = reader["telefono"].ToString(),
+                                Correo = reader["correo"].ToString(),
+                                FechaCreacion = reader["fechaCreacion"].ToString(),
                                 oRespIVA = new CE_ResponsableIVA()
                                 {
-                                    Id = Convert.ToInt32(reader["ID_RespIVA"]),
-                                    Nombre = reader["ResponsableIVA"].ToString()
+                                    Id = Convert.ToInt32(reader["idResponsableIVA"]),
+                                    Nombre = reader["nombre"].ToString()
+                                },
+                                oEstado = new CE_Estado()
+                                {
+                                    Id = Convert.ToBoolean(reader["idEstado"]),
+                                    Nombre = reader["nombre"].ToString()
                                 }
                             });
                         }
+                        reader.Close();
                     }
                 }
                 catch (SqlException ex)

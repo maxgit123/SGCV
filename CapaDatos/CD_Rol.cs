@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-//Lo que agregue:
-using CapaEntidad;
 using System.Data;
 using System.Data.SqlClient;
-
+using CapaEntidad;
 
 namespace CapaDatos
 {
@@ -17,9 +15,11 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "SELECT id, nombre FROM cRol";
-                    SqlCommand cmd = new SqlCommand(query, oConexion);
-                    cmd.CommandType = CommandType.Text;
+                    string query = "SELECT idRol,nombre FROM cRol;";
+
+                    SqlCommand cmd = new SqlCommand(query, oConexion)
+                    { CommandType = CommandType.Text };
+
                     oConexion.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -28,10 +28,11 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Rol()
                             {
-                                IdRol = Convert.ToInt32(reader["id"]),
-                                NomRol = reader["nombre"].ToString(),
+                                IdRol = Convert.ToInt32(reader["idRol"]),
+                                Nombre = reader["nombre"].ToString(),
                             });
                         }
+                        reader.Close();
                     }
                 }
                 catch (SqlException ex)

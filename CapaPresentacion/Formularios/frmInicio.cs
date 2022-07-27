@@ -22,7 +22,7 @@ namespace CapaPresentacion.Formularios
         private void Dashboard_Load(object sender, EventArgs e)
         {
             menuTituloUsuario.Text = usuarioActual.Apellido + ", " + usuarioActual.Nombre;
-            smenuRol.Text = usuarioActual.oRol.NomRol;
+            smenuRol.Text = usuarioActual.oRol.Nombre;
             //----Muestra el menu segun los permisos del usuario----
             List<CE_Modulo> ListaModulos = new CN_Modulo().Listar(usuarioActual.Id); //Obtiene los permisos del usuario.
 

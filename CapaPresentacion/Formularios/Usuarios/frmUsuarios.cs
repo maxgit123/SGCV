@@ -19,7 +19,7 @@ namespace CapaPresentacion.Formularios.Usuarios
 
             foreach (CE_Rol item in listaRol)
             {
-                cbRol.Items.Add(new OpcionCombo() { Valor = item.IdRol, Texto = item.NomRol });
+                cbRol.Items.Add(new OpcionCombo() { Valor = item.IdRol, Texto = item.Nombre });
                 cbRol.DisplayMember = "Texto";
                 cbRol.ValueMember = "Valor";
                 cbRol.SelectedIndex = 0;
@@ -179,7 +179,7 @@ namespace CapaPresentacion.Formularios.Usuarios
                     item.Clave,
                     item.FechaCreacion,
                     item.oRol.IdRol,
-                    item.oRol.NomRol,
+                    item.oRol.Nombre,
                     item.oEstado.Id,
                     item.oEstado.Nombre,
                     "",""

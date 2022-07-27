@@ -20,7 +20,7 @@ namespace CapaNegocio
                 mensaje += "Ingrese la razon social.\n";
             if (oComercio.Cuit == "")
                 mensaje += "Ingrese el CUIT.\n";
-            if (oComercio.IngBrutos == "")
+            if (oComercio.IngresosBrutos == "")
                 mensaje += "Ingrese el número de ingresos brutos.\n";
             //if (oComercio.oDireccion.NomCalle == "")
             //    mensaje += "Ingrese el nombre de la calle.\n";

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-//Lo que agregue:
 using CapaNegocio;
 using CapaEntidad;
 

@@ -5,8 +5,8 @@
         public int Id { get; set; }
         public string RazonSocial { get; set; }
         public string Cuit { get; set; }
-        public string IngBrutos { get; set; }
-        public string InicioAct { get; set; }
+        public string IngresosBrutos { get; set; }
+        public string InicioActividad { get; set; }
         public int PuntoVenta { get; set; }
         public string FechaActualizacion { get; set; }
         public string Telefono { get; set; }

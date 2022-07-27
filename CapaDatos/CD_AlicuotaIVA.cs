@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-//Lo que agregue:
+using System.Data.SqlClient;
 using CapaEntidad;
 using System.Data;
-using System.Data.SqlClient;
 
 namespace CapaDatos
 {
@@ -16,9 +15,11 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "SELECT * FROM ALICUOTA_IVA";
-                    SqlCommand cmd = new SqlCommand(query, oConexion);
-                    cmd.CommandType = CommandType.Text;
+                    string query = "SELECT * FROM cAlicuotaIVA";
+
+                    SqlCommand cmd = new SqlCommand(query, oConexion)
+                    { CommandType = CommandType.Text };
+
                     oConexion.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -27,10 +28,11 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_AlicuotaIVA()
                             {
-                                Id = Convert.ToInt32(reader["ID_AlicuotaIVA"]),
-                                Porcentaje = Convert.ToDecimal(reader["PorcentajeIVA"]),
+                                Id = Convert.ToInt32(reader["idAlicuotaIVA"]),
+                                Porcentaje = Convert.ToDecimal(reader["porcentaje"]),
                             });
                         }
+                        reader.Close();
                     }
                 }
                 catch (SqlException ex)

@@ -17,9 +17,9 @@ namespace CapaDatos
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT c.id,c.nombre,c.alicuotaIVA_id,a.porcentaje,c.estado_id,e.nombre AS [estado] FROM Categoria c");
-                    query.AppendLine("INNER JOIN cAlicuotaIVA a ON a.id = c.alicuotaIVA_id");
-                    query.AppendLine("INNER JOIN cEstado e ON e.id = c.estado_id");
+                    query.AppendLine("SELECT c.id,c.nombre,c.fechaCreacion,a.porcentaje,e.nombre FROM Categoria c");
+                    query.AppendLine("INNER JOIN cAlicuotaIVA a ON a.idAlicuotaIVA = c.alicuotaIVA_id");
+                    query.AppendLine("INNER JOIN cEstado e ON e.idEstado = c.estado_id");
                     query.AppendLine("WHERE c.estado_id = 1;");
 
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
@@ -35,14 +35,15 @@ namespace CapaDatos
                             {
                                 Id = Convert.ToInt32(reader["id"]),
                                 Nombre = reader["nombre"].ToString(),
+                                FechaCreacion = reader["fechaCreacion"].ToString(),
                                 oAlicuotaIVA = new CE_AlicuotaIVA()
                                 {
-                                    Id = Convert.ToInt32(reader["id"]),
+                                    Id = Convert.ToInt32(reader["idAlicuotaIVA"]),
                                     Porcentaje = Convert.ToDecimal(reader["porcentaje"])
                                 },
                                 oEstado = new CE_Estado()
                                 {
-                                    Id = Convert.ToBoolean(reader["id"]),
+                                    Id = Convert.ToBoolean(reader["idEstado"]),
                                     Nombre = reader["nombre"].ToString(),
                                 }
                             });

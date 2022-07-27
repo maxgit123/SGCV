@@ -16,8 +16,14 @@ namespace CapaDatos
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("usp_listarusuario", oConexion)
-                    { CommandType = CommandType.StoredProcedure };
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT u.idUsuario,u.documento,u.nombre,u.apellido,u.clave,u.fechaCreacion,r.idRol,r.nombre,e.idEstado,e.nombre FROM Usuario u");
+                    query.AppendLine("INNER JOIN cRol r ON r.idRol = u.rol_id");
+                    query.AppendLine("INNER JOIN cEstado e ON e.idEstado = u.estado_id");
+                    query.AppendLine("WHERE u.estado_id = 1;");
+
+                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
+                    { CommandType = CommandType.Text };
 
                     oConexion.Open();
 
@@ -27,7 +33,7 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Usuario()
                             {
-                                Id = Convert.ToInt32(reader["id"]),
+                                Id = Convert.ToInt32(reader["idUsuario"]),
                                 Documento = reader["documento"].ToString(),
                                 Nombre = reader["nombre"].ToString(),
                                 Apellido = reader["apellido"].ToString(),
@@ -35,13 +41,13 @@ namespace CapaDatos
                                 FechaCreacion = reader["fechaCreacion"].ToString(),
                                 oRol = new CE_Rol()
                                 {
-                                    IdRol = Convert.ToInt32(reader["id"]),
-                                    NomRol = reader["rol"].ToString()
+                                    IdRol = Convert.ToInt32(reader["idRol"]),
+                                    Nombre = reader["nombre"].ToString()
                                 },
                                 oEstado = new CE_Estado()
                                 {
-                                    Id = Convert.ToBoolean(reader["id"]),
-                                    Nombre = reader["estado"].ToString()
+                                    Id = Convert.ToBoolean(reader["idEstado"]),
+                                    Nombre = reader["nombre"].ToString()
                                 }
                             });
                         }
