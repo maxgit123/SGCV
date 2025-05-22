@@ -148,7 +148,14 @@ namespace CapaPresentacion.Formularios.Proveedores
         private void MostrarListaProveedores()
         {
             dgvProveedores.Rows.Clear();
-            List<CE_Proveedor> listaProveedor = new CN_Proveedor().Listar();
+            string mensaje = string.Empty;
+            List<CE_Proveedor> listaProveedor = new CN_Proveedor().Listar(out mensaje);
+
+            if (!string.IsNullOrEmpty(mensaje))
+            {
+                MessageBox.Show(mensaje, "Error al listar proveedores", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             foreach (CE_Proveedor item in listaProveedor)
             {

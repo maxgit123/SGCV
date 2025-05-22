@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using CapaEntidad;
+using System.Reflection;
 
 namespace CapaDatos
 {
@@ -17,9 +18,11 @@ namespace CapaDatos
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT p.id,p.descripcion,p.costo,p.precio,p.stock,p.quiebreStock,p.fechaCreacion,c.nombre AS [categoria],e.nombre AS [estado] FROM Producto p");
-                    query.AppendLine("INNER JOIN Categoria c ON c.id = p.categoria_id");
-                    query.AppendLine("INNER JOIN cEstado e ON e.id = p.estado_id;");
+                    query.AppendLine("SELECT p.id_producto,p.descripcion,p.costo,p.precio,p.stock,p.quiebreStock,p.fechaCreacion,");
+                    query.AppendLine("c.id_categoria,c.nombre AS [categoria],e.id_estado,e.nombre AS [estado] FROM Producto p");
+                    query.AppendLine("INNER JOIN Categoria c ON c.id_categoria = p.categoria_id");
+                    query.AppendLine("INNER JOIN cEstado e ON e.id_estado = p.estado_id;");
+
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
                     { CommandType = CommandType.Text };
                     oConexion.Open();
@@ -30,7 +33,7 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Producto()
                             {
-                                Id = Convert.ToInt32(reader["id"]),
+                                Id = Convert.ToInt32(reader["id_producto"]),
                                 Descripcion = reader["descripcion"].ToString(),
                                 Costo = Convert.ToDecimal(reader["costo"]),
                                 Precio = Convert.ToDecimal(reader["precio"]),
@@ -39,12 +42,12 @@ namespace CapaDatos
                                 FechaCreacion = reader["fechaCreacion"].ToString(),
                                 oCategoria = new CE_Categoria()
                                 {
-                                    Id = Convert.ToInt32(reader["id"]),
+                                    Id = Convert.ToInt32(reader["id_categoria"]),
                                     Nombre = reader["categoria"].ToString()
                                 },
                                 oEstado = new CE_Estado()
                                 {
-                                    Id = Convert.ToBoolean(reader["id"]),
+                                    Id = Convert.ToBoolean(reader["id_estado"]),
                                     Nombre = reader["estado"].ToString()
                                 }
                             });

@@ -9,16 +9,18 @@ namespace CapaDatos
 {
     public class CD_Proveedor
     {
-        public List<CE_Proveedor> Listar()
+        public List<CE_Proveedor> Listar(out string mensaje)
         {
+            mensaje = string.Empty;
+
             List<CE_Proveedor> lista = new List<CE_Proveedor>();
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT p.id,p.razonSocial,p.observacion,p.fechaCreacion,p.telefono,p.correo,e.nombre AS [estado] FROM Proveedor p");
-                    query.AppendLine("INNER JOIN cEstado e ON e.id = p.estado_id;");
+                    query.AppendLine("SELECT p.id_proveedor,p.razonSocial,p.observacion,p.fechaCreacion,p.telefono,p.correo,e.nombre AS [estado] FROM Proveedor p");
+                    query.AppendLine("INNER JOIN cEstado e ON e.id_estado = p.estado_id;");
 
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
                     { CommandType = CommandType.Text };
@@ -31,7 +33,7 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Proveedor()
                             {
-                                Id = Convert.ToInt32(reader["id"]),
+                                Id = Convert.ToInt32(reader["id_proveedor"]),
                                 RazonSocial = reader["razonSocial"].ToString(),
                                 Observacion = reader["observacion"].ToString(),
                                 FechaCreacion = reader["fechaCreacion"].ToString(),
@@ -39,7 +41,6 @@ namespace CapaDatos
                                 Correo = reader["correo"].ToString(),
                                 oEstado = new CE_Estado()
                                 {
-                                    Id = Convert.ToBoolean(reader["id"]),
                                     Nombre = reader["estado"].ToString()
                                 }
                             });
@@ -50,6 +51,9 @@ namespace CapaDatos
                 catch (SqlException ex)
                 {
                     lista = new List<CE_Proveedor>();
+                    mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
+                    //Console.WriteLine("Error en Listar(): " + ex.Message);
+                    //Log.Error("Error al listar proveedores", ex);
                 }
                 finally
                 {
@@ -70,9 +74,9 @@ namespace CapaDatos
                 {
                     StringBuilder query = new StringBuilder();
 
-                    query.AppendLine("INSERT INTO Proveedor (razonSocial,observacion,telefono,correo,estado_id");
-                    query.AppendLine("VALUES (@razonSocial,@observacion,@telefono,@correo,@estado_id;");
-                    query.AppendLine("SELECT last_insert_rowid();");
+                    query.AppendLine("INSERT INTO Proveedor (razonSocial,observacion,telefono,correo)");
+                    query.AppendLine("VALUES (@razonSocial,@observacion,@telefono,@correo);");
+                    query.AppendLine("SELECT SCOPE_IDENTITY();");
 
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
                     { CommandType = CommandType.Text };
@@ -81,12 +85,16 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("@observacion", oProveedor.Observacion);
                     cmd.Parameters.AddWithValue("@telefono", oProveedor.Telefono);
                     cmd.Parameters.AddWithValue("@correo", oProveedor.Correo);
-                    cmd.Parameters.AddWithValue("@estado_id", oProveedor.oEstado.Id);
 
                     oConexion.Open();
-                    respuesta = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+                    
+                    object result = cmd.ExecuteScalar();
                     //ExecuteScalar devuelve la 1ra columna de la 1ra fila. En este caso el ID del usuario.
-                    cmd.Parameters.Clear();
+
+                    if (result != null)
+                    {
+                        respuesta = Convert.ToInt32(result);
+                    }
                 }
                 catch (SqlException ex)
                 {
@@ -114,10 +122,10 @@ namespace CapaDatos
                     StringBuilder query = new StringBuilder();
                     query.AppendLine("UPDATE Proveedor SET "
                                      + "razonSocial = @razonSocial, "
-                                     + "observacion = @obervacion, "
+                                     + "observacion = @observacion, "
                                      + "telefono = @telefono, "
-                                     + "correo = @correo, "
-                                     + "WHERE id = @id");
+                                     + "correo = @correo "
+                                     + "WHERE id_proveedor = @id_proveedor");
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
                     { CommandType = CommandType.Text };
 
@@ -125,10 +133,9 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("@observacion", oProveedor.Observacion);
                     cmd.Parameters.AddWithValue("@telefono", oProveedor.Telefono);
                     cmd.Parameters.AddWithValue("@correo", oProveedor.Correo);
-                    cmd.Parameters.AddWithValue("@id", oProveedor.Id);
-
-                    respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
-                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@id_proveedor", oProveedor.Id);
+                    
+                    respuesta = cmd.ExecuteNonQuery() > 0;
                 }
                 catch (SqlException ex)
                 {
@@ -153,14 +160,15 @@ namespace CapaDatos
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("DELETE FROM Proveedor WHERE id = @id;");
+                    query.AppendLine("DELETE FROM Proveedor WHERE id_proveedor = @id_proveedor;");
+                    
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
                     { CommandType = CommandType.Text };
-                    cmd.Parameters.AddWithValue("@id", oProveedor.Id);
+
+                    cmd.Parameters.AddWithValue("@id_proveedor", oProveedor.Id);
 
                     oConexion.Open();
-                    respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
-                    cmd.Parameters.Clear();
+                    respuesta = cmd.ExecuteNonQuery() > 0;
                 }
                 catch (SqlException ex)
                 {

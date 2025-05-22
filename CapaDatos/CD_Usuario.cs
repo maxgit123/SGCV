@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Reflection;
+using System.Text;
 using CapaEntidad;
 
 namespace CapaDatos
@@ -17,11 +18,12 @@ namespace CapaDatos
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT u.idUsuario,u.documento,u.nombre,u.apellido,u.clave,u.fechaCreacion,r.idRol,r.nombre,e.idEstado,e.nombre FROM Usuario u");
-                    query.AppendLine("INNER JOIN cRol r ON r.idRol = u.rol_id");
-                    query.AppendLine("INNER JOIN cEstado e ON e.idEstado = u.estado_id");
+                    query.AppendLine("SELECT u.id_usuario,u.documento,u.nombre,u.apellido,u.clave,u.fechaCreacion,");
+                    query.AppendLine("r.id_rol,r.nombre AS rol_nombre,e.id_estado,e.nombre AS estado_nombre FROM Usuario u");
+                    query.AppendLine("INNER JOIN cRol r ON r.id_rol = u.rol_id");
+                    query.AppendLine("INNER JOIN cEstado e ON e.id_estado = u.estado_id");
                     query.AppendLine("WHERE u.estado_id = 1;");
-
+                    
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
                     { CommandType = CommandType.Text };
 
@@ -33,7 +35,7 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Usuario()
                             {
-                                Id = Convert.ToInt32(reader["idUsuario"]),
+                                Id = Convert.ToInt32(reader["id_usuario"]),
                                 Documento = reader["documento"].ToString(),
                                 Nombre = reader["nombre"].ToString(),
                                 Apellido = reader["apellido"].ToString(),
@@ -41,13 +43,13 @@ namespace CapaDatos
                                 FechaCreacion = reader["fechaCreacion"].ToString(),
                                 oRol = new CE_Rol()
                                 {
-                                    IdRol = Convert.ToInt32(reader["idRol"]),
-                                    Nombre = reader["nombre"].ToString()
+                                    IdRol = Convert.ToInt32(reader["id_rol"]),
+                                    Nombre = reader["rol_nombre"].ToString()
                                 },
                                 oEstado = new CE_Estado()
                                 {
-                                    Id = Convert.ToBoolean(reader["idEstado"]),
-                                    Nombre = reader["nombre"].ToString()
+                                    Id = Convert.ToBoolean(reader["id_estado"]),
+                                    Nombre = reader["estado_nombre"].ToString()
                                 }
                             });
                         }
@@ -117,7 +119,7 @@ namespace CapaDatos
                     SqlCommand cmd = new SqlCommand("usp_actualizarusuario", oConexion)
                     { CommandType = CommandType.StoredProcedure };
 
-                    cmd.Parameters.AddWithValue("@id", oUsuario.Id);
+                    cmd.Parameters.AddWithValue("@id_usuario", oUsuario.Id);
                     cmd.Parameters.AddWithValue("@documento", oUsuario.Documento);
                     cmd.Parameters.AddWithValue("@nombre", oUsuario.Nombre);
                     cmd.Parameters.AddWithValue("@apellido", oUsuario.Apellido);
@@ -227,12 +229,12 @@ namespace CapaDatos
                     StringBuilder query = new StringBuilder();
                     query.AppendLine("UPDATE Usuario SET ");
                     query.AppendLine("clave = @clave ");
-                    query.AppendLine("WHERE id = @id;");
+                    query.AppendLine("WHERE id_usuario = @id_usuario;");
 
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
                     { CommandType = CommandType.Text };
 
-                    cmd.Parameters.AddWithValue("@id", oUsuario.Id);
+                    cmd.Parameters.AddWithValue("@id_usuario", oUsuario.Id);
                     cmd.Parameters.AddWithValue("@clave", oUsuario.Clave);
 
                     oConexion.Open();

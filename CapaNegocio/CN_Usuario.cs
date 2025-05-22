@@ -68,9 +68,14 @@ namespace CapaNegocio
                 mensaje += "La clave actual es incorrecta.\n";
 
             if (mensaje == string.Empty)
+            {
+                oUsuario.Clave = claveNueva;
                 return oCD_Usuario.CambiarClave(oUsuario, out mensaje);
+            }
             else
+            {
                 return false;
+            }
         }
     }
 }

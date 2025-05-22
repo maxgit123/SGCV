@@ -17,9 +17,9 @@ namespace CapaDatos
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT c.id,c.nombre,c.fechaCreacion,a.porcentaje,e.nombre FROM Categoria c");
-                    query.AppendLine("INNER JOIN cAlicuotaIVA a ON a.idAlicuotaIVA = c.alicuotaIVA_id");
-                    query.AppendLine("INNER JOIN cEstado e ON e.idEstado = c.estado_id");
+                    query.AppendLine("SELECT c.id_categoria,c.nombre,c.fechaCreacion,a.id_alicuotaIVA,a.porcentaje,e.id_estado,e.nombre FROM Categoria c");
+                    query.AppendLine("INNER JOIN cAlicuotaIVA a ON a.id_alicuotaIVA = c.alicuotaIVA_id");
+                    query.AppendLine("INNER JOIN cEstado e ON e.id_estado = c.estado_id");
                     query.AppendLine("WHERE c.estado_id = 1;");
 
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
@@ -33,17 +33,17 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Categoria()
                             {
-                                Id = Convert.ToInt32(reader["id"]),
+                                Id = Convert.ToInt32(reader["id_categoria"]),
                                 Nombre = reader["nombre"].ToString(),
                                 FechaCreacion = reader["fechaCreacion"].ToString(),
                                 oAlicuotaIVA = new CE_AlicuotaIVA()
                                 {
-                                    Id = Convert.ToInt32(reader["idAlicuotaIVA"]),
+                                    Id = Convert.ToInt32(reader["id_alicuotaIVA"]),
                                     Porcentaje = Convert.ToDecimal(reader["porcentaje"])
                                 },
                                 oEstado = new CE_Estado()
                                 {
-                                    Id = Convert.ToBoolean(reader["idEstado"]),
+                                    Id = Convert.ToBoolean(reader["id_estado"]),
                                     Nombre = reader["nombre"].ToString(),
                                 }
                             });

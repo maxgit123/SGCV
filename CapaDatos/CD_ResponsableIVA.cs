@@ -27,7 +27,7 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_ResponsableIVA()
                             {
-                                Id = Convert.ToInt32(reader["idResponsableIVA"]),
+                                Id = Convert.ToInt32(reader["id_responsableIVA"]),
                                 Nombre = reader["nombre"].ToString(),
                             });
                         }

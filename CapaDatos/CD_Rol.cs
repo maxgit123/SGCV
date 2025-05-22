@@ -15,7 +15,7 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "SELECT idRol,nombre FROM cRol;";
+                    string query = "SELECT id_rol,nombre FROM cRol;";
 
                     SqlCommand cmd = new SqlCommand(query, oConexion)
                     { CommandType = CommandType.Text };
@@ -28,7 +28,7 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Rol()
                             {
-                                IdRol = Convert.ToInt32(reader["idRol"]),
+                                IdRol = Convert.ToInt32(reader["id_rol"]),
                                 Nombre = reader["nombre"].ToString(),
                             });
                         }

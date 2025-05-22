@@ -41,6 +41,7 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ipbLogo)).BeginInit();
             this.SuspendLayout();
+
             // 
             // lblDocumento
             // 
@@ -157,7 +158,7 @@
             this.ipbLogo.TabIndex = 0;
             this.ipbLogo.TabStop = false;
             // 
-            // Login
+            // frmLogin
             // 
             this.AcceptButton = this.btnIngresar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -175,7 +176,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Login";
+            this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.panel1.ResumeLayout(false);

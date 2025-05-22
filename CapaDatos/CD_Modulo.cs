@@ -17,10 +17,10 @@ namespace CapaDatos
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT m.nombre,m.rol_id,r.idRol FROM cModulo m");
-                    query.AppendLine("INNER JOIN cRol r ON r.idRol = m.rol_id");
-                    query.AppendLine("INNER JOIN Usuario u ON u.rol_id = r.idRol");
-                    query.AppendLine("WHERE u.idUsuario = @IdUsuario;");
+                    query.AppendLine("SELECT m.nombre,m.rol_id,r.id_rol FROM cModulo m");
+                    query.AppendLine("INNER JOIN cRol r ON r.id_rol = m.rol_id");
+                    query.AppendLine("INNER JOIN Usuario u ON u.rol_id = r.id_rol");
+                    query.AppendLine("WHERE u.id_usuario = @IdUsuario;");
 
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
                     { CommandType = CommandType.Text };
@@ -38,7 +38,7 @@ namespace CapaDatos
                                 Nombre = reader["nombre"].ToString(),
                                 oRol = new CE_Rol()
                                 {
-                                    IdRol = Convert.ToInt32(reader["idRol"])
+                                    IdRol = Convert.ToInt32(reader["id_rol"])
                                 }
                             });
                         }

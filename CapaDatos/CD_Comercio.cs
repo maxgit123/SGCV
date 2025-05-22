@@ -16,12 +16,12 @@ namespace CapaDatos
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT c.idComercio,c.razonSocial,c.cuit,c.ingresosBrutos,c.inicioActividad,c.puntoVenta,c.telefono,c.correo,c.fechaActualizacion,");
-                    query.AppendLine("d.idDireccion,d.calle,d.numero,l.idLocalidad,l.nombre,l.codigoPostal,p.idProvincia,p.nombre,r.idResponsableIVA,r.nombre FROM Comercio c");
-                    query.AppendLine("INNER JOIN Direccion d ON d.idDireccion = c.direccion_id");
-                    query.AppendLine("INNER JOIN Localidad l ON l.idLocalidad = c.localidad_id");
-                    query.AppendLine("INNER JOIN cProvincia p ON p.idProvincia = c.provincia_id");
-                    query.AppendLine("INNER JOIN cResponsableIVA r ON r.idResponsableIVA = c.responsableIVA_id;");
+                    query.AppendLine("SELECT c.id_comercio,c.razonSocial,c.cuit,c.ingresosBrutos,c.inicioActividad,c.puntoVenta,c.telefono,c.correo,c.fechaActualizacion,");
+                    query.AppendLine("d.id_direccion,d.calle,d.numero,l.id_localidad,l.nombre,l.codigoPostal,p.id_provincia,p.nombre,r.id_responsableIVA,r.nombre FROM Comercio c");
+                    query.AppendLine("INNER JOIN Direccion d ON d.id_direccion = c.direccion_id");
+                    query.AppendLine("INNER JOIN Localidad l ON l.id_localidad = c.localidad_id");
+                    query.AppendLine("INNER JOIN cProvincia p ON p.id_provincia = c.provincia_id");
+                    query.AppendLine("INNER JOIN cResponsableIVA r ON r.id_responsableIVA = c.responsableIVA_id;");
 
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
                     { CommandType = CommandType.Text };
@@ -34,7 +34,7 @@ namespace CapaDatos
                         {
                             oComercio = new CE_Comercio()
                             {
-                                Id = Convert.ToInt32(reader["idComercio"]),
+                                Id = Convert.ToInt32(reader["id_comercio"]),
                                 RazonSocial = reader["razonSocial"].ToString(),
                                 Cuit = reader["cuit"].ToString(),
                                 IngresosBrutos = reader["ingresosBrutos"].ToString(),
@@ -45,24 +45,24 @@ namespace CapaDatos
                                 FechaActualizacion = reader["fechaActualizacion"].ToString(),
                                 oDireccion = new CE_Direccion()
                                 {
-                                    Id = Convert.ToInt32(reader["idDireccion"]),
+                                    Id = Convert.ToInt32(reader["id_direccion"]),
                                     Calle = reader["calle"].ToString(),
                                     Numero = reader["numero"].ToString()
                                 },
                                 oLocalidad = new CE_Localidad()
                                 {
-                                    Id = Convert.ToInt32(reader["idLocalidad"]),
+                                    Id = Convert.ToInt32(reader["id_localidad"]),
                                     Nombre = reader["nombre"].ToString(),
                                     CodigoPostal = reader["codigoPostal"].ToString(),
                                 },
                                 oProvincia = new CE_Provincia()
                                 {
-                                    Id = Convert.ToInt32(reader["idProvincia"]),
+                                    Id = Convert.ToInt32(reader["id_provincia"]),
                                     Nombre = reader["nombre"].ToString()
                                 },
                                 oResponsableIVA = new CE_ResponsableIVA()
                                 {
-                                    Id = Convert.ToInt32(reader["idResponsableIVA"]),
+                                    Id = Convert.ToInt32(reader["id_responsableIVA"]),
                                     Nombre = reader["nombre"].ToString()
                                 }
                             };

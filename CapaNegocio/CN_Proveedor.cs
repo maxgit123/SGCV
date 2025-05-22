@@ -7,9 +7,9 @@ namespace CapaNegocio
     public class CN_Proveedor
     {
         private readonly CD_Proveedor oCD_Proveedor = new CD_Proveedor();
-        public List<CE_Proveedor> Listar()
+        public List<CE_Proveedor> Listar(out string mensaje)
         {
-            return oCD_Proveedor.Listar();
+            return oCD_Proveedor.Listar(out mensaje);
         }
         public int Crear(CE_Proveedor oProveedor, out string mensaje)
         {

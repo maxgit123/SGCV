@@ -17,10 +17,10 @@ namespace CapaDatos
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT c.idCliente,c.documento,c.nombre,c.apellido,c.telefono,c.correo,c.fechaCreacion,");
-                    query.AppendLine("r.idResponsableIVA,r.nombre,e.idEstado,e.nombre FROM Cliente c");
-                    query.AppendLine("INNER JOIN cResponsableIVA r on r.idResponsableIVA = c.responsableIVA_id");
-                    query.AppendLine("INNER JOIN cEstado e ON e.idEstado = c.estado_id;");
+                    query.AppendLine("SELECT c.id_cliente,c.documento,c.nombre,c.apellido,c.telefono,c.correo,c.fechaCreacion,");
+                    query.AppendLine("r.id_responsableIVA,r.nombre,e.id_estado,e.nombre FROM Cliente c");
+                    query.AppendLine("INNER JOIN cResponsableIVA r on r.id_responsableIVA = c.responsableIVA_id");
+                    query.AppendLine("INNER JOIN cEstado e ON e.id_estado = c.estado_id");
 
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
                     { CommandType = CommandType.Text };
@@ -33,7 +33,7 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Cliente()
                             {
-                                IdCliente = Convert.ToInt32(reader["idCliente"]),
+                                IdCliente = Convert.ToInt32(reader["id_cliente"]),
                                 Documento = reader["documento"].ToString(),
                                 Nombre = reader["nombre"].ToString(),
                                 Apellido = reader["apellido"].ToString(),
@@ -42,12 +42,12 @@ namespace CapaDatos
                                 FechaCreacion = reader["fechaCreacion"].ToString(),
                                 oRespIVA = new CE_ResponsableIVA()
                                 {
-                                    Id = Convert.ToInt32(reader["idResponsableIVA"]),
+                                    Id = Convert.ToInt32(reader["id_responsableIVA"]),
                                     Nombre = reader["nombre"].ToString()
                                 },
                                 oEstado = new CE_Estado()
                                 {
-                                    Id = Convert.ToBoolean(reader["idEstado"]),
+                                    Id = Convert.ToBoolean(reader["id_estado"]),
                                     Nombre = reader["nombre"].ToString()
                                 }
                             });
