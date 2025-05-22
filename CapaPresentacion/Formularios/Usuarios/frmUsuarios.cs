@@ -136,19 +136,25 @@ namespace CapaPresentacion.Formularios.Usuarios
             LimpiarForm();
             DeshabilitarForm();
         }
-        private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
         {
-            if (dgvUsuarios.Rows.Count < 0)
+            if (dgvUsuarios.Rows.Count == 0)
                 return;
 
+            string textoFiltro = txtBuscar.Text.Trim().ToUpper();
             string columnaFiltro = ((OpcionCombo)cbBuscar.SelectedItem).Valor.ToString();
+
             foreach (DataGridViewRow row in dgvUsuarios.Rows)
             {
-                if (row.Cells[columnaFiltro].Value.ToString().Trim().ToUpper().Contains(txtBuscar.Text.Trim().ToUpper()))
-                    //Se hace el filtro por la columnaFiltro si contiene lo que se encuentra en txtBuscar.
+                if (row.Cells[columnaFiltro].Value != null &&
+                    row.Cells[columnaFiltro].Value.ToString().Trim().ToUpper().Contains(textoFiltro))
+                {
                     row.Visible = true;
+                }
                 else
+                {
                     row.Visible = false;
+                }
             }
         }
         private void btnLimpiarBuscar_Click(object sender, EventArgs e)
