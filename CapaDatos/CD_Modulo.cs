@@ -20,12 +20,12 @@ namespace CapaDatos
                     query.AppendLine("SELECT m.nombre,m.rol_id,r.id_rol FROM cModulo m");
                     query.AppendLine("INNER JOIN cRol r ON r.id_rol = m.rol_id");
                     query.AppendLine("INNER JOIN Usuario u ON u.rol_id = r.id_rol");
-                    query.AppendLine("WHERE u.id_usuario = @IdUsuario;");
+                    query.AppendLine("WHERE u.id_usuario = @id_usuario;");
 
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
                     { CommandType = CommandType.Text };
 
-                    cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                    cmd.Parameters.AddWithValue("@id_usuario", idUsuario);
 
                     oConexion.Open();
 
