@@ -10,7 +10,10 @@ namespace CapaNegocio
         public List<CE_Usuario> Listar()
         {
             return oCD_Usuario.Listar();
-            //Retorna la lista que tiene la clase CD_Usuario de la capa de datos.
+        }
+        public CE_Usuario Login(string documento, string clave)
+        {
+            return oCD_Usuario.Login(documento, clave);
         }
         public int Crear(CE_Usuario oUsuario, out string mensaje)
         {

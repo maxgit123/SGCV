@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Reflection;
+//using System.Reflection;
 using System.Text;
 using CapaEntidad;
 
@@ -68,6 +68,62 @@ namespace CapaDatos
             }
             return lista;
         }
+        public CE_Usuario Login(string documento, string clave)
+        {
+            CE_Usuario oUsuario = null;
+
+            using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_loginUsuario", oConexion)
+                    { CommandType = CommandType.StoredProcedure };
+
+                    cmd.Parameters.AddWithValue("@documento", documento);
+                    cmd.Parameters.AddWithValue("@clave", clave);
+
+                    oConexion.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        // Si el usuario existe se devuelve el objeto completo. Sino, null.
+                        if (reader.Read())
+                        {
+                            oUsuario = new CE_Usuario()
+                            {
+                                Id = Convert.ToInt32(reader["id_usuario"]),
+                                Documento = reader["documento"].ToString(),
+                                Nombre = reader["nombre"].ToString(),
+                                Apellido = reader["apellido"].ToString(),
+                                Clave = reader["clave"].ToString(),
+                                FechaCreacion = reader["fechaCreacion"].ToString(),
+                                oRol = new CE_Rol()
+                                {
+                                    IdRol = Convert.ToInt32(reader["id_rol"]),
+                                    Nombre = reader["rol_nombre"].ToString()
+                                },
+                                oEstado = new CE_Estado()
+                                {
+                                    Id = Convert.ToBoolean(reader["id_estado"]),
+                                    Nombre = reader["estado_nombre"].ToString()
+                                }
+                            };
+                        }
+                    }
+                }
+                catch (SqlException)
+                {
+                    oUsuario = null;
+                }
+                finally
+                {
+                    if (oConexion.State != ConnectionState.Closed)
+                        oConexion.Close();
+                }
+            }
+
+            return oUsuario;
+        }
         public int Crear(CE_Usuario oUsuario, out string mensaje)
         {
             int idCreado = 0;
@@ -77,7 +133,7 @@ namespace CapaDatos
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("usp_crearusuario", oConexion)
+                    SqlCommand cmd = new SqlCommand("usp_crearUsuario", oConexion)
                     { CommandType = CommandType.StoredProcedure };
 
                     cmd.Parameters.AddWithValue("@documento", oUsuario.Documento);
@@ -116,7 +172,7 @@ namespace CapaDatos
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("usp_actualizarusuario", oConexion)
+                    SqlCommand cmd = new SqlCommand("usp_actualizarUsuario", oConexion)
                     { CommandType = CommandType.StoredProcedure };
 
                     cmd.Parameters.AddWithValue("@id_usuario", oUsuario.Id);
@@ -155,7 +211,7 @@ namespace CapaDatos
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("usp_eliminarusuario", oConexion)
+                    SqlCommand cmd = new SqlCommand("usp_eliminarUsuario", oConexion)
                     { CommandType = CommandType.StoredProcedure };
 
                     cmd.Parameters.AddWithValue("@id", oUsuario.Id);
@@ -190,7 +246,7 @@ namespace CapaDatos
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("usp_estadousuario", oConexion)
+                    SqlCommand cmd = new SqlCommand("usp_estadoUsuario", oConexion)
                     { CommandType = CommandType.StoredProcedure };
                     
                     cmd.Parameters.AddWithValue("@id", oUsuario.Id);
