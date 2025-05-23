@@ -96,7 +96,7 @@ namespace CapaPresentacion.Formularios.Usuarios
                 Documento = txtDocumento.Text.Trim(),
                 Nombre = txtNombre.Text.Trim(),
                 Apellido = txtApellido.Text.Trim(),
-                Clave = txtClave.Text.Trim(),
+                Clave = ClaveHash.ObtenerSha256(txtClave.Text.Trim()),
                 oRol = new CE_Rol()
                 {
                     IdRol = Convert.ToInt32(((OpcionCombo)cbRol.SelectedItem).Valor)

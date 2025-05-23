@@ -1,14 +1,8 @@
 ﻿using System;
-//using System.Collections.Generic;
-//using System.ComponentModel;
-//using System.Data;
-//using System.Drawing;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
+using CapaPresentacion.Utilidades;
 
 namespace CapaPresentacion.Formularios.Usuarios
 {
@@ -24,7 +18,10 @@ namespace CapaPresentacion.Formularios.Usuarios
         {
             string mensaje = string.Empty;
 
-            bool resultado = new CN_Usuario().CambiarClave(usuarioActual, txtClaveActual.Text, txtClaveNueva.Text, out mensaje);
+            string claveActualHash = ClaveHash.ObtenerSha256(txtClaveActual.Text.Trim());
+            string claveNuevaHash = ClaveHash.ObtenerSha256(txtClaveNueva.Text.Trim());
+            bool resultado = new CN_Usuario().CambiarClave(usuarioActual, claveActualHash, claveNuevaHash, out mensaje);
+
 
             if (resultado)
             {

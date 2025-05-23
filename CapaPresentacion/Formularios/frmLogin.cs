@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using CapaNegocio;
 using CapaEntidad;
+using CapaNegocio;
+using CapaPresentacion.Utilidades;
 
 namespace CapaPresentacion.Formularios
 {
@@ -20,11 +21,8 @@ namespace CapaPresentacion.Formularios
                 return;
             }
 
-            // FirstOrDefault te regresa el elemento o null.
-            //CE_Usuario oUsuario = new CN_Usuario().Listar()
-            //    .FirstOrDefault(u => u.Documento == txtDocumento.Text.Trim() && u.Clave == txtClave.Text.Trim());
-
-            CE_Usuario oUsuario = new CN_Usuario().Login(txtDocumento.Text.Trim(), txtClave.Text.Trim());
+            string claveHash = ClaveHash.ObtenerSha256(txtClave.Text.Trim());
+            CE_Usuario oUsuario = new CN_Usuario().Login(txtDocumento.Text.Trim(), claveHash);
 
             if (oUsuario == null)
             {
