@@ -275,40 +275,35 @@ namespace CapaDatos
         }
         public bool CambiarClave(CE_Usuario oUsuario, out string mensaje)
         {
-            bool respuesta = false;
             mensaje = string.Empty;
 
-            using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
+            try
             {
-                try
+                using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
+                using (SqlCommand cmd = new SqlCommand("usp_cambiarClaveUsuario", oConexion))
                 {
-                    StringBuilder query = new StringBuilder();
-                    query.AppendLine("UPDATE Usuario SET ");
-                    query.AppendLine("clave = @clave ");
-                    query.AppendLine("WHERE id_usuario = @id_usuario;");
-
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
-                    { CommandType = CommandType.Text };
+                    cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@id_usuario", oUsuario.Id);
-                    cmd.Parameters.AddWithValue("@clave", oUsuario.Clave);
+                    cmd.Parameters.AddWithValue("@nueva_clave", oUsuario.Clave);
+
+                    cmd.Parameters.Add("@respuesta", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
 
                     oConexion.Open();
-                    respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
-                    cmd.Parameters.Clear();
-                }
-                catch (SqlException ex)
-                {
-                    respuesta = false;
-                    mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
-                }
-                finally
-                {
-                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
-                        oConexion.Close();
+                    cmd.ExecuteNonQuery();
+
+                    bool resultado = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
+                    mensaje = cmd.Parameters["@mensaje"].Value.ToString();
+
+                    return resultado;
                 }
             }
-            return respuesta;
+            catch (SqlException ex)
+            {
+                mensaje = "Código de error: " + ex.ErrorCode + "\n" + ex.Message;
+                return false;
+            }
         }
     }
 }
