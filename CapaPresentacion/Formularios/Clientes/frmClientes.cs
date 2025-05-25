@@ -43,7 +43,7 @@ namespace CapaPresentacion.Formularios.Clientes
 
             foreach (CE_Cliente item in listaCliente)
             {
-                dgvClientes.Rows.Add(new object[] { //Acordate de poner los TODOS los items EN ORDEN
+                dgvClientes.Rows.Add(new object[] { // Se debe poner los TODOS los items EN ORDEN
                     item.IdCliente,
                     item.Documento,
                     item.Nombre,
@@ -190,7 +190,7 @@ namespace CapaPresentacion.Formularios.Clientes
         {
             LimpiarForm();
         }
-        private void LimpiarForm() //Limpia los textbox y combobox.
+        private void LimpiarForm()
         {
             lblIndice.Text = "-1"; //Se setea en -1 xq el indice empieza en 0.
             lblID_Cliente.Text = "0"; //Se setea en 0 para que el boton guardar sepa si debe crear o actualizar.

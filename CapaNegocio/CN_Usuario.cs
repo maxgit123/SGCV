@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using CapaDatos;
 using CapaEntidad;
 
@@ -17,21 +18,26 @@ namespace CapaNegocio
         }
         public int Crear(CE_Usuario oUsuario, out string mensaje)
         {
-            mensaje = string.Empty;
+            var errores = new StringBuilder();
 
-            if (oUsuario.Documento == "")
-                mensaje += "Ingrese un nº de documento.\n";
-            if (oUsuario.Nombre == "")
-                mensaje += "Ingrese el nombre del usuario.\n";
-            if (oUsuario.Apellido == "")
-                mensaje += "Ingrese el Apellido del usuario.\n";
-            if (oUsuario.Clave == "")
-                mensaje += "Ingrese la clave del usuario.\n";
+            if (string.IsNullOrWhiteSpace(oUsuario.Documento))
+                errores.AppendLine("Ingrese un nº de documento.");
 
-            if (mensaje == string.Empty)
+            if (string.IsNullOrWhiteSpace(oUsuario.Nombre))
+                errores.AppendLine("Ingrese el nombre del usuario.");
+
+            if (string.IsNullOrWhiteSpace(oUsuario.Apellido))
+                errores.AppendLine("Ingrese el Apellido del usuario.");
+
+            if (string.IsNullOrWhiteSpace(oUsuario.Clave))
+                errores.AppendLine("Ingrese la clave del usuario.");
+
+            mensaje = errores.ToString();
+
+            if (string.IsNullOrEmpty(mensaje))
                 return oCD_Usuario.Crear(oUsuario, out mensaje);
-            else
-                return 0;
+
+            return 0;
         }
         public bool Actualizar(CE_Usuario oUsuario, out string mensaje)
         {

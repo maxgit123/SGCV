@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-//Lo que agregue:
 using CapaDatos;
 using CapaEntidad;
 
@@ -11,7 +10,6 @@ namespace CapaNegocio
         public List<CE_Cliente> Listar()
         {
             return oCD_Cliente.Listar();
-            //Retorna la lista que tiene la clase CD_Cliente de la capa de datos.
         }
         public int Crear(CE_Cliente oCliente, out string mensaje)
         {
