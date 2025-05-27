@@ -67,8 +67,10 @@
             this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaCreacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID_RespIVA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ResponsableIVA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
@@ -208,8 +210,10 @@
             this.Apellido,
             this.Telefono,
             this.Correo,
+            this.FechaCreacion,
             this.ID_RespIVA,
             this.ResponsableIVA,
+            this.Estado,
             this.btnEditar,
             this.btnEliminar});
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -480,6 +484,12 @@
             this.Correo.Name = "Correo";
             this.Correo.ReadOnly = true;
             // 
+            // FechaCreacion
+            // 
+            this.FechaCreacion.HeaderText = "Fecha creación";
+            this.FechaCreacion.Name = "FechaCreacion";
+            this.FechaCreacion.ReadOnly = true;
+            // 
             // ID_RespIVA
             // 
             this.ID_RespIVA.HeaderText = "ID_RespIVA";
@@ -496,6 +506,12 @@
             this.ResponsableIVA.Name = "ResponsableIVA";
             this.ResponsableIVA.ReadOnly = true;
             this.ResponsableIVA.Width = 150;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
             // 
             // btnEditar
             // 
@@ -576,19 +592,21 @@
         private System.Windows.Forms.ComboBox cbRespIVA;
         private System.Windows.Forms.Label lblApellido;
         private FontAwesome.Sharp.IconButton btnCrear;
+        private System.Windows.Forms.Label lblTelefono;
+        private System.Windows.Forms.TextBox txtTelefono;
+        private System.Windows.Forms.TextBox txtCorreo;
+        private System.Windows.Forms.Label lblCorreo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID_Cliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn Documento;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
         private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
         private System.Windows.Forms.DataGridViewTextBoxColumn Correo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaCreacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID_RespIVA;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResponsableIVA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewButtonColumn btnEditar;
         private System.Windows.Forms.DataGridViewButtonColumn btnEliminar;
-        private System.Windows.Forms.Label lblTelefono;
-        private System.Windows.Forms.TextBox txtTelefono;
-        private System.Windows.Forms.TextBox txtCorreo;
-        private System.Windows.Forms.Label lblCorreo;
     }
 }

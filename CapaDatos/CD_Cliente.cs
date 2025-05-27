@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using System.Reflection;
+using System.Text;
 using CapaEntidad;
 
 namespace CapaDatos
@@ -17,10 +18,12 @@ namespace CapaDatos
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT c.id_cliente,c.documento,c.nombre,c.apellido,c.telefono,c.correo,c.fechaCreacion,");
-                    query.AppendLine("r.id_responsableIVA,r.nombre,e.id_estado,e.nombre FROM Cliente c");
-                    query.AppendLine("INNER JOIN cResponsableIVA r on r.id_responsableIVA = c.responsableIVA_id");
-                    query.AppendLine("INNER JOIN cEstado e ON e.id_estado = c.estado_id");
+                    query.AppendLine("SELECT c.id_cliente, c.documento, c.nombre, c.apellido, c.telefono, c.correo, c.fechaCreacion,");
+                    query.AppendLine("r.id_responsableIVA, r.nombre AS responsableIVA,");
+                    query.AppendLine("e.nombre AS estado");
+                    query.AppendLine("FROM Cliente c");
+                    query.AppendLine("INNER JOIN cResponsableIVA r ON r.id_responsableIVA = c.responsableIVA_id");
+                    query.AppendLine("INNER JOIN cEstado e ON e.id_estado = c.estado_id;");
 
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
                     { CommandType = CommandType.Text };
@@ -43,16 +46,14 @@ namespace CapaDatos
                                 oRespIVA = new CE_ResponsableIVA()
                                 {
                                     Id = Convert.ToInt32(reader["id_responsableIVA"]),
-                                    Nombre = reader["nombre"].ToString()
+                                    Nombre = reader["responsableIVA"].ToString()
                                 },
                                 oEstado = new CE_Estado()
                                 {
-                                    Id = Convert.ToBoolean(reader["id_estado"]),
-                                    Nombre = reader["nombre"].ToString()
+                                    Nombre = reader["estado"].ToString()
                                 }
                             });
                         }
-                        reader.Close();
                     }
                 }
                 catch (SqlException ex)

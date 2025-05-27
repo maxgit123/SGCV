@@ -32,7 +32,7 @@ namespace CapaNegocio
             if (string.IsNullOrWhiteSpace(oUsuario.Clave))
                 errores.AppendLine("Ingrese la clave del usuario.");
 
-            mensaje = errores.ToString();
+            mensaje = "Se encontraron los siguientes errores:\n\n" + errores.ToString();
 
             if (string.IsNullOrEmpty(mensaje))
                 return oCD_Usuario.Crear(oUsuario, out mensaje);

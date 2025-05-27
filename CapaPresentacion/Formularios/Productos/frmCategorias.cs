@@ -41,7 +41,7 @@ namespace CapaPresentacion.Formularios.Productos
         }
         private void dgvCategorias_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            PintarDGV.PintarbtnEditarEliminar(sender, e, dgvCategorias.ColumnCount);
+            PintarDGV.PintarbtnEditarEliminar(sender, e, "btnEditar", "btnEliminar");
         }
         private void dgvCategorias_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

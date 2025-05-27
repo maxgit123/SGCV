@@ -48,39 +48,19 @@ namespace CapaPresentacion.Formularios.Clientes
                     item.Documento,
                     item.Nombre,
                     item.Apellido,
+                    item.Telefono,
+                    item.Correo,
+                    item.FechaCreacion,
                     item.oRespIVA.Id,
                     item.oRespIVA.Nombre,
+                    item.oEstado.Nombre,
                     "",""
                 });
             }
         }
         private void dgvClientes_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.RowIndex < 0)
-                return;
-
-            if (e.ColumnIndex == 6) //Pinta el icono de editar
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-                var w = Properties.Resources.edit16.Width;
-                var h = Properties.Resources.edit16.Height;
-                var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
-                var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
-                e.Graphics.DrawImage(Properties.Resources.edit16, new Rectangle(x, y, w, h));
-                e.Handled = true;
-            }
-            if (e.ColumnIndex == 7) //Pinta el icono de eliminar
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                var w = Properties.Resources.delete16.Width;
-                var h = Properties.Resources.delete16.Height;
-                var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
-                var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
-
-                e.Graphics.DrawImage(Properties.Resources.delete16, new Rectangle(x, y, w, h));
-                e.Handled = true;
-            }
+            PintarDGV.PintarbtnEditarEliminar(sender, e, "btnEditar", "btnEliminar");
         }
         private void dgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -133,8 +113,8 @@ namespace CapaPresentacion.Formularios.Clientes
         {
             string mensaje = string.Empty;
 
-            CE_Cliente oCliente = new CE_Cliente() //Se crea un obj de la clase Cliente
-            { //y se le asignan los valores del formulario.
+            CE_Cliente oCliente = new CE_Cliente()
+            {
                 IdCliente = Convert.ToInt32(lblID_Cliente.Text),
                 Documento = txtDocumento.Text.Trim(),
                 Nombre = txtNombre.Text.Trim(),
@@ -142,7 +122,8 @@ namespace CapaPresentacion.Formularios.Clientes
                 oRespIVA = new CE_ResponsableIVA() { Id = Convert.ToInt32(((OpcionCombo)cbRespIVA.SelectedItem).Valor) },
             };
 
-            if (oCliente.IdCliente == 0) //Si es un Cliente nuevo:
+            // Si es un Cliente nuevo:
+            if (oCliente.IdCliente == 0)
             {
                 //Se ejecuta el metodo Crear que retorna el ID del Cliente creado que se genera desde la BD.
                 int idClienteCreado = new CN_Cliente().Crear(oCliente, out mensaje);
