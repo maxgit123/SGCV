@@ -1,17 +1,18 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Reflection;
-using System.Text;
 using CapaEntidad;
 
 namespace CapaDatos
 {
     public class CD_Cliente
     {
-        public List<CE_Cliente> Listar()
+        public List<CE_Cliente> Listar(out string mensaje)
         {
+            mensaje = string.Empty;
+
             List<CE_Cliente> lista = new List<CE_Cliente>();
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
@@ -20,7 +21,7 @@ namespace CapaDatos
                     StringBuilder query = new StringBuilder();
                     query.AppendLine("SELECT c.id_cliente, c.documento, c.nombre, c.apellido, c.telefono, c.correo, c.fechaCreacion,");
                     query.AppendLine("r.id_responsableIVA, r.nombre AS responsableIVA,");
-                    query.AppendLine("e.nombre AS estado");
+                    query.AppendLine("e.id_estado, e.nombre AS estado");
                     query.AppendLine("FROM Cliente c");
                     query.AppendLine("INNER JOIN cResponsableIVA r ON r.id_responsableIVA = c.responsableIVA_id");
                     query.AppendLine("INNER JOIN cEstado e ON e.id_estado = c.estado_id;");
@@ -36,7 +37,7 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Cliente()
                             {
-                                IdCliente = Convert.ToInt32(reader["id_cliente"]),
+                                Id = Convert.ToInt32(reader["id_cliente"]),
                                 Documento = reader["documento"].ToString(),
                                 Nombre = reader["nombre"].ToString(),
                                 Apellido = reader["apellido"].ToString(),
@@ -59,6 +60,7 @@ namespace CapaDatos
                 catch (SqlException ex)
                 {
                     lista = new List<CE_Cliente>();
+                    mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
                 }
                 finally
                 {
@@ -80,31 +82,28 @@ namespace CapaDatos
                     oConexion.Open();
                     StringBuilder query = new StringBuilder();
 
-                    query.AppendLine("INSERT INTO CLIENTE (Documento,Nombre,Apellido,ID_RespIVA)" +
-                        "VALUES (@Documento,@Nombre,@Apellido,@ID_RespIVA);");
-                    query.AppendLine("SELECT last_insert_rowid();");
+                    query.AppendLine("INSERT INTO Cliente (documento, nombre, apellido, telefono, correo, responsableIVA_id, estado_id)");
+                    query.AppendLine("VALUES (@documento, @nombre, @apellido, @telefono, @correo, @responsableIVA_id, @estado_id);");
+                    query.AppendLine("SELECT SCOPE_IDENTITY();");
 
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oConexion))
+                    {
+                        cmd.Parameters.Add(new SqlParameter("@documento", oCliente.Documento));
+                        cmd.Parameters.Add(new SqlParameter("@nombre", oCliente.Nombre));
+                        cmd.Parameters.Add(new SqlParameter("@apellido", oCliente.Apellido));
+                        cmd.Parameters.Add(new SqlParameter("@telefono", oCliente.Telefono));
+                        cmd.Parameters.Add(new SqlParameter("@correo", oCliente.Correo));
+                        cmd.Parameters.Add(new SqlParameter("@responsableIVA_id", oCliente.oRespIVA.Id));
+                        cmd.Parameters.Add(new SqlParameter("@estado_id", 1));
+                        //cmd.CommandType = CommandType.Text;
 
-                    cmd.Parameters.Add(new SqlParameter("@Documento", oCliente.Documento));
-                    cmd.Parameters.Add(new SqlParameter("@Nombre", oCliente.Nombre));
-                    cmd.Parameters.Add(new SqlParameter("@Apellido", oCliente.Apellido));
-                    cmd.Parameters.Add(new SqlParameter("@ID_RespIVA", oCliente.oRespIVA.Id));
-                    cmd.CommandType = CommandType.Text;
-
-                    respuesta = Convert.ToInt32(cmd.ExecuteScalar().ToString());
-                    //ExecuteScalar devuelve la 1ra columna de la 1ra fila. En este caso el ID del Cliente.
-                    cmd.Parameters.Clear();
+                        respuesta = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+                    }
                 }
                 catch (SqlException ex)
                 {
                     respuesta = 0;
                     mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
-                }
-                finally
-                {
-                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
-                        oConexion.Close();
                 }
             }
             return respuesta;
@@ -120,33 +119,28 @@ namespace CapaDatos
                 {
                     oConexion.Open();
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("UPDATE Cliente SET "
-                                     + "Documento = @Documento, "
-                                     + "Nombre = @Nombre, "
-                                     + "Apellido = @Apellido, "
-                                     + "ID_RespIVA = @ID_RespIVA "
-                                     + "WHERE ID_Cliente = @ID_Cliente");
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
+                    query.AppendLine("UPDATE Cliente SET");
+                    query.AppendLine("documento = @documento, nombre = @nombre, apellido = @apellido,");
+                    query.AppendLine("telefono = @telefono, correo = @correo, responsableIVA_id = @responsableIVA_id");
+                    query.AppendLine("WHERE id_cliente = @id_cliente;");
 
-                    cmd.Parameters.Add(new SqlParameter("@Documento", oCliente.Documento));
-                    cmd.Parameters.Add(new SqlParameter("@Nombre", oCliente.Nombre));
-                    cmd.Parameters.Add(new SqlParameter("@Apellido", oCliente.Apellido));
-                    cmd.Parameters.Add(new SqlParameter("@ID_RespIVA", oCliente.oRespIVA.Id));
-                    cmd.Parameters.Add(new SqlParameter("@ID_Cliente", oCliente.IdCliente));
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oConexion))
+                    {
+                        cmd.Parameters.Add(new SqlParameter("@documento", oCliente.Documento));
+                        cmd.Parameters.Add(new SqlParameter("@nombre", oCliente.Nombre));
+                        cmd.Parameters.Add(new SqlParameter("@apellido", oCliente.Apellido));
+                        cmd.Parameters.Add(new SqlParameter("@telefono", oCliente.Telefono));
+                        cmd.Parameters.Add(new SqlParameter("@correo", oCliente.Correo));
+                        cmd.Parameters.Add(new SqlParameter("@responsableIVA_id", oCliente.oRespIVA.Id));
+                        cmd.Parameters.Add(new SqlParameter("@id_cliente", oCliente.Id));
 
-                    cmd.CommandType = CommandType.Text;
-                    respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
-                    cmd.Parameters.Clear();
+                        respuesta = cmd.ExecuteNonQuery() > 0;
+                    }
                 }
                 catch (SqlException ex)
                 {
                     respuesta = false;
                     mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
-                }
-                finally
-                {
-                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
-                        oConexion.Close();
                 }
             }
             return respuesta;
@@ -161,23 +155,19 @@ namespace CapaDatos
                 try
                 {
                     oConexion.Open();
-                    StringBuilder query = new StringBuilder();
-                    query.AppendLine("DELETE FROM CLIENTE WHERE ID_Cliente = @ID_Cliente;");
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
-                    cmd.Parameters.Add(new SqlParameter("@ID_Cliente", oCliente.IdCliente));
-                    cmd.CommandType = CommandType.Text;
-                    respuesta = Convert.ToBoolean(cmd.ExecuteNonQuery());
-                    cmd.Parameters.Clear();
+
+                    string query = "DELETE FROM Cliente WHERE id_cliente = @id_cliente;";
+
+                    using (SqlCommand cmd = new SqlCommand(query, oConexion))
+                    {
+                        cmd.Parameters.AddWithValue("@id_cliente", oCliente.Id);
+                        respuesta = cmd.ExecuteNonQuery() > 0;
+                    }
                 }
                 catch (SqlException ex)
                 {
                     respuesta = false;
                     mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
-                }
-                finally
-                {
-                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
-                        oConexion.Close();
                 }
             }
             return respuesta;

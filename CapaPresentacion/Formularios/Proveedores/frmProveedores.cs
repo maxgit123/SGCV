@@ -58,7 +58,7 @@ namespace CapaPresentacion.Formularios.Proveedores
 
                     CE_Proveedor oProveedor = new CE_Proveedor()
                     {
-                        Id = int.Parse(dgvProveedores.Rows[e.RowIndex].Cells["ID_Proveedor"].Value.ToString())
+                        Id = Convert.ToInt32(dgvProveedores.Rows[e.RowIndex].Cells["ID_Proveedor"].Value)
                     };
 
                     bool respuesta = new CN_Proveedor().Eliminar(oProveedor, out mensaje);
@@ -95,8 +95,7 @@ namespace CapaPresentacion.Formularios.Proveedores
 
                 MostrarListaProveedores();
                 LimpiarForm();
-                DeshabilitarForm();
-                    
+                DeshabilitarForm();     
             }
             else
             {
@@ -148,8 +147,7 @@ namespace CapaPresentacion.Formularios.Proveedores
         private void MostrarListaProveedores()
         {
             dgvProveedores.Rows.Clear();
-            string mensaje = string.Empty;
-            List<CE_Proveedor> listaProveedor = new CN_Proveedor().Listar(out mensaje);
+            List<CE_Proveedor> listaProveedor = new CN_Proveedor().Listar(out string mensaje);
 
             if (!string.IsNullOrEmpty(mensaje))
             {
@@ -174,8 +172,8 @@ namespace CapaPresentacion.Formularios.Proveedores
         }
         private void LimpiarForm()
         {
-            lblIndice.Text = "-1"; //Se setea en -1 xq el indice empieza en 0.
-            lblID_Proveedor.Text = "0"; //Se setea en 0 para que el boton guardar sepa si debe crear o actualizar.
+            lblIndice.Text = "-1";
+            lblID_Proveedor.Text = "0";
             txtRazonSocial.Text = "";
             txtObservacion.Text = "";
             txtTelefono.Text = "";

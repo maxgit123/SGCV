@@ -1,9 +1,8 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-//using System.Reflection;
-using System.Text;
 using CapaEntidad;
 
 namespace CapaDatos
@@ -211,28 +210,26 @@ namespace CapaDatos
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("usp_eliminarUsuario", oConexion)
-                    { CommandType = CommandType.StoredProcedure };
-
-                    cmd.Parameters.AddWithValue("@id", oUsuario.Id);
-                    cmd.Parameters.Add("@respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
-
                     oConexion.Open();
-                    cmd.ExecuteNonQuery();
-                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
-                    mensaje = cmd.Parameters["@mensaje"].Value.ToString();
-                    cmd.Parameters.Clear();
+
+                    using (SqlCommand cmd = new SqlCommand("usp_eliminarUsuario", oConexion))
+                    { 
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@id", oUsuario.Id);
+                        cmd.Parameters.Add("@respuesta", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+                        
+                        cmd.ExecuteNonQuery();
+
+                        respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
+                        mensaje = cmd.Parameters["@mensaje"].Value.ToString();
+                    }
                 }
                 catch (SqlException ex)
                 {
                     respuesta = false;
                     mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
-                }
-                finally
-                {
-                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
-                        oConexion.Close();
                 }
             }
             return respuesta;

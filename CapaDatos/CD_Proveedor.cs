@@ -88,8 +88,8 @@ namespace CapaDatos
 
                     oConexion.Open();
                     
+                    // ExecuteScalar devuelve la 1ra columna de la 1ra fila. En este caso el ID del usuario.
                     object result = cmd.ExecuteScalar();
-                    //ExecuteScalar devuelve la 1ra columna de la 1ra fila. En este caso el ID del usuario.
 
                     if (result != null)
                     {
@@ -120,32 +120,26 @@ namespace CapaDatos
                 {
                     oConexion.Open();
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("UPDATE Proveedor SET "
-                                     + "razonSocial = @razonSocial, "
-                                     + "observacion = @observacion, "
-                                     + "telefono = @telefono, "
-                                     + "correo = @correo "
-                                     + "WHERE id_proveedor = @id_proveedor");
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
-                    { CommandType = CommandType.Text };
+                    query.AppendLine("UPDATE Proveedor SET");
+                    query.AppendLine("razonSocial = @razonSocial, observacion = @observacion,");
+                    query.AppendLine("telefono = @telefono, correo = @correo");
+                    query.AppendLine("WHERE id_proveedor = @id_proveedor");
 
-                    cmd.Parameters.AddWithValue("@razonSocial", oProveedor.RazonSocial);
-                    cmd.Parameters.AddWithValue("@observacion", oProveedor.Observacion);
-                    cmd.Parameters.AddWithValue("@telefono", oProveedor.Telefono);
-                    cmd.Parameters.AddWithValue("@correo", oProveedor.Correo);
-                    cmd.Parameters.AddWithValue("@id_proveedor", oProveedor.Id);
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oConexion))
+                    { 
+                        cmd.Parameters.AddWithValue("@razonSocial", oProveedor.RazonSocial);
+                        cmd.Parameters.AddWithValue("@observacion", oProveedor.Observacion);
+                        cmd.Parameters.AddWithValue("@telefono", oProveedor.Telefono);
+                        cmd.Parameters.AddWithValue("@correo", oProveedor.Correo);
+                        cmd.Parameters.AddWithValue("@id_proveedor", oProveedor.Id);
                     
-                    respuesta = cmd.ExecuteNonQuery() > 0;
+                        respuesta = cmd.ExecuteNonQuery() > 0;
+                    }
                 }
                 catch (SqlException ex)
                 {
                     respuesta = false;
                     mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
-                }
-                finally
-                {
-                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
-                        oConexion.Close();
                 }
             }
             return respuesta;
@@ -159,26 +153,20 @@ namespace CapaDatos
             {
                 try
                 {
-                    StringBuilder query = new StringBuilder();
-                    query.AppendLine("DELETE FROM Proveedor WHERE id_proveedor = @id_proveedor;");
-                    
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
-                    { CommandType = CommandType.Text };
-
-                    cmd.Parameters.AddWithValue("@id_proveedor", oProveedor.Id);
-
                     oConexion.Open();
-                    respuesta = cmd.ExecuteNonQuery() > 0;
+
+                    string query = "DELETE FROM Proveedor WHERE id_proveedor = @id_proveedor;";
+
+                    using (SqlCommand cmd = new SqlCommand(query, oConexion))
+                    {
+                        cmd.Parameters.AddWithValue("@id_proveedor", oProveedor.Id);
+                        respuesta = cmd.ExecuteNonQuery() > 0;
+                    }
                 }
                 catch (SqlException ex)
                 {
                     respuesta = false;
                     mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
-                }
-                finally
-                {
-                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
-                        oConexion.Close();
                 }
             }
             return respuesta;

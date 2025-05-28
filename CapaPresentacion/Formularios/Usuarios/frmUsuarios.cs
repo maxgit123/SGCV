@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Documents;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
@@ -47,41 +48,49 @@ namespace CapaPresentacion.Formularios.Usuarios
             if (e.ColumnIndex < 0 || (dgvUsuarios.Columns[e.ColumnIndex].Name != "btnEditar" && dgvUsuarios.Columns[e.ColumnIndex].Name != "btnEliminar"))
                 return;
 
-            if (e.ColumnIndex == dgvUsuarios.Columns["btnEditar"].Index){
-                lblIndice.Text = e.RowIndex.ToString();
-                lblID_Usuario.Text = dgvUsuarios.Rows[e.RowIndex].Cells["ID_Usuario"].Value.ToString();
+            int indice = e.RowIndex;
 
-                txtDocumento.Text = dgvUsuarios.Rows[e.RowIndex].Cells["Documento"].Value.ToString();
-                txtNombre.Text = dgvUsuarios.Rows[e.RowIndex].Cells["Nombre"].Value.ToString();
-                txtApellido.Text = dgvUsuarios.Rows[e.RowIndex].Cells["Apellido"].Value.ToString();
+            if (e.ColumnIndex == dgvUsuarios.Columns["btnEditar"].Index)
+            {
+                lblIndice.Text = indice.ToString();
+                lblID_Usuario.Text = dgvUsuarios.Rows[indice].Cells["ID_Usuario"].Value.ToString();
+
+                txtDocumento.Text = dgvUsuarios.Rows[indice].Cells["Documento"].Value.ToString();
+                txtNombre.Text = dgvUsuarios.Rows[indice].Cells["Nombre"].Value.ToString();
+                txtApellido.Text = dgvUsuarios.Rows[indice].Cells["Apellido"].Value.ToString();
                 foreach (OpcionCombo oc in cbRol.Items)
                 {
-                    if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvUsuarios.Rows[e.RowIndex].Cells["ID_Rol"].Value))
+                    if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvUsuarios.Rows[indice].Cells["ID_Rol"].Value))
                     {
                         int indice_combo = cbRol.Items.IndexOf(oc);
+                        // Se selecciona el que encontro.
                         cbRol.SelectedIndex = indice_combo;
+                        // Cuando la relacion sea correcta se corta el foreach.
                         break;
                     }
                 }
+
                 HabilitarForm();
                 txtClave.Enabled = false;
             }
             else if (e.ColumnIndex == dgvUsuarios.Columns["btnEliminar"].Index)
             {
-                if (MessageBox.Show("¿Desea eliminar al usuario " + dgvUsuarios.Rows[e.RowIndex].Cells["Nombre"].Value.ToString() + "?", "Eliminar Usuario", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                if (MessageBox.Show("¿Desea eliminar al usuario " + dgvUsuarios.Rows[indice].Cells["Nombre"].Value.ToString() +
+                    "?", "Eliminar Usuario", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                     return;
 
-                string mensaje = string.Empty;
-
+                // Se crea un nueva instancia de la que solo se necesita el ID del Cliente.
                 CE_Usuario oUsuario = new CE_Usuario()
                 {
-                    Id = int.Parse(dgvUsuarios.Rows[e.RowIndex].Cells["ID_Usuario"].Value.ToString())
+                    Id = Convert.ToInt32(dgvUsuarios.Rows[indice].Cells["ID_Usuario"].Value)
                 };
 
-                bool respuesta = new CN_Usuario().Eliminar(oUsuario, out mensaje);
+                bool respuesta = new CN_Usuario().Eliminar(oUsuario, out string mensaje);
 
                 if (respuesta)
-                    dgvUsuarios.Rows.RemoveAt(Convert.ToInt32(e.RowIndex));
+                    // Si se elimino correctamente (Eliminar retorna respuesta bool)
+                    // se elimina la fila del DGV.
+                    dgvUsuarios.Rows.RemoveAt(indice);
                 else
                     MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -188,6 +197,7 @@ namespace CapaPresentacion.Formularios.Usuarios
                     item.oRol.Nombre,
                     item.oEstado.Id,
                     item.oEstado.Nombre,
+                    // Botones de editar y eliminar.
                     "",""
                 });
             }
@@ -196,11 +206,13 @@ namespace CapaPresentacion.Formularios.Usuarios
         {
             lblIndice.Text = "-1"; //Se setea en -1 xq el indice empieza en 0.
             lblID_Usuario.Text = "0"; //Se setea en 0 para que el boton guardar sepa si debe crear o actualizar.
+            
             txtDocumento.Text = "";
             txtNombre.Text = "";
             txtApellido.Text = "";
             txtClave.Text = "";
             cbRol.SelectedIndex = 0;
+
             txtDocumento.Select();
         }
         private void HabilitarForm()
