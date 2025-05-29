@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace CapaPresentacion.Utilidades
+namespace CapaNegocio.Utilidades
 {
     public static class ClaveHash
     {

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
-using CapaPresentacion.Utilidades;
 
 namespace CapaPresentacion.Formularios
 {
@@ -15,22 +13,25 @@ namespace CapaPresentacion.Formularios
         }
         private void btnIngresar_Click(object sender, EventArgs e)
         {
+            // Validacion de campos del formulario.
             if (string.IsNullOrWhiteSpace(txtDocumento.Text) || string.IsNullOrWhiteSpace(txtClave.Text))
             {
                 MessageBox.Show("Debe ingresar DNI y clave.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            string claveHash = ClaveHash.ObtenerSha256(txtClave.Text.Trim());
-            CE_Usuario oUsuario = new CN_Usuario().Login(txtDocumento.Text.Trim(), claveHash);
+            // Procesamiento de inicio de sesión.
+            CE_Usuario oUsuario = new CN_Usuario().Login(txtDocumento.Text.Trim(), txtClave.Text.Trim());
 
             if (oUsuario == null)
             {
-                MessageBox.Show("DNI y/o Clave invalidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("DNI y/o Clave inválidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
+            // Acceso exitoso.
             this.Hide();
+            // Se procede a abrir el dashborad.
             frmInicio form = new frmInicio(oUsuario);
             // Cuando se cierra el dashboard vuelve a mostrar el form de login que se oculto.
             form.FormClosing += frm_closing;
@@ -42,8 +43,8 @@ namespace CapaPresentacion.Formularios
         }
         private void frm_closing(object sender, FormClosingEventArgs e)
         {
-            txtDocumento.Text = "";
-            txtClave.Text = "";
+            txtDocumento.Clear();
+            txtClave.Clear();
             txtDocumento.Focus();
             this.Show();
         }

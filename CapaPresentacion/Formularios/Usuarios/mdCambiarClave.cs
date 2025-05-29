@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
-using CapaPresentacion.Utilidades;
 
 namespace CapaPresentacion.Formularios.Usuarios
 {
@@ -16,12 +15,7 @@ namespace CapaPresentacion.Formularios.Usuarios
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            string mensaje = string.Empty;
-
-            string claveActualHash = ClaveHash.ObtenerSha256(txtClaveActual.Text.Trim());
-            string claveNuevaHash = ClaveHash.ObtenerSha256(txtClaveNueva.Text.Trim());
-            bool resultado = new CN_Usuario().CambiarClave(usuarioActual, claveActualHash, claveNuevaHash, out mensaje);
-
+            bool resultado = new CN_Usuario().CambiarClave(usuarioActual, txtClaveActual.Text, txtClaveNueva.Text, out string mensaje);
 
             if (resultado)
             {
