@@ -4,7 +4,7 @@ using System.Drawing;
 namespace CapaPresentacion.Utilidades
 {
     /// <summary>
-    /// Clase auxiliar para pintar iconos de editar y eliminar en un DataGridView.
+    /// Clase auxiliar para pintar iconos en un DataGridView.
     /// </summary>
     public class PintarDGV
     {
@@ -26,10 +26,16 @@ namespace CapaPresentacion.Utilidades
             var colNombre = dgv.Columns[e.ColumnIndex].Name;
 
             if (colNombre == nombreColEditar)
+            {
+                //dgv.Columns[colNombre].Width = 30;
                 PintarIcono(e, Properties.Resources.edit16);
+            }
 
             if (colNombre == nombreColEliminar)
+            {
+                //dgv.Columns[colNombre].MinimumWidth = 30;
                 PintarIcono(e, Properties.Resources.delete16);
+            }
         }
 
         /// <summary>

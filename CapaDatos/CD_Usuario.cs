@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,21 +10,18 @@ namespace CapaDatos
     {
         public List<CE_Usuario> Listar()
         {
-            List<CE_Usuario> lista = new List<CE_Usuario>();
+            var lista = new List<CE_Usuario>();
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
+            using (SqlCommand cmd = new SqlCommand(@"
+                    SELECT u.id_usuario, u.documento, u.nombre, u.apellido, u.clave, u.fechaCreacion,
+                    r.id_rol, r.nombre AS rol_nombre,
+                    e.id_estado, e.nombre AS estado_nombre
+                    FROM Usuario u
+                    INNER JOIN cRol r ON r.id_rol = u.rol_id
+                    WHERE u.estado_id = 1;", oConexion))
             {
                 try
                 {
-                    StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT u.id_usuario,u.documento,u.nombre,u.apellido,u.clave,u.fechaCreacion,");
-                    query.AppendLine("r.id_rol,r.nombre AS rol_nombre,e.id_estado,e.nombre AS estado_nombre FROM Usuario u");
-                    query.AppendLine("INNER JOIN cRol r ON r.id_rol = u.rol_id");
-                    query.AppendLine("INNER JOIN cEstado e ON e.id_estado = u.estado_id");
-                    query.AppendLine("WHERE u.estado_id = 1;");
-                    
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
-                    { CommandType = CommandType.Text };
-
                     oConexion.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -52,17 +48,12 @@ namespace CapaDatos
                                 }
                             });
                         }
-                        reader.Close();
                     }
                 }
-                catch (SqlException ex)
+                catch (SqlException)
                 {
+                    //mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
                     lista = new List<CE_Usuario>();
-                }
-                finally
-                {
-                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
-                        oConexion.Close();
                 }
             }
             return lista;
@@ -72,15 +63,15 @@ namespace CapaDatos
             CE_Usuario oUsuario = null;
 
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
+            using (SqlCommand cmd = new SqlCommand("usp_loginUsuario", oConexion))
             {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@documento", documento);
+                cmd.Parameters.AddWithValue("@clave", clave);
+
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("usp_loginUsuario", oConexion)
-                    { CommandType = CommandType.StoredProcedure };
-
-                    cmd.Parameters.AddWithValue("@documento", documento);
-                    cmd.Parameters.AddWithValue("@clave", clave);
-
                     oConexion.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -112,124 +103,103 @@ namespace CapaDatos
                 }
                 catch (SqlException)
                 {
+                    //string mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
                     oUsuario = null;
                 }
-                finally
-                {
-                    if (oConexion.State != ConnectionState.Closed)
-                        oConexion.Close();
-                }
             }
-
             return oUsuario;
         }
         public int Crear(CE_Usuario oUsuario, out string mensaje)
         {
-            int idCreado = 0;
             mensaje = string.Empty;
+            int idUsuarioCreado = 0;
             
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
+            using (SqlCommand cmd = new SqlCommand("usp_crearUsuario", oConexion))
             {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@documento", oUsuario.Documento);
+                cmd.Parameters.AddWithValue("@nombre", oUsuario.Nombre);
+                cmd.Parameters.AddWithValue("@apellido", oUsuario.Apellido);
+                cmd.Parameters.AddWithValue("@clave", oUsuario.Clave);
+                cmd.Parameters.AddWithValue("@rol_id", oUsuario.oRol.IdRol);
+                cmd.Parameters.Add("@idUsuarioCreado", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+                
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("usp_crearUsuario", oConexion)
-                    { CommandType = CommandType.StoredProcedure };
-
-                    cmd.Parameters.AddWithValue("@documento", oUsuario.Documento);
-                    cmd.Parameters.AddWithValue("@nombre", oUsuario.Nombre);
-                    cmd.Parameters.AddWithValue("@apellido", oUsuario.Apellido);
-                    cmd.Parameters.AddWithValue("@clave", oUsuario.Clave);
-                    cmd.Parameters.AddWithValue("@rol_id", oUsuario.oRol.IdRol);
-                    cmd.Parameters.Add("@idUsuarioCreado", SqlDbType.Int).Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
-
                     oConexion.Open();
                     cmd.ExecuteNonQuery();
-                    idCreado = Convert.ToInt32(cmd.Parameters["@idUsuarioCreado"].Value);
+                    idUsuarioCreado = Convert.ToInt32(cmd.Parameters["@idUsuarioCreado"].Value);
                     mensaje = cmd.Parameters["@mensaje"].Value.ToString();
-                    cmd.Parameters.Clear();
                 }
                 catch (SqlException ex)
                 {
-                    idCreado = 0;
-                    mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
-                }
-                finally
-                {
-                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
-                        oConexion.Close();
+                    mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
+                    idUsuarioCreado = 0;
                 }
             }
-            return idCreado;
+            return idUsuarioCreado;
         }
         public bool Actualizar(CE_Usuario oUsuario, out string mensaje)
         {
-            bool respuesta = false;
             mensaje = string.Empty;
+            bool respuesta = false;
 
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
+            using (SqlCommand cmd = new SqlCommand("usp_actualizarUsuario", oConexion))
             {
+                cmd.CommandType = CommandType.StoredProcedure;
+                
+                cmd.Parameters.AddWithValue("@id_usuario", oUsuario.Id);
+                cmd.Parameters.AddWithValue("@documento", oUsuario.Documento);
+                cmd.Parameters.AddWithValue("@nombre", oUsuario.Nombre);
+                cmd.Parameters.AddWithValue("@apellido", oUsuario.Apellido);
+                cmd.Parameters.AddWithValue("@rol_id", oUsuario.oRol.IdRol);
+                cmd.Parameters.Add("@respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+                
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("usp_actualizarUsuario", oConexion)
-                    { CommandType = CommandType.StoredProcedure };
-
-                    cmd.Parameters.AddWithValue("@id_usuario", oUsuario.Id);
-                    cmd.Parameters.AddWithValue("@documento", oUsuario.Documento);
-                    cmd.Parameters.AddWithValue("@nombre", oUsuario.Nombre);
-                    cmd.Parameters.AddWithValue("@apellido", oUsuario.Apellido);
-                    cmd.Parameters.AddWithValue("@rol_id", oUsuario.oRol.IdRol);
-                    cmd.Parameters.Add("@respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
-
                     oConexion.Open();
                     cmd.ExecuteNonQuery();
                     respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
                     mensaje = cmd.Parameters["@mensaje"].Value.ToString();
-                    cmd.Parameters.Clear();
                 }
                 catch (SqlException ex)
                 {
+                    mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
                     respuesta = false;
-                    mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
-                }
-                finally
-                {
-                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
-                        oConexion.Close();
                 }
             }
             return respuesta;
         }
         public bool Eliminar(CE_Usuario oUsuario, out string mensaje)
         {
-            bool respuesta = false;
             mensaje = string.Empty;
+            bool respuesta = false;
 
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
+            using (SqlCommand cmd = new SqlCommand("usp_eliminarUsuario", oConexion))
             {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@id", oUsuario.Id);
+                cmd.Parameters.Add("@respuesta", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+
                 try
                 {
                     oConexion.Open();
-
-                    using (SqlCommand cmd = new SqlCommand("usp_eliminarUsuario", oConexion))
-                    { 
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-                        cmd.Parameters.AddWithValue("@id", oUsuario.Id);
-                        cmd.Parameters.Add("@respuesta", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                        cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
-                        
-                        cmd.ExecuteNonQuery();
-
-                        respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
-                        mensaje = cmd.Parameters["@mensaje"].Value.ToString();
-                    }
+                    cmd.ExecuteNonQuery();
+                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
+                    mensaje = cmd.Parameters["@mensaje"].Value.ToString();
                 }
                 catch (SqlException ex)
                 {
+                    mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
                     respuesta = false;
-                    mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
                 }
             }
             return respuesta;
@@ -259,13 +229,8 @@ namespace CapaDatos
                 }
                 catch (SqlException ex)
                 {
+                    mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
                     respuesta = false;
-                    mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
-                }
-                finally
-                {
-                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
-                        oConexion.Close();
                 }
             }
             return respuesta;
@@ -273,6 +238,7 @@ namespace CapaDatos
         public bool CambiarClave(CE_Usuario oUsuario, out string mensaje)
         {
             mensaje = string.Empty;
+            bool respuesta = false;
 
             try
             {
@@ -283,22 +249,21 @@ namespace CapaDatos
 
                     cmd.Parameters.AddWithValue("@id_usuario", oUsuario.Id);
                     cmd.Parameters.AddWithValue("@nueva_clave", oUsuario.Clave);
-
                     cmd.Parameters.Add("@respuesta", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
 
                     oConexion.Open();
                     cmd.ExecuteNonQuery();
 
-                    bool resultado = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
+                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
                     mensaje = cmd.Parameters["@mensaje"].Value.ToString();
 
-                    return resultado;
+                    return respuesta;
                 }
             }
             catch (SqlException ex)
             {
-                mensaje = "Código de error: " + ex.ErrorCode + "\n" + ex.Message;
+                mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
                 return false;
             }
         }

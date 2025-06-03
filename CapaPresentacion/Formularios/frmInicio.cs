@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
+using CapaPresentacion.Utilidades;
 using FontAwesome.Sharp;
 
 namespace CapaPresentacion.Formularios
@@ -21,16 +22,23 @@ namespace CapaPresentacion.Formularios
         }
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            menuTituloUsuario.Text = usuarioActual.Apellido + ", " + usuarioActual.Nombre;
-            smenuRol.Text = usuarioActual.oRol.Nombre;
-            //----Muestra el menu segun los permisos del usuario----
-            List<CE_Modulo> ListaModulos = new CN_Modulo().Listar(usuarioActual.Id); //Obtiene los permisos del usuario.
+            // ------ Configuraciones del Formulario ------
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.Size = new Size(1024, 600);
+            this.MinimumSize = new Size(850, 600);
 
-            foreach (IconMenuItem iconmenu in menuPrincipal.Items) //En cada uno comprueba
+            menuTituloUsuario.Text = $"{usuarioActual.Apellido}, {usuarioActual.Nombre}";
+            smenuRol.Text = usuarioActual.oRol.Nombre;
+
+            // Obtiene una lista de modulos permitidos para el usuario actual.
+            List<CE_Modulo> modulosPermitidos = new CN_Modulo().Listar(usuarioActual.Id);
+
+            // Filtra los item del menu en base a los permisos del usuario.
+            foreach (IconMenuItem iconmenu in menuPrincipal.Items) 
             {
-                bool encontrado = ListaModulos.Any(m => m.Nombre == iconmenu.Name); //que el nombre sea el mismo
-                if (encontrado == false) //si no lo encuentra
-                    iconmenu.Visible = false; //lo oculta.
+                iconmenu.Visible = modulosPermitidos.Any(m =>
+                    string.Equals(m.Nombre, iconmenu.Name, StringComparison.OrdinalIgnoreCase));
+                //bool encontrado = modulosPermitidos.Any(m => m.Nombre == iconmenu.Name);
             }
         }
         private void AbrirFormulario(IconMenuItem menu, Form formulario)
@@ -41,16 +49,16 @@ namespace CapaPresentacion.Formularios
             menu.BackColor = Color.Silver;
             menuActivo = menu;
 
-            if (formularioActivo != null) //Si ya mostre uno anteriormente
-                formularioActivo.Close(); //lo cierro para que se pueda mostrar uno nuevo.
+            // Si ya mostre uno anteriormente (si no es null), lo cierro para que se pueda mostrar uno nuevo.
+            formularioActivo?.Close();
 
-            formularioActivo = formulario; //Que sea el form activo.
-            formulario.TopLevel = false; //Que no este sobre todo.
-            formulario.FormBorderStyle = FormBorderStyle.None; //Que no tenga bordes.
-            formulario.Dock = DockStyle.Fill; //Que rellene todo el conetenedor.
+            formularioActivo = formulario; // Que sea el form activo.
+            formulario.TopLevel = false; // Que no este sobre todo.
+            formulario.FormBorderStyle = FormBorderStyle.None; // Que no tenga bordes.
+            formulario.Dock = DockStyle.Fill; // Que rellene todo el conetenedor.
             //formulario.BackColor = Color.White;
-            panelDashboard.Controls.Add(formulario); //Se le agrega el form al contenedor.
-            formulario.Show(); //Se muestra.
+            panelDashboard.Controls.Add(formulario); // Se le agrega el form al contenedor.
+            formulario.Show(); // Se muestra.
         }
         private void menuUsuarios_Click(object sender, EventArgs e)
         {

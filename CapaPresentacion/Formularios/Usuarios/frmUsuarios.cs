@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
@@ -16,16 +15,36 @@ namespace CapaPresentacion.Formularios.Usuarios
         }
         private void frmUsuarios_Load(object sender, EventArgs e)
         {
+            // Se configura el DataGridView para que ajuste las columnas al contenido y los botones tengan un tamaño fijo.
+            foreach (DataGridViewColumn col in dgvUsuarios.Columns)
+            {
+                if (col.Name != "btnEditar" && col.Name != "btnEliminar")
+                {
+                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                }
+                else
+                {
+                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                    col.Width = 30;
+                    col.Resizable = DataGridViewTriState.False;
+                }
+            }
+
             List<CE_Rol> listaRol = new CN_Rol().Listar();
 
             foreach (CE_Rol item in listaRol)
             {
                 cbRol.Items.Add(new OpcionCombo() { Valor = item.IdRol, Texto = item.Nombre });
-                cbRol.DisplayMember = "Texto";
-                cbRol.ValueMember = "Valor";
-                cbRol.SelectedIndex = 0;
             }
 
+            cbRol.DisplayMember = "Texto";
+            cbRol.ValueMember = "Valor";
+
+            // Solo selecciona el primer item del combobox si hay items.
+            if (cbRol.Items.Count > 0)
+                cbRol.SelectedIndex = 0;
+
+            // Se agregan al combobox de busqueda los encabezados visibles del dgv. 
             foreach (DataGridViewColumn columna in dgvUsuarios.Columns)
             {
                 if (columna.Visible == true && columna.HeaderText != "")
@@ -33,11 +52,15 @@ namespace CapaPresentacion.Formularios.Usuarios
                     cbBuscar.Items.Add(new OpcionCombo() { Valor = columna.Name, Texto = columna.HeaderText });
                 }
             }
+
             cbBuscar.DisplayMember = "Texto";
             cbBuscar.ValueMember = "Valor";
-            cbBuscar.SelectedIndex = 0;
+
+            if (cbBuscar.Items.Count > 0)
+                cbBuscar.SelectedIndex = 0;
 
             MostrarListaUsuarios();
+            DeshabilitarForm();
         }
         private void dgvUsuarios_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
@@ -97,15 +120,13 @@ namespace CapaPresentacion.Formularios.Usuarios
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            string mensaje = string.Empty;
-
             CE_Usuario oUsuario = new CE_Usuario()
             {
                 Id = Convert.ToInt32(lblID_Usuario.Text),
                 Documento = txtDocumento.Text.Trim(),
                 Nombre = txtNombre.Text.Trim(),
                 Apellido = txtApellido.Text.Trim(),
-                Clave = ClaveHash.ObtenerSha256(txtClave.Text.Trim()),
+                Clave = txtClave.Text.Trim(),
                 oRol = new CE_Rol()
                 {
                     IdRol = Convert.ToInt32(((OpcionCombo)cbRol.SelectedItem).Valor)
@@ -114,7 +135,7 @@ namespace CapaPresentacion.Formularios.Usuarios
             
             if (oUsuario.Id == 0)
             {
-                int idUsuarioCreado = new CN_Usuario().Crear(oUsuario, out mensaje);
+                int idUsuarioCreado = new CN_Usuario().Crear(oUsuario, out string mensaje);
 
                 if (idUsuarioCreado == 0)
                 {
@@ -128,7 +149,7 @@ namespace CapaPresentacion.Formularios.Usuarios
             }
             else
             {
-                bool resultado = new CN_Usuario().Actualizar(oUsuario, out mensaje);
+                bool resultado = new CN_Usuario().Actualizar(oUsuario, out string mensaje);
 
                 if (!resultado)
                 {
@@ -167,8 +188,10 @@ namespace CapaPresentacion.Formularios.Usuarios
             }
         }
         private void btnLimpiarBuscar_Click(object sender, EventArgs e)
-        { //Se elimina el filtro.
-            txtBuscar.Text = "";
+        {
+            txtBuscar.Clear();
+
+            // Se elimina el filtro.
             foreach (DataGridViewRow row in dgvUsuarios.Rows)
             {
                 row.Visible = true;
@@ -204,37 +227,85 @@ namespace CapaPresentacion.Formularios.Usuarios
         }
         private void LimpiarForm()
         {
-            lblIndice.Text = "-1"; //Se setea en -1 xq el indice empieza en 0.
-            lblID_Usuario.Text = "0"; //Se setea en 0 para que el boton guardar sepa si debe crear o actualizar.
-            
-            txtDocumento.Text = "";
-            txtNombre.Text = "";
-            txtApellido.Text = "";
-            txtClave.Text = "";
-            cbRol.SelectedIndex = 0;
+            // Se setea en -1 porque el indice empieza en 0.
+            lblIndice.Text = "-1";
+            // Se setea en 0 para que el boton guardar sepa si debe Crear o Actualizar.
+            lblID_Usuario.Text = "0";
 
+            // Se recorre el panel de formulario y se limpian los TextBox.
+            foreach (Control control in pnlFormUsuario.Controls)
+            {
+                if (control is TextBox txt)
+                {
+                    txt.Clear();
+                }
+            }
+
+            cbRol.SelectedIndex = 0;
             txtDocumento.Select();
         }
         private void HabilitarForm()
         {
+            foreach (Control ctrl in pnlFormUsuario.Controls)
+            {
+                if (ctrl.EsInteractivo())
+                    ctrl.Enabled = true;
+            }
+
+            pnlFormUsuario.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            pnlListaUsuarios.BackColor = System.Drawing.Color.Lavender;
+
+            foreach (Control c in pnlListaUsuarios.Controls)
+            {
+                if (c.EsInteractivo())
+                    c.Enabled = false;
+            }
+
             txtDocumento.Select();
-            txtDocumento.Enabled = true;
-            txtNombre.Enabled = true;
-            txtApellido.Enabled = true;
-            txtClave.Enabled = true;
-            cbRol.Enabled = true;
-            btnGuardar.Enabled = true;
-            btnCancelar.Enabled = true;
+
+            //pnlFormUsuario.Enabled = true;
+
+            //txtDocumento.Enabled = true;
+            //txtNombre.Enabled = true;
+            //txtApellido.Enabled = true;
+            //txtClave.Enabled = true;
+            //cbRol.Enabled = true;
+            //btnGuardar.Enabled = true;
+            //btnCancelar.Enabled = true;
         }
         private void DeshabilitarForm()
         {
-            txtDocumento.Enabled = false;
-            txtNombre.Enabled = false;
-            txtApellido.Enabled = false;
-            txtClave.Enabled = false;
-            cbRol.Enabled = false;
-            btnGuardar.Enabled = false;
-            btnCancelar.Enabled = false;
+            foreach (Control c in pnlFormUsuario.Controls)
+            {
+                if (c.EsInteractivo())
+                    c.Enabled = false;
+            }
+
+            pnlFormUsuario.BackColor = System.Drawing.Color.Lavender;
+            pnlListaUsuarios.BackColor = System.Drawing.SystemColors.ActiveCaption;
+
+            foreach (Control c in pnlListaUsuarios.Controls)
+            {
+                if (c.EsInteractivo())
+                    c.Enabled = true;
+            }
+
+
+            txtBuscar.Select();
+
+            //pnlFormUsuario.Enabled = false;
+
+            //txtDocumento.Enabled = false;
+            //txtNombre.Enabled = false;
+            //txtApellido.Enabled = false;
+            //txtClave.Enabled = false;
+            //cbRol.Enabled = false;
+            //btnGuardar.Enabled = false;
+            //btnCancelar.Enabled = false;
+        }
+        private void pnlListaUsuarios_Resize(object sender, EventArgs e)
+        {
+            lblListaUsuarios.CentrarH();
         }
     }
 }

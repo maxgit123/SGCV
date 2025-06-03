@@ -15,17 +15,27 @@ namespace CapaPresentacion.Formularios.Clientes
         }
         private void frmClientes_Load(object sender, EventArgs e)
         {
+            dgvClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            dgvClientes.Columns["btnEditar"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvClientes.Columns["btnEditar"].Width = 30;
+
+            dgvClientes.Columns["btnEliminar"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvClientes.Columns["btnEliminar"].Width = 30;
+
             List<CE_ResponsableIVA> listaRespIVA = new CN_ResponsableIVA().Listar();
 
             foreach (CE_ResponsableIVA item in listaRespIVA)
             {
                 cbRespIVA.Items.Add(new OpcionCombo() { Valor = item.Id, Texto = item.Nombre });
-                cbRespIVA.DisplayMember = "Texto";
-                cbRespIVA.ValueMember = "Valor";
-                cbRespIVA.SelectedIndex = 0;
             }
 
-            // Se agrega al combobox de busqueda los encabezados visibles. 
+            cbRespIVA.DisplayMember = "Texto";
+            cbRespIVA.ValueMember = "Valor";
+
+            if (cbRespIVA.Items.Count > 0)
+                cbRespIVA.SelectedIndex = 0;
+
             foreach (DataGridViewColumn columna in dgvClientes.Columns)
             {
                 if (columna.Visible == true && columna.HeaderText != "")
@@ -33,9 +43,12 @@ namespace CapaPresentacion.Formularios.Clientes
                     cbBuscar.Items.Add(new OpcionCombo() { Valor = columna.Name, Texto = columna.HeaderText });
                 }
             }
+
             cbBuscar.DisplayMember = "Texto";
             cbBuscar.ValueMember = "Valor";
-            cbBuscar.SelectedIndex = 0;
+
+            if (cbBuscar.Items.Count > 0)
+                cbBuscar.SelectedIndex = 0;
 
             MostrarListaClientes();
         }
@@ -154,8 +167,9 @@ namespace CapaPresentacion.Formularios.Clientes
             }
         }
         private void btnLimpiarBuscar_Click(object sender, EventArgs e)
-        { //Limpia el textbox de busqueda y se elimina el filtro.
-            txtBuscar.Text = "";
+        {
+            txtBuscar.Clear();
+
             foreach (DataGridViewRow row in dgvClientes.Rows)
             {
                 row.Visible = true;

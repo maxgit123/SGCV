@@ -44,6 +44,9 @@ namespace CapaNegocio
                 return 0;
             }
 
+            // Se genera el hash de la clave antes de enviar a la capa de datos.
+            oUsuario.Clave = ClaveHash.ObtenerSha256(oUsuario.Clave.Trim());
+
             // Si no hay errores, se procede a la capa de datos.
             return oCD_Usuario.Crear(oUsuario, out mensaje);
         }
