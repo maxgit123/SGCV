@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblAdmUsuario = new System.Windows.Forms.Label();
             this.txtNomCategoria = new System.Windows.Forms.TextBox();
             this.lblIndice = new System.Windows.Forms.Label();
@@ -44,15 +44,6 @@
             this.lblBuscar = new System.Windows.Forms.Label();
             this.lblListaCategoria = new System.Windows.Forms.Label();
             this.dgvCategorias = new System.Windows.Forms.DataGridView();
-            this.ID_Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NomCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaCreacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID_AlicuotaIVA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AlicuotaIVA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID_Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.lblNomCategoria = new System.Windows.Forms.Label();
             this.lblAlicuotaIVA = new System.Windows.Forms.Label();
             this.cbAlicuotaIVA = new System.Windows.Forms.ComboBox();
@@ -61,6 +52,15 @@
             this.btnGuardar = new FontAwesome.Sharp.IconButton();
             this.btnCrear = new FontAwesome.Sharp.IconButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.id_categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaCreacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_alicuotaIVA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.alicuotaIVA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -82,7 +82,7 @@
             this.txtNomCategoria.Enabled = false;
             this.txtNomCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNomCategoria.Location = new System.Drawing.Point(16, 99);
-            this.txtNomCategoria.MaxLength = 8;
+            this.txtNomCategoria.MaxLength = 50;
             this.txtNomCategoria.Name = "txtNomCategoria";
             this.txtNomCategoria.Size = new System.Drawing.Size(206, 26);
             this.txtNomCategoria.TabIndex = 242;
@@ -127,7 +127,7 @@
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(135, 26);
             this.txtBuscar.TabIndex = 240;
-            this.txtBuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscar_KeyPress);
+            this.txtBuscar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscar_KeyUp);
             // 
             // lblBuscar
             // 
@@ -157,42 +157,42 @@
             // 
             this.dgvCategorias.AllowUserToAddRows = false;
             this.dgvCategorias.AllowUserToResizeRows = false;
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvCategorias.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvCategorias.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle15;
             this.dgvCategorias.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCategorias.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle23.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCategorias.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCategorias.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.dgvCategorias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvCategorias.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID_Categoria,
-            this.NomCategoria,
-            this.FechaCreacion,
-            this.ID_AlicuotaIVA,
-            this.AlicuotaIVA,
-            this.ID_Estado,
-            this.Estado,
+            this.id_categoria,
+            this.nombre,
+            this.fechaCreacion,
+            this.id_alicuotaIVA,
+            this.alicuotaIVA,
+            this.id_estado,
+            this.estado,
             this.btnEditar,
             this.btnEliminar});
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCategorias.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCategorias.DefaultCellStyle = dataGridViewCellStyle19;
             this.dgvCategorias.EnableHeadersVisualStyles = false;
             this.dgvCategorias.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgvCategorias.Location = new System.Drawing.Point(290, 99);
@@ -200,19 +200,19 @@
             this.dgvCategorias.Name = "dgvCategorias";
             this.dgvCategorias.ReadOnly = true;
             this.dgvCategorias.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCategorias.RowHeadersDefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCategorias.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
             this.dgvCategorias.RowHeadersVisible = false;
             this.dgvCategorias.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvCategorias.RowsDefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvCategorias.RowsDefaultCellStyle = dataGridViewCellStyle21;
             this.dgvCategorias.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.Control;
             this.dgvCategorias.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
             this.dgvCategorias.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
@@ -222,84 +222,6 @@
             this.dgvCategorias.TabIndex = 236;
             this.dgvCategorias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategorias_CellContentClick);
             this.dgvCategorias.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvCategorias_CellPainting);
-            // 
-            // ID_Categoria
-            // 
-            this.ID_Categoria.HeaderText = "ID";
-            this.ID_Categoria.Name = "ID_Categoria";
-            this.ID_Categoria.ReadOnly = true;
-            this.ID_Categoria.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ID_Categoria.Visible = false;
-            // 
-            // NomCategoria
-            // 
-            this.NomCategoria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.Black;
-            this.NomCategoria.DefaultCellStyle = dataGridViewCellStyle24;
-            this.NomCategoria.HeaderText = "Nombre";
-            this.NomCategoria.Name = "NomCategoria";
-            this.NomCategoria.ReadOnly = true;
-            this.NomCategoria.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.NomCategoria.Width = 80;
-            // 
-            // FechaCreacion
-            // 
-            this.FechaCreacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.FechaCreacion.HeaderText = "Fecha de creación";
-            this.FechaCreacion.Name = "FechaCreacion";
-            this.FechaCreacion.ReadOnly = true;
-            this.FechaCreacion.Width = 136;
-            // 
-            // ID_AlicuotaIVA
-            // 
-            this.ID_AlicuotaIVA.HeaderText = "ID AlicuotaIVA";
-            this.ID_AlicuotaIVA.Name = "ID_AlicuotaIVA";
-            this.ID_AlicuotaIVA.ReadOnly = true;
-            this.ID_AlicuotaIVA.Visible = false;
-            // 
-            // AlicuotaIVA
-            // 
-            this.AlicuotaIVA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.Color.Black;
-            this.AlicuotaIVA.DefaultCellStyle = dataGridViewCellStyle25;
-            this.AlicuotaIVA.HeaderText = "Alicuota IVA";
-            this.AlicuotaIVA.Name = "AlicuotaIVA";
-            this.AlicuotaIVA.ReadOnly = true;
-            this.AlicuotaIVA.Width = 98;
-            // 
-            // ID_Estado
-            // 
-            this.ID_Estado.HeaderText = "ID Estado";
-            this.ID_Estado.Name = "ID_Estado";
-            this.ID_Estado.ReadOnly = true;
-            this.ID_Estado.Visible = false;
-            // 
-            // Estado
-            // 
-            this.Estado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
-            this.Estado.Width = 73;
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.HeaderText = "";
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.ReadOnly = true;
-            this.btnEditar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.btnEditar.Width = 30;
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.HeaderText = "";
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.ReadOnly = true;
-            this.btnEliminar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.btnEliminar.Width = 30;
             // 
             // lblNomCategoria
             // 
@@ -417,6 +339,7 @@
             this.btnCrear.Text = "Crear";
             this.btnCrear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCrear.UseVisualStyleBackColor = false;
+            this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
             // panel1
             // 
@@ -435,6 +358,70 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(250, 405);
             this.panel1.TabIndex = 259;
+            // 
+            // id_categoria
+            // 
+            this.id_categoria.HeaderText = "ID";
+            this.id_categoria.Name = "id_categoria";
+            this.id_categoria.ReadOnly = true;
+            this.id_categoria.Visible = false;
+            // 
+            // nombre
+            // 
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.Black;
+            this.nombre.DefaultCellStyle = dataGridViewCellStyle17;
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // fechaCreacion
+            // 
+            this.fechaCreacion.HeaderText = "Fecha de creación";
+            this.fechaCreacion.Name = "fechaCreacion";
+            this.fechaCreacion.ReadOnly = true;
+            // 
+            // id_alicuotaIVA
+            // 
+            this.id_alicuotaIVA.HeaderText = "ID AlicuotaIVA";
+            this.id_alicuotaIVA.Name = "id_alicuotaIVA";
+            this.id_alicuotaIVA.ReadOnly = true;
+            this.id_alicuotaIVA.Visible = false;
+            // 
+            // alicuotaIVA
+            // 
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.Black;
+            this.alicuotaIVA.DefaultCellStyle = dataGridViewCellStyle18;
+            this.alicuotaIVA.HeaderText = "Alicuota IVA";
+            this.alicuotaIVA.Name = "alicuotaIVA";
+            this.alicuotaIVA.ReadOnly = true;
+            // 
+            // id_estado
+            // 
+            this.id_estado.HeaderText = "ID Estado";
+            this.id_estado.Name = "id_estado";
+            this.id_estado.ReadOnly = true;
+            this.id_estado.Visible = false;
+            // 
+            // estado
+            // 
+            this.estado.HeaderText = "Estado";
+            this.estado.Name = "estado";
+            this.estado.ReadOnly = true;
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.HeaderText = "";
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.ReadOnly = true;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.HeaderText = "";
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.ReadOnly = true;
             // 
             // frmCategorias
             // 
@@ -482,13 +469,13 @@
         private System.Windows.Forms.ComboBox cbAlicuotaIVA;
         private FontAwesome.Sharp.IconButton btnCrear;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Categoria;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NomCategoria;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaCreacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID_AlicuotaIVA;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AlicuotaIVA;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Estado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_categoria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechaCreacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_alicuotaIVA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn alicuotaIVA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_estado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn estado;
         private System.Windows.Forms.DataGridViewButtonColumn btnEditar;
         private System.Windows.Forms.DataGridViewButtonColumn btnEliminar;
     }

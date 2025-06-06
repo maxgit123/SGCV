@@ -47,6 +47,7 @@ namespace CapaPresentacion.Formularios.Usuarios
             // Se agregan al combobox de busqueda los encabezados visibles del dgv. 
             foreach (DataGridViewColumn columna in dgvUsuarios.Columns)
             {
+                // Si no es un ID o un boton
                 if (columna.Visible == true && columna.HeaderText != "")
                 {
                     cbBuscar.Items.Add(new OpcionCombo() { Valor = columna.Name, Texto = columna.HeaderText });
@@ -71,19 +72,21 @@ namespace CapaPresentacion.Formularios.Usuarios
             if (e.ColumnIndex < 0 || (dgvUsuarios.Columns[e.ColumnIndex].Name != "btnEditar" && dgvUsuarios.Columns[e.ColumnIndex].Name != "btnEliminar"))
                 return;
 
-            int indice = e.RowIndex;
+            int indiceFila = e.RowIndex;
 
-            if (e.ColumnIndex == dgvUsuarios.Columns["btnEditar"].Index)
+            //if (e.ColumnIndex == dgvUsuarios.Columns["btnEditar"].Index) // Usar este if si se usan columnas con orden dinamico o no se lo conoce
+            if (dgvUsuarios.Columns[e.ColumnIndex].Name == "btnEditar")
             {
-                lblIndice.Text = indice.ToString();
-                lblID_Usuario.Text = dgvUsuarios.Rows[indice].Cells["ID_Usuario"].Value.ToString();
+                lblIndice.Text = indiceFila.ToString();
+                lblID_Usuario.Text = dgvUsuarios.Rows[indiceFila].Cells["ID_Usuario"].Value.ToString();
 
-                txtDocumento.Text = dgvUsuarios.Rows[indice].Cells["Documento"].Value.ToString();
-                txtNombre.Text = dgvUsuarios.Rows[indice].Cells["Nombre"].Value.ToString();
-                txtApellido.Text = dgvUsuarios.Rows[indice].Cells["Apellido"].Value.ToString();
+                txtDocumento.Text = dgvUsuarios.Rows[indiceFila].Cells["Documento"].Value.ToString();
+                txtNombre.Text = dgvUsuarios.Rows[indiceFila].Cells["Nombre"].Value.ToString();
+                txtApellido.Text = dgvUsuarios.Rows[indiceFila].Cells["Apellido"].Value.ToString();
+
                 foreach (OpcionCombo oc in cbRol.Items)
                 {
-                    if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvUsuarios.Rows[indice].Cells["ID_Rol"].Value))
+                    if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells["ID_Rol"].Value))
                     {
                         int indice_combo = cbRol.Items.IndexOf(oc);
                         // Se selecciona el que encontro.
@@ -96,24 +99,28 @@ namespace CapaPresentacion.Formularios.Usuarios
                 HabilitarForm();
                 txtClave.Enabled = false;
             }
-            else if (e.ColumnIndex == dgvUsuarios.Columns["btnEliminar"].Index)
+            else if (dgvUsuarios.Columns[e.ColumnIndex].Name == "btnEliminar")
             {
-                if (MessageBox.Show("¿Desea eliminar al usuario " + dgvUsuarios.Rows[indice].Cells["Nombre"].Value.ToString() +
-                    "?", "Eliminar Usuario", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                // Si se presiona el boton de eliminar, se pregunta si se desea eliminar el usuario.
+                DialogResult respuestaEliminar = MessageBox.Show(
+                    $"¿Desea eliminar al usuario {dgvUsuarios.Rows[indiceFila].Cells["Nombre"].Value}?",
+                    "Eliminar Usuario", MessageBoxButtons.YesNo, MessageBoxIcon.Question
+                );
+
+                if (respuestaEliminar == DialogResult.No)
                     return;
 
                 // Se crea un nueva instancia de la que solo se necesita el ID del Cliente.
                 CE_Usuario oUsuario = new CE_Usuario()
                 {
-                    Id = Convert.ToInt32(dgvUsuarios.Rows[indice].Cells["ID_Usuario"].Value)
+                    Id = Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells["ID_Usuario"].Value)
                 };
 
                 bool respuesta = new CN_Usuario().Eliminar(oUsuario, out string mensaje);
 
+                // Si se elimino correctamente (Eliminar retorna respuesta bool) se elimina la fila del DGV.
                 if (respuesta)
-                    // Si se elimino correctamente (Eliminar retorna respuesta bool)
-                    // se elimina la fila del DGV.
-                    dgvUsuarios.Rows.RemoveAt(indice);
+                    dgvUsuarios.Rows.RemoveAt(indiceFila);
                 else
                     MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -156,6 +163,7 @@ namespace CapaPresentacion.Formularios.Usuarios
                     MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
+
                 MostrarListaUsuarios();
                 LimpiarForm();
                 DeshabilitarForm();
@@ -227,7 +235,7 @@ namespace CapaPresentacion.Formularios.Usuarios
         }
         private void LimpiarForm()
         {
-            // Se setea en -1 porque el indice empieza en 0.
+            // Se setea en -1 porque el indiceFila empieza en 0.
             lblIndice.Text = "-1";
             // Se setea en 0 para que el boton guardar sepa si debe Crear o Actualizar.
             lblID_Usuario.Text = "0";
