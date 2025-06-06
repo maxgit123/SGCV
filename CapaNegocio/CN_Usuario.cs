@@ -14,11 +14,11 @@ namespace CapaNegocio
         {
             return oCD_Usuario.Listar();
         }
-        public CE_Usuario Login(string documento, string clave)
+        public CE_Usuario Login(string documento, string clave, out string mensaje)
         {
             string claveHash = ClaveHash.ObtenerSha256(clave?.Trim());
 
-            return oCD_Usuario.Login(documento, claveHash);
+            return oCD_Usuario.Login(documento, claveHash, out mensaje);
         }
         public int Crear(CE_Usuario oUsuario, out string mensaje)
         {

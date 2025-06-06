@@ -1,4 +1,6 @@
-﻿namespace CapaEntidad
+﻿using System;
+
+namespace CapaEntidad
 {
     public class CE_Comercio
     {
@@ -6,11 +8,11 @@
         public string RazonSocial { get; set; }
         public string Cuit { get; set; }
         public string IngresosBrutos { get; set; }
-        public string InicioActividad { get; set; }
+        public DateTime InicioActividad { get; set; } 
         public int PuntoVenta { get; set; }
-        public string FechaActualizacion { get; set; }
         public string Telefono { get; set; }
         public string Correo { get; set; }
+        public DateTime FechaActualizacion { get; set; }
         public CE_Direccion oDireccion { get; set; }
         public CE_Localidad oLocalidad { get; set; }
         public CE_Provincia oProvincia { get; set; }

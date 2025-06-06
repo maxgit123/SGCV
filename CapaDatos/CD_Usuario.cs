@@ -11,14 +11,16 @@ namespace CapaDatos
         public List<CE_Usuario> Listar()
         {
             var lista = new List<CE_Usuario>();
+
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
-            using (SqlCommand cmd = new SqlCommand(@"
-                    SELECT u.id_usuario, u.documento, u.nombre, u.apellido, u.clave, u.fechaCreacion,
-                    r.id_rol, r.nombre AS rol_nombre,
-                    e.id_estado, e.nombre AS estado_nombre
-                    FROM Usuario u
-                    INNER JOIN cRol r ON r.id_rol = u.rol_id
-                    WHERE u.estado_id = 1;", oConexion))
+            using (SqlCommand cmd = new SqlCommand(
+                @"SELECT u.id_usuario, u.documento, u.nombre, u.apellido, u.clave, u.fechaCreacion,
+                r.id_rol, r.nombre AS rol_nombre,
+                e.id_estado, e.nombre AS estado_nombre
+                FROM Usuario u
+                INNER JOIN cRol r ON r.id_rol = u.rol_id
+                INNER JOIN cEstado e ON e.id_estado = u.estado_id
+                WHERE u.estado_id = 1;", oConexion))
             {
                 try
                 {
@@ -58,8 +60,9 @@ namespace CapaDatos
             }
             return lista;
         }
-        public CE_Usuario Login(string documento, string clave)
+        public CE_Usuario Login(string documento, string clave, out string mensaje)
         {
+            mensaje = string.Empty;
             CE_Usuario oUsuario = null;
 
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
@@ -76,6 +79,12 @@ namespace CapaDatos
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
+                        if (!reader.HasRows)
+                        {
+                            mensaje = "No se encontró ningún usuario con esas credenciales";
+                            return null;
+                        }
+
                         // Si el usuario existe se devuelve el objeto completo. Sino, null.
                         if (reader.Read())
                         {
@@ -101,12 +110,16 @@ namespace CapaDatos
                         }
                     }
                 }
-                catch (SqlException)
+                catch (SqlException ex)
                 {
-                    //string mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
-                    oUsuario = null;
+                    mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
+                    return null;
                 }
             }
+
+            if (oUsuario == null)
+                mensaje = "Error al leer los datos del usuario";
+
             return oUsuario;
         }
         public int Crear(CE_Usuario oUsuario, out string mensaje)
@@ -170,7 +183,7 @@ namespace CapaDatos
                 catch (SqlException ex)
                 {
                     mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
-                    respuesta = false;
+                    respuesta = false; // se puede eliminar esta linea, ya que respuesta ya es false por defecto
                 }
             }
             return respuesta;

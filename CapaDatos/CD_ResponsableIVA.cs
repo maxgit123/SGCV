@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 using CapaEntidad;
 
@@ -10,15 +9,16 @@ namespace CapaDatos
     {
         public List<CE_ResponsableIVA> Listar()
         {
-            List<CE_ResponsableIVA> lista = new List<CE_ResponsableIVA>();
+            var lista = new List<CE_ResponsableIVA>();
+
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
+            using (SqlCommand cmd = new SqlCommand(
+                @"SELECT id_responsableIVA, codigo, nombre
+                FROM cResponsableIVA
+                WHERE estado_id = 1;", oConexion))
             {
                 try
                 {
-                    string query = "SELECT * FROM cResponsableIVA;";
-                    SqlCommand cmd = new SqlCommand(query, oConexion)
-                    { CommandType = CommandType.Text };
-
                     oConexion.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -28,20 +28,16 @@ namespace CapaDatos
                             lista.Add(new CE_ResponsableIVA()
                             {
                                 Id = Convert.ToInt32(reader["id_responsableIVA"]),
+                                Codigo = Convert.ToInt32(reader["codigo"]),
                                 Nombre = reader["nombre"].ToString(),
                             });
                         }
-                        reader.Close();
                     }
                 }
-                catch (SqlException ex)
+                catch (SqlException)
                 {
+                    //mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
                     lista = new List<CE_ResponsableIVA>();
-                }
-                finally
-                {
-                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
-                        oConexion.Close();
                 }
             }
             return lista;

@@ -15,16 +15,14 @@ namespace CapaDatos
 
             List<CE_Proveedor> lista = new List<CE_Proveedor>();
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
+            using (SqlCommand cmd = new SqlCommand(@"
+                    SELECT p.id_proveedor, p.razonSocial, p.observacion, p.fechaCreacion, p.telefono, p.correo,
+                    e.nombre AS [estado]
+                    FROM Proveedor p
+                    INNER JOIN cEstado e ON e.id_estado = p.estado_id;", oConexion))
             {
                 try
                 {
-                    StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT p.id_proveedor,p.razonSocial,p.observacion,p.fechaCreacion,p.telefono,p.correo,e.nombre AS [estado] FROM Proveedor p");
-                    query.AppendLine("INNER JOIN cEstado e ON e.id_estado = p.estado_id;");
-
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
-                    { CommandType = CommandType.Text };
-
                     oConexion.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -45,20 +43,14 @@ namespace CapaDatos
                                 }
                             });
                         }
-                        reader.Close();
                     }
                 }
                 catch (SqlException ex)
                 {
+                    mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
                     lista = new List<CE_Proveedor>();
-                    mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
                     //Console.WriteLine("Error en Listar(): " + ex.Message);
                     //Log.Error("Error al listar proveedores", ex);
-                }
-                finally
-                {
-                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
-                        oConexion.Close();
                 }
             }
             return lista;
@@ -111,8 +103,8 @@ namespace CapaDatos
         }
         public bool Actualizar(CE_Proveedor oProveedor, out string mensaje)
         {
-            bool respuesta = false;
             mensaje = string.Empty;
+            bool respuesta = false;
 
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             {
@@ -138,8 +130,8 @@ namespace CapaDatos
                 }
                 catch (SqlException ex)
                 {
-                    respuesta = false;
                     mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
+                    respuesta = false;
                 }
             }
             return respuesta;

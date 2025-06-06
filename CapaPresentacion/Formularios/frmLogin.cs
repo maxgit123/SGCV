@@ -13,6 +13,15 @@ namespace CapaPresentacion.Formularios
         }
         private void btnIngresar_Click(object sender, EventArgs e)
         {
+            if (!CN_Conexion.VerificarConexion(out string errorMessage))
+            {
+                MessageBox.Show($"No se pudo conectar a la base de datos:\n\n{errorMessage}",
+                               "Error de Conexión",
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Error);
+                return;
+            }
+
             // Validacion de campos del formulario.
             if (string.IsNullOrWhiteSpace(txtDocumento.Text) || string.IsNullOrWhiteSpace(txtClave.Text))
             {
@@ -21,11 +30,12 @@ namespace CapaPresentacion.Formularios
             }
 
             // Procesamiento de inicio de sesión.
-            CE_Usuario oUsuario = new CN_Usuario().Login(txtDocumento.Text.Trim(), txtClave.Text.Trim());
+            CE_Usuario oUsuario = new CN_Usuario().Login(txtDocumento.Text.Trim(), txtClave.Text.Trim(), out string mensaje);
 
             if (oUsuario == null)
             {
-                MessageBox.Show("DNI y/o Clave inválidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //MessageBox.Show("DNI y/o Clave inválidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 

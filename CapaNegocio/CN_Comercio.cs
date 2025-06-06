@@ -1,4 +1,5 @@
-﻿//Lo que agregue:
+﻿using System;
+using System.Text;
 using CapaDatos;
 using CapaEntidad;
 
@@ -10,32 +11,58 @@ namespace CapaNegocio
         public CE_Comercio Leer()
         {
             return oCD_Comercio.Leer();
-        } //Retorna los datos que tiene la clase CD_Comercio de la capa de datos.
+        }
         public bool Actualizar(CE_Comercio oComercio, out string mensaje)
         {
-            mensaje = string.Empty;
+            var errores = new StringBuilder();
 
-            //Validaciones de campos del formulario.
-            if (oComercio.RazonSocial == "")
-                mensaje += "Ingrese la razon social.\n";
-            if (oComercio.Cuit == "")
-                mensaje += "Ingrese el CUIT.\n";
-            if (oComercio.IngresosBrutos == "")
-                mensaje += "Ingrese el número de ingresos brutos.\n";
-            //if (oComercio.oDireccion.NomCalle == "")
-            //    mensaje += "Ingrese el nombre de la calle.\n";
-            //if (oComercio.oDireccion.NumCalle == "")
-            //    mensaje += "Ingrese el número de la calle.\n";
-            //if (oComercio.oLocalidad.IdLocCP.ToString() == "")
-            //    mensaje += "Ingrese el codigo postal.\n";
-            //if (oComercio.oLocalidad.NomLocalidad == "")
-            //    mensaje += "Ingrese la localidad.\n";
-            //Va concatenando con saltos de linea los mensajes de error que surjan.
+            // Validaciones de campos del formulario.
+            if (string.IsNullOrWhiteSpace(oComercio.RazonSocial))
+                errores.AppendLine("Ingrese la razón social.\n");
 
-            if (mensaje == string.Empty)
-                return oCD_Comercio.Actualizar(oComercio, out mensaje);
-            else
+            if (string.IsNullOrWhiteSpace(oComercio.Cuit))
+                errores.AppendLine("Ingrese el CUIT.\n");
+
+            if (string.IsNullOrWhiteSpace(oComercio.IngresosBrutos))
+                errores.AppendLine("Ingrese el número de ingresos brutos.\n");
+
+            if (oComercio.InicioActividad == DateTime.MinValue)
+                errores.AppendLine("Ingrese la fecha de inicio de actividad.\n");
+
+            if (oComercio.PuntoVenta < 1)
+                errores.AppendLine("Ingrese un punto de venta válido.\n");
+
+            if (string.IsNullOrWhiteSpace(oComercio.Telefono))
+                errores.AppendLine("Ingrese un número de teléfono.\n");
+
+            if (string.IsNullOrWhiteSpace(oComercio.Correo))
+                errores.AppendLine("Ingrese un correo electrónico.\n");
+
+            if (string.IsNullOrWhiteSpace(oComercio.oDireccion.Calle))
+                errores.AppendLine("Ingrese el nombre de la calle.\n");
+
+            if (string.IsNullOrWhiteSpace(oComercio.oDireccion.Numero))
+                errores.AppendLine("Ingrese el número de la calle.\n");
+
+            if (string.IsNullOrWhiteSpace(oComercio.oLocalidad.Nombre))
+                errores.AppendLine("Ingrese la localidad.\n");
+
+            if (string.IsNullOrWhiteSpace(oComercio.oLocalidad.CodigoPostal))
+                errores.AppendLine("Ingrese el código postal.\n");
+
+            if (oComercio.oProvincia.Id < 1 || oComercio.oProvincia.Id > 23)
+                errores.AppendLine("Seleccione una provincia válida.\n");
+
+            if (oComercio.oResponsableIVA.Id < 1 || oComercio.oResponsableIVA.Id > 16)
+                errores.AppendLine("Seleccione un responsable de IVA válido.\n");
+
+            if (errores.Length > 0)
+            {
+                mensaje = "Se encontraron los siguientes errores:\n\n" + errores.ToString();
                 return false;
+            }
+            
+            return oCD_Comercio.Actualizar(oComercio, out mensaje);
         }
         public byte[] LeerLogo(out bool leido)
         {
@@ -43,6 +70,12 @@ namespace CapaNegocio
         }
         public bool ActualizarLogo(byte[] imagen, out string mensaje)
         {
+            if (imagen == null || imagen.Length == 0)
+            {
+                mensaje = "Seleccione una imagen válida.";
+                return false;
+            }
+
             return oCD_Comercio.ActualizarLogo(imagen, out mensaje);
         }
     }
