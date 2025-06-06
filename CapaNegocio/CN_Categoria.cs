@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using CapaDatos;
 using CapaEntidad;
 
@@ -13,27 +14,38 @@ namespace CapaNegocio
         }
         public int Crear(CE_Categoria oCategoria, out string mensaje)
         {
-            mensaje = string.Empty;
+            var errores = new StringBuilder();
 
-            if (oCategoria.Nombre == "")
-                mensaje += "Ingrese un nombre de categoria.\n";
+            if (string.IsNullOrWhiteSpace(oCategoria.Nombre))
+                errores.AppendLine("Ingrese un nombre de categoría.");
 
-            if (mensaje == string.Empty)
-                return oCD_Categoria.Crear(oCategoria, out mensaje);
-            else
+            if (oCategoria.oAlicuotaIVA == null || oCategoria.oAlicuotaIVA.Id < 1)
+                errores.AppendLine("Seleccione una alícuota IVA.");
+
+            if (errores.Length > 0)
+            {
+                mensaje = "Se encontraron los siguientes errores:\n\n" + errores.ToString();
                 return 0;
+            }
+            
+            return oCD_Categoria.Crear(oCategoria, out mensaje);
         }
         public bool Actualizar(CE_Categoria oCategoria, out string mensaje)
         {
-            mensaje = string.Empty;
+            var errores = new StringBuilder();
 
-            if (oCategoria.Nombre == "")
-                mensaje += "Ingrese un nombre de categoria.\n";
+            if (string.IsNullOrWhiteSpace(oCategoria.Nombre))
+                errores.AppendLine("Ingrese un nombre de categoría.");
 
-            if (mensaje == string.Empty)
-                return oCD_Categoria.Actualizar(oCategoria, out mensaje);
-            else
+            if (oCategoria.oAlicuotaIVA == null || oCategoria.oAlicuotaIVA.Id < 1)
+                errores.AppendLine("Seleccione una alícuota IVA.");
+
+            if (errores.Length > 0) { 
+                mensaje = "Se encontraron los siguientes errores:\n\n" + errores.ToString();
                 return false;
+            }
+            
+            return oCD_Categoria.Actualizar(oCategoria, out mensaje);
         }
         public bool Eliminar(CE_Categoria oCategoria, out string mensaje)
         {
