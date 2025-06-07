@@ -10,7 +10,7 @@
         public int Stock { get; set; }
         public int QuiebreStock { get; set; }
         public string FechaCreacion { get; set; }
-        public CE_Estado oEstado { get; set; }
         public CE_Categoria oCategoria { get; set; }
+        public CE_Estado oEstado { get; set; }
     }
 }

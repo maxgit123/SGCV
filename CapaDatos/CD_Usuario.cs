@@ -144,8 +144,8 @@ namespace CapaDatos
                 {
                     oConexion.Open();
                     cmd.ExecuteNonQuery();
-                    idUsuarioCreado = Convert.ToInt32(cmd.Parameters["@idUsuarioCreado"].Value);
                     mensaje = cmd.Parameters["@mensaje"].Value.ToString();
+                    idUsuarioCreado = Convert.ToInt32(cmd.Parameters["@idUsuarioCreado"].Value);
                 }
                 catch (SqlException ex)
                 {
@@ -170,15 +170,15 @@ namespace CapaDatos
                 cmd.Parameters.AddWithValue("@nombre", oUsuario.Nombre);
                 cmd.Parameters.AddWithValue("@apellido", oUsuario.Apellido);
                 cmd.Parameters.AddWithValue("@rol_id", oUsuario.oRol.IdRol);
-                cmd.Parameters.Add("@respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("@respuesta", SqlDbType.Bit).Direction = ParameterDirection.Output;
                 cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
                 
                 try
                 {
                     oConexion.Open();
                     cmd.ExecuteNonQuery();
-                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
                     mensaje = cmd.Parameters["@mensaje"].Value.ToString();
+                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
                 }
                 catch (SqlException ex)
                 {
@@ -198,7 +198,7 @@ namespace CapaDatos
             {
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@id", oUsuario.Id);
+                cmd.Parameters.AddWithValue("@id_usuario", oUsuario.Id);
                 cmd.Parameters.Add("@respuesta", SqlDbType.Bit).Direction = ParameterDirection.Output;
                 cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
 
@@ -229,7 +229,7 @@ namespace CapaDatos
                     SqlCommand cmd = new SqlCommand("usp_estadoUsuario", oConexion)
                     { CommandType = CommandType.StoredProcedure };
                     
-                    cmd.Parameters.AddWithValue("@id", oUsuario.Id);
+                    cmd.Parameters.AddWithValue("@id_usuario", oUsuario.Id);
                     cmd.Parameters.AddWithValue("@estado_id", oUsuario.oEstado.Id);
                     cmd.Parameters.Add("@respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("@mensaje", SqlDbType.VarChar,500).Direction = ParameterDirection.Output;
