@@ -54,6 +54,13 @@ namespace CapaPresentacion.Formularios.Usuarios
                 }
             }
 
+            //var columnasVisibles = dgvUsuarios.Columns
+            //    .Cast<DataGridViewColumn>()
+            //    .Where(c => c.Visible && !string.IsNullOrWhiteSpace(c.HeaderText))
+            //    .Select(c => new OpcionCombo { Valor = c.Name, Texto = c.HeaderText })
+            //    .ToList();
+            //cbBuscar.DataSource = columnasVisibles;
+
             cbBuscar.DisplayMember = "Texto";
             cbBuscar.ValueMember = "Valor";
 
@@ -74,7 +81,8 @@ namespace CapaPresentacion.Formularios.Usuarios
 
             int indiceFila = e.RowIndex;
 
-            //if (e.ColumnIndex == dgvUsuarios.Columns["btnEditar"].Index) // Usar este if si se usan columnas con orden dinamico o no se lo conoce
+            // Usar este if si se usan columnas con orden dinamico o no se lo conoce
+            //if (e.ColumnIndex == dgvUsuarios.Columns["btnEditar"].Index)
             if (dgvUsuarios.Columns[e.ColumnIndex].Name == "btnEditar")
             {
                 lblIndice.Text = indiceFila.ToString();
@@ -88,9 +96,9 @@ namespace CapaPresentacion.Formularios.Usuarios
                 {
                     if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells["ID_Rol"].Value))
                     {
-                        int indice_combo = cbRol.Items.IndexOf(oc);
+                        int indiceCombo = cbRol.Items.IndexOf(oc);
                         // Se selecciona el que encontro.
-                        cbRol.SelectedIndex = indice_combo;
+                        cbRol.SelectedIndex = indiceCombo;
                         // Cuando la relacion sea correcta se corta el foreach.
                         break;
                     }

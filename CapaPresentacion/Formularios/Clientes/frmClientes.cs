@@ -15,13 +15,19 @@ namespace CapaPresentacion.Formularios.Clientes
         }
         private void frmClientes_Load(object sender, EventArgs e)
         {
-            dgvClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-            dgvClientes.Columns["btnEditar"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvClientes.Columns["btnEditar"].Width = 30;
-
-            dgvClientes.Columns["btnEliminar"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvClientes.Columns["btnEliminar"].Width = 30;
+            foreach (DataGridViewColumn col in dgvClientes.Columns)
+            {
+                if (col.Name != "btnEditar" && col.Name != "btnEliminar")
+                {
+                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                }
+                else
+                {
+                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                    col.Width = 30;
+                    col.Resizable = DataGridViewTriState.False;
+                }
+            }
 
             List<CE_ResponsableIVA> listaRespIVA = new CN_ResponsableIVA().Listar();
 

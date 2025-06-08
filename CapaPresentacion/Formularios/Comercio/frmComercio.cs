@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -24,14 +25,14 @@ namespace CapaPresentacion.Formularios.Comercio
             else
                 picLogo.Image = null;
 
-            var listaRespIVA = new CN_ResponsableIVA().Listar();
+            List<CE_ResponsableIVA> listaRespIVA = new CN_ResponsableIVA().Listar();
             cbResponsableIVA.DataSource = listaRespIVA
                 .Select(r => new OpcionCombo { Valor = r.Id, Texto = r.Nombre })
                 .ToList();
             cbResponsableIVA.ValueMember = "Valor";
             cbResponsableIVA.DisplayMember = "Texto";
 
-            var listaProvincia = new CN_Provincia().Listar();
+            List<CE_Provincia> listaProvincia = new CN_Provincia().Listar();
             cbProvincia.DataSource = listaProvincia
                 .Select(p => new OpcionCombo { Valor = p.Id, Texto = p.Nombre })
                 .ToList();
