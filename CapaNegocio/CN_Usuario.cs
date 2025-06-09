@@ -40,7 +40,7 @@ namespace CapaNegocio
             // Si se encontraron errores, se construye el mensaje de error.
             if (errores.Length > 0)
             {
-                mensaje = "Se encontraron los siguientes errores:\n\n" + errores.ToString();
+                mensaje = $"Se encontraron los siguientes errores:\n\n {errores}";
                 return 0;
             }
 

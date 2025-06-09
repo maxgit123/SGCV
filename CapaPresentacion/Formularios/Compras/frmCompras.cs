@@ -16,6 +16,7 @@ namespace CapaPresentacion.Formularios.Compras
         private void frmCompras_Load(object sender, EventArgs e)
         {
             dtpPedido.Value = DateTime.Now;
+            dtpEntrega.Value = DateTime.Now;
         }
         private void dgvProductos_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {

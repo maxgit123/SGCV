@@ -71,7 +71,6 @@ namespace CapaDatos
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@descripcion", oProducto.Descripcion);
-                cmd.Parameters.AddWithValue("@stock", oProducto.Stock);
                 cmd.Parameters.AddWithValue("@quiebreStock", oProducto.QuiebreStock);
                 cmd.Parameters.AddWithValue("@categoria_id", oProducto.oCategoria.Id);
                 cmd.Parameters.Add("@idProductoCreado", SqlDbType.Int).Direction = ParameterDirection.Output;

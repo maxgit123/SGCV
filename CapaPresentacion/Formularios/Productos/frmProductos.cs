@@ -10,6 +10,7 @@ namespace CapaPresentacion.Formularios.Productos
 {
     public partial class frmProductos : Form
     {
+        private int idProductoSeleccionado = 0;
         public frmProductos()
         {
             InitializeComponent();
@@ -33,7 +34,6 @@ namespace CapaPresentacion.Formularios.Productos
                     col.Resizable = DataGridViewTriState.False;
                 }
             }
-            
 
             List<CE_Categoria> listaCategoria = new CN_Categoria().Listar();
             cbCategoria.DataSource = listaCategoria
@@ -78,12 +78,10 @@ namespace CapaPresentacion.Formularios.Productos
 
             if (dgvProductos.Columns[e.ColumnIndex].Name == "btnEditar")
             {
-                lblIndice.Text = indiceFila.ToString();
-                lblID_Producto.Text = dgvProductos.Rows[indiceFila].Cells["id_producto"].Value.ToString();
-
+                idProductoSeleccionado = Convert.ToInt32(dgvProductos.Rows[indiceFila].Cells["id_producto"].Value);
                 txtCodigo.Text = dgvProductos.Rows[indiceFila].Cells["codigo"].Value?.ToString() ?? "";
                 txtDescripcion.Text = dgvProductos.Rows[indiceFila].Cells["descripcion"].Value.ToString();
-                txtQuiebreStock.Text = dgvProductos.Rows[indiceFila].Cells["quiebreStock"].Value.ToString();
+                nudQuiebreStock.Value = Convert.ToInt32(dgvProductos.Rows[indiceFila].Cells["quiebreStock"].Value);
                 
                 foreach (OpcionCombo oc in cbCategoria.Items)
                 {
@@ -124,10 +122,10 @@ namespace CapaPresentacion.Formularios.Productos
         {
             CE_Producto oProducto = new CE_Producto()
             {
-                Id = Convert.ToInt32(lblID_Producto.Text),
+                Id = idProductoSeleccionado,
                 Codigo = txtCodigo.Text.Trim(),
-                Descripcion = txtCodigo.Text.Trim(),
-                QuiebreStock = Convert.ToInt32(txtQuiebreStock.Text.Trim()),
+                Descripcion = txtDescripcion.Text.Trim(),
+                QuiebreStock = Convert.ToInt32(nudQuiebreStock.Value),
                 oCategoria = new CE_Categoria()
                 {
                     Id = Convert.ToInt32(((OpcionCombo)cbCategoria.SelectedItem).Valor)
@@ -229,11 +227,10 @@ namespace CapaPresentacion.Formularios.Productos
         }
         private void LimpiarForm()
         {
-            lblIndice.Text = "-1"; //Se setea en -1 xq el indice empieza en 0.
-            lblID_Producto.Text = "0"; //Se setea en 0 para que el boton guardar sepa si debe crear o actualizar.
+            idProductoSeleccionado = 0;
             txtCodigo.Clear();
             txtDescripcion.Clear();
-            txtQuiebreStock.Clear();
+            nudQuiebreStock.Value = nudQuiebreStock.Minimum;
             cbCategoria.SelectedIndex = 0;
             txtCodigo.Select();
         }
@@ -241,7 +238,7 @@ namespace CapaPresentacion.Formularios.Productos
         {
             txtCodigo.Enabled = true;
             txtDescripcion.Enabled = true;
-            txtQuiebreStock.Enabled = true;
+            nudQuiebreStock.Enabled = true;
             cbCategoria.Enabled = true;
             btnGuardar.Enabled = true;
             btnCancelar.Enabled = true;
@@ -250,7 +247,7 @@ namespace CapaPresentacion.Formularios.Productos
         {
             txtCodigo.Enabled = false;
             txtDescripcion.Enabled = false;
-            txtQuiebreStock.Enabled = false;
+            nudQuiebreStock.Enabled = false;
             cbCategoria.Enabled = false;
             btnGuardar.Enabled = false;
             btnCancelar.Enabled = false;

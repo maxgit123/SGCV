@@ -9,6 +9,7 @@ namespace CapaPresentacion.Formularios.Usuarios
 {
     public partial class frmUsuarios : Form
     {
+        private int idUsuarioSeleccionado = 0;
         public frmUsuarios()
         {
             InitializeComponent();
@@ -85,16 +86,14 @@ namespace CapaPresentacion.Formularios.Usuarios
             //if (e.ColumnIndex == dgvUsuarios.Columns["btnEditar"].Index)
             if (dgvUsuarios.Columns[e.ColumnIndex].Name == "btnEditar")
             {
-                lblIndice.Text = indiceFila.ToString();
-                lblID_Usuario.Text = dgvUsuarios.Rows[indiceFila].Cells["ID_Usuario"].Value.ToString();
-
-                txtDocumento.Text = dgvUsuarios.Rows[indiceFila].Cells["Documento"].Value.ToString();
-                txtNombre.Text = dgvUsuarios.Rows[indiceFila].Cells["Nombre"].Value.ToString();
-                txtApellido.Text = dgvUsuarios.Rows[indiceFila].Cells["Apellido"].Value.ToString();
+                idUsuarioSeleccionado = Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells["id_usuario"].Value);
+                txtDocumento.Text = dgvUsuarios.Rows[indiceFila].Cells["documento"].Value.ToString();
+                txtNombre.Text = dgvUsuarios.Rows[indiceFila].Cells["nombre"].Value.ToString();
+                txtApellido.Text = dgvUsuarios.Rows[indiceFila].Cells["apellido"].Value.ToString();
 
                 foreach (OpcionCombo oc in cbRol.Items)
                 {
-                    if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells["ID_Rol"].Value))
+                    if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells["id_rol"].Value))
                     {
                         int indiceCombo = cbRol.Items.IndexOf(oc);
                         // Se selecciona el que encontro.
@@ -111,7 +110,7 @@ namespace CapaPresentacion.Formularios.Usuarios
             {
                 // Si se presiona el boton de eliminar, se pregunta si se desea eliminar el usuario.
                 DialogResult respuestaEliminar = MessageBox.Show(
-                    $"¿Desea eliminar al usuario {dgvUsuarios.Rows[indiceFila].Cells["Nombre"].Value}?",
+                    $"¿Desea eliminar al usuario {dgvUsuarios.Rows[indiceFila].Cells["nombre"].Value}?",
                     "Eliminar Usuario", MessageBoxButtons.YesNo, MessageBoxIcon.Question
                 );
 
@@ -121,7 +120,7 @@ namespace CapaPresentacion.Formularios.Usuarios
                 // Se crea un nueva instancia de la que solo se necesita el ID del Cliente.
                 CE_Usuario oUsuario = new CE_Usuario()
                 {
-                    Id = Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells["ID_Usuario"].Value)
+                    Id = Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells["id_usuario"].Value)
                 };
 
                 bool respuesta = new CN_Usuario().Eliminar(oUsuario, out string mensaje);
@@ -137,7 +136,7 @@ namespace CapaPresentacion.Formularios.Usuarios
         {
             CE_Usuario oUsuario = new CE_Usuario()
             {
-                Id = Convert.ToInt32(lblID_Usuario.Text),
+                Id = idUsuarioSeleccionado,
                 Documento = txtDocumento.Text.Trim(),
                 Nombre = txtNombre.Text.Trim(),
                 Apellido = txtApellido.Text.Trim(),
@@ -243,10 +242,8 @@ namespace CapaPresentacion.Formularios.Usuarios
         }
         private void LimpiarForm()
         {
-            // Se setea en -1 porque el indiceFila empieza en 0.
-            lblIndice.Text = "-1";
             // Se setea en 0 para que el boton guardar sepa si debe Crear o Actualizar.
-            lblID_Usuario.Text = "0";
+            idUsuarioSeleccionado = 0;
 
             // Se recorre el panel de formulario y se limpian los TextBox.
             foreach (Control control in pnlFormUsuario.Controls)
