@@ -60,7 +60,7 @@ namespace CapaPresentacion.Formularios.Clientes
         }
         private void dgvClientes_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            PintarDGV.PintarbtnEditarEliminar(sender, e, "btnEditar", "btnEliminar");
+            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, "btnEditar", "btnEliminar");
         }
         private void dgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

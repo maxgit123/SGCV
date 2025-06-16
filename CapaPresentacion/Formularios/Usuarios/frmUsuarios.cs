@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
@@ -16,64 +17,19 @@ namespace CapaPresentacion.Formularios.Usuarios
         }
         private void frmUsuarios_Load(object sender, EventArgs e)
         {
-            // Se configura el DataGridView para que ajuste las columnas al contenido y los botones tengan un tamaño fijo.
-            foreach (DataGridViewColumn col in dgvUsuarios.Columns)
-            {
-                if (col.Name != "btnEditar" && col.Name != "btnEliminar")
-                {
-                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                }
-                else
-                {
-                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                    col.Width = 30;
-                    col.Resizable = DataGridViewTriState.False;
-                }
-            }
+            UtilidadesDGV.Configurar(dgvUsuarios);
 
-            List<CE_Rol> listaRol = new CN_Rol().Listar();
+            UtilidadesCB.Cargar(cbRol, new CN_Rol().Listar(), r => r.IdRol, r => r.Nombre);
 
-            foreach (CE_Rol item in listaRol)
-            {
-                cbRol.Items.Add(new OpcionCombo() { Valor = item.IdRol, Texto = item.Nombre });
-            }
+            UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvUsuarios, "apellido");
 
-            cbRol.DisplayMember = "Texto";
-            cbRol.ValueMember = "Valor";
-
-            // Solo selecciona el primer item del combobox si hay items.
-            if (cbRol.Items.Count > 0)
-                cbRol.SelectedIndex = 0;
-
-            // Se agregan al combobox de busqueda los encabezados visibles del dgv. 
-            foreach (DataGridViewColumn columna in dgvUsuarios.Columns)
-            {
-                // Si no es un ID o un boton
-                if (columna.Visible == true && columna.HeaderText != "")
-                {
-                    cbBuscar.Items.Add(new OpcionCombo() { Valor = columna.Name, Texto = columna.HeaderText });
-                }
-            }
-
-            //var columnasVisibles = dgvUsuarios.Columns
-            //    .Cast<DataGridViewColumn>()
-            //    .Where(c => c.Visible && !string.IsNullOrWhiteSpace(c.HeaderText))
-            //    .Select(c => new OpcionCombo { Valor = c.Name, Texto = c.HeaderText })
-            //    .ToList();
-            //cbBuscar.DataSource = columnasVisibles;
-
-            cbBuscar.DisplayMember = "Texto";
-            cbBuscar.ValueMember = "Valor";
-
-            if (cbBuscar.Items.Count > 0)
-                cbBuscar.SelectedIndex = 0;
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaUsuarios, pnlFormUsuario, txtBuscar);
 
             MostrarListaUsuarios();
-            DeshabilitarForm();
         }
         private void dgvUsuarios_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            PintarDGV.PintarbtnEditarEliminar(sender, e, "btnEditar", "btnEliminar");
+            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, "btnEditar", "btnEliminar");
         }
         private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -103,7 +59,7 @@ namespace CapaPresentacion.Formularios.Usuarios
                     }
                 }
 
-                HabilitarForm();
+                UtilidadesForm.AlternarPanelHabilitado(pnlFormUsuario, pnlListaUsuarios, txtDocumento);
                 txtClave.Enabled = false;
             }
             else if (dgvUsuarios.Columns[e.ColumnIndex].Name == "btnEliminar")
@@ -134,6 +90,9 @@ namespace CapaPresentacion.Formularios.Usuarios
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (!ValidarEntradas())
+                return;
+
             CE_Usuario oUsuario = new CE_Usuario()
             {
                 Id = idUsuarioSeleccionado,
@@ -146,8 +105,11 @@ namespace CapaPresentacion.Formularios.Usuarios
                     IdRol = Convert.ToInt32(((OpcionCombo)cbRol.SelectedItem).Valor)
                 }
             };
-            
-            if (oUsuario.Id == 0)
+
+            //string mensaje;
+            //bool operacionExitosa;
+
+            if (idUsuarioSeleccionado == 0)
             {
                 int idUsuarioCreado = new CN_Usuario().Crear(oUsuario, out string mensaje);
 
@@ -156,10 +118,6 @@ namespace CapaPresentacion.Formularios.Usuarios
                     MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
-
-                MostrarListaUsuarios();
-                LimpiarForm();
-                DeshabilitarForm();
             }
             else
             {
@@ -170,52 +128,29 @@ namespace CapaPresentacion.Formularios.Usuarios
                     MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
-
-                MostrarListaUsuarios();
-                LimpiarForm();
-                DeshabilitarForm();
             }
+
+            MostrarListaUsuarios();
+            LimpiarForm();
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaUsuarios, pnlFormUsuario, txtBuscar);
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             LimpiarForm();
-            DeshabilitarForm();
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaUsuarios, pnlFormUsuario, txtBuscar);
         }
         private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
         {
-            if (dgvUsuarios.Rows.Count == 0)
-                return;
-
-            string textoFiltro = txtBuscar.Text.Trim().ToUpper();
-            string columnaFiltro = ((OpcionCombo)cbBuscar.SelectedItem).Valor.ToString();
-
-            foreach (DataGridViewRow row in dgvUsuarios.Rows)
-            {
-                if (row.Cells[columnaFiltro].Value != null &&
-                    row.Cells[columnaFiltro].Value.ToString().Trim().ToUpper().Contains(textoFiltro))
-                {
-                    row.Visible = true;
-                }
-                else
-                {
-                    row.Visible = false;
-                }
-            }
+            UtilidadesDGV.AplicarFiltro(dgvUsuarios, cbBuscar, txtBuscar.Text);
         }
         private void btnLimpiarBuscar_Click(object sender, EventArgs e)
         {
-            txtBuscar.Clear();
-
-            // Se elimina el filtro.
-            foreach (DataGridViewRow row in dgvUsuarios.Rows)
-            {
-                row.Visible = true;
-            }
+            UtilidadesDGV.QuitarFiltro(dgvUsuarios, txtBuscar);
         }
         private void btnCrear_Click(object sender, EventArgs e)
         {
-            LimpiarForm();
-            HabilitarForm();
+            idUsuarioSeleccionado = 0;
+            UtilidadesForm.AlternarPanelHabilitado(pnlFormUsuario, pnlListaUsuarios, txtDocumento);
         }
         private void MostrarListaUsuarios()
         {
@@ -244,81 +179,46 @@ namespace CapaPresentacion.Formularios.Usuarios
         {
             // Se setea en 0 para que el boton guardar sepa si debe Crear o Actualizar.
             idUsuarioSeleccionado = 0;
-
-            // Se recorre el panel de formulario y se limpian los TextBox.
-            foreach (Control control in pnlFormUsuario.Controls)
-            {
-                if (control is TextBox txt)
-                {
-                    txt.Clear();
-                }
-            }
-
-            cbRol.SelectedIndex = 0;
-            txtDocumento.Select();
-        }
-        private void HabilitarForm()
-        {
-            foreach (Control ctrl in pnlFormUsuario.Controls)
-            {
-                if (ctrl.EsInteractivo())
-                    ctrl.Enabled = true;
-            }
-
-            pnlFormUsuario.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            pnlListaUsuarios.BackColor = System.Drawing.Color.Lavender;
-
-            foreach (Control c in pnlListaUsuarios.Controls)
-            {
-                if (c.EsInteractivo())
-                    c.Enabled = false;
-            }
-
-            txtDocumento.Select();
-
-            //pnlFormUsuario.Enabled = true;
-
-            //txtDocumento.Enabled = true;
-            //txtNombre.Enabled = true;
-            //txtApellido.Enabled = true;
-            //txtClave.Enabled = true;
-            //cbRol.Enabled = true;
-            //btnGuardar.Enabled = true;
-            //btnCancelar.Enabled = true;
-        }
-        private void DeshabilitarForm()
-        {
-            foreach (Control c in pnlFormUsuario.Controls)
-            {
-                if (c.EsInteractivo())
-                    c.Enabled = false;
-            }
-
-            pnlFormUsuario.BackColor = System.Drawing.Color.Lavender;
-            pnlListaUsuarios.BackColor = System.Drawing.SystemColors.ActiveCaption;
-
-            foreach (Control c in pnlListaUsuarios.Controls)
-            {
-                if (c.EsInteractivo())
-                    c.Enabled = true;
-            }
-
-
-            txtBuscar.Select();
-
-            //pnlFormUsuario.Enabled = false;
-
-            //txtDocumento.Enabled = false;
-            //txtNombre.Enabled = false;
-            //txtApellido.Enabled = false;
-            //txtClave.Enabled = false;
-            //cbRol.Enabled = false;
-            //btnGuardar.Enabled = false;
-            //btnCancelar.Enabled = false;
+            UtilidadesForm.ReiniciarControles(pnlFormUsuario);
         }
         private void pnlListaUsuarios_Resize(object sender, EventArgs e)
         {
             lblListaUsuarios.CentrarH();
+        }
+        private bool ValidarEntradas()
+        {
+            var errores = new StringBuilder();
+
+            if (string.IsNullOrWhiteSpace(txtDocumento.Text))
+                errores.AppendLine("Ingrese un nº de documento.");
+
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+                errores.AppendLine("Ingrese el nombre del usuario.");
+
+            if (string.IsNullOrWhiteSpace(txtApellido.Text))
+                errores.AppendLine("Ingrese el apellido del usuario.");
+
+            if (idUsuarioSeleccionado == 0 && string.IsNullOrWhiteSpace(txtClave.Text))
+                errores.AppendLine("Ingrese la clave del usuario.");
+
+            if (!(cbRol.SelectedItem is OpcionCombo))
+                errores.AppendLine("Seleccione el rol del usuario.");
+
+            if (errores.Length > 0)
+            {
+                MessageBox.Show(
+                    $"Se encontraron los siguientes errores:\n\n {errores}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning
+                );
+                return false;
+            }
+
+            return true;
+        }
+        private bool ConfirmarAccion(string mensaje)
+        {
+            return MessageBox.Show(mensaje, "Confirmación", 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
         }
     }
 }

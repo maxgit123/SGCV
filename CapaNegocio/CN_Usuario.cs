@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using CapaDatos;
 using CapaEntidad;
@@ -37,6 +38,12 @@ namespace CapaNegocio
             if (string.IsNullOrWhiteSpace(oUsuario.Clave))
                 errores.AppendLine("Ingrese la clave del usuario.");
 
+            if (oUsuario.oRol == null || oUsuario.oRol.IdRol <= 0)
+                errores.AppendLine("Seleccione un rol válido.");
+
+            if (oUsuario.Documento.Length != 8 || !oUsuario.Documento.All(char.IsDigit))
+                errores.AppendLine("El documento debe tener ocho (8) caracteres numéricos.");
+
             // Si se encontraron errores, se construye el mensaje de error.
             if (errores.Length > 0)
             {
@@ -63,6 +70,9 @@ namespace CapaNegocio
 
             if (string.IsNullOrWhiteSpace(oUsuario.Apellido))
                 errores.AppendLine("Ingrese el apellido del usuario.");
+
+            if (oUsuario.oRol == null || oUsuario.oRol.IdRol <= 0)
+                errores.AppendLine("Seleccione un rol válido.");
 
             // Si se encontraron errores, se construye el mensaje de error.
             if (errores.Length > 0)

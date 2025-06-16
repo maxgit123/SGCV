@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms;
-
-namespace CapaPresentacion.Utilidades
+﻿namespace CapaPresentacion.Utilidades
 {
     public class OpcionCombo
     {
