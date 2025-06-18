@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
@@ -9,149 +10,117 @@ namespace CapaPresentacion.Formularios.Proveedores
 {
     public partial class frmProveedores : Form
     {
+        private int idProveedorSeleccionado = 0;
+        private static class NombreColumna
+        {
+            public const string ID_PROVEEDOR = "ID_Proveedor";
+            public const string RAZON_SOCIAL = "RazonSocial";
+            public const string OBSERVACION = "Observacion";
+            public const string FECHA_CREACION = "FechaCreacion";
+            public const string TELEFONO = "Telefono";
+            public const string CORREO = "Correo";
+            public const string ESTADO_ID = "ID_Estado";
+            public const string ESTADO_NOMBRE = "NombreEstado";
+            public const string BTN_EDITAR = "btnEditar";
+            public const string BTN_ELIMINAR = "btnEliminar";
+        }
         public frmProveedores()
         {
             InitializeComponent();
         }
         private void frmProveedores_Load(object sender, EventArgs e)
         {
-            foreach (DataGridViewColumn columna in dgvProveedores.Columns)
-            {
-                if (columna.Visible == true && columna.HeaderText != "")
-                {
-                    cbBuscar.Items.Add(new OpcionCombo() { Valor = columna.Name, Texto = columna.HeaderText });
-                }
-            }
-            cbBuscar.DisplayMember = "Texto";
-            cbBuscar.ValueMember = "Valor";
-            cbBuscar.SelectedIndex = 0;
+            UtilidadesDGV.Configurar(dgvProveedores);
 
-            MostrarListaProveedores();
+            UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvProveedores, NombreColumna.RAZON_SOCIAL);
+
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaProveedores, pnlFormProveedor, txtBuscar);
+
+            ListarProveedoresEnDGV();
         }
         private void dgvProveedores_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, "btnEditar", "btnEliminar");
+            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, NombreColumna.BTN_EDITAR, NombreColumna.BTN_ELIMINAR);
         }
         private void dgvProveedores_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex < 0 || (dgvProveedores.Columns[e.ColumnIndex].Name != "btnEditar" && dgvProveedores.Columns[e.ColumnIndex].Name != "btnEliminar"))
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+
+            string nombreColumna = dgvProveedores.Columns[e.ColumnIndex].Name;
+            if (nombreColumna != NombreColumna.BTN_EDITAR && nombreColumna != NombreColumna.BTN_ELIMINAR)
                 return;
 
-            if (dgvProveedores.Columns[e.ColumnIndex].Name == "btnEditar")
+            if (nombreColumna == NombreColumna.BTN_EDITAR)
             {
-                //Labels de ayuda para ver el indice del DGV y el ID del Proveedor.
-                lblIndice.Text = e.RowIndex.ToString();
-                lblID_Proveedor.Text = dgvProveedores.Rows[e.RowIndex].Cells["ID_Proveedor"].Value.ToString();
-
-                txtRazonSocial.Text = dgvProveedores.Rows[e.RowIndex].Cells["RazonSocial"].Value.ToString();
-                txtObservacion.Text = dgvProveedores.Rows[e.RowIndex].Cells["Observacion"].Value.ToString();
-                txtTelefono.Text = dgvProveedores.Rows[e.RowIndex].Cells["Telefono"].Value.ToString();
-                txtCorreo.Text = dgvProveedores.Rows[e.RowIndex].Cells["Correo"].Value.ToString();
-
-                HabilitarForm();
+                CargarDatosParaEdicion(e.RowIndex);
+                ConfigurarFormularioParaEdicion(false);
             }
-            else if (dgvProveedores.Columns[e.ColumnIndex].Name == "btnEliminar")
+            else if (nombreColumna == NombreColumna.BTN_ELIMINAR)
             {
-                if (MessageBox.Show("¿Desea eliminar al proveedor " + dgvProveedores.Rows[e.RowIndex].Cells["RazonSocial"].Value.ToString() + "?", "Eliminar Proveedor", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    string mensaje = string.Empty;
-
-                    CE_Proveedor oProveedor = new CE_Proveedor()
-                    {
-                        Id = Convert.ToInt32(dgvProveedores.Rows[e.RowIndex].Cells["ID_Proveedor"].Value)
-                    };
-
-                    bool respuesta = new CN_Proveedor().Eliminar(oProveedor, out mensaje);
-
-                    if (respuesta)
-                        dgvProveedores.Rows.RemoveAt(Convert.ToInt32(e.RowIndex));
-                    else
-                        MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
+                EliminarProveedor(e.RowIndex);
             }
+        }
+        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
+        {
+            UtilidadesDGV.AplicarFiltro(dgvProveedores, cbBuscar, txtBuscar.Text);
+        }
+        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
+        {
+            UtilidadesDGV.QuitarFiltro(dgvProveedores, txtBuscar);
+        }
+        private void btnCrear_Click(object sender, EventArgs e)
+        {
+            ConfigurarFormularioParaEdicion(true);
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            string mensaje = string.Empty;
+            if (!ValidarCampos()) return;
 
             CE_Proveedor oProveedor = new CE_Proveedor()
             {
-                Id = Convert.ToInt32(lblID_Proveedor.Text),
+                Id = idProveedorSeleccionado,
                 Observacion = txtObservacion.Text.Trim(),
                 RazonSocial = txtRazonSocial.Text.Trim(),
                 Telefono = txtTelefono.Text.Trim(),
                 Correo = txtCorreo.Text.Trim()
             };
 
-            if (oProveedor.Id == 0)
+            string mensaje;
+            bool operacionExitosa;
+
+            if (idProveedorSeleccionado == 0)
             {
-                int idProveedorCreado = new CN_Proveedor().Crear(oProveedor, out mensaje);
-
-                if (idProveedorCreado == 0)
-                {
-                    MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-
-                MostrarListaProveedores();
-                LimpiarForm();
-                DeshabilitarForm();     
+                operacionExitosa = new CN_Proveedor().Crear(oProveedor, out mensaje) != 0;
             }
             else
             {
-                bool resultado = new CN_Proveedor().Actualizar(oProveedor, out mensaje);
+                operacionExitosa = new CN_Proveedor().Actualizar(oProveedor, out mensaje);
 
-                if (!resultado)
-                {
-                    MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-                MostrarListaProveedores();
-                LimpiarForm();
-                DeshabilitarForm();
             }
+
+            if (!operacionExitosa)
+            {
+                MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            ListarProveedoresEnDGV();
+            LimpiarForm();
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaProveedores, pnlFormProveedor, txtBuscar);
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             LimpiarForm();
-            DeshabilitarForm();
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaProveedores, pnlFormProveedor, txtBuscar);
         }
-        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode != Keys.Enter || dgvProveedores.Rows.Count < 0)
-                return;
-
-            string columnaFiltro = ((OpcionCombo)cbBuscar.SelectedItem).Valor.ToString();
-            foreach (DataGridViewRow row in dgvProveedores.Rows)
-            {
-                if (row.Cells[columnaFiltro].Value.ToString().Trim().ToUpper().Contains(txtBuscar.Text.Trim().ToUpper()))
-                    //Se hace el filtro por la columnaFiltro si contiene lo que se encuentra en txtBuscar.
-                    row.Visible = true;
-                else
-                    row.Visible = false;
-            }
-        }
-        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
-        {
-            txtBuscar.Text = "";
-            foreach (DataGridViewRow row in dgvProveedores.Rows)
-            {
-                row.Visible = true;
-            }
-        }
-        private void btnCrear_Click(object sender, EventArgs e)
-        {
-            LimpiarForm();
-            HabilitarForm();
-        }
-        private void MostrarListaProveedores()
+        private void ListarProveedoresEnDGV()
         {
             dgvProveedores.Rows.Clear();
             List<CE_Proveedor> listaProveedor = new CN_Proveedor().Listar(out string mensaje);
 
             if (!string.IsNullOrEmpty(mensaje))
             {
-                MessageBox.Show(mensaje, "Error al listar proveedores", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(mensaje, "Error al listar proveedores", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -172,31 +141,74 @@ namespace CapaPresentacion.Formularios.Proveedores
         }
         private void LimpiarForm()
         {
-            lblIndice.Text = "-1";
-            lblID_Proveedor.Text = "0";
-            txtRazonSocial.Text = "";
-            txtObservacion.Text = "";
-            txtTelefono.Text = "";
-            txtCorreo.Text = "";
-            txtRazonSocial.Select();
+            idProveedorSeleccionado = 0;
+            UtilidadesForm.ReiniciarControles(pnlFormProveedor);
         }
-        private void HabilitarForm()
+        private bool ValidarCampos()
         {
-            txtRazonSocial.Enabled = true;
-            txtObservacion.Enabled = true;
-            txtTelefono.Enabled = true;
-            txtCorreo.Enabled = true;
-            btnGuardar.Enabled = true;
-            btnCancelar.Enabled = true;
+            var errores = new StringBuilder();
+
+            if (string.IsNullOrWhiteSpace(txtRazonSocial.Text))
+                errores.AppendLine("Ingrese la razón social del proveedor.");
+
+            // Si se ingreso un telfono o un correo, se agrega validaciones adicionales.
+
+            if (errores.Length > 0)
+            {
+                MessageBox.Show(
+                    $"Se encontraron los siguientes errores:\n\n {errores}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning
+                );
+                return false;
+            }
+
+            return true;
         }
-        private void DeshabilitarForm()
+        private void ConfigurarFormularioParaEdicion(bool esNuevo)
         {
-            txtRazonSocial.Enabled = false;
-            txtObservacion.Enabled = false;
-            txtTelefono.Enabled = false;
-            txtCorreo.Enabled = false;
-            btnGuardar.Enabled = false;
-            btnCancelar.Enabled = false;
+            if (esNuevo)
+            {
+                idProveedorSeleccionado = 0;
+                LimpiarForm();
+            }
+            UtilidadesForm.AlternarPanelHabilitado(pnlFormProveedor, pnlListaProveedores, txtRazonSocial);
+        }
+        private void CargarDatosParaEdicion(int indiceFila)
+        {
+            idProveedorSeleccionado = Convert.ToInt32(dgvProveedores.Rows[indiceFila].Cells[NombreColumna.ID_PROVEEDOR].Value);
+            txtRazonSocial.Text = dgvProveedores.Rows[indiceFila].Cells[NombreColumna.RAZON_SOCIAL].Value.ToString();
+            txtObservacion.Text = dgvProveedores.Rows[indiceFila].Cells[NombreColumna.OBSERVACION].Value.ToString();
+            txtTelefono.Text = dgvProveedores.Rows[indiceFila].Cells[NombreColumna.TELEFONO].Value.ToString();
+            txtCorreo.Text = dgvProveedores.Rows[indiceFila].Cells[NombreColumna.CORREO].Value.ToString();
+        }
+        private bool ConfirmarAccion(string mensaje)
+        {
+            return MessageBox.Show(mensaje, "Confirmación",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+        }
+        private bool EliminarProveedor(int indiceFila)
+        {
+            var nombreProveedor = dgvProveedores.Rows[indiceFila].Cells[NombreColumna.RAZON_SOCIAL].Value.ToString();
+            if (!ConfirmarAccion($"¿Desea eliminar al proveedor {nombreProveedor}?"))
+                return false;
+
+            var oProveedor = new CE_Proveedor
+            {
+                Id = Convert.ToInt32(dgvProveedores.Rows[indiceFila].Cells[NombreColumna.ID_PROVEEDOR].Value)
+            };
+
+            if (!new CN_Proveedor().Eliminar(oProveedor, out string mensaje))
+            {
+                MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            dgvProveedores.Rows.RemoveAt(indiceFila);
+            return true;
+        }
+        private void pnlListaProveedores_Resize(object sender, EventArgs e)
+        {
+            lblListaProveedores.CentrarH();
         }
     }
 }

@@ -11,6 +11,17 @@ namespace CapaPresentacion.Utilidades
         /// <param name="dgv">El DataGridView a configurar.</param>
         public static void Configurar(DataGridView dgv)
         {
+            dgv.AllowUserToResizeRows = false;
+            dgv.AllowUserToResizeColumns = false;
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.MultiSelect = false;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.ReadOnly = true;
+
+            dgv.BackgroundColor = SystemColors.ControlLight;
+            dgv.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+
             foreach (DataGridViewColumn col in dgv.Columns)
             {
                 if (col.Name != "btnEditar" && col.Name != "btnEliminar")

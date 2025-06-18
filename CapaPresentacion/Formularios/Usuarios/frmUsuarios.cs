@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using CapaEntidad;
@@ -11,6 +12,17 @@ namespace CapaPresentacion.Formularios.Usuarios
     public partial class frmUsuarios : Form
     {
         private int idUsuarioSeleccionado = 0;
+        private static class NombreColumna
+        {
+            public const string ID_USUARIO = "id_usuario";
+            public const string DOCUMENTO = "documento";
+            public const string NOMBRE = "nombre";
+            public const string APELLIDO = "apellido";
+            public const string ID_ROL = "id_rol";
+            public const string ID_ESTADO = "id_estado";
+            public const string BTN_EDITAR = "btnEditar";
+            public const string BTN_ELIMINAR = "btnEliminar";
+        }
         public frmUsuarios()
         {
             InitializeComponent();
@@ -21,77 +33,51 @@ namespace CapaPresentacion.Formularios.Usuarios
 
             UtilidadesCB.Cargar(cbRol, new CN_Rol().Listar(), r => r.IdRol, r => r.Nombre);
 
-            UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvUsuarios, "apellido");
+            UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvUsuarios, NombreColumna.APELLIDO);
 
             UtilidadesForm.AlternarPanelHabilitado(pnlListaUsuarios, pnlFormUsuario, txtBuscar);
 
-            MostrarListaUsuarios();
+            ListarUsuariosEnDGV();
         }
         private void dgvUsuarios_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, "btnEditar", "btnEliminar");
+            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, NombreColumna.BTN_EDITAR, NombreColumna.BTN_ELIMINAR);
         }
         private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex < 0 || (dgvUsuarios.Columns[e.ColumnIndex].Name != "btnEditar" && dgvUsuarios.Columns[e.ColumnIndex].Name != "btnEliminar"))
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+
+            string nombreColumna = dgvUsuarios.Columns[e.ColumnIndex].Name;
+            if (nombreColumna != NombreColumna.BTN_EDITAR && nombreColumna != NombreColumna.BTN_ELIMINAR)
                 return;
 
-            int indiceFila = e.RowIndex;
-
             // Usar este if si se usan columnas con orden dinamico o no se lo conoce
-            //if (e.ColumnIndex == dgvUsuarios.Columns["btnEditar"].Index)
-            if (dgvUsuarios.Columns[e.ColumnIndex].Name == "btnEditar")
+            //if (e.ColumnIndex == dgvUsuarios.Columns[NombreColumna.BTN_EDITAR].Index)
+            if (nombreColumna == NombreColumna.BTN_EDITAR)
             {
-                idUsuarioSeleccionado = Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells["id_usuario"].Value);
-                txtDocumento.Text = dgvUsuarios.Rows[indiceFila].Cells["documento"].Value.ToString();
-                txtNombre.Text = dgvUsuarios.Rows[indiceFila].Cells["nombre"].Value.ToString();
-                txtApellido.Text = dgvUsuarios.Rows[indiceFila].Cells["apellido"].Value.ToString();
-
-                foreach (OpcionCombo oc in cbRol.Items)
-                {
-                    if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells["id_rol"].Value))
-                    {
-                        int indiceCombo = cbRol.Items.IndexOf(oc);
-                        // Se selecciona el que encontro.
-                        cbRol.SelectedIndex = indiceCombo;
-                        // Cuando la relacion sea correcta se corta el foreach.
-                        break;
-                    }
-                }
-
-                UtilidadesForm.AlternarPanelHabilitado(pnlFormUsuario, pnlListaUsuarios, txtDocumento);
-                txtClave.Enabled = false;
+                CargarDatosParaEdicion(e.RowIndex);
+                ConfigurarFormularioParaEdicion(false);
             }
-            else if (dgvUsuarios.Columns[e.ColumnIndex].Name == "btnEliminar")
+            else if (nombreColumna == NombreColumna.BTN_ELIMINAR)
             {
-                // Si se presiona el boton de eliminar, se pregunta si se desea eliminar el usuario.
-                DialogResult respuestaEliminar = MessageBox.Show(
-                    $"¿Desea eliminar al usuario {dgvUsuarios.Rows[indiceFila].Cells["nombre"].Value}?",
-                    "Eliminar Usuario", MessageBoxButtons.YesNo, MessageBoxIcon.Question
-                );
-
-                if (respuestaEliminar == DialogResult.No)
-                    return;
-
-                // Se crea un nueva instancia de la que solo se necesita el ID del Cliente.
-                CE_Usuario oUsuario = new CE_Usuario()
-                {
-                    Id = Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells["id_usuario"].Value)
-                };
-
-                bool respuesta = new CN_Usuario().Eliminar(oUsuario, out string mensaje);
-
-                // Si se elimino correctamente (Eliminar retorna respuesta bool) se elimina la fila del DGV.
-                if (respuesta)
-                    dgvUsuarios.Rows.RemoveAt(indiceFila);
-                else
-                    MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                EliminarUsuario(e.RowIndex);
             }
+        }
+        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
+        {
+            UtilidadesDGV.AplicarFiltro(dgvUsuarios, cbBuscar, txtBuscar.Text);
+        }
+        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
+        {
+            UtilidadesDGV.QuitarFiltro(dgvUsuarios, txtBuscar);
+        }
+        private void btnCrear_Click(object sender, EventArgs e)
+        {
+            ConfigurarFormularioParaEdicion(true);
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (!ValidarEntradas())
-                return;
+            if (!ValidarCampos()) return;
 
             CE_Usuario oUsuario = new CE_Usuario()
             {
@@ -106,31 +92,25 @@ namespace CapaPresentacion.Formularios.Usuarios
                 }
             };
 
-            //string mensaje;
-            //bool operacionExitosa;
+            string mensaje;
+            bool operacionExitosa;
 
             if (idUsuarioSeleccionado == 0)
             {
-                int idUsuarioCreado = new CN_Usuario().Crear(oUsuario, out string mensaje);
-
-                if (idUsuarioCreado == 0)
-                {
-                    MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
+                operacionExitosa = new CN_Usuario().Crear(oUsuario, out mensaje) != 0;
             }
             else
             {
-                bool resultado = new CN_Usuario().Actualizar(oUsuario, out string mensaje);
-
-                if (!resultado)
-                {
-                    MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
+                operacionExitosa = new CN_Usuario().Actualizar(oUsuario, out mensaje);
             }
 
-            MostrarListaUsuarios();
+            if (!operacionExitosa)
+            {
+                MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            ListarUsuariosEnDGV();
             LimpiarForm();
             UtilidadesForm.AlternarPanelHabilitado(pnlListaUsuarios, pnlFormUsuario, txtBuscar);
         }
@@ -139,20 +119,7 @@ namespace CapaPresentacion.Formularios.Usuarios
             LimpiarForm();
             UtilidadesForm.AlternarPanelHabilitado(pnlListaUsuarios, pnlFormUsuario, txtBuscar);
         }
-        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
-        {
-            UtilidadesDGV.AplicarFiltro(dgvUsuarios, cbBuscar, txtBuscar.Text);
-        }
-        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
-        {
-            UtilidadesDGV.QuitarFiltro(dgvUsuarios, txtBuscar);
-        }
-        private void btnCrear_Click(object sender, EventArgs e)
-        {
-            idUsuarioSeleccionado = 0;
-            UtilidadesForm.AlternarPanelHabilitado(pnlFormUsuario, pnlListaUsuarios, txtDocumento);
-        }
-        private void MostrarListaUsuarios()
+        private void ListarUsuariosEnDGV()
         {
             dgvUsuarios.Rows.Clear();
             List<CE_Usuario> listaUsuario = new CN_Usuario().Listar();
@@ -181,16 +148,14 @@ namespace CapaPresentacion.Formularios.Usuarios
             idUsuarioSeleccionado = 0;
             UtilidadesForm.ReiniciarControles(pnlFormUsuario);
         }
-        private void pnlListaUsuarios_Resize(object sender, EventArgs e)
-        {
-            lblListaUsuarios.CentrarH();
-        }
-        private bool ValidarEntradas()
+        private bool ValidarCampos()
         {
             var errores = new StringBuilder();
 
             if (string.IsNullOrWhiteSpace(txtDocumento.Text))
-                errores.AppendLine("Ingrese un nº de documento.");
+                errores.AppendLine("Ingrese el nº de documento.");
+            else if (txtDocumento.Text.Length != 8 || !txtDocumento.Text.All(char.IsDigit))
+                errores.AppendLine("El documento debe tener ocho (8) caracteres numéricos.");
 
             if (string.IsNullOrWhiteSpace(txtNombre.Text))
                 errores.AppendLine("Ingrese el nombre del usuario.");
@@ -215,10 +180,61 @@ namespace CapaPresentacion.Formularios.Usuarios
 
             return true;
         }
+        private void ConfigurarFormularioParaEdicion(bool esNuevo)
+        {
+            txtClave.Enabled = esNuevo;
+            if (esNuevo)
+            {
+                idUsuarioSeleccionado = 0;
+                LimpiarForm();
+            }
+            UtilidadesForm.AlternarPanelHabilitado(pnlFormUsuario, pnlListaUsuarios, txtDocumento);
+        }
+        private void CargarDatosParaEdicion(int indiceFila)
+        {
+            idUsuarioSeleccionado = Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.ID_USUARIO].Value);
+            txtDocumento.Text = dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.DOCUMENTO].Value.ToString();
+            txtNombre.Text = dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.NOMBRE].Value.ToString();
+            txtApellido.Text = dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.APELLIDO].Value.ToString();
+
+            foreach (OpcionCombo oc in cbRol.Items)
+            {
+                if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.ID_ROL].Value))
+                {
+                    cbRol.SelectedIndex = cbRol.Items.IndexOf(oc);
+                    break;
+                }
+            }
+        }
         private bool ConfirmarAccion(string mensaje)
         {
             return MessageBox.Show(mensaje, "Confirmación", 
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+        }
+        private bool EliminarUsuario(int indiceFila)
+        {
+            var nombreUsuario = dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.NOMBRE].Value.ToString();
+            var apellidoUsuario = dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.APELLIDO].Value.ToString();
+            if (!ConfirmarAccion($"¿Desea eliminar al usuario {apellidoUsuario}, {nombreUsuario}?"))
+                return false;
+
+            var oUsuario = new CE_Usuario()
+            {
+                Id = Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.ID_USUARIO].Value)
+            };
+
+            if (!new CN_Usuario().Eliminar(oUsuario, out string mensaje))
+            {
+                MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            dgvUsuarios.Rows.RemoveAt(indiceFila);
+            return true;
+        }
+        private void pnlListaUsuarios_Resize(object sender, EventArgs e)
+        {
+            lblListaUsuarios.CentrarH();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace CapaPresentacion.Utilidades
 {
     public static class UtilidadesForm
     {
-        public static readonly Color ColorActivo = SystemColors.ActiveCaption;
+        public static readonly Color ColorActivo = SystemColors.Control;
         public static readonly Color ColorInactivo = Color.Lavender;
 
         /// <summary>
@@ -17,9 +17,11 @@ namespace CapaPresentacion.Utilidades
         {
             panelActivo.Enabled = true;
             panelActivo.BackColor = ColorActivo;
+            panelActivo.BorderStyle = BorderStyle.FixedSingle;
 
             panelInactivo.Enabled = false;
             panelInactivo.BackColor = ColorInactivo;
+            panelInactivo.BorderStyle = BorderStyle.None;
 
             controlFocus?.Focus();
         }
