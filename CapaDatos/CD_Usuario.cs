@@ -40,7 +40,7 @@ namespace CapaDatos
                                 FechaCreacion = reader["fechaCreacion"].ToString(),
                                 oRol = new CE_Rol()
                                 {
-                                    IdRol = Convert.ToInt32(reader["id_rol"]),
+                                    Id = Convert.ToInt32(reader["id_rol"]),
                                     Nombre = reader["rol_nombre"].ToString()
                                 },
                                 oEstado = new CE_Estado()
@@ -98,7 +98,7 @@ namespace CapaDatos
                                 FechaCreacion = reader["fechaCreacion"].ToString(),
                                 oRol = new CE_Rol()
                                 {
-                                    IdRol = Convert.ToInt32(reader["id_rol"]),
+                                    Id = Convert.ToInt32(reader["id_rol"]),
                                     Nombre = reader["rol_nombre"].ToString()
                                 },
                                 oEstado = new CE_Estado()
@@ -136,7 +136,7 @@ namespace CapaDatos
                 cmd.Parameters.AddWithValue("@nombre", oUsuario.Nombre);
                 cmd.Parameters.AddWithValue("@apellido", oUsuario.Apellido);
                 cmd.Parameters.AddWithValue("@clave", oUsuario.Clave);
-                cmd.Parameters.AddWithValue("@rol_id", oUsuario.oRol.IdRol);
+                cmd.Parameters.AddWithValue("@rol_id", oUsuario.oRol.Id);
                 cmd.Parameters.Add("@idUsuarioCreado", SqlDbType.Int).Direction = ParameterDirection.Output;
                 cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
                 
@@ -169,7 +169,7 @@ namespace CapaDatos
                 cmd.Parameters.AddWithValue("@documento", oUsuario.Documento);
                 cmd.Parameters.AddWithValue("@nombre", oUsuario.Nombre);
                 cmd.Parameters.AddWithValue("@apellido", oUsuario.Apellido);
-                cmd.Parameters.AddWithValue("@rol_id", oUsuario.oRol.IdRol);
+                cmd.Parameters.AddWithValue("@rol_id", oUsuario.oRol.Id);
                 cmd.Parameters.Add("@respuesta", SqlDbType.Bit).Direction = ParameterDirection.Output;
                 cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
                 
@@ -206,8 +206,8 @@ namespace CapaDatos
                 {
                     oConexion.Open();
                     cmd.ExecuteNonQuery();
-                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
                     mensaje = cmd.Parameters["@mensaje"].Value.ToString();
+                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
                 }
                 catch (SqlException ex)
                 {

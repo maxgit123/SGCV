@@ -38,7 +38,7 @@ namespace CapaNegocio
             if (string.IsNullOrWhiteSpace(oUsuario.Clave))
                 errores.AppendLine("Ingrese la clave del usuario.");
 
-            if (oUsuario.oRol == null || oUsuario.oRol.IdRol <= 0)
+            if (oUsuario.oRol == null || oUsuario.oRol.Id <= 0)
                 errores.AppendLine("Seleccione un rol válido.");
 
             if (oUsuario.Documento.Length != 8 || !oUsuario.Documento.All(char.IsDigit))
@@ -71,7 +71,7 @@ namespace CapaNegocio
             if (string.IsNullOrWhiteSpace(oUsuario.Apellido))
                 errores.AppendLine("Ingrese el apellido del usuario.");
 
-            if (oUsuario.oRol == null || oUsuario.oRol.IdRol <= 0)
+            if (oUsuario.oRol == null || oUsuario.oRol.Id <= 0)
                 errores.AppendLine("Seleccione un rol válido.");
 
             // Si se encontraron errores, se construye el mensaje de error.

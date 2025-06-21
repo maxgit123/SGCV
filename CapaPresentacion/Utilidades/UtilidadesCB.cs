@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Windows.Forms;
 
 namespace CapaPresentacion.Utilidades
@@ -35,6 +34,7 @@ namespace CapaPresentacion.Utilidades
             if (cb.Items.Count > 0)
                 cb.SelectedIndex = -1;
         }
+
         /// <summary>
         /// Carga un ComboBox con los encabezados visibles y no vacíos de un DataGridView.
         /// </summary>
@@ -43,7 +43,7 @@ namespace CapaPresentacion.Utilidades
         /// <param name="nomColumnaPorDefecto">Nombre de columna a seleccionar por defecto. Si no se encuentra, selecciona el primer ítem.</param>
         public static void CargarHeadersDesdeDGV(ComboBox cb, DataGridView dgv, string nomColumnaPorDefecto = null)
         {
-            var opciones = dgv.Columns
+            var columnasVisibles = dgv.Columns
                 .Cast<DataGridViewColumn>()
                 .Where(c => c.Visible && !string.IsNullOrWhiteSpace(c.HeaderText))
                 .Select(c => new OpcionCombo
@@ -53,11 +53,11 @@ namespace CapaPresentacion.Utilidades
                 })
                 .ToList();
 
-            cb.DataSource = opciones;
+            cb.DataSource = columnasVisibles;
             cb.ValueMember = "Valor";
             cb.DisplayMember = "Texto";
 
-            var indicePorDefecto = opciones.FindIndex(o => o.Valor.ToString() == nomColumnaPorDefecto);
+            var indicePorDefecto = columnasVisibles.FindIndex(o => o.Valor.ToString() == nomColumnaPorDefecto);
             cb.SelectedIndex = indicePorDefecto >= 0 ? indicePorDefecto : 0;
         }
     }

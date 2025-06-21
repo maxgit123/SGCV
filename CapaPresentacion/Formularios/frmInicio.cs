@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
-using CapaPresentacion.Utilidades;
 using FontAwesome.Sharp;
 
 namespace CapaPresentacion.Formularios
@@ -24,8 +23,8 @@ namespace CapaPresentacion.Formularios
         {
             // ------ Configuraciones del Formulario ------
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.Size = new Size(1024, 600);
-            this.MinimumSize = new Size(850, 600);
+            this.Size = new Size(1024, 720);
+            this.MinimumSize = new Size(850, 720);
 
             menuTituloUsuario.Text = $"{usuarioActual.Apellido}, {usuarioActual.Nombre}";
             smenuRol.Text = usuarioActual.oRol.Nombre;

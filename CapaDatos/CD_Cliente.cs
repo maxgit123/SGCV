@@ -62,8 +62,8 @@ namespace CapaDatos
         }
         public int Crear(CE_Cliente oCliente, out string mensaje)
         {
-            int idClienteCreado = 0;
             mensaje = string.Empty;
+            int idClienteCreado = 0;
 
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             using (SqlCommand cmd = new SqlCommand("usp_crearCliente", oConexion))
@@ -83,8 +83,8 @@ namespace CapaDatos
                 {
                     oConexion.Open();
                     cmd.ExecuteNonQuery();
-                    idClienteCreado = Convert.ToInt32(cmd.ExecuteScalar().ToString());
                     mensaje = cmd.Parameters["@mensaje"].Value.ToString();
+                    idClienteCreado = Convert.ToInt32(cmd.Parameters["@idClienteCreado"].Value);
                 }
                 catch (SqlException ex)
                 {
@@ -118,8 +118,8 @@ namespace CapaDatos
                 {
                     oConexion.Open();
                     cmd.ExecuteNonQuery();
-                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
                     mensaje = cmd.Parameters["@mensaje"].Value.ToString();
+                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
                 }
                 catch (SqlException ex)
                 {
@@ -147,8 +147,8 @@ namespace CapaDatos
                 {
                     oConexion.Open();
                     cmd.ExecuteNonQuery();
-                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
                     mensaje = cmd.Parameters["@mensaje"].Value.ToString();
+                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
                 }
                 catch (SqlException ex)
                 {

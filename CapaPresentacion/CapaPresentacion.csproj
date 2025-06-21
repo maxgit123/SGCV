@@ -202,7 +202,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilidades\UtilidadesDGV.cs" />
-    <Compile Include="Utilidades\ExtensionesControl.cs" />
     <Compile Include="Utilidades\OpcionCombo.cs" />
     <Compile Include="Utilidades\UtilidadesCB.cs" />
     <Compile Include="Utilidades\UtilidadesForm.cs" />

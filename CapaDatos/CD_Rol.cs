@@ -28,7 +28,7 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_Rol()
                             {
-                                IdRol = Convert.ToInt32(reader["id_rol"]),
+                                Id = Convert.ToInt32(reader["id_rol"]),
                                 Nombre = reader["nombre"].ToString(),
                             });
                         }

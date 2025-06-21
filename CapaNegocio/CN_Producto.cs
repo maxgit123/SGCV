@@ -19,14 +19,17 @@ namespace CapaNegocio
             //if (string.IsNullOrWhiteSpace(oProducto.Codigo))
             //    errores.AppendLine("Ingrese el codigo del producto.");
 
+            if (string.IsNullOrWhiteSpace(oProducto.Codigo))
+                errores.AppendLine("Ingrese un código para el producto.");
+
             if (string.IsNullOrWhiteSpace(oProducto.Descripcion))
-                errores.AppendLine("Ingrese la descripcion del producto.");
+                errores.AppendLine("Ingrese la descripción del producto.");
 
             if (oProducto.QuiebreStock < 0)
-                errores.AppendLine("El quiebre de stock no puede ser negativo.");
+                errores.AppendLine("Ingrese un quiebre de stock dentro del rango valido.");
 
             if (oProducto.oCategoria.Id < 1)
-                errores.AppendLine("Seleccione una categoria.");
+                errores.AppendLine("Seleccione una categoría para el producto.");
 
             if (errores.Length > 0)
             {
@@ -41,13 +44,16 @@ namespace CapaNegocio
             var errores = new StringBuilder();
 
             //if (string.IsNullOrWhiteSpace(oProducto.Codigo))
-            //    errores.AppendLine("Ingrese el codigo del producto.");
+            //    errores.AppendLine("Ingrese un código para el producto.");
 
             if (string.IsNullOrWhiteSpace(oProducto.Descripcion))
-                errores.AppendLine("Ingrese la descripcion del producto.");
+                errores.AppendLine("Ingrese la descripción del producto.");
 
             if (oProducto.QuiebreStock < 0)
-                errores.AppendLine("El quiebre de stock no puede ser negativo.");
+                errores.AppendLine("Ingrese un quiebre de stock dentro del rango valido.");
+
+            if (oProducto.oCategoria.Id < 1)
+                errores.AppendLine("Seleccione una categoría para el producto.");
 
             if (errores.Length > 0)
             {

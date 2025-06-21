@@ -30,24 +30,23 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblAdmUsuario = new System.Windows.Forms.Label();
             this.cbBuscar = new System.Windows.Forms.ComboBox();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.lblListaProveedores = new System.Windows.Forms.Label();
             this.dgvProveedores = new System.Windows.Forms.DataGridView();
-            this.ID_Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RazonSocial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaCreacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.razonSocial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaCreacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID_Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnLimpiarBuscar = new FontAwesome.Sharp.IconButton();
@@ -89,7 +88,7 @@
             this.cbBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbBuscar.FormattingEnabled = true;
-            this.cbBuscar.Location = new System.Drawing.Point(551, 52);
+            this.cbBuscar.Location = new System.Drawing.Point(554, 64);
             this.cbBuscar.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
             this.cbBuscar.Name = "cbBuscar";
             this.cbBuscar.Size = new System.Drawing.Size(145, 26);
@@ -99,7 +98,7 @@
             // 
             this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.Location = new System.Drawing.Point(702, 52);
+            this.txtBuscar.Location = new System.Drawing.Point(705, 64);
             this.txtBuscar.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(135, 26);
@@ -112,7 +111,7 @@
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.SystemColors.Control;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(455, 58);
+            this.label12.Location = new System.Drawing.Point(458, 70);
             this.label12.Margin = new System.Windows.Forms.Padding(15, 3, 3, 5);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(90, 20);
@@ -122,7 +121,7 @@
             // lblListaProveedores
             // 
             this.lblListaProveedores.AutoSize = true;
-            this.lblListaProveedores.BackColor = System.Drawing.SystemColors.Control;
+            this.lblListaProveedores.BackColor = System.Drawing.Color.Transparent;
             this.lblListaProveedores.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblListaProveedores.ForeColor = System.Drawing.Color.Black;
             this.lblListaProveedores.Location = new System.Drawing.Point(355, 17);
@@ -154,110 +153,104 @@
             this.dgvProveedores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvProveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvProveedores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID_Proveedor,
-            this.RazonSocial,
-            this.Observacion,
-            this.FechaCreacion,
-            this.Telefono,
+            this.id_proveedor,
+            this.razonSocial,
+            this.observacion,
+            this.fechaCreacion,
+            this.telefono,
             this.Correo,
-            this.ID_Estado,
-            this.Estado,
+            this.id_estado,
+            this.estado,
             this.btnEditar,
             this.btnEliminar});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProveedores.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProveedores.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvProveedores.EnableHeadersVisualStyles = false;
             this.dgvProveedores.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dgvProveedores.Location = new System.Drawing.Point(12, 86);
+            this.dgvProveedores.Location = new System.Drawing.Point(15, 98);
             this.dgvProveedores.Margin = new System.Windows.Forms.Padding(15, 3, 15, 15);
             this.dgvProveedores.MultiSelect = false;
             this.dgvProveedores.Name = "dgvProveedores";
             this.dgvProveedores.ReadOnly = true;
             this.dgvProveedores.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProveedores.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProveedores.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvProveedores.RowHeadersVisible = false;
             this.dgvProveedores.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvProveedores.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvProveedores.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvProveedores.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.Control;
             this.dgvProveedores.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
             this.dgvProveedores.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvProveedores.RowTemplate.Height = 28;
             this.dgvProveedores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProveedores.Size = new System.Drawing.Size(859, 329);
+            this.dgvProveedores.Size = new System.Drawing.Size(859, 314);
             this.dgvProveedores.TabIndex = 258;
             this.dgvProveedores.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProveedores_CellContentClick);
             this.dgvProveedores.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvProveedores_CellPainting);
             // 
-            // ID_Proveedor
+            // id_proveedor
             // 
-            this.ID_Proveedor.HeaderText = "ID_Proveedor";
-            this.ID_Proveedor.Name = "ID_Proveedor";
-            this.ID_Proveedor.ReadOnly = true;
-            this.ID_Proveedor.Visible = false;
+            this.id_proveedor.HeaderText = "ID_Proveedor";
+            this.id_proveedor.Name = "id_proveedor";
+            this.id_proveedor.ReadOnly = true;
+            this.id_proveedor.Visible = false;
             // 
-            // RazonSocial
+            // razonSocial
             // 
-            this.RazonSocial.HeaderText = "Razón Social";
-            this.RazonSocial.Name = "RazonSocial";
-            this.RazonSocial.ReadOnly = true;
+            this.razonSocial.HeaderText = "Razón Social";
+            this.razonSocial.Name = "razonSocial";
+            this.razonSocial.ReadOnly = true;
             // 
-            // Observacion
+            // observacion
             // 
-            this.Observacion.HeaderText = "Observación";
-            this.Observacion.Name = "Observacion";
-            this.Observacion.ReadOnly = true;
+            this.observacion.HeaderText = "Observación";
+            this.observacion.Name = "observacion";
+            this.observacion.ReadOnly = true;
             // 
-            // FechaCreacion
+            // fechaCreacion
             // 
-            this.FechaCreacion.HeaderText = "Fecha creación";
-            this.FechaCreacion.Name = "FechaCreacion";
-            this.FechaCreacion.ReadOnly = true;
+            this.fechaCreacion.HeaderText = "Fecha creación";
+            this.fechaCreacion.Name = "fechaCreacion";
+            this.fechaCreacion.ReadOnly = true;
             // 
-            // Telefono
+            // telefono
             // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            this.Telefono.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Telefono.HeaderText = "Teléfono";
-            this.Telefono.Name = "Telefono";
-            this.Telefono.ReadOnly = true;
-            this.Telefono.Width = 150;
+            this.telefono.HeaderText = "Teléfono";
+            this.telefono.Name = "telefono";
+            this.telefono.ReadOnly = true;
             // 
             // Correo
             // 
             this.Correo.HeaderText = "Correo";
             this.Correo.Name = "Correo";
             this.Correo.ReadOnly = true;
-            this.Correo.Width = 150;
             // 
-            // ID_Estado
+            // id_estado
             // 
-            this.ID_Estado.HeaderText = "ID Estado";
-            this.ID_Estado.Name = "ID_Estado";
-            this.ID_Estado.ReadOnly = true;
-            this.ID_Estado.Visible = false;
+            this.id_estado.HeaderText = "ID Estado";
+            this.id_estado.Name = "id_estado";
+            this.id_estado.ReadOnly = true;
+            this.id_estado.Visible = false;
             // 
-            // Estado
+            // estado
             // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
+            this.estado.HeaderText = "Estado";
+            this.estado.Name = "estado";
+            this.estado.ReadOnly = true;
             // 
             // btnEditar
             // 
@@ -271,7 +264,6 @@
             this.btnEliminar.HeaderText = "";
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.ReadOnly = true;
-            this.btnEliminar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.btnEliminar.Width = 30;
             // 
             // btnLimpiarBuscar
@@ -284,7 +276,7 @@
             this.btnLimpiarBuscar.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(96)))), ((int)(((byte)(132)))));
             this.btnLimpiarBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnLimpiarBuscar.IconSize = 18;
-            this.btnLimpiarBuscar.Location = new System.Drawing.Point(834, 52);
+            this.btnLimpiarBuscar.Location = new System.Drawing.Point(837, 64);
             this.btnLimpiarBuscar.Margin = new System.Windows.Forms.Padding(3, 15, 15, 5);
             this.btnLimpiarBuscar.Name = "btnLimpiarBuscar";
             this.btnLimpiarBuscar.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
@@ -433,7 +425,7 @@
             this.btnCrear.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnCrear.IconSize = 20;
             this.btnCrear.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCrear.Location = new System.Drawing.Point(12, 52);
+            this.btnCrear.Location = new System.Drawing.Point(15, 64);
             this.btnCrear.Margin = new System.Windows.Forms.Padding(15, 15, 3, 5);
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(71, 26);
@@ -525,17 +517,17 @@
         private System.Windows.Forms.Label lblObservacion;
         private System.Windows.Forms.TextBox txtObservacion;
         private FontAwesome.Sharp.IconButton btnCrear;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Proveedor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RazonSocial;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Observacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaCreacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Correo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Estado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
-        private System.Windows.Forms.DataGridViewButtonColumn btnEditar;
-        private System.Windows.Forms.DataGridViewButtonColumn btnEliminar;
         private System.Windows.Forms.Panel pnlFormProveedor;
         private System.Windows.Forms.Panel pnlListaProveedores;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_proveedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn razonSocial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn observacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechaCreacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn telefono;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Correo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_estado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn estado;
+        private System.Windows.Forms.DataGridViewButtonColumn btnEditar;
+        private System.Windows.Forms.DataGridViewButtonColumn btnEliminar;
     }
 }

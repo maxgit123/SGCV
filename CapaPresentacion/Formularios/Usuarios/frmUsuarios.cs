@@ -18,8 +18,8 @@ namespace CapaPresentacion.Formularios.Usuarios
             public const string DOCUMENTO = "documento";
             public const string NOMBRE = "nombre";
             public const string APELLIDO = "apellido";
-            public const string ID_ROL = "id_rol";
-            public const string ID_ESTADO = "id_estado";
+            public const string ROL_ID = "id_rol";
+            public const string ESTADO_ID = "id_estado";
             public const string BTN_EDITAR = "btnEditar";
             public const string BTN_ELIMINAR = "btnEliminar";
         }
@@ -31,7 +31,7 @@ namespace CapaPresentacion.Formularios.Usuarios
         {
             UtilidadesDGV.Configurar(dgvUsuarios);
 
-            UtilidadesCB.Cargar(cbRol, new CN_Rol().Listar(), r => r.IdRol, r => r.Nombre);
+            UtilidadesCB.Cargar(cbRol, new CN_Rol().Listar(), r => r.Id, r => r.Nombre);
 
             UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvUsuarios, NombreColumna.APELLIDO);
 
@@ -48,6 +48,7 @@ namespace CapaPresentacion.Formularios.Usuarios
             if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
 
             string nombreColumna = dgvUsuarios.Columns[e.ColumnIndex].Name;
+            
             if (nombreColumna != NombreColumna.BTN_EDITAR && nombreColumna != NombreColumna.BTN_ELIMINAR)
                 return;
 
@@ -88,7 +89,7 @@ namespace CapaPresentacion.Formularios.Usuarios
                 Clave = txtClave.Text.Trim(),
                 oRol = new CE_Rol()
                 {
-                    IdRol = Convert.ToInt32(((OpcionCombo)cbRol.SelectedItem).Valor)
+                    Id = Convert.ToInt32(((OpcionCombo)cbRol.SelectedItem).Valor)
                 }
             };
 
@@ -96,13 +97,9 @@ namespace CapaPresentacion.Formularios.Usuarios
             bool operacionExitosa;
 
             if (idUsuarioSeleccionado == 0)
-            {
                 operacionExitosa = new CN_Usuario().Crear(oUsuario, out mensaje) != 0;
-            }
             else
-            {
                 operacionExitosa = new CN_Usuario().Actualizar(oUsuario, out mensaje);
-            }
 
             if (!operacionExitosa)
             {
@@ -133,7 +130,7 @@ namespace CapaPresentacion.Formularios.Usuarios
                     item.Apellido,
                     item.Clave,
                     item.FechaCreacion,
-                    item.oRol.IdRol,
+                    item.oRol.Id,
                     item.oRol.Nombre,
                     item.oEstado.Id,
                     item.oEstado.Nombre,
@@ -166,7 +163,7 @@ namespace CapaPresentacion.Formularios.Usuarios
             if (idUsuarioSeleccionado == 0 && string.IsNullOrWhiteSpace(txtClave.Text))
                 errores.AppendLine("Ingrese la clave del usuario.");
 
-            if (!(cbRol.SelectedItem is OpcionCombo))
+            if (cbRol.SelectedItem == null || !(cbRol.SelectedItem is OpcionCombo))
                 errores.AppendLine("Seleccione el rol del usuario.");
 
             if (errores.Length > 0)
@@ -180,47 +177,51 @@ namespace CapaPresentacion.Formularios.Usuarios
 
             return true;
         }
-        private void ConfigurarFormularioParaEdicion(bool esNuevo)
+        private void ConfigurarFormularioParaEdicion(bool esNuevoUsuario)
         {
-            txtClave.Enabled = esNuevo;
-            if (esNuevo)
+            txtClave.Enabled = esNuevoUsuario;
+            if (esNuevoUsuario)
             {
                 idUsuarioSeleccionado = 0;
                 LimpiarForm();
             }
             UtilidadesForm.AlternarPanelHabilitado(pnlFormUsuario, pnlListaUsuarios, txtDocumento);
         }
-        private void CargarDatosParaEdicion(int indiceFila)
+        private void CargarDatosParaEdicion(int indiceFilaSeleccionada)
         {
-            idUsuarioSeleccionado = Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.ID_USUARIO].Value);
-            txtDocumento.Text = dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.DOCUMENTO].Value.ToString();
-            txtNombre.Text = dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.NOMBRE].Value.ToString();
-            txtApellido.Text = dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.APELLIDO].Value.ToString();
+            DataGridViewRow filaSeleccionada = dgvUsuarios.Rows[indiceFilaSeleccionada];
 
-            foreach (OpcionCombo oc in cbRol.Items)
-            {
-                if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.ID_ROL].Value))
-                {
-                    cbRol.SelectedIndex = cbRol.Items.IndexOf(oc);
-                    break;
-                }
-            }
+            idUsuarioSeleccionado = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ID_USUARIO].Value);
+            txtDocumento.Text = filaSeleccionada.Cells[NombreColumna.DOCUMENTO].Value.ToString();
+            txtNombre.Text = filaSeleccionada.Cells[NombreColumna.NOMBRE].Value.ToString();
+            txtApellido.Text = filaSeleccionada.Cells[NombreColumna.APELLIDO].Value.ToString();
+            
+            int idRolSeleccionado = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ROL_ID].Value);
+            cbRol.SelectedItem = cbRol.Items
+                .Cast<OpcionCombo>()
+                .FirstOrDefault(oc => Convert.ToInt32(oc.Valor) == idRolSeleccionado);
+
+            //foreach (OpcionCombo oc in cbRol.Items)
+            //{
+            //    if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.ROL_ID].Value))
+            //    {
+            //        cbRol.SelectedIndex = cbRol.Items.IndexOf(oc);
+            //        break;
+            //    }
+            //}
         }
-        private bool ConfirmarAccion(string mensaje)
+        private bool EliminarUsuario(int indiceFilaSeleccionada)
         {
-            return MessageBox.Show(mensaje, "Confirmación", 
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
-        }
-        private bool EliminarUsuario(int indiceFila)
-        {
-            var nombreUsuario = dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.NOMBRE].Value.ToString();
-            var apellidoUsuario = dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.APELLIDO].Value.ToString();
-            if (!ConfirmarAccion($"¿Desea eliminar al usuario {apellidoUsuario}, {nombreUsuario}?"))
+            var filaSeleccionada = dgvUsuarios.Rows[indiceFilaSeleccionada];
+            var nombreUsuario = filaSeleccionada.Cells[NombreColumna.NOMBRE].Value.ToString();
+            var apellidoUsuario = filaSeleccionada.Cells[NombreColumna.APELLIDO].Value.ToString();
+            
+            if (!UtilidadesForm.ConfirmarAccion($"¿Desea eliminar al usuario {apellidoUsuario}, {nombreUsuario}?"))
                 return false;
 
             var oUsuario = new CE_Usuario()
             {
-                Id = Convert.ToInt32(dgvUsuarios.Rows[indiceFila].Cells[NombreColumna.ID_USUARIO].Value)
+                Id = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ID_USUARIO].Value)
             };
 
             if (!new CN_Usuario().Eliminar(oUsuario, out string mensaje))
@@ -229,12 +230,12 @@ namespace CapaPresentacion.Formularios.Usuarios
                 return false;
             }
 
-            dgvUsuarios.Rows.RemoveAt(indiceFila);
+            dgvUsuarios.Rows.RemoveAt(indiceFilaSeleccionada);
             return true;
         }
         private void pnlListaUsuarios_Resize(object sender, EventArgs e)
         {
-            lblListaUsuarios.CentrarH();
+            UtilidadesForm.CentrarHorizontalmente(lblListaUsuarios);
         }
     }
 }

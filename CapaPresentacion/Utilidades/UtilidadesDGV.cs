@@ -24,6 +24,10 @@ namespace CapaPresentacion.Utilidades
 
             foreach (DataGridViewColumn col in dgv.Columns)
             {
+                //if (col.Name == "espacio") // Si se quiere que los botones se mantengan pegados al borde izquierdo
+                //{
+                //    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                //}
                 if (col.Name != "btnEditar" && col.Name != "btnEliminar")
                 {
                     col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;

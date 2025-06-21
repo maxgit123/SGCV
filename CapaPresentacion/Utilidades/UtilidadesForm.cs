@@ -57,5 +57,26 @@ namespace CapaPresentacion.Utilidades
                 }
             }
         }
+
+        /// <summary>
+        /// Muestra un cuadro de diálogo de confirmación y retorna true si el usuario selecciona "Sí".
+        /// </summary>
+        /// <param name="mensaje">El mensaje a mostrar en el cuadro de diálogo.</param>
+        /// <returns>true si el usuario selecciona "Sí", false en caso contrario.</returns>
+        public static bool ConfirmarAccion(string mensaje)
+        {
+            return MessageBox.Show(mensaje, "Confirmación",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+        }
+
+        /// <summary>
+        /// Centra horizontalmente un control dentro de su contenedor padre.
+        /// </summary>
+        /// <param name="ctrl">El control a centrar.</param>
+        public static void CentrarHorizontalmente(Control ctrl)
+        {
+            if (ctrl?.Parent != null)
+                ctrl.Left = (ctrl.Parent.Width - ctrl.Width) / 2;
+        }
     }
 }

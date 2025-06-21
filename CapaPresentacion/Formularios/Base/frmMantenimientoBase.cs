@@ -17,37 +17,37 @@ public abstract class frmMantenimientoBase<TEntity> : Form where TEntity : class
     protected abstract TEntity CrearEntidad();
     protected virtual void HabilitarFormulario()
     {
-        foreach (Control ctrl in pnlFormulario.Controls)
-        {
-            if (ctrl.EsInteractivo())
-                ctrl.Enabled = true;
-        }
+        //foreach (Control ctrl in pnlFormulario.Controls)
+        //{
+        //    if (ctrl.EsInteractivo())
+        //        ctrl.Enabled = true;
+        //}
 
-        pnlFormulario.BackColor = SystemColors.ActiveCaption;
-        pnlLista.BackColor = Color.Lavender;
+        //pnlFormulario.BackColor = SystemColors.ActiveCaption;
+        //pnlLista.BackColor = Color.Lavender;
 
-        foreach (Control c in pnlLista.Controls)
-        {
-            if (c.EsInteractivo())
-                c.Enabled = false;
-        }
+        //foreach (Control c in pnlLista.Controls)
+        //{
+        //    if (c.EsInteractivo())
+        //        c.Enabled = false;
+        //}
     }
     protected virtual void DeshabilitarFormulario()
     {
-        foreach (Control c in pnlFormulario.Controls)
-        {
-            if (c.EsInteractivo())
-                c.Enabled = false;
-        }
+        //foreach (Control c in pnlFormulario.Controls)
+        //{
+        //    if (c.EsInteractivo())
+        //        c.Enabled = false;
+        //}
 
-        pnlFormulario.BackColor = Color.Lavender;
-        pnlLista.BackColor = SystemColors.ActiveCaption;
+        //pnlFormulario.BackColor = Color.Lavender;
+        //pnlLista.BackColor = SystemColors.ActiveCaption;
 
-        foreach (Control c in pnlLista.Controls)
-        {
-            if (c.EsInteractivo())
-                c.Enabled = true;
-        }
+        //foreach (Control c in pnlLista.Controls)
+        //{
+        //    if (c.EsInteractivo())
+        //        c.Enabled = true;
+        //}
     }
     protected virtual void ConfigurarDGV()
     {

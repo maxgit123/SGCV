@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
@@ -11,115 +12,71 @@ namespace CapaPresentacion.Formularios.Productos
     public partial class frmProductos : Form
     {
         private int idProductoSeleccionado = 0;
+        private static class NombreColumna
+        {
+            public const string ID_PRODUCTO = "id_producto";
+            public const string CODIGO = "codigo";
+            public const string DESCRIPCION = "descripcion";
+            public const string QUIEBRE_STOCK = "quiebreStock";
+            public const string CATEGORIA_ID = "id_categoria";
+            public const string BTN_EDITAR = "btnEditar";
+            public const string BTN_ELIMINAR = "btnEliminar";
+        }
         public frmProductos()
         {
             InitializeComponent();
         }
         private void frmProductos_Load(object sender, EventArgs e)
         {
-            foreach (DataGridViewColumn col in dgvProductos.Columns)
-            {
-                if (col.Name == "espacio")
-                {
-                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
-                else if (col.Name != "btnEditar" && col.Name != "btnEliminar")
-                {
-                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                }
-                else
-                {
-                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                    col.Width = 30;
-                    col.Resizable = DataGridViewTriState.False;
-                }
-            }
+            UtilidadesDGV.Configurar(dgvProductos);
 
-            List<CE_Categoria> listaCategoria = new CN_Categoria().Listar();
-            cbCategoria.DataSource = listaCategoria
-                .Select(c => new OpcionCombo { Valor = c.Id, Texto = c.Nombre })
-                .ToList();
-            cbCategoria.DisplayMember = "Texto";
-            cbCategoria.ValueMember = "Valor";
-            cbCategoria.SelectedIndex = 0;
+            UtilidadesCB.Cargar(cbCategoria, new CN_Categoria().Listar(), c => c.Id, c => c.Nombre);
 
-            var columnasVisibles = dgvProductos.Columns
-                .Cast<DataGridViewColumn>()
-                .Where(c => c.Visible && !string.IsNullOrWhiteSpace(c.HeaderText))
-                .Select(c => new OpcionCombo { Valor = c.Name, Texto = c.HeaderText })
-                .ToList();
-            cbBuscar.DataSource = columnasVisibles;
-            cbBuscar.DisplayMember = "Texto";
-            cbBuscar.ValueMember = "Valor";
-            if (cbBuscar.Items.Count > 0)
-                cbBuscar.SelectedIndex = 0;
+            UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvProductos, "descripcion");
 
-            MostrarListaProductos();
-            DeshabilitarForm();
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaProductos, pnlFormProducto, txtBuscar);
 
-            //foreach (DataGridViewColumn columna in dgvProductos.Columns)
-            //{
-            //    if (columna.Visible == true && columna.HeaderText != "")
-            //    {
-            //        cbBuscar.Items.Add(new OpcionCombo() { Valor = columna.Name, Texto = columna.HeaderText });
-            //    }
-            //}
+            ListarProductosEnDGV();
         }
         private void dgvProductos_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, "btnEditar", "btnEliminar");
+            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, NombreColumna.BTN_EDITAR, NombreColumna.BTN_ELIMINAR);
         }
         private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex < 0 || (dgvProductos.Columns[e.ColumnIndex].Name != "btnEditar" && dgvProductos.Columns[e.ColumnIndex].Name != "btnEliminar"))
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+
+            string nombreColumna = dgvProductos.Columns[e.ColumnIndex].Name;
+
+            if (nombreColumna != NombreColumna.BTN_EDITAR && nombreColumna != NombreColumna.BTN_ELIMINAR)
                 return;
 
-            int indiceFila = e.RowIndex;
-
-            if (dgvProductos.Columns[e.ColumnIndex].Name == "btnEditar")
+            if (nombreColumna == NombreColumna.BTN_EDITAR)
             {
-                idProductoSeleccionado = Convert.ToInt32(dgvProductos.Rows[indiceFila].Cells["id_producto"].Value);
-                txtCodigo.Text = dgvProductos.Rows[indiceFila].Cells["codigo"].Value?.ToString() ?? "";
-                txtDescripcion.Text = dgvProductos.Rows[indiceFila].Cells["descripcion"].Value.ToString();
-                nudQuiebreStock.Value = Convert.ToInt32(dgvProductos.Rows[indiceFila].Cells["quiebreStock"].Value);
-                
-                foreach (OpcionCombo oc in cbCategoria.Items)
-                {
-                    if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvProductos.Rows[indiceFila].Cells["id_categoria"].Value))
-                    {
-                        int indice_combo = cbCategoria.Items.IndexOf(oc);
-                        cbCategoria.SelectedIndex = indice_combo;
-                        break;
-                    }
-                }
-
-                HabilitarForm();
+                CargarDatosParaEdicion(e.RowIndex);
+                ConfigurarFormularioParaEdicion(false);
             }
-            else if (dgvProductos.Columns[e.ColumnIndex].Name == "btnEliminar")
+            else if (nombreColumna == NombreColumna.BTN_ELIMINAR)
             {
-                DialogResult respuestaEliminar = MessageBox.Show(
-                    $"¿Desea eliminar el producto {dgvProductos.Rows[indiceFila].Cells["descripcion"].Value}?",
-                    "Eliminar Producto", MessageBoxButtons.YesNo, MessageBoxIcon.Question
-                );
-
-                if (respuestaEliminar == DialogResult.No)
-                    return;
-
-                CE_Producto oProducto = new CE_Producto()
-                {
-                    Id = int.Parse(dgvProductos.Rows[indiceFila].Cells["id_producto"].Value.ToString())
-                };
-
-                bool respuesta = new CN_Producto().Eliminar(oProducto, out string mensaje);
-
-                if (respuesta)
-                    dgvProductos.Rows.RemoveAt(indiceFila);
-                else
-                    MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                EliminarProducto(e.RowIndex);
             }
+        }
+        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
+        {
+            UtilidadesDGV.AplicarFiltro(dgvProductos, cbBuscar, txtBuscar.Text);
+        }
+        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
+        {
+            UtilidadesDGV.QuitarFiltro(dgvProductos, txtBuscar);
+        }
+        private void btnCrear_Click(object sender, EventArgs e)
+        {
+            ConfigurarFormularioParaEdicion(true);
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (!ValidarCampos()) return;
+
             CE_Producto oProducto = new CE_Producto()
             {
                 Id = idProductoSeleccionado,
@@ -132,76 +89,30 @@ namespace CapaPresentacion.Formularios.Productos
                 }
             };
 
-            if (oProducto.Id == 0)
-            {
-                int idProductoCreado = new CN_Producto().Crear(oProducto, out string mensaje);
+            string mensaje;
+            bool operacionExitosa;
 
-                if (idProductoCreado == 0)
-                {
-                    MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                };
-
-                MostrarListaProductos();
-                LimpiarForm();
-                DeshabilitarForm();
-            }
+            if (idProductoSeleccionado == 0)
+                operacionExitosa = new CN_Producto().Crear(oProducto, out mensaje) != 0;
             else
+                operacionExitosa = new CN_Producto().Actualizar(oProducto, out mensaje);
+
+            if (!operacionExitosa)
             {
-                bool resultado = new CN_Producto().Actualizar(oProducto, out string mensaje);
-
-                if (!resultado)
-                {
-                    MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-
-                MostrarListaProductos();
-                LimpiarForm();
-                DeshabilitarForm();
+                MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
+
+            ListarProductosEnDGV();
+            LimpiarForm();
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaProductos, pnlFormProducto, txtBuscar);
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             LimpiarForm();
-            DeshabilitarForm();
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaProductos, pnlFormProducto, txtBuscar);
         }
-        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (dgvProductos.Rows.Count == 0)
-                return;
-
-            string textoFiltro = txtBuscar.Text.Trim().ToUpper();
-            string columnaFiltro = ((OpcionCombo)cbBuscar.SelectedItem).Valor.ToString();
-
-            foreach (DataGridViewRow row in dgvProductos.Rows)
-            {
-                if (row.Cells[columnaFiltro].Value != null &&
-                    row.Cells[columnaFiltro].Value.ToString().Trim().ToUpper().Contains(textoFiltro))
-                {
-                    row.Visible = true;
-                }
-                else
-                {
-                    row.Visible = false;
-                }
-            }
-        }
-        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
-        {
-            txtBuscar.Clear();
-
-            foreach (DataGridViewRow row in dgvProductos.Rows)
-            {
-                row.Visible = true;
-            }
-        }
-        private void btnCrear_Click(object sender, EventArgs e)
-        {
-            LimpiarForm();
-            HabilitarForm();
-        }
-        private void MostrarListaProductos()
+        private void ListarProductosEnDGV()
         {
             dgvProductos.Rows.Clear();
             List<CE_Producto> listaProducto = new CN_Producto().Listar();
@@ -221,36 +132,91 @@ namespace CapaPresentacion.Formularios.Productos
                     item.oCategoria.Nombre,
                     item.oEstado.Id,
                     item.oEstado.Nombre,
-                    "","",""
+                    "",""
                 });
             }
         }
         private void LimpiarForm()
         {
             idProductoSeleccionado = 0;
-            txtCodigo.Clear();
-            txtDescripcion.Clear();
-            nudQuiebreStock.Value = nudQuiebreStock.Minimum;
-            cbCategoria.SelectedIndex = 0;
-            txtCodigo.Select();
+            UtilidadesForm.ReiniciarControles(pnlFormProducto);
         }
-        private void HabilitarForm()
+        private bool ValidarCampos()
         {
-            txtCodigo.Enabled = true;
-            txtDescripcion.Enabled = true;
-            nudQuiebreStock.Enabled = true;
-            cbCategoria.Enabled = true;
-            btnGuardar.Enabled = true;
-            btnCancelar.Enabled = true;
+            var errores = new StringBuilder();
+
+            if (string.IsNullOrWhiteSpace(txtCodigo.Text))
+                errores.AppendLine("Ingrese un código para el producto.");
+
+            if (string.IsNullOrWhiteSpace(txtDescripcion.Text))
+                errores.AppendLine("Ingrese la descripción del producto.");
+
+            if (nudQuiebreStock.Value < 0 || nudQuiebreStock.Value > nudQuiebreStock.Maximum)
+                errores.AppendLine("Ingrese un quiebre de stock dentro del rango valido");
+
+            if (cbCategoria.SelectedItem == null || !(cbCategoria.SelectedItem is OpcionCombo))
+                errores.AppendLine("Seleccione una categoría para el producto.");
+
+            if (errores.Length > 0)
+            {
+                MessageBox.Show(
+                    $"Se encontraron los siguientes errores:\n\n {errores}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning
+                );
+                return false;
+            }
+
+            return true;
         }
-        private void DeshabilitarForm()
+        private void ConfigurarFormularioParaEdicion(bool esNuevoProducto)
         {
-            txtCodigo.Enabled = false;
-            txtDescripcion.Enabled = false;
-            nudQuiebreStock.Enabled = false;
-            cbCategoria.Enabled = false;
-            btnGuardar.Enabled = false;
-            btnCancelar.Enabled = false;
+            if (esNuevoProducto)
+            {
+                idProductoSeleccionado = 0;
+                LimpiarForm();
+            }
+            UtilidadesForm.AlternarPanelHabilitado(pnlFormProducto, pnlListaProductos, txtCodigo);
+        }
+        private void CargarDatosParaEdicion(int indiceFilaSeleccionada)
+        {
+            DataGridViewRow filaSeleccionada = dgvProductos.Rows[indiceFilaSeleccionada];
+
+            idProductoSeleccionado = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ID_PRODUCTO].Value);
+            txtCodigo.Text = filaSeleccionada.Cells[NombreColumna.CODIGO].Value?.ToString() ?? "";
+            txtDescripcion.Text = filaSeleccionada.Cells[NombreColumna.DESCRIPCION].Value.ToString();
+            nudQuiebreStock.Value = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.QUIEBRE_STOCK].Value);
+
+            int idCategoriaSeleccionada = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.CATEGORIA_ID].Value);
+            cbCategoria.SelectedItem = cbCategoria.Items
+                .Cast<OpcionCombo>()
+                .FirstOrDefault(oc => Convert.ToInt32(oc.Valor) == idCategoriaSeleccionada);
+        }
+        private bool EliminarProducto(int indiceFilaSeleccionada)
+        {
+            DataGridViewRow filaSeleccionada = dgvProductos.Rows[indiceFilaSeleccionada];
+
+            var nombreProducto = filaSeleccionada.Cells[NombreColumna.DESCRIPCION].Value.ToString();
+            
+            if (!UtilidadesForm.ConfirmarAccion($"¿Desea eliminar el producto {nombreProducto}?"))
+                return false;
+
+            var oProducto = new CE_Producto()
+            {
+                Id = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ID_PRODUCTO].Value)
+            };
+
+            if (!new CN_Producto().Eliminar(oProducto, out string mensaje))
+            {
+                MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            dgvProductos.Rows.RemoveAt(indiceFilaSeleccionada);
+            return true;
+        }
+        private void pnlListaProductos_Resize(object sender, EventArgs e)
+        {
+            UtilidadesForm.CentrarHorizontalmente(lblListaProductos);
         }
     }
 }

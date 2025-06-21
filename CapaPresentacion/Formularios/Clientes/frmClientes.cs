@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
@@ -9,184 +11,112 @@ namespace CapaPresentacion.Formularios.Clientes
 {
     public partial class frmClientes : Form
     {
+        private int idClienteSeleccionado = 0;
+        private static class NombreColumna
+        {
+            public const string ID_CLIENTE = "id_cliente";
+            public const string DOCUMENTO = "documento";
+            public const string NOMBRE = "nombre";
+            public const string APELLIDO = "apellido";
+            public const string TELEFONO = "telefono";
+            public const string CORREO = "correo";
+            public const string BTN_EDITAR = "btnEditar";
+            public const string BTN_ELIMINAR = "btnEliminar";
+        }
         public frmClientes()
         {
             InitializeComponent();
         }
         private void frmClientes_Load(object sender, EventArgs e)
         {
-            foreach (DataGridViewColumn col in dgvClientes.Columns)
-            {
-                if (col.Name != "btnEditar" && col.Name != "btnEliminar")
-                {
-                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                }
-                else
-                {
-                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                    col.Width = 30;
-                    col.Resizable = DataGridViewTriState.False;
-                }
-            }
+            UtilidadesDGV.Configurar(dgvClientes);
 
-            List<CE_ResponsableIVA> listaRespIVA = new CN_ResponsableIVA().Listar();
+            UtilidadesCB.Cargar(cbRespIVA, new CN_ResponsableIVA().Listar(), r => r.Id, r => r.Nombre);
 
-            foreach (CE_ResponsableIVA item in listaRespIVA)
-            {
-                cbRespIVA.Items.Add(new OpcionCombo() { Valor = item.Id, Texto = item.Nombre });
-            }
+            UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvClientes, NombreColumna.APELLIDO);
 
-            cbRespIVA.DisplayMember = "Texto";
-            cbRespIVA.ValueMember = "Valor";
-
-            if (cbRespIVA.Items.Count > 0)
-                cbRespIVA.SelectedIndex = 0;
-
-            foreach (DataGridViewColumn columna in dgvClientes.Columns)
-            {
-                if (columna.Visible == true && columna.HeaderText != "")
-                {
-                    cbBuscar.Items.Add(new OpcionCombo() { Valor = columna.Name, Texto = columna.HeaderText });
-                }
-            }
-
-            cbBuscar.DisplayMember = "Texto";
-            cbBuscar.ValueMember = "Valor";
-
-            if (cbBuscar.Items.Count > 0)
-                cbBuscar.SelectedIndex = 0;
-
-            MostrarListaClientes();
+            ListarClientesEnDGV();
         }
         private void dgvClientes_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, "btnEditar", "btnEliminar");
+            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, NombreColumna.BTN_EDITAR, NombreColumna.BTN_ELIMINAR);
         }
         private void dgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex < 0 || (dgvClientes.Columns[e.ColumnIndex].Name != "btnEditar" && dgvClientes.Columns[e.ColumnIndex].Name != "btnEliminar"))
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+
+            string nombreColumna = dgvClientes.Columns[e.ColumnIndex].Name;
+            if (nombreColumna != NombreColumna.BTN_EDITAR && nombreColumna != NombreColumna.BTN_ELIMINAR)
                 return;
 
-            int indice = e.RowIndex;
-
-            if (dgvClientes.Columns[e.ColumnIndex].Name == "btnEditar")
+            if (nombreColumna == NombreColumna.BTN_EDITAR)
             {
-                lblIndice.Text = indice.ToString();
-                lblID_Cliente.Text = dgvClientes.Rows[indice].Cells["ID_Cliente"].Value.ToString();
-
-                txtDocumento.Text = dgvClientes.Rows[indice].Cells["Documento"].Value.ToString();
-                txtNombre.Text = dgvClientes.Rows[indice].Cells["Nombre"].Value.ToString();
-                txtApellido.Text = dgvClientes.Rows[indice].Cells["Apellido"].Value.ToString();
-                txtTelefono.Text = dgvClientes.Rows[indice].Cells["Telefono"].Value.ToString();
-                txtCorreo.Text = dgvClientes.Rows[indice].Cells["Correo"].Value.ToString();
-                foreach (OpcionCombo oc in cbRespIVA.Items)
-                {
-                    if (Convert.ToInt32(oc.Valor) == Convert.ToInt32(dgvClientes.Rows[indice].Cells["ID_RespIVA"].Value))
-                    {
-                        int indice_combo = cbRespIVA.Items.IndexOf(oc);
-                        cbRespIVA.SelectedIndex = indice_combo;
-                        break;
-                    }
-                }
-
-                HabilitarForm();
+                CargarDatosParaEdicion(e.RowIndex);
+                ConfigurarFormularioParaEdicion(false);
             }
             else if (dgvClientes.Columns[e.ColumnIndex].Name == "btnEliminar")
             {
-                if (MessageBox.Show("¿Desea eliminar al cliente " + dgvClientes.Rows[indice].Cells["Nombre"].Value.ToString() +
-                    "?", "Eliminar Cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                    return;
-
-                CE_Cliente oCliente = new CE_Cliente()
-                {
-                    Id = Convert.ToInt32(dgvClientes.Rows[indice].Cells["ID_Cliente"].Value)
-                };
-
-                bool respuesta = new CN_Cliente().Eliminar(oCliente, out string mensaje);
-
-                if (respuesta)
-                    dgvClientes.Rows.RemoveAt(indice);
-                else
-                    MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                EliminarCliente(e.RowIndex);
             }
+        }
+        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
+        {
+            UtilidadesDGV.AplicarFiltro(dgvClientes, cbBuscar, txtBuscar.Text);
+        }
+        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
+        {
+            UtilidadesDGV.QuitarFiltro(dgvClientes, txtBuscar);
+        }
+        private void btnCrear_Click(object sender, EventArgs e)
+        {
+            ConfigurarFormularioParaEdicion(true);
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            string mensaje = string.Empty;
+            if (!ValidarCampos()) return;
 
             CE_Cliente oCliente = new CE_Cliente()
             {
-                Id = Convert.ToInt32(lblID_Cliente.Text),
+                Id = idClienteSeleccionado,
                 Documento = txtDocumento.Text.Trim(),
                 Nombre = txtNombre.Text.Trim(),
                 Apellido = txtApellido.Text.Trim(),
                 Telefono = txtTelefono.Text.Trim(),
                 Correo = txtCorreo.Text.Trim(),
-                oRespIVA = new CE_ResponsableIVA() { Id = Convert.ToInt32(((OpcionCombo)cbRespIVA.SelectedItem).Valor) },
+                oRespIVA = new CE_ResponsableIVA()
+                {
+                    Id = Convert.ToInt32(((OpcionCombo)cbRespIVA.SelectedItem).Valor)
+                }
             };
 
-            if (oCliente.Id == 0)
-            {
-                int idClienteCreado = new CN_Cliente().Crear(oCliente, out mensaje);
+            string mensaje;
+            bool operacionExitosa;
 
-                if (idClienteCreado == 0)
-                {
-                    MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-                MostrarListaClientes();
-                LimpiarForm();
-                DeshabilitarForm();
+            if (idClienteSeleccionado == 0)
+            {
+                operacionExitosa = new CN_Cliente().Crear(oCliente, out mensaje) != 0;
             }
             else
             {
-                bool resultado = new CN_Cliente().Actualizar(oCliente, out mensaje);
-
-                if (!resultado)
-                {
-                    MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-                MostrarListaClientes();
-                LimpiarForm();
-                DeshabilitarForm();
+                operacionExitosa = new CN_Cliente().Actualizar(oCliente, out mensaje);
             }
+
+            if (!operacionExitosa)
+            {
+                MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            ListarClientesEnDGV();
+            LimpiarForm();
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaClientes, pnlFormCliente, txtBuscar);
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             LimpiarForm();
-            DeshabilitarForm();
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaClientes, pnlFormCliente, txtBuscar);
         }
-        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
-        {
-            string columnaFiltro = ((OpcionCombo)cbBuscar.SelectedItem).Valor.ToString();
-            if (dgvClientes.Rows.Count > 0) //Si no hay elementos en la tabla no tiene sentido hacer la busqueda.
-            {
-                foreach (DataGridViewRow row in dgvClientes.Rows) //Recorre cada fila que encuentre en dgvClientes.
-                {
-                    if (row.Cells[columnaFiltro].Value.ToString().Trim().ToUpper().Contains(txtBuscar.Text.Trim().ToUpper()))
-                        //Se hace el filtro por la columnaFiltro si contiene lo que se encuentra en txtBuscar.
-                        row.Visible = true;
-                    else
-                        row.Visible = false;
-                }
-            }
-        }
-        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
-        {
-            txtBuscar.Clear();
-
-            foreach (DataGridViewRow row in dgvClientes.Rows)
-            {
-                row.Visible = true;
-            }
-        }
-        private void btnCrear_Click(object sender, EventArgs e)
-        {
-            LimpiarForm();
-            HabilitarForm();
-        }
-        private void MostrarListaClientes()
+        private void ListarClientesEnDGV()
         {
             dgvClientes.Rows.Clear();
             List<CE_Cliente> listaCliente = new CN_Cliente().Listar(out string mensaje);
@@ -217,40 +147,92 @@ namespace CapaPresentacion.Formularios.Clientes
         }
         private void LimpiarForm()
         {
-            lblIndice.Text = "-1";
-            lblID_Cliente.Text = "0";
-
-            txtDocumento.Text = "";
-            txtNombre.Text = "";
-            txtApellido.Text = "";
-            txtTelefono.Text = "";
-            txtCorreo.Text = "";
-            cbRespIVA.SelectedIndex = 0;
-
-            txtDocumento.Select();
+            idClienteSeleccionado = 0;
+            UtilidadesForm.ReiniciarControles(pnlFormCliente);
         }
-        private void HabilitarForm()
+        private bool ValidarCampos()
         {
-            txtDocumento.Enabled = true;
-            txtNombre.Enabled = true;
-            txtApellido.Enabled = true;
-            txtTelefono.Enabled = true;
-            txtCorreo.Enabled = true;
-            cbRespIVA.Enabled = true;
-            btnGuardar.Enabled = true;
-            btnCancelar.Enabled = true;
-        }
-        private void DeshabilitarForm()
-        {
-            txtDocumento.Enabled = false;
-            txtNombre.Enabled = false;
-            txtApellido.Enabled = false;
-            txtTelefono.Enabled = false;
-            txtCorreo.Enabled = false;
-            cbRespIVA.Enabled = false;
-            btnGuardar.Enabled = false;
-            btnCancelar.Enabled = false;
-        }
+            var errores = new StringBuilder();
 
+            if (string.IsNullOrWhiteSpace(txtDocumento.Text))
+                errores.AppendLine("Ingrese un nº de documento.");
+            else if (txtDocumento.Text.Length != 8 || !txtDocumento.Text.All(char.IsDigit))
+                errores.AppendLine("El documento debe tener ocho (8) caracteres numéricos.");
+
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+                errores.AppendLine("Ingrese el nombre del cliente.");
+
+            if (string.IsNullOrWhiteSpace(txtApellido.Text))
+                errores.AppendLine("Ingrese el apellido del cliente.");
+
+            if (string.IsNullOrWhiteSpace(txtTelefono.Text))
+                errores.AppendLine("Ingrese el número de teléfono del cliente.");
+
+            if (string.IsNullOrWhiteSpace(txtCorreo.Text))
+                errores.AppendLine("Ingrese el correo electrónico del cliente.");
+
+            if (errores.Length > 0)
+            {
+                MessageBox.Show(
+                    $"Se encontraron los siguientes errores:\n\n {errores}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning
+                );
+                return false;
+            }
+
+            return true;
+        }
+        private void ConfigurarFormularioParaEdicion(bool esNuevoCliente)
+        {
+            if (esNuevoCliente)
+            {
+                idClienteSeleccionado = 0;
+                LimpiarForm();
+            }
+            UtilidadesForm.AlternarPanelHabilitado(pnlFormCliente, pnlListaClientes, txtDocumento);
+        }
+        private void CargarDatosParaEdicion(int indiceFilaSeleccionada)
+        {
+            DataGridViewRow filaSeleccionada = dgvClientes.Rows[indiceFilaSeleccionada];
+
+            idClienteSeleccionado = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ID_CLIENTE].Value);
+            txtDocumento.Text = filaSeleccionada.Cells[NombreColumna.DOCUMENTO].Value.ToString();
+            txtNombre.Text = filaSeleccionada.Cells[NombreColumna.NOMBRE].Value.ToString();
+            txtApellido.Text = filaSeleccionada.Cells[NombreColumna.APELLIDO].Value.ToString();
+            txtTelefono.Text = filaSeleccionada.Cells[NombreColumna.TELEFONO].Value.ToString();
+            txtCorreo.Text = filaSeleccionada.Cells[NombreColumna.CORREO].Value.ToString();
+            int idRespIVASeleccionado = Convert.ToInt32(filaSeleccionada.Cells["ID_RespIVA"].Value);
+
+            cbRespIVA.SelectedItem = cbRespIVA.Items.Cast<OpcionCombo>()
+                .FirstOrDefault(oc => Convert.ToInt32(oc.Valor) == idRespIVASeleccionado);
+        }
+        private bool EliminarCliente(int indiceFilaSeleccionada)
+        {
+            DataGridViewRow filaSeleccionada = dgvClientes.Rows[indiceFilaSeleccionada];
+
+            var nombreCliente = filaSeleccionada.Cells[NombreColumna.NOMBRE].Value.ToString();
+            var apellidoCliente = filaSeleccionada.Cells[NombreColumna.APELLIDO].Value.ToString();
+            
+            if (!UtilidadesForm.ConfirmarAccion($"¿Desea eliminar al cliente {apellidoCliente}, {nombreCliente}?"))
+                return false;
+
+            var oCliente = new CE_Cliente()
+            {
+                Id = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ID_CLIENTE].Value)
+            };
+
+            if (!new CN_Cliente().Eliminar(oCliente, out string mensaje))
+            {
+                MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            dgvClientes.Rows.RemoveAt(indiceFilaSeleccionada);
+            return true;
+        }
+        private void pnlListaClientes_Resize(object sender, EventArgs e)
+        {
+            UtilidadesForm.CentrarHorizontalmente(lblListaClientes);
+        }
     }
 }

@@ -13,14 +13,11 @@ namespace CapaPresentacion.Formularios.Proveedores
         private int idProveedorSeleccionado = 0;
         private static class NombreColumna
         {
-            public const string ID_PROVEEDOR = "ID_Proveedor";
-            public const string RAZON_SOCIAL = "RazonSocial";
-            public const string OBSERVACION = "Observacion";
-            public const string FECHA_CREACION = "FechaCreacion";
-            public const string TELEFONO = "Telefono";
-            public const string CORREO = "Correo";
-            public const string ESTADO_ID = "ID_Estado";
-            public const string ESTADO_NOMBRE = "NombreEstado";
+            public const string ID_PROVEEDOR = "id_proveedor";
+            public const string RAZON_SOCIAL = "razonSocial";
+            public const string OBSERVACION = "observacion";
+            public const string TELEFONO = "telefono";
+            public const string CORREO = "correo";
             public const string BTN_EDITAR = "btnEditar";
             public const string BTN_ELIMINAR = "btnEliminar";
         }
@@ -181,15 +178,10 @@ namespace CapaPresentacion.Formularios.Proveedores
             txtTelefono.Text = dgvProveedores.Rows[indiceFila].Cells[NombreColumna.TELEFONO].Value.ToString();
             txtCorreo.Text = dgvProveedores.Rows[indiceFila].Cells[NombreColumna.CORREO].Value.ToString();
         }
-        private bool ConfirmarAccion(string mensaje)
-        {
-            return MessageBox.Show(mensaje, "Confirmación",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
-        }
         private bool EliminarProveedor(int indiceFila)
         {
             var nombreProveedor = dgvProveedores.Rows[indiceFila].Cells[NombreColumna.RAZON_SOCIAL].Value.ToString();
-            if (!ConfirmarAccion($"¿Desea eliminar al proveedor {nombreProveedor}?"))
+            if (!UtilidadesForm.ConfirmarAccion($"¿Desea eliminar al proveedor {nombreProveedor}?"))
                 return false;
 
             var oProveedor = new CE_Proveedor
@@ -208,7 +200,7 @@ namespace CapaPresentacion.Formularios.Proveedores
         }
         private void pnlListaProveedores_Resize(object sender, EventArgs e)
         {
-            lblListaProveedores.CentrarH();
+            UtilidadesForm.CentrarHorizontalmente(lblListaProveedores);
         }
     }
 }
