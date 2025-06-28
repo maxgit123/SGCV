@@ -46,9 +46,9 @@
     <Compile Include="CE_Comercio.cs" />
     <Compile Include="CE_Compra.cs" />
     <Compile Include="CE_Contacto.cs" />
-    <Compile Include="CE_DetalleCompra.cs" />
+    <Compile Include="CE_CompraDetalle.cs" />
     <Compile Include="CE_DetallePerdida.cs" />
-    <Compile Include="CE_DetalleVenta.cs" />
+    <Compile Include="CE_VentaDetalle.cs" />
     <Compile Include="CE_Direccion.cs" />
     <Compile Include="CE_Estado.cs" />
     <Compile Include="CE_Localidad.cs" />

@@ -41,7 +41,7 @@
             this.smenuDetalleCompras = new FontAwesome.Sharp.IconMenuItem();
             this.menuVentas = new FontAwesome.Sharp.IconMenuItem();
             this.smenuRegistrarVenta = new FontAwesome.Sharp.IconMenuItem();
-            this.listaDeVentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.smenuDetalleVentas = new System.Windows.Forms.ToolStripMenuItem();
             this.menuClientes = new FontAwesome.Sharp.IconMenuItem();
             this.menuTitulo = new System.Windows.Forms.MenuStrip();
             this.menuTituloUsuario = new System.Windows.Forms.ToolStripMenuItem();
@@ -190,7 +190,7 @@
             this.menuVentas.AutoSize = false;
             this.menuVentas.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.smenuRegistrarVenta,
-            this.listaDeVentasToolStripMenuItem});
+            this.smenuDetalleVentas});
             this.menuVentas.IconChar = FontAwesome.Sharp.IconChar.CashRegister;
             this.menuVentas.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(96)))), ((int)(((byte)(132)))));
             this.menuVentas.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -207,15 +207,16 @@
             this.smenuRegistrarVenta.IconColor = System.Drawing.Color.Black;
             this.smenuRegistrarVenta.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.smenuRegistrarVenta.Name = "smenuRegistrarVenta";
-            this.smenuRegistrarVenta.Size = new System.Drawing.Size(152, 22);
+            this.smenuRegistrarVenta.Size = new System.Drawing.Size(180, 22);
             this.smenuRegistrarVenta.Text = "Registrar Venta";
             this.smenuRegistrarVenta.Click += new System.EventHandler(this.smenuRegistrarVenta_Click);
             // 
-            // listaDeVentasToolStripMenuItem
+            // smenuDetalleVentas
             // 
-            this.listaDeVentasToolStripMenuItem.Name = "listaDeVentasToolStripMenuItem";
-            this.listaDeVentasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.listaDeVentasToolStripMenuItem.Text = "Lista de Ventas";
+            this.smenuDetalleVentas.Name = "smenuDetalleVentas";
+            this.smenuDetalleVentas.Size = new System.Drawing.Size(180, 22);
+            this.smenuDetalleVentas.Text = "Lista de Ventas";
+            this.smenuDetalleVentas.Click += new System.EventHandler(this.smenuDetalleVentas_Click);
             // 
             // menuClientes
             // 
@@ -259,20 +260,20 @@
             // smenuRol
             // 
             this.smenuRol.Name = "smenuRol";
-            this.smenuRol.Size = new System.Drawing.Size(180, 26);
+            this.smenuRol.Size = new System.Drawing.Size(178, 26);
             this.smenuRol.Text = "Rol";
             // 
             // cambiarClaveToolStripMenuItem
             // 
             this.cambiarClaveToolStripMenuItem.Name = "cambiarClaveToolStripMenuItem";
-            this.cambiarClaveToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.cambiarClaveToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
             this.cambiarClaveToolStripMenuItem.Text = "Cambiar clave";
             this.cambiarClaveToolStripMenuItem.Click += new System.EventHandler(this.cambiarContraseñaToolStripMenuItem_Click);
             // 
             // smenuCerrarSesion
             // 
             this.smenuCerrarSesion.Name = "smenuCerrarSesion";
-            this.smenuCerrarSesion.Size = new System.Drawing.Size(180, 26);
+            this.smenuCerrarSesion.Size = new System.Drawing.Size(178, 26);
             this.smenuCerrarSesion.Text = "Cerrar sesion";
             this.smenuCerrarSesion.Click += new System.EventHandler(this.smenuCerrarSesion_Click);
             // 
@@ -338,7 +339,7 @@
         private System.Windows.Forms.ToolStripMenuItem smenuCerrarSesion;
         private FontAwesome.Sharp.IconMenuItem smenuCategorias;
         private FontAwesome.Sharp.IconMenuItem smenuRegistCompra;
-        private System.Windows.Forms.ToolStripMenuItem listaDeVentasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem smenuDetalleVentas;
         private FontAwesome.Sharp.IconMenuItem smenuProductos;
         private System.Windows.Forms.ToolStripMenuItem smenuRol;
         private System.Windows.Forms.ToolStripMenuItem cambiarClaveToolStripMenuItem;

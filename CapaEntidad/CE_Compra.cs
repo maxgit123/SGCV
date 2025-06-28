@@ -9,7 +9,7 @@ namespace CapaEntidad
         public string FechaPedido { get; set; }
         public string FechaEntrega { get; set; }
         public string FechaCreacion { get; set; }
-        public List<CE_DetalleCompra> oDetalleCompra { get; set; }
+        public List<CE_CompraDetalle> oDetalleCompra { get; set; }
         public CE_Usuario oUsuario { get; set; }
         public CE_Estado oEstado { get; set; }
         public CE_Proveedor oProveedor { get; set; }

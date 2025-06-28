@@ -10,7 +10,7 @@ namespace CapaEntidad
         public decimal Pago { get; set; }
         public decimal Vuelto { get; set; }
         public string FechaCreacion { get; set; }
-        public List<CE_DetalleVenta> oDetalleVenta { get; set; }
+        public List<CE_VentaDetalle> oDetalleVenta { get; set; }
         public CE_Estado oEstado { get; set; }
         public CE_Usuario oUsuario { get; set; }
         public CE_Comercio oComercio { get; set; }

@@ -1,0 +1,222 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using CapaEntidad;
+using CapaNegocio;
+using CapaPresentacion.Utilidades;
+
+namespace CapaPresentacion.Formularios
+{
+    public partial class frmProducto : Form
+    {
+        private int idProductoSeleccionado = 0;
+        private static class NombreColumna
+        {
+            public const string ID_PRODUCTO = "id_producto";
+            public const string CODIGO = "codigo";
+            public const string DESCRIPCION = "descripcion";
+            public const string QUIEBRE_STOCK = "quiebreStock";
+            public const string CATEGORIA_ID = "id_categoria";
+            public const string BTN_EDITAR = "btnEditar";
+            public const string BTN_ELIMINAR = "btnEliminar";
+        }
+        public frmProducto()
+        {
+            InitializeComponent();
+        }
+        private void frmProductos_Load(object sender, EventArgs e)
+        {
+            UtilidadesDGV.Configurar(dgvProductos);
+
+            UtilidadesCB.Cargar(cbCategoria, new CN_Categoria().Listar(), c => c.Id, c => c.Nombre);
+
+            UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvProductos, "descripcion");
+
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaProductos, pnlFormProducto, txtBuscar);
+
+            ListarProductosEnDGV();
+        }
+        private void dgvProductos_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, NombreColumna.BTN_EDITAR, NombreColumna.BTN_ELIMINAR);
+        }
+        private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+
+            string nombreColumna = dgvProductos.Columns[e.ColumnIndex].Name;
+
+            if (nombreColumna != NombreColumna.BTN_EDITAR && nombreColumna != NombreColumna.BTN_ELIMINAR)
+                return;
+
+            if (nombreColumna == NombreColumna.BTN_EDITAR)
+            {
+                CargarDatosParaEdicion(e.RowIndex);
+                ConfigurarFormularioParaEdicion(false);
+            }
+            else if (nombreColumna == NombreColumna.BTN_ELIMINAR)
+            {
+                EliminarProducto(e.RowIndex);
+            }
+        }
+        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
+        {
+            UtilidadesDGV.AplicarFiltro(dgvProductos, cbBuscar, txtBuscar.Text);
+        }
+        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
+        {
+            UtilidadesDGV.QuitarFiltro(dgvProductos, txtBuscar);
+        }
+        private void btnCrear_Click(object sender, EventArgs e)
+        {
+            ConfigurarFormularioParaEdicion(true);
+        }
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (!ValidarCampos()) return;
+
+            CE_Producto oProducto = new CE_Producto()
+            {
+                Id = idProductoSeleccionado,
+                Codigo = txtCodigo.Text.Trim(),
+                Descripcion = txtDescripcion.Text.Trim(),
+                QuiebreStock = Convert.ToInt32(nudQuiebreStock.Value),
+                oCategoria = new CE_Categoria()
+                {
+                    Id = Convert.ToInt32(((OpcionCombo)cbCategoria.SelectedItem).Valor)
+                }
+            };
+
+            string mensaje;
+            bool operacionExitosa;
+
+            if (idProductoSeleccionado == 0)
+                operacionExitosa = new CN_Producto().Crear(oProducto, out mensaje) != 0;
+            else
+                operacionExitosa = new CN_Producto().Actualizar(oProducto, out mensaje);
+
+            if (!operacionExitosa)
+            {
+                MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            ListarProductosEnDGV();
+            LimpiarForm();
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaProductos, pnlFormProducto, txtBuscar);
+        }
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            LimpiarForm();
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaProductos, pnlFormProducto, txtBuscar);
+        }
+        private void ListarProductosEnDGV()
+        {
+            dgvProductos.Rows.Clear();
+            List<CE_Producto> listaProducto = new CN_Producto().Listar();
+
+            foreach (CE_Producto item in listaProducto)
+            {
+                dgvProductos.Rows.Add(new object[] {
+                    item.Id,
+                    item.Codigo,
+                    item.Descripcion,
+                    item.Costo,
+                    item.Precio,
+                    item.Stock,
+                    item.QuiebreStock,
+                    item.FechaCreacion,
+                    item.oCategoria.Id,
+                    item.oCategoria.Nombre,
+                    item.oEstado.Id,
+                    item.oEstado.Nombre,
+                    "",""
+                });
+            }
+        }
+        private void LimpiarForm()
+        {
+            idProductoSeleccionado = 0;
+            UtilidadesForm.ReiniciarControles(pnlFormProducto);
+        }
+        private bool ValidarCampos()
+        {
+            var errores = new StringBuilder();
+
+            if (string.IsNullOrWhiteSpace(txtCodigo.Text))
+                errores.AppendLine("Ingrese un código para el producto.");
+
+            if (string.IsNullOrWhiteSpace(txtDescripcion.Text))
+                errores.AppendLine("Ingrese la descripción del producto.");
+
+            if (nudQuiebreStock.Value < 0 || nudQuiebreStock.Value > nudQuiebreStock.Maximum)
+                errores.AppendLine("Ingrese un quiebre de stock dentro del rango valido");
+
+            if (cbCategoria.SelectedItem == null || !(cbCategoria.SelectedItem is OpcionCombo))
+                errores.AppendLine("Seleccione una categoría para el producto.");
+
+            if (errores.Length > 0)
+            {
+                MessageBox.Show(
+                    $"Se encontraron los siguientes errores:\n\n {errores}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning
+                );
+                return false;
+            }
+
+            return true;
+        }
+        private void ConfigurarFormularioParaEdicion(bool esNuevoProducto)
+        {
+            if (esNuevoProducto)
+            {
+                idProductoSeleccionado = 0;
+                LimpiarForm();
+            }
+            UtilidadesForm.AlternarPanelHabilitado(pnlFormProducto, pnlListaProductos, txtCodigo);
+        }
+        private void CargarDatosParaEdicion(int indiceFilaSeleccionada)
+        {
+            DataGridViewRow filaSeleccionada = dgvProductos.Rows[indiceFilaSeleccionada];
+
+            idProductoSeleccionado = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ID_PRODUCTO].Value);
+            txtCodigo.Text = filaSeleccionada.Cells[NombreColumna.CODIGO].Value?.ToString() ?? "";
+            txtDescripcion.Text = filaSeleccionada.Cells[NombreColumna.DESCRIPCION].Value.ToString();
+            nudQuiebreStock.Value = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.QUIEBRE_STOCK].Value);
+
+            int idCategoriaSeleccionada = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.CATEGORIA_ID].Value);
+            cbCategoria.SelectedItem = cbCategoria.Items
+                .Cast<OpcionCombo>()
+                .FirstOrDefault(oc => Convert.ToInt32(oc.Valor) == idCategoriaSeleccionada);
+        }
+        private bool EliminarProducto(int indiceFilaSeleccionada)
+        {
+            DataGridViewRow filaSeleccionada = dgvProductos.Rows[indiceFilaSeleccionada];
+
+            var nombreProducto = filaSeleccionada.Cells[NombreColumna.DESCRIPCION].Value.ToString();
+            
+            if (!UtilidadesForm.ConfirmarAccion($"¿Desea eliminar el producto {nombreProducto}?"))
+                return false;
+
+            var oProducto = new CE_Producto()
+            {
+                Id = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ID_PRODUCTO].Value)
+            };
+
+            if (!new CN_Producto().Eliminar(oProducto, out string mensaje))
+            {
+                MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            dgvProductos.Rows.RemoveAt(indiceFilaSeleccionada);
+            return true;
+        }
+        private void pnlListaProductos_Resize(object sender, EventArgs e)
+        {
+            UtilidadesForm.CentrarHorizontalmente(lblListaProductos);
+        }
+    }
+}

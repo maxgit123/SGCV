@@ -16,9 +16,7 @@ namespace CapaPresentacion.Formularios
             if (!CN_Conexion.VerificarConexion(out string errorMessage))
             {
                 MessageBox.Show($"No se pudo conectar a la base de datos:\n\n{errorMessage}",
-                               "Error de Conexión",
-                               MessageBoxButtons.OK,
-                               MessageBoxIcon.Error);
+                               "Error de Conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -35,14 +33,12 @@ namespace CapaPresentacion.Formularios
             if (oUsuario == null)
             {
                 MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                //MessageBox.Show("DNI y/o Clave inválidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
             // Acceso exitoso.
-            this.Hide();
-            // Se procede a abrir el dashborad.
-            frmInicio form = new frmInicio(oUsuario);
+            Hide();
+            var form = new frmInicio(oUsuario);
             // Cuando se cierra el dashboard vuelve a mostrar el form de login que se oculto.
             form.FormClosing += frm_closing;
             form.Show();
@@ -56,7 +52,7 @@ namespace CapaPresentacion.Formularios
             txtDocumento.Clear();
             txtClave.Clear();
             txtDocumento.Focus();
-            this.Show();
+            Show();
         }
         private void txtDocumento_KeyPress(object sender, KeyPressEventArgs e)
         {
