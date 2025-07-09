@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CN_Compra.cs" />
     <Compile Include="CN_Conexion.cs" />
     <Compile Include="Utilidades\ClaveHash.cs" />
     <Compile Include="CN_AlicuotaIVA.cs" />

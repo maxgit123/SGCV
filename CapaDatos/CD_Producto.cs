@@ -14,7 +14,7 @@ namespace CapaDatos
             List<CE_Producto> lista = new List<CE_Producto>();
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             using (SqlCommand cmd = new SqlCommand(
-                @"SELECT p.id_producto, p.codigo, p.descripcion, p.costo, p.precio, p.stock, p.quiebreStock, p.fechaCreacion,
+                @"SELECT p.id_producto, p.codigo, p.descripcion, p.precioCompra, p.precioVenta, p.stock, p.quiebreStock, p.fechaCreacion,
                 c.id_categoria, c.nombre AS [categoria],
                 e.id_estado, e.nombre AS [estado]
                 FROM Producto p
@@ -32,9 +32,10 @@ namespace CapaDatos
                             lista.Add(new CE_Producto()
                             {
                                 Id = Convert.ToInt32(reader["id_producto"]),
+                                Codigo = reader["codigo"].ToString(),
                                 Descripcion = reader["descripcion"].ToString(),
-                                Costo = Convert.ToDecimal(reader["costo"]),
-                                Precio = Convert.ToDecimal(reader["precio"]),
+                                PrecioCompra = Convert.ToDecimal(reader["precioCompra"]),
+                                PrecioVenta = Convert.ToDecimal(reader["precioVenta"]),
                                 Stock = Convert.ToInt32(reader["stock"]),
                                 QuiebreStock = Convert.ToInt32(reader["quiebreStock"]),
                                 FechaCreacion = reader["fechaCreacion"].ToString(),
@@ -70,6 +71,7 @@ namespace CapaDatos
             {
                 cmd.CommandType = CommandType.StoredProcedure;
 
+                cmd.Parameters.AddWithValue("@codigo", oProducto.Codigo);
                 cmd.Parameters.AddWithValue("@descripcion", oProducto.Descripcion);
                 cmd.Parameters.AddWithValue("@quiebreStock", oProducto.QuiebreStock);
                 cmd.Parameters.AddWithValue("@categoria_id", oProducto.oCategoria.Id);

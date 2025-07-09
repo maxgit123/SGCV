@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CapaEntidad
 {
@@ -6,9 +7,9 @@ namespace CapaEntidad
     {
         public int IdCompra { get; set; }
         public decimal Total { get; set; }
-        public string FechaPedido { get; set; }
-        public string FechaEntrega { get; set; }
-        public string FechaCreacion { get; set; }
+        public DateTime FechaPedido { get; set; }
+        public DateTime FechaEntrega { get; set; }
+        public DateTime FechaCreacion { get; set; }
         public List<CE_CompraDetalle> oDetalleCompra { get; set; }
         public CE_Usuario oUsuario { get; set; }
         public CE_Estado oEstado { get; set; }

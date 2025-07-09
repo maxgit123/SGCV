@@ -123,8 +123,8 @@ namespace CapaPresentacion.Formularios
                     item.Id,
                     item.Codigo,
                     item.Descripcion,
-                    item.Costo,
-                    item.Precio,
+                    item.PrecioCompra,
+                    item.PrecioVenta,
                     item.Stock,
                     item.QuiebreStock,
                     item.FechaCreacion,
@@ -182,7 +182,7 @@ namespace CapaPresentacion.Formularios
             DataGridViewRow filaSeleccionada = dgvProductos.Rows[indiceFilaSeleccionada];
 
             idProductoSeleccionado = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ID_PRODUCTO].Value);
-            txtCodigo.Text = filaSeleccionada.Cells[NombreColumna.CODIGO].Value?.ToString() ?? "";
+            txtCodigo.Text = filaSeleccionada.Cells[NombreColumna.CODIGO].Value.ToString();
             txtDescripcion.Text = filaSeleccionada.Cells[NombreColumna.DESCRIPCION].Value.ToString();
             nudQuiebreStock.Value = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.QUIEBRE_STOCK].Value);
 

@@ -56,16 +56,6 @@ namespace CapaPresentacion.Formularios
             txtCP.Text = oComercio.oLocalidad.CodigoPostal;
             cbProvincia.SelectedIndex = oComercio.oProvincia.Id - 1;
             cbResponsableIVA.SelectedValue = oComercio.oResponsableIVA.Id;
-
-            //foreach (OpcionCombo item in cbResponsableIVA.Items)
-            //{
-            //    if ((int)item.Valor == oComercio.oResponsableIVA.Id)
-            //    {
-            //        cbResponsableIVA.SelectedItem = item;
-            //        break;
-            //    }
-            //}
-
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {

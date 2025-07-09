@@ -43,10 +43,10 @@ namespace CapaPresentacion.Formularios.Modal
             Producto = new CE_Producto()
             {
                 Id = Convert.ToInt32(fila.Cells[NombreColumna.ID_PRODUCTO].Value),
-                Codigo = fila.Cells[NombreColumna.CODIGO].Value.ToString(), // TODO: agregar en diseñador
+                Codigo = fila.Cells[NombreColumna.CODIGO].Value.ToString(),
                 Descripcion = fila.Cells[NombreColumna.DESCRIPCION].Value.ToString(),
-                Costo = Convert.ToDecimal(fila.Cells[NombreColumna.COSTO].Value),
-                Precio = Convert.ToDecimal(fila.Cells[NombreColumna.PRECIO].Value),
+                PrecioCompra = Convert.ToDecimal(fila.Cells[NombreColumna.COSTO].Value),
+                PrecioVenta = Convert.ToDecimal(fila.Cells[NombreColumna.PRECIO].Value),
                 Stock = Convert.ToInt32(fila.Cells[NombreColumna.STOCK].Value),
                 //oCategoria = new CE_Categoria()
                 //{
@@ -83,8 +83,8 @@ namespace CapaPresentacion.Formularios.Modal
                     item.Id,
                     item.Codigo,
                     item.Descripcion,
-                    item.Costo,
-                    item.Precio,
+                    item.PrecioCompra,
+                    item.PrecioVenta,
                     item.Stock,
                     item.oCategoria.Nombre
                 });

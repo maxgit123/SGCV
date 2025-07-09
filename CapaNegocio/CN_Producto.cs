@@ -16,9 +16,6 @@ namespace CapaNegocio
         {
             var errores = new StringBuilder();
 
-            //if (string.IsNullOrWhiteSpace(oProducto.Codigo))
-            //    errores.AppendLine("Ingrese el codigo del producto.");
-
             if (string.IsNullOrWhiteSpace(oProducto.Codigo))
                 errores.AppendLine("Ingrese un código para el producto.");
 
