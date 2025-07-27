@@ -2,16 +2,19 @@
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
+using CapaPresentacion.Formularios.Base;
 
 namespace CapaPresentacion.Formularios
 {
-    public partial class frmLogin : Form
+    public partial class frmLogin : MaterialModalBase
     {
         public frmLogin()
         {
             InitializeComponent();
+
+            panel1.BackColor = _materialColorDark;
         }
-        private void btnIngresar_Click(object sender, EventArgs e)
+        private void btnIngrsar_Click(object sender, EventArgs e)
         {
             if (!CN_Conexion.VerificarConexion(out string errorMessage))
             {
@@ -20,19 +23,23 @@ namespace CapaPresentacion.Formularios
                 return;
             }
 
+            string documento = txtDocumento.Text.Trim();
+            string clave = txtClave.Text.Trim();
+
             // Validacion de campos del formulario.
-            if (string.IsNullOrWhiteSpace(txtDocumento.Text) || string.IsNullOrWhiteSpace(txtClave.Text))
+            if (string.IsNullOrWhiteSpace(documento) || string.IsNullOrWhiteSpace(clave))
             {
-                MessageBox.Show("Debe ingresar DNI y clave.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Debe ingresar DNI y clave.", "Advertencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
             // Procesamiento de inicio de sesión.
-            CE_Usuario oUsuario = new CN_Usuario().Login(txtDocumento.Text.Trim(), txtClave.Text.Trim(), out string mensaje);
+            CE_Usuario oUsuario = new CN_Usuario().Login(documento, clave, out string mensaje);
 
             if (oUsuario == null)
             {
-                MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -59,6 +66,21 @@ namespace CapaPresentacion.Formularios
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+        private void txtClave_TrailingIconClick(object sender, EventArgs e)
+        {
+            if (txtClave.UseSystemPasswordChar)
+            {
+                txtClave.UseSystemPasswordChar = false;
+                txtClave.PasswordChar = '\0';
+                txtClave.TrailingIcon = Properties.Resources.visible_32;
+            }
+            else
+            {
+                txtClave.UseSystemPasswordChar = true;
+                txtClave.PasswordChar = '●';
+                txtClave.TrailingIcon = Properties.Resources.hide_32;
             }
         }
     }

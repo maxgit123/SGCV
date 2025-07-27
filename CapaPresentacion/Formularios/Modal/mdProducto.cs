@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
+using CapaPresentacion.Formularios.Base;
 using CapaPresentacion.Utilidades;
 
 namespace CapaPresentacion.Formularios.Modal
 {
-    public partial class mdProducto : Form
+    public partial class mdProducto : MaterialModalBase
     {
-        public CE_Producto Producto { get; set; }
+        public CE_Producto _producto { get; set; }
         private static class NombreColumna
         {
             public const string ID_PRODUCTO = "id_producto";
@@ -21,15 +21,10 @@ namespace CapaPresentacion.Formularios.Modal
             public const string STOCK = "stock";
             public const string CATEGORIA = "categoria";
         }
+
         public mdProducto()
         {
-            StartPosition = FormStartPosition.CenterParent;
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            Size = new Size(466, 327);
             InitializeComponent();
-        }
-        private void mdProducto_Load(object sender, EventArgs e)
-        {
             UtilidadesDGV.Configurar(dgvProductos);
             UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvProductos, NombreColumna.CODIGO);
             ListarProductosEnDGV();
@@ -40,7 +35,7 @@ namespace CapaPresentacion.Formularios.Modal
 
             var fila = dgvProductos.Rows[e.RowIndex];
 
-            Producto = new CE_Producto()
+            _producto = new CE_Producto()
             {
                 Id = Convert.ToInt32(fila.Cells[NombreColumna.ID_PRODUCTO].Value),
                 Codigo = fila.Cells[NombreColumna.CODIGO].Value.ToString(),
@@ -61,10 +56,11 @@ namespace CapaPresentacion.Formularios.Modal
         {
             UtilidadesDGV.AplicarFiltro(dgvProductos, cbBuscar, txtBuscar.Text);
         }
-        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
+        private void txtBuscar_TrailingIconClick(object sender, EventArgs e)
         {
             UtilidadesDGV.QuitarFiltro(dgvProductos, txtBuscar);
         }
+
         private void ListarProductosEnDGV()
         {
             dgvProductos.Rows.Clear();
@@ -90,5 +86,6 @@ namespace CapaPresentacion.Formularios.Modal
                 });
             }
         }
+
     }
 }

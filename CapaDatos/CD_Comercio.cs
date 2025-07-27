@@ -13,16 +13,19 @@ namespace CapaDatos
 
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             using (SqlCommand cmd = new SqlCommand(@"
-                    SELECT c.id_comercio, c.razonSocial, c.cuit, c.ingresosBrutos, c.inicioActividad, c.puntoVenta, c.telefono, c.correo, c.fechaActualizacion,
-                    d.id_direccion, d.calle, d.numero,
-                    l.id_localidad, l.nombre AS localidad_nombre, l.codigoPostal,
-                    p.id_provincia, p.nombre AS provincia_nombre,
-                    r.id_responsableIVA, r.nombre AS respIVA_nombre
+                    SELECT c.id_comercio, c.razonSocial, c.cuit, c.ingresosBrutos,
+                        c.inicioActividad, c.puntoVenta, c.telefono, c.correo,
+                        c.fechaActualizacion, c.logo,
+                        d.id_direccion, d.calle, d.numero,
+                        l.id_localidad, l.nombre AS localidad_nombre, l.codigoPostal,
+                        p.id_provincia, p.nombre AS provincia_nombre,
+                        r.id_responsableIVA, r.nombre AS respIVA_nombre
                     FROM Comercio c
                     INNER JOIN Direccion d ON d.id_direccion = c.direccion_id
                     INNER JOIN Localidad l ON l.id_localidad = c.localidad_id
                     INNER JOIN cProvincia p ON p.id_provincia = c.provincia_id
-                    INNER JOIN cResponsableIVA r ON r.id_responsableIVA = c.responsableIVA_id;", oConexion))
+                    INNER JOIN cResponsableIVA r ON r.id_responsableIVA = c.responsableIVA_id
+                    WHERE c.id_comercio = 1;", oConexion))
             {
                 try
                 {
@@ -43,6 +46,7 @@ namespace CapaDatos
                                 Telefono = reader["telefono"].ToString(),
                                 Correo = reader["correo"].ToString(),
                                 FechaActualizacion = Convert.ToDateTime(reader["fechaActualizacion"]),
+                                Logo = reader["logo"] != DBNull.Value ? (byte[])reader["logo"] : null,
                                 oDireccion = new CE_Direccion()
                                 {
                                     Id = Convert.ToInt32(reader["id_direccion"]),
@@ -100,6 +104,7 @@ namespace CapaDatos
                 cmd.Parameters.AddWithValue("@provincia_id", oComercio.oProvincia.Id);
                 cmd.Parameters.AddWithValue("@responsableIVA_id", oComercio.oResponsableIVA.Id);
                 cmd.Parameters.AddWithValue("@id_Comercio", oComercio.Id);
+                cmd.Parameters.Add("@logo", SqlDbType.VarBinary).Value = (object)oComercio.Logo ?? DBNull.Value;
                 // ------ Direccion ------
                 cmd.Parameters.AddWithValue("@calle", oComercio.oDireccion.Calle);
                 cmd.Parameters.AddWithValue("@numero", oComercio.oDireccion.Numero);
@@ -124,69 +129,6 @@ namespace CapaDatos
                 }
             }
             return respuesta;
-        }
-        public byte[] LeerLogo(out bool logoLeido)
-        {
-            logoLeido = false;
-            byte[] logoBytes = Array.Empty<byte>();
-
-            using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
-            using (SqlCommand cmd = new SqlCommand("SELECT logo FROM Comercio WHERE id_comercio = 1;", oConexion))
-            {
-                try
-                {
-                    oConexion.Open();
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read() && reader["logo"] != DBNull.Value)
-                        {
-                            //logoBytes = reader["logo"] != DBNull.Value ? (byte[])reader["logo"] : new byte[0];
-                            logoBytes = (byte[])reader["Logo"];
-                            logoLeido = true;
-                            // La BD lo va a guardar distinto a ese array
-                            // por eso la conversion a byte, pero de un formato de codigo
-                            // no uno de base de datos.
-                        }
-                    }
-                }
-                catch (SqlException)
-                {
-                    //mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
-                }
-            }
-            return logoBytes;
-        }
-        public bool ActualizarLogo(byte[] imagen, out string mensaje)
-        {
-            mensaje = string.Empty;
-
-            using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
-            using (SqlCommand cmd = new SqlCommand(
-                @"UPDATE Comercio SET logo = @imagen
-                WHERE id_comercio = 1;", oConexion))
-            {
-                cmd.Parameters.Add("@imagen", SqlDbType.VarBinary).Value = imagen ?? Array.Empty<byte>();
-                
-                try
-                {
-                    oConexion.Open();
-                    int filasAfectadas = cmd.ExecuteNonQuery();
-
-                    if (filasAfectadas < 1)
-                    {
-                        mensaje = "No se pudo actualizar el logo.";
-                        return false;
-                    }
-
-                    return true;
-                }
-                catch (SqlException ex)
-                {
-                    mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
-                    return false;
-                }
-            }
         }
     }
 }

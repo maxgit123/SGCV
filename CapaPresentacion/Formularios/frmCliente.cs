@@ -11,7 +11,7 @@ namespace CapaPresentacion.Formularios
 {
     public partial class frmCliente : Form
     {
-        private int idClienteSeleccionado = 0;
+        private int _idClienteSeleccionado = 0;
         private static class NombreColumna
         {
             public const string ID_CLIENTE = "id_cliente";
@@ -26,20 +26,21 @@ namespace CapaPresentacion.Formularios
         public frmCliente()
         {
             InitializeComponent();
-        }
-        private void frmClientes_Load(object sender, EventArgs e)
-        {
+
+            this.BackColor = System.Drawing.Color.FromArgb(63, 81, 181);
             UtilidadesDGV.Configurar(dgvClientes);
 
-            UtilidadesCB.Cargar(cbRespIVA, new CN_ResponsableIVA().Listar(), r => r.Id, r => r.Nombre);
-
+            UtilidadesCB.Cargar(cbRespIva, new CN_ResponsableIVA().Listar(), r => r.Id, r => r.Nombre);
             UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvClientes, NombreColumna.APELLIDO);
-
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaClientes, pnlFormCliente, txtBuscar);
             ListarClientesEnDGV();
         }
         private void dgvClientes_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, NombreColumna.BTN_EDITAR, NombreColumna.BTN_ELIMINAR);
+            UtilidadesDGV.PintarbtnEditarEliminar(sender, e,
+                nombreColEditar: NombreColumna.BTN_EDITAR,
+                nombreColEliminar: NombreColumna.BTN_ELIMINAR
+            );
         }
         private void dgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -63,7 +64,7 @@ namespace CapaPresentacion.Formularios
         {
             UtilidadesDGV.AplicarFiltro(dgvClientes, cbBuscar, txtBuscar.Text);
         }
-        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
+        private void txtBuscar_TrailingIconClick(object sender, EventArgs e)
         {
             UtilidadesDGV.QuitarFiltro(dgvClientes, txtBuscar);
         }
@@ -77,7 +78,7 @@ namespace CapaPresentacion.Formularios
 
             CE_Cliente oCliente = new CE_Cliente()
             {
-                Id = idClienteSeleccionado,
+                Id = _idClienteSeleccionado,
                 Documento = txtDocumento.Text.Trim(),
                 Nombre = txtNombre.Text.Trim(),
                 Apellido = txtApellido.Text.Trim(),
@@ -85,14 +86,14 @@ namespace CapaPresentacion.Formularios
                 Correo = txtCorreo.Text.Trim(),
                 oRespIVA = new CE_ResponsableIVA()
                 {
-                    Id = Convert.ToInt32(((OpcionCombo)cbRespIVA.SelectedItem).Valor)
+                    Id = Convert.ToInt32(((OpcionCombo)cbRespIva.SelectedItem).Valor)
                 }
             };
 
             string mensaje;
             bool operacionExitosa;
 
-            if (idClienteSeleccionado == 0)
+            if (_idClienteSeleccionado == 0)
             {
                 operacionExitosa = new CN_Cliente().Crear(oCliente, out mensaje) != 0;
             }
@@ -116,6 +117,11 @@ namespace CapaPresentacion.Formularios
             LimpiarForm();
             UtilidadesForm.AlternarPanelHabilitado(pnlListaClientes, pnlFormCliente, txtBuscar);
         }
+        private void pnlListaClientes_Resize(object sender, EventArgs e)
+        {
+            UtilidadesForm.CentrarHorizontalmente(lblListaClientes);
+        }
+
         private void ListarClientesEnDGV()
         {
             dgvClientes.Rows.Clear();
@@ -147,7 +153,7 @@ namespace CapaPresentacion.Formularios
         }
         private void LimpiarForm()
         {
-            idClienteSeleccionado = 0;
+            _idClienteSeleccionado = 0;
             UtilidadesForm.ReiniciarControles(pnlFormCliente);
         }
         private bool ValidarCampos()
@@ -186,7 +192,7 @@ namespace CapaPresentacion.Formularios
         {
             if (esNuevoCliente)
             {
-                idClienteSeleccionado = 0;
+                _idClienteSeleccionado = 0;
                 LimpiarForm();
             }
             UtilidadesForm.AlternarPanelHabilitado(pnlFormCliente, pnlListaClientes, txtDocumento);
@@ -195,7 +201,7 @@ namespace CapaPresentacion.Formularios
         {
             DataGridViewRow filaSeleccionada = dgvClientes.Rows[indiceFilaSeleccionada];
 
-            idClienteSeleccionado = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ID_CLIENTE].Value);
+            _idClienteSeleccionado = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ID_CLIENTE].Value);
             txtDocumento.Text = filaSeleccionada.Cells[NombreColumna.DOCUMENTO].Value.ToString();
             txtNombre.Text = filaSeleccionada.Cells[NombreColumna.NOMBRE].Value.ToString();
             txtApellido.Text = filaSeleccionada.Cells[NombreColumna.APELLIDO].Value.ToString();
@@ -203,7 +209,7 @@ namespace CapaPresentacion.Formularios
             txtCorreo.Text = filaSeleccionada.Cells[NombreColumna.CORREO].Value.ToString();
             int idRespIVASeleccionado = Convert.ToInt32(filaSeleccionada.Cells["ID_RespIVA"].Value);
 
-            cbRespIVA.SelectedItem = cbRespIVA.Items.Cast<OpcionCombo>()
+            cbRespIva.SelectedItem = cbRespIva.Items.Cast<OpcionCombo>()
                 .FirstOrDefault(oc => Convert.ToInt32(oc.Valor) == idRespIVASeleccionado);
         }
         private bool EliminarCliente(int indiceFilaSeleccionada)
@@ -229,10 +235,6 @@ namespace CapaPresentacion.Formularios
 
             dgvClientes.Rows.RemoveAt(indiceFilaSeleccionada);
             return true;
-        }
-        private void pnlListaClientes_Resize(object sender, EventArgs e)
-        {
-            UtilidadesForm.CentrarHorizontalmente(lblListaClientes);
         }
     }
 }

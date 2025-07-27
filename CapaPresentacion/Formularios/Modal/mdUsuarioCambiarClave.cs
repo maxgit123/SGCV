@@ -1,26 +1,34 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
+using CapaPresentacion.Formularios.Base;
 
 namespace CapaPresentacion.Formularios.Modal
 {
-    public partial class mdUsuarioCambiarClave : Form
+    public partial class mdUsuarioCambiarClave : MaterialModalBase
     {
-        private static CE_Usuario usuarioActual;
+        private static CE_Usuario _usuarioActual;
         public mdUsuarioCambiarClave(CE_Usuario oUsuario)
         {
-            usuarioActual = oUsuario;
             InitializeComponent();
+            _usuarioActual = oUsuario;
+            Size = new Size(292, 321);
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            bool resultado = new CN_Usuario().CambiarClave(usuarioActual, txtClaveActual.Text, txtClaveNueva.Text, out string mensaje);
+            bool resultado = new CN_Usuario().CambiarClave(
+                _usuarioActual,
+                txtClaveActual.Text,
+                txtClaveNueva.Text,
+                out string mensaje
+            );
 
             if (resultado)
             {
                 MessageBox.Show("Clave cambiada con exito.", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                Close();
             }
             else
             {
@@ -29,7 +37,7 @@ namespace CapaPresentacion.Formularios.Modal
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

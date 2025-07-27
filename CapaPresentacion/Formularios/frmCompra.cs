@@ -12,106 +12,79 @@ namespace CapaPresentacion.Formularios
 {
     public partial class frmCompra : Form
     {
-        private readonly CE_Usuario usuario;
+        private readonly CE_Usuario _usuario;
         private int idProveedorSeleccionado = 0;
         private int idProductoSeleccionado = 0;
         private const string FormatoPrecio = "0.00";
-        private static readonly CultureInfo CulturaArgentina = new CultureInfo("es-AR");
-
+        private static readonly CultureInfo culturaArgentina = new CultureInfo("es-AR");
         private static class NombreColumna
         {
             public const string ID_PRODUCTO = "id_producto";
-            public const string DESCRIPCION = "descripcion";
+            //public const string DESCRIPCION = "descripcion";
             public const string PRECIO_COMPRA = "precioCompra";
             public const string CANTIDAD = "cantidad";
             public const string SUBTOTAL = "subTotal";
             public const string BTN_ELIMINAR = "btnEliminar";
         }
+
         public frmCompra(CE_Usuario oUsuario = null)
         {
-            usuario = oUsuario;
+            _usuario = oUsuario;
             InitializeComponent();
         }
         private void frmCompras_Load(object sender, EventArgs e)
         {
             UtilidadesDGV.Configurar(dgvProductos);
-            dtpPedido.Value = DateTime.Now;
-            dtpEntrega.Value = DateTime.Now;
+            dtpFechaPedido.Value = DateTime.Now;
+            dtpFechaEntrega.Value = DateTime.Now;
             txtRazonSocial.ReadOnly = true;
-            txtDescProducto.ReadOnly = true;
-            nudCantidad.Minimum = 1;
-            nudCantidad.Maximum = 999;
+            txtDescripcionProducto.ReadOnly = true;
+            txtTotal.ReadOnly = true;
+            nudCantidadProducto.Minimum = 1;
+            nudCantidadProducto.Maximum = 999;
         }
         private void dgvProductos_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.RowIndex < 0)
-                return;
-
-            if (e.ColumnIndex == dgvProductos.ColumnCount - 1) //Pinta el icono de eliminar
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                var w = Properties.Resources.delete16.Width;
-                var h = Properties.Resources.delete16.Height;
-                var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
-                var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
-
-                e.Graphics.DrawImage(Properties.Resources.delete16, new Rectangle(x, y, w, h));
-                e.Handled = true;
-            }
+            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, nombreColEliminar: NombreColumna.BTN_ELIMINAR);
         }
         private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+            if (e.ColumnIndex < 0 || e.RowIndex < 0)
+                return;
 
             string nombreColumna = dgvProductos.Columns[e.ColumnIndex].Name;
 
-            if (nombreColumna != NombreColumna.BTN_ELIMINAR) return;
+            if (nombreColumna != NombreColumna.BTN_ELIMINAR)
+                return;
 
-            if (nombreColumna == NombreColumna.BTN_ELIMINAR)
-            {
-                dgvProductos.Rows.RemoveAt(Convert.ToInt32(e.RowIndex));
-                CalcularTotal();
-            }
+            dgvProductos.Rows.RemoveAt(Convert.ToInt32(e.RowIndex));
+            CalcularTotal();
         }
         private void btnBuscarProducto_Click(object sender, EventArgs e)
         {
-            using (var modal = new mdProducto())
-            {
-                var result = modal.ShowDialog();
-
-                if (result == DialogResult.OK)
-                {
-                    idProductoSeleccionado = modal.Producto.Id;
-                    txtCodProducto.Text = modal.Producto.Codigo;
-                    txtCodProducto.BackColor = Color.LightGreen;
-                    txtDescProducto.Text = modal.Producto.Descripcion;
-                }
-            }
-        } // Check
+            UtilidadesModal.BuscarProducto(
+                txtCodigo: txtCodigoProducto,
+                txtDescripcion: txtDescripcionProducto,
+                idProductoSeleccionado: ref idProductoSeleccionado
+            );
+        }
         private void btnBuscarProveedor_Click(object sender, EventArgs e)
         {
-            using (var modal = new mdProveedor())
-            {
-                var result = modal.ShowDialog();
-
-                if (result == DialogResult.OK)
-                {
-                    idProveedorSeleccionado = modal.Proveedor.Id;
-                    txtRazonSocial.Text = modal.Proveedor.RazonSocial;
-                }
-            }
-        } // Check
+            UtilidadesModal.BuscarProveedor(
+                txtRazonSocial,
+                ref idProveedorSeleccionado
+            );
+        }
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             decimal precioCompra = 0;
-            //decimal precioVenta = 0;
-            bool productoExiste = false;
+            bool productoYaExiste = false;
 
             // Se comprueba que se haya seleccionado un producto
             if (idProductoSeleccionado == 0)
             {
-                MessageBox.Show("Debe seleccionar un producto", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe seleccionar un producto", "Advertencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -130,44 +103,45 @@ namespace CapaPresentacion.Formularios
             {
                 if (Convert.ToInt32(fila.Cells[NombreColumna.ID_PRODUCTO].Value) == idProductoSeleccionado)
                 {
-                    productoExiste = true;
+                    productoYaExiste = true;
                     MessageBox.Show("El producto que se intenta agregar ya fue agregado.", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
                 }
             }
 
-            if (!productoExiste)
+            if (!productoYaExiste)
             {
-                decimal subTotal = nudCantidad.Value * precioCompra;
+                decimal subtotal = nudCantidadProducto.Value * precioCompra;
 
                 dgvProductos.Rows.Add(new object[]
                 {
                     idProductoSeleccionado,
-                    txtDescProducto.Text,
-                    precioCompra.ToString(FormatoPrecio),
-                    //precioVenta.ToString(FormatoPrecio),
-                    nudCantidad.Value.ToString(),
-                    (subTotal).ToString(FormatoPrecio),
+                    txtDescripcionProducto.Text,
+                    precioCompra.ToString(FormatoPrecio, culturaArgentina),
+                    nudCantidadProducto.Value.ToString(),
+                    (subtotal).ToString(FormatoPrecio, culturaArgentina),
                     "" // btnEliminar
                 });
 
                 CalcularTotal();
                 LimpiarProducto();
-                txtCodProducto.Select();
+                txtCodigoProducto.Select();
             }
         }
         private void btnRegistrarCompra_Click(object sender, EventArgs e)
         {
             if (idProveedorSeleccionado == 0)
             {
-                MessageBox.Show("Debe seleccionar un proveedor", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe seleccionar un proveedor", "Advertencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (dgvProductos.Rows.Count < 1)
             {
-                MessageBox.Show("Debe agregar al menos un producto", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe agregar al menos un producto", "Advertencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -183,30 +157,28 @@ namespace CapaPresentacion.Formularios
 
             foreach (DataGridViewRow fila in dgvProductos.Rows)
             {
-                compraDetalle.Rows.Add(
-                    new object[]
-                    {
-                        Convert.ToInt32(fila.Cells[NombreColumna.ID_PRODUCTO].Value),
-                        Convert.ToDecimal(fila.Cells[NombreColumna.PRECIO_COMPRA].Value),
-                        Convert.ToInt32(fila.Cells[NombreColumna.CANTIDAD].Value),
-                        Convert.ToDecimal(fila.Cells[NombreColumna.SUBTOTAL].Value)
-                    }
-                );
+                compraDetalle.Rows.Add(new object[]
+                {
+                    Convert.ToInt32(fila.Cells[NombreColumna.ID_PRODUCTO].Value),
+                    Convert.ToDecimal(fila.Cells[NombreColumna.PRECIO_COMPRA].Value),
+                    Convert.ToInt32(fila.Cells[NombreColumna.CANTIDAD].Value),
+                    Convert.ToDecimal(fila.Cells[NombreColumna.SUBTOTAL].Value)
+                });
             }
 
             CE_Compra oCompra = new CE_Compra()
             {
                 oUsuario = new CE_Usuario()
                 {
-                    Id = usuario.Id
+                    Id = _usuario.Id
                 },
                 oProveedor = new CE_Proveedor()
                 {
                     Id = idProveedorSeleccionado
                 },
-                FechaPedido = dtpPedido.Value,
-                FechaEntrega = dtpEntrega.Value,
-                Total = Convert.ToDecimal(txtTotal.Text)
+                FechaPedido = dtpFechaPedido.Value,
+                FechaEntrega = dtpFechaEntrega.Value,
+                Total = Convert.ToDecimal(txtTotal.Text, culturaArgentina)
             };
 
             bool respuesta = new CN_Compra().Crear(oCompra, compraDetalle, out string mensaje);
@@ -217,7 +189,8 @@ namespace CapaPresentacion.Formularios
                 return;
             }
 
-            MessageBox.Show("Compra registrada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Compra registrada correctamente.", "Éxito",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
             txtRazonSocial.Clear();
             dgvProductos.Rows.Clear();
             CalcularTotal();
@@ -225,29 +198,26 @@ namespace CapaPresentacion.Formularios
         private void txtCodProducto_KeyDown(object sender, KeyEventArgs e)
         {
             // Se usa keyDown para detectar la tecla Enter (los lectores de código de barras envían Enter al finalizar la lectura)
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode != Keys.Enter)
+                return;
+
+            CE_Producto oProducto = new CN_Producto().Listar()
+                .Find(p => p.Codigo == txtCodigoProducto.Text.Trim() && p.oEstado.Id == true);
+
+            if (oProducto == null)
             {
-                CE_Producto oProducto = new CN_Producto().Listar().Find(p => p.Codigo == txtCodProducto.Text.Trim() && p.oEstado.Id == true);
-
-                if (oProducto == null)
-                {
-                    txtCodProducto.BackColor = Color.LightCoral;
-                    idProductoSeleccionado = 0;
-                    txtDescProducto.Clear();
-                    return;
-                }
-
-                txtCodProducto.BackColor = Color.LightGreen;
-                idProductoSeleccionado = oProducto.Id;
-                txtDescProducto.Text = oProducto.Descripcion;
-                txtPrecioCompra.Select();
+                txtCodigoProducto.BackColor = Color.LightCoral;
+                idProductoSeleccionado = 0;
+                txtDescripcionProducto.Clear();
+                return;
             }
+
+            txtCodigoProducto.BackColor = Color.LightGreen;
+            idProductoSeleccionado = oProducto.Id;
+            txtDescripcionProducto.Text = oProducto.Descripcion;
+            txtPrecioCompra.Select();
         }
         private void txtPrecioCompra_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            UtilidadesForm.EsEntradaPrecioValida(sender, e);
-        }
-        private void txtPrecioVenta_KeyPress(object sender, KeyPressEventArgs e)
         {
             UtilidadesForm.EsEntradaPrecioValida(sender, e);
         }
@@ -261,26 +231,32 @@ namespace CapaPresentacion.Formularios
         {
             decimal total = 0;
 
-            if (dgvProductos.Rows.Count < 1) return;
+            if (dgvProductos.Rows.Count < 1)
+            {
+                txtTotal.Text = "0.00";
+                return;
+            }
 
             foreach (DataGridViewRow fila in dgvProductos.Rows)
             {
                 var valorCelda = fila.Cells[NombreColumna.SUBTOTAL].Value;
-                
-                if (valorCelda == null) continue; // En el flujo normal no debería ser null (btnAgregar_Click valida esto)
+
+                // En el flujo normal no debería ser null (btnAgregar_Click valida esto)
+                if (valorCelda == null)
+                    continue;
 
                 string textoCelda = valorCelda.ToString();
-                if (decimal.TryParse(textoCelda, NumberStyles.Any, CulturaArgentina, out decimal subTotal))
+                if (decimal.TryParse(textoCelda, NumberStyles.Any, culturaArgentina, out decimal subTotal))
                 {
                     total += subTotal;
                 }
             }
 
-            txtTotal.Text = total.ToString(FormatoPrecio, CulturaArgentina);
+            txtTotal.Text = total.ToString(FormatoPrecio, culturaArgentina);
         }
         private bool ValidarFechas()
         {
-            if (dtpEntrega.Value < dtpPedido.Value)
+            if (dtpFechaEntrega.Value < dtpFechaPedido.Value)
             {
                 MessageBox.Show("La fecha de entrega no puede ser anterior a la fecha de pedido", 
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

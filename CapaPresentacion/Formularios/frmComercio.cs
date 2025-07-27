@@ -12,25 +12,22 @@ namespace CapaPresentacion.Formularios
 {
     public partial class frmComercio : Form
     {
+        private byte[] _logoBytes = null;
+
         public frmComercio()
         {
             InitializeComponent();
+            BackColor = Color.FromArgb(63, 81, 181); // Indigo 500
         }
+
         private void frmComercio_Load(object sender, EventArgs e)
         {
-            byte[] byteimagen = new CN_Comercio().LeerLogo(out bool logoLeido); // Renamed 'leido' to 'logoLeido'  
-
-            if (logoLeido && byteimagen.Length > 0)
-                picLogo.Image = ByteToImage(byteimagen);
-            else
-                picLogo.Image = null;
-
             List<CE_ResponsableIVA> listaRespIVA = new CN_ResponsableIVA().Listar();
-            cbResponsableIVA.DataSource = listaRespIVA
+            cbCondicionIva.DataSource = listaRespIVA
                 .Select(r => new OpcionCombo { Valor = r.Id, Texto = r.Nombre })
                 .ToList();
-            cbResponsableIVA.ValueMember = "Valor";
-            cbResponsableIVA.DisplayMember = "Texto";
+            cbCondicionIva.ValueMember = "Valor";
+            cbCondicionIva.DisplayMember = "Texto";
 
             List<CE_Provincia> listaProvincia = new CN_Provincia().Listar();
             cbProvincia.DataSource = listaProvincia
@@ -42,44 +39,68 @@ namespace CapaPresentacion.Formularios
             CE_Comercio oComercio = new CN_Comercio().Leer();
 
             txtRazonSocial.Text = oComercio.RazonSocial;
-            txtCUIT.Text = oComercio.Cuit;
+            txtCuit.Text = oComercio.Cuit;
             txtIngresosBrutos.Text = oComercio.IngresosBrutos;
-            dtInicioActividad.Value = oComercio.InicioActividad;
+            //dtInicioActividad.Value = oComercio.InicioActividad;
+            txtInicioActividad.Text = oComercio.InicioActividad.ToString("dd/MM/yyyy");
             txtFechaActualizacion.Text = oComercio.FechaActualizacion.ToString("dd/MM/yyyy");
             txtFechaActualizacion.Enabled = false; // Deshabilita el campo de fecha de actualización para que no se pueda editar.
-            numPuntoVenta.Value = oComercio.PuntoVenta;
+            txtPuntoVenta.Text = Convert.ToString(oComercio.PuntoVenta);
             txtTelefono.Text = oComercio.Telefono;
             txtCorreo.Text = oComercio.Correo;
-            txtNomCalle.Text = oComercio.oDireccion.Calle;
-            txtNumCalle.Text = oComercio.oDireccion.Numero;
+            txtCalleNombre.Text = oComercio.oDireccion.Calle;
+            txtCalleNumero.Text = oComercio.oDireccion.Numero;
             txtCiudad.Text = oComercio.oLocalidad.Nombre;
-            txtCP.Text = oComercio.oLocalidad.CodigoPostal;
+            txtCodigoPostal.Text = oComercio.oLocalidad.CodigoPostal;
             cbProvincia.SelectedIndex = oComercio.oProvincia.Id - 1;
-            cbResponsableIVA.SelectedValue = oComercio.oResponsableIVA.Id;
+            cbCondicionIva.SelectedValue = oComercio.oResponsableIVA.Id;
+
+            if (oComercio.Logo != null && oComercio.Logo.Length > 0)
+            {
+                picLogo.SizeMode = PictureBoxSizeMode.StretchImage;
+                picLogo.Image = ByteToImage(oComercio.Logo);
+            }
+            else
+            {
+                picLogo.SizeMode = PictureBoxSizeMode.CenterImage;
+                picLogo.Image = Properties.Resources.image_logo_96;
+            }
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("¿Desea guardar los cambios?", "Guardar",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+
+            if (!EsFechaValida(txtInicioActividad.Text, out DateTime fechaInicioActividad))
+            {
+                MessageBox.Show("La fecha de inicio de actividad no es válida", "Advertencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             CE_Comercio oComercio = new CE_Comercio()
             {
                 Id = 1,
                 RazonSocial = txtRazonSocial.Text,
-                Cuit = txtCUIT.Text,
+                Cuit = txtCuit.Text,
                 IngresosBrutos = txtIngresosBrutos.Text,
-                InicioActividad = dtInicioActividad.Value, // ToString("dd/MM/yyyy"),
-                PuntoVenta = (int)numPuntoVenta.Value,
+                InicioActividad = fechaInicioActividad,
+                PuntoVenta = int.TryParse(txtPuntoVenta.Text, out int pv) ? pv : 0,
                 Telefono = txtTelefono.Text,
                 Correo = txtCorreo.Text,
+                Logo = _logoBytes,
                 oDireccion = new CE_Direccion()
                 {
                     Id = 1,
-                    Calle = txtNomCalle.Text,
-                    Numero = txtNumCalle.Text
+                    Calle = txtCalleNombre.Text,
+                    Numero = txtCalleNumero.Text
                 },
                 oLocalidad = new CE_Localidad()
                 {
                     Id = 1,
                     Nombre = txtCiudad.Text,
-                    CodigoPostal = txtCP.Text
+                    CodigoPostal = txtCodigoPostal.Text
                 },
                 oProvincia = new CE_Provincia()
                 {
@@ -87,18 +108,36 @@ namespace CapaPresentacion.Formularios
                 },
                 oResponsableIVA = new CE_ResponsableIVA()
                 {
-                    Id = Convert.ToInt32(((OpcionCombo)cbResponsableIVA.SelectedItem).Valor)
+                    Id = Convert.ToInt32(((OpcionCombo)cbCondicionIva.SelectedItem).Valor)
                 }
             };
 
-            bool respuesta = new CN_Comercio().Actualizar(oComercio, out string mensaje);
-
-            if (respuesta)
-                MessageBox.Show("Los cambios fueron guardados", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (new CN_Comercio().Actualizar(oComercio, out string mensaje))
+            {
+                MessageBox.Show("Los cambios fueron guardados con éxito.", "Mensaje",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _logoBytes = null;
+            }
             else
-                MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(mensaje, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        private void btnActLogo_Click(object sender, EventArgs e)
+        private bool EsFechaValida(string fecha, out DateTime fechaValida)
+        {
+            fechaValida = DateTime.MinValue;
+
+            if (string.IsNullOrWhiteSpace(fecha))
+                return false;
+
+            fecha = fecha.Replace('-', '/').Replace('.', '/');
+
+            return DateTime.TryParseExact(fecha,
+                "dd/MM/yyyy",
+                System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None,
+                out fechaValida);
+        }
+        private void btnCambiarLogo_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog oOpenFileDialog = new OpenFileDialog())
             {
@@ -106,37 +145,36 @@ namespace CapaPresentacion.Formularios
 
                 if (oOpenFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    byte[] byteImagen = File.ReadAllBytes(oOpenFileDialog.FileName);
-                    bool actualizado = new CN_Comercio().ActualizarLogo(byteImagen, out string mensaje);
-
-                    if (actualizado)
-                    {
-                        picLogo.Image = ByteToImage(byteImagen);
-                        MessageBox.Show("Logo actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                        MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _logoBytes = File.ReadAllBytes(oOpenFileDialog.FileName);
+                    picLogo.SizeMode = PictureBoxSizeMode.StretchImage;
+                    picLogo.Image = ByteToImage(_logoBytes);
                 }
             }
         }
+        private void btnQuitarLogo_Click(object sender, EventArgs e)
+        {
+            picLogo.SizeMode = PictureBoxSizeMode.CenterImage;
+            picLogo.Image = Properties.Resources.image_logo_96;
+            _logoBytes = null;
+        }
         public Image ByteToImage(byte[] imageBytes)
         {
-            //MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
-            //ms.Write(imageBytes, 0, imageBytes.Length);
-            //Image imagen = new Bitmap(ms);
-            //return imagen;
-
-            /*
-                Más clara.
-                Más eficiente.
-                Menos propensa a errores.
-                Recomendada por la documentación de .NET para este caso.
-             */
-
             using (MemoryStream ms = new MemoryStream(imageBytes))
             {
                 return Image.FromStream(ms);
             }
+        }
+        private void txtPuntoVenta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo dígitos y teclas de control (backspace, etc)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void frmComercio_Resize(object sender, EventArgs e)
+        {
+            UtilidadesForm.CentrarHorizontalmente(pnlComercioDatos);
         }
     }
 }

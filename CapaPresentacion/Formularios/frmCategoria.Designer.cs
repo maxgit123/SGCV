@@ -28,17 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.lblAdmUsuario = new System.Windows.Forms.Label();
-            this.txtNomCategoria = new System.Windows.Forms.TextBox();
-            this.cbBuscar = new System.Windows.Forms.ComboBox();
-            this.txtBuscar = new System.Windows.Forms.TextBox();
-            this.lblBuscar = new System.Windows.Forms.Label();
-            this.lblListaCategorias = new System.Windows.Forms.Label();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCategoria));
             this.dgvCategorias = new System.Windows.Forms.DataGridView();
             this.id_categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,115 +44,44 @@
             this.estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.lblNomCategoria = new System.Windows.Forms.Label();
-            this.lblAlicuotaIVA = new System.Windows.Forms.Label();
-            this.cbAlicuotaIVA = new System.Windows.Forms.ComboBox();
-            this.btnLimpiarBuscar = new FontAwesome.Sharp.IconButton();
-            this.btnCancelar = new FontAwesome.Sharp.IconButton();
-            this.btnGuardar = new FontAwesome.Sharp.IconButton();
-            this.btnCrear = new FontAwesome.Sharp.IconButton();
-            this.pnlFormCategoria = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pnlListaCategorias = new System.Windows.Forms.Panel();
+            this.pnlFormCategoria = new MaterialSkin.Controls.MaterialCard();
+            this.btnCancelar = new MaterialSkin.Controls.MaterialButton();
+            this.cbAlicuotaIva = new MaterialSkin.Controls.MaterialComboBox();
+            this.btnGuardar = new MaterialSkin.Controls.MaterialButton();
+            this.txtNombre = new MaterialSkin.Controls.MaterialTextBox2();
+            this.lblFormUsuario = new MaterialSkin.Controls.MaterialLabel();
+            this.pnlListaCategorias = new MaterialSkin.Controls.MaterialCard();
+            this.txtBuscar = new MaterialSkin.Controls.MaterialTextBox2();
+            this.cbBuscar = new MaterialSkin.Controls.MaterialComboBox();
+            this.mbtnAgregar = new MaterialSkin.Controls.MaterialButton();
+            this.lblListaCategorias = new MaterialSkin.Controls.MaterialLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).BeginInit();
             this.pnlFormCategoria.SuspendLayout();
             this.pnlListaCategorias.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblAdmUsuario
-            // 
-            this.lblAdmUsuario.AutoSize = true;
-            this.lblAdmUsuario.BackColor = System.Drawing.Color.Transparent;
-            this.lblAdmUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdmUsuario.ForeColor = System.Drawing.Color.Black;
-            this.lblAdmUsuario.Location = new System.Drawing.Point(19, 15);
-            this.lblAdmUsuario.Margin = new System.Windows.Forms.Padding(3, 15, 3, 0);
-            this.lblAdmUsuario.Name = "lblAdmUsuario";
-            this.lblAdmUsuario.Size = new System.Drawing.Size(228, 20);
-            this.lblAdmUsuario.TabIndex = 255;
-            this.lblAdmUsuario.Text = "Administrador de Categoría";
-            // 
-            // txtNomCategoria
-            // 
-            this.txtNomCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNomCategoria.Location = new System.Drawing.Point(15, 99);
-            this.txtNomCategoria.Margin = new System.Windows.Forms.Padding(15, 3, 15, 3);
-            this.txtNomCategoria.MaxLength = 50;
-            this.txtNomCategoria.Name = "txtNomCategoria";
-            this.txtNomCategoria.Size = new System.Drawing.Size(236, 26);
-            this.txtNomCategoria.TabIndex = 242;
-            // 
-            // cbBuscar
-            // 
-            this.cbBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbBuscar.FormattingEnabled = true;
-            this.cbBuscar.Location = new System.Drawing.Point(549, 65);
-            this.cbBuscar.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
-            this.cbBuscar.Name = "cbBuscar";
-            this.cbBuscar.Size = new System.Drawing.Size(145, 26);
-            this.cbBuscar.TabIndex = 239;
-            // 
-            // txtBuscar
-            // 
-            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.Location = new System.Drawing.Point(700, 65);
-            this.txtBuscar.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(135, 26);
-            this.txtBuscar.TabIndex = 240;
-            this.txtBuscar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscar_KeyUp);
-            // 
-            // lblBuscar
-            // 
-            this.lblBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblBuscar.AutoSize = true;
-            this.lblBuscar.BackColor = System.Drawing.SystemColors.Control;
-            this.lblBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBuscar.Location = new System.Drawing.Point(453, 71);
-            this.lblBuscar.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
-            this.lblBuscar.Name = "lblBuscar";
-            this.lblBuscar.Size = new System.Drawing.Size(90, 20);
-            this.lblBuscar.TabIndex = 238;
-            this.lblBuscar.Text = "Buscar por:";
-            // 
-            // lblListaCategorias
-            // 
-            this.lblListaCategorias.AutoSize = true;
-            this.lblListaCategorias.BackColor = System.Drawing.Color.Transparent;
-            this.lblListaCategorias.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblListaCategorias.ForeColor = System.Drawing.Color.Black;
-            this.lblListaCategorias.Location = new System.Drawing.Point(362, 15);
-            this.lblListaCategorias.Margin = new System.Windows.Forms.Padding(3, 15, 3, 0);
-            this.lblListaCategorias.Name = "lblListaCategorias";
-            this.lblListaCategorias.Size = new System.Drawing.Size(165, 20);
-            this.lblListaCategorias.TabIndex = 237;
-            this.lblListaCategorias.Text = "Lista de Categorías";
-            // 
             // dgvCategorias
             // 
             this.dgvCategorias.AllowUserToAddRows = false;
             this.dgvCategorias.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvCategorias.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvCategorias.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvCategorias.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCategorias.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCategorias.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCategorias.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvCategorias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvCategorias.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id_categoria,
@@ -169,41 +93,40 @@
             this.estado,
             this.btnEditar,
             this.btnEliminar});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCategorias.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCategorias.DefaultCellStyle = dataGridViewCellStyle13;
             this.dgvCategorias.EnableHeadersVisualStyles = false;
             this.dgvCategorias.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dgvCategorias.Location = new System.Drawing.Point(15, 98);
-            this.dgvCategorias.Margin = new System.Windows.Forms.Padding(15, 3, 15, 15);
+            this.dgvCategorias.Location = new System.Drawing.Point(18, 137);
             this.dgvCategorias.MultiSelect = false;
             this.dgvCategorias.Name = "dgvCategorias";
             this.dgvCategorias.ReadOnly = true;
             this.dgvCategorias.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCategorias.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCategorias.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.dgvCategorias.RowHeadersVisible = false;
             this.dgvCategorias.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvCategorias.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvCategorias.RowsDefaultCellStyle = dataGridViewCellStyle15;
             this.dgvCategorias.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.Control;
             this.dgvCategorias.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
             this.dgvCategorias.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvCategorias.RowTemplate.Height = 28;
             this.dgvCategorias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCategorias.Size = new System.Drawing.Size(856, 314);
+            this.dgvCategorias.Size = new System.Drawing.Size(606, 337);
             this.dgvCategorias.TabIndex = 236;
             this.dgvCategorias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategorias_CellContentClick);
             this.dgvCategorias.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvCategorias_CellPainting);
@@ -265,144 +188,6 @@
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.ReadOnly = true;
             // 
-            // lblNomCategoria
-            // 
-            this.lblNomCategoria.AutoSize = true;
-            this.lblNomCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNomCategoria.Location = new System.Drawing.Point(16, 80);
-            this.lblNomCategoria.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.lblNomCategoria.Name = "lblNomCategoria";
-            this.lblNomCategoria.Size = new System.Drawing.Size(59, 16);
-            this.lblNomCategoria.TabIndex = 246;
-            this.lblNomCategoria.Text = "Nombre:";
-            // 
-            // lblAlicuotaIVA
-            // 
-            this.lblAlicuotaIVA.AutoSize = true;
-            this.lblAlicuotaIVA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAlicuotaIVA.Location = new System.Drawing.Point(16, 133);
-            this.lblAlicuotaIVA.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.lblAlicuotaIVA.Name = "lblAlicuotaIVA";
-            this.lblAlicuotaIVA.Size = new System.Drawing.Size(82, 16);
-            this.lblAlicuotaIVA.TabIndex = 252;
-            this.lblAlicuotaIVA.Text = "Alicuota IVA:";
-            // 
-            // cbAlicuotaIVA
-            // 
-            this.cbAlicuotaIVA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAlicuotaIVA.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbAlicuotaIVA.FormattingEnabled = true;
-            this.cbAlicuotaIVA.Location = new System.Drawing.Point(15, 152);
-            this.cbAlicuotaIVA.Margin = new System.Windows.Forms.Padding(15, 3, 15, 3);
-            this.cbAlicuotaIVA.Name = "cbAlicuotaIVA";
-            this.cbAlicuotaIVA.Size = new System.Drawing.Size(236, 28);
-            this.cbAlicuotaIVA.TabIndex = 247;
-            // 
-            // btnLimpiarBuscar
-            // 
-            this.btnLimpiarBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLimpiarBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLimpiarBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLimpiarBuscar.IconChar = FontAwesome.Sharp.IconChar.Eraser;
-            this.btnLimpiarBuscar.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(63)))), ((int)(((byte)(84)))));
-            this.btnLimpiarBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnLimpiarBuscar.IconSize = 18;
-            this.btnLimpiarBuscar.Location = new System.Drawing.Point(834, 65);
-            this.btnLimpiarBuscar.Margin = new System.Windows.Forms.Padding(3, 15, 15, 5);
-            this.btnLimpiarBuscar.Name = "btnLimpiarBuscar";
-            this.btnLimpiarBuscar.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.btnLimpiarBuscar.Size = new System.Drawing.Size(37, 26);
-            this.btnLimpiarBuscar.TabIndex = 257;
-            this.btnLimpiarBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLimpiarBuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLimpiarBuscar.UseVisualStyleBackColor = true;
-            this.btnLimpiarBuscar.Click += new System.EventHandler(this.btnLimpiarBuscar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancelar.BackColor = System.Drawing.SystemColors.Control;
-            this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.IconChar = FontAwesome.Sharp.IconChar.CircleXmark;
-            this.btnCancelar.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(96)))), ((int)(((byte)(132)))));
-            this.btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.btnCancelar.IconSize = 20;
-            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCancelar.Location = new System.Drawing.Point(141, 384);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(3, 15, 30, 15);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(95, 30);
-            this.btnCancelar.TabIndex = 256;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGuardar.BackColor = System.Drawing.SystemColors.Control;
-            this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
-            this.btnGuardar.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(96)))), ((int)(((byte)(132)))));
-            this.btnGuardar.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.btnGuardar.IconSize = 20;
-            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnGuardar.Location = new System.Drawing.Point(30, 384);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(30, 15, 3, 15);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(95, 30);
-            this.btnGuardar.TabIndex = 250;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // btnCrear
-            // 
-            this.btnCrear.BackColor = System.Drawing.SystemColors.Control;
-            this.btnCrear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCrear.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(96)))), ((int)(((byte)(132)))));
-            this.btnCrear.FlatAppearance.BorderSize = 0;
-            this.btnCrear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(160)))), ((int)(((byte)(189)))));
-            this.btnCrear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(132)))), ((int)(((byte)(170)))));
-            this.btnCrear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCrear.IconChar = FontAwesome.Sharp.IconChar.Plus;
-            this.btnCrear.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(96)))), ((int)(((byte)(132)))));
-            this.btnCrear.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.btnCrear.IconSize = 20;
-            this.btnCrear.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCrear.Location = new System.Drawing.Point(15, 65);
-            this.btnCrear.Margin = new System.Windows.Forms.Padding(15, 15, 3, 5);
-            this.btnCrear.Name = "btnCrear";
-            this.btnCrear.Size = new System.Drawing.Size(70, 26);
-            this.btnCrear.TabIndex = 258;
-            this.btnCrear.Text = "Crear";
-            this.btnCrear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCrear.UseVisualStyleBackColor = true;
-            this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
-            // 
-            // pnlFormCategoria
-            // 
-            this.pnlFormCategoria.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.pnlFormCategoria.BackColor = System.Drawing.Color.Lavender;
-            this.pnlFormCategoria.Controls.Add(this.btnGuardar);
-            this.pnlFormCategoria.Controls.Add(this.cbAlicuotaIVA);
-            this.pnlFormCategoria.Controls.Add(this.lblAlicuotaIVA);
-            this.pnlFormCategoria.Controls.Add(this.btnCancelar);
-            this.pnlFormCategoria.Controls.Add(this.lblNomCategoria);
-            this.pnlFormCategoria.Controls.Add(this.lblAdmUsuario);
-            this.pnlFormCategoria.Controls.Add(this.txtNomCategoria);
-            this.pnlFormCategoria.Enabled = false;
-            this.pnlFormCategoria.Location = new System.Drawing.Point(12, 12);
-            this.pnlFormCategoria.Name = "pnlFormCategoria";
-            this.pnlFormCategoria.Size = new System.Drawing.Size(266, 429);
-            this.pnlFormCategoria.TabIndex = 259;
-            // 
             // panel2
             // 
             this.panel2.Location = new System.Drawing.Point(367, -49);
@@ -410,39 +195,259 @@
             this.panel2.Size = new System.Drawing.Size(273, 20);
             this.panel2.TabIndex = 260;
             // 
+            // pnlFormCategoria
+            // 
+            this.pnlFormCategoria.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlFormCategoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.pnlFormCategoria.Controls.Add(this.btnCancelar);
+            this.pnlFormCategoria.Controls.Add(this.cbAlicuotaIva);
+            this.pnlFormCategoria.Controls.Add(this.btnGuardar);
+            this.pnlFormCategoria.Controls.Add(this.txtNombre);
+            this.pnlFormCategoria.Controls.Add(this.lblFormUsuario);
+            this.pnlFormCategoria.Depth = 0;
+            this.pnlFormCategoria.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pnlFormCategoria.Location = new System.Drawing.Point(23, 23);
+            this.pnlFormCategoria.Margin = new System.Windows.Forms.Padding(14);
+            this.pnlFormCategoria.MouseState = MaterialSkin.MouseState.HOVER;
+            this.pnlFormCategoria.Name = "pnlFormCategoria";
+            this.pnlFormCategoria.Padding = new System.Windows.Forms.Padding(14);
+            this.pnlFormCategoria.Size = new System.Drawing.Size(290, 491);
+            this.pnlFormCategoria.TabIndex = 261;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCancelar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCancelar.Depth = 0;
+            this.btnCancelar.HighEmphasis = false;
+            this.btnCancelar.Icon = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Icon")));
+            this.btnCancelar.Location = new System.Drawing.Point(148, 234);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCancelar.Size = new System.Drawing.Size(124, 36);
+            this.btnCancelar.TabIndex = 315;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnCancelar.UseAccentColor = false;
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // cbAlicuotaIva
+            // 
+            this.cbAlicuotaIva.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbAlicuotaIva.AutoResize = false;
+            this.cbAlicuotaIva.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cbAlicuotaIva.Depth = 0;
+            this.cbAlicuotaIva.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cbAlicuotaIva.DropDownHeight = 174;
+            this.cbAlicuotaIva.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAlicuotaIva.DropDownWidth = 121;
+            this.cbAlicuotaIva.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cbAlicuotaIva.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cbAlicuotaIva.FormattingEnabled = true;
+            this.cbAlicuotaIva.Hint = "Alicuota IVA";
+            this.cbAlicuotaIva.IntegralHeight = false;
+            this.cbAlicuotaIva.ItemHeight = 43;
+            this.cbAlicuotaIva.Location = new System.Drawing.Point(18, 134);
+            this.cbAlicuotaIva.MaxDropDownItems = 4;
+            this.cbAlicuotaIva.MouseState = MaterialSkin.MouseState.OUT;
+            this.cbAlicuotaIva.Name = "cbAlicuotaIva";
+            this.cbAlicuotaIva.Size = new System.Drawing.Size(255, 49);
+            this.cbAlicuotaIva.StartIndex = 0;
+            this.cbAlicuotaIva.TabIndex = 313;
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGuardar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnGuardar.Depth = 0;
+            this.btnGuardar.HighEmphasis = true;
+            this.btnGuardar.Icon = global::CapaPresentacion.Properties.Resources.save_32;
+            this.btnGuardar.Location = new System.Drawing.Point(16, 234);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnGuardar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnGuardar.Size = new System.Drawing.Size(116, 36);
+            this.btnGuardar.TabIndex = 314;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnGuardar.UseAccentColor = false;
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNombre.AnimateReadOnly = false;
+            this.txtNombre.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtNombre.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtNombre.Depth = 0;
+            this.txtNombre.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtNombre.HideSelection = true;
+            this.txtNombre.Hint = "Categoria";
+            this.txtNombre.LeadingIcon = null;
+            this.txtNombre.Location = new System.Drawing.Point(18, 80);
+            this.txtNombre.MaxLength = 8;
+            this.txtNombre.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.PasswordChar = '\0';
+            this.txtNombre.PrefixSuffixText = null;
+            this.txtNombre.ReadOnly = false;
+            this.txtNombre.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtNombre.SelectedText = "";
+            this.txtNombre.SelectionLength = 0;
+            this.txtNombre.SelectionStart = 0;
+            this.txtNombre.ShortcutsEnabled = true;
+            this.txtNombre.Size = new System.Drawing.Size(255, 48);
+            this.txtNombre.TabIndex = 310;
+            this.txtNombre.TabStop = false;
+            this.txtNombre.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtNombre.TrailingIcon = null;
+            this.txtNombre.UseSystemPasswordChar = false;
+            // 
+            // lblFormUsuario
+            // 
+            this.lblFormUsuario.AutoSize = true;
+            this.lblFormUsuario.Depth = 0;
+            this.lblFormUsuario.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblFormUsuario.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.lblFormUsuario.Location = new System.Drawing.Point(42, 14);
+            this.lblFormUsuario.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblFormUsuario.Name = "lblFormUsuario";
+            this.lblFormUsuario.Size = new System.Drawing.Size(207, 29);
+            this.lblFormUsuario.TabIndex = 311;
+            this.lblFormUsuario.Text = "Datos de Categoria";
+            // 
             // pnlListaCategorias
             // 
             this.pnlListaCategorias.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlListaCategorias.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlListaCategorias.Controls.Add(this.dgvCategorias);
-            this.pnlListaCategorias.Controls.Add(this.lblBuscar);
-            this.pnlListaCategorias.Controls.Add(this.lblListaCategorias);
-            this.pnlListaCategorias.Controls.Add(this.btnCrear);
+            this.pnlListaCategorias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.pnlListaCategorias.Controls.Add(this.txtBuscar);
-            this.pnlListaCategorias.Controls.Add(this.btnLimpiarBuscar);
             this.pnlListaCategorias.Controls.Add(this.cbBuscar);
-            this.pnlListaCategorias.Location = new System.Drawing.Point(284, 12);
+            this.pnlListaCategorias.Controls.Add(this.dgvCategorias);
+            this.pnlListaCategorias.Controls.Add(this.mbtnAgregar);
+            this.pnlListaCategorias.Controls.Add(this.lblListaCategorias);
+            this.pnlListaCategorias.Depth = 0;
+            this.pnlListaCategorias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pnlListaCategorias.Location = new System.Drawing.Point(341, 23);
+            this.pnlListaCategorias.Margin = new System.Windows.Forms.Padding(14);
+            this.pnlListaCategorias.MouseState = MaterialSkin.MouseState.HOVER;
             this.pnlListaCategorias.Name = "pnlListaCategorias";
-            this.pnlListaCategorias.Size = new System.Drawing.Size(888, 429);
-            this.pnlListaCategorias.TabIndex = 261;
+            this.pnlListaCategorias.Padding = new System.Windows.Forms.Padding(14);
+            this.pnlListaCategorias.Size = new System.Drawing.Size(641, 491);
+            this.pnlListaCategorias.TabIndex = 262;
             this.pnlListaCategorias.Resize += new System.EventHandler(this.pnlListaCategorias_Resize);
             // 
-            // frmCategorias
+            // txtBuscar
             // 
-            this.AcceptButton = this.btnGuardar;
+            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBuscar.AnimateReadOnly = false;
+            this.txtBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.txtBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtBuscar.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtBuscar.Depth = 0;
+            this.txtBuscar.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtBuscar.HideSelection = true;
+            this.txtBuscar.Hint = "Buscar";
+            this.txtBuscar.LeadingIcon = null;
+            this.txtBuscar.Location = new System.Drawing.Point(399, 80);
+            this.txtBuscar.MaxLength = 32767;
+            this.txtBuscar.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.PasswordChar = '\0';
+            this.txtBuscar.PrefixSuffixText = null;
+            this.txtBuscar.ReadOnly = false;
+            this.txtBuscar.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtBuscar.SelectedText = "";
+            this.txtBuscar.SelectionLength = 0;
+            this.txtBuscar.SelectionStart = 0;
+            this.txtBuscar.ShortcutsEnabled = true;
+            this.txtBuscar.Size = new System.Drawing.Size(225, 48);
+            this.txtBuscar.TabIndex = 312;
+            this.txtBuscar.TabStop = false;
+            this.txtBuscar.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtBuscar.TrailingIcon = ((System.Drawing.Image)(resources.GetObject("txtBuscar.TrailingIcon")));
+            this.txtBuscar.UseSystemPasswordChar = false;
+            this.txtBuscar.TrailingIconClick += new System.EventHandler(this.txtBuscar_TrailingIconClick);
+            this.txtBuscar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscar_KeyUp);
+            // 
+            // cbBuscar
+            // 
+            this.cbBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbBuscar.AutoResize = false;
+            this.cbBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.cbBuscar.Depth = 0;
+            this.cbBuscar.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cbBuscar.DropDownHeight = 174;
+            this.cbBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBuscar.DropDownWidth = 121;
+            this.cbBuscar.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cbBuscar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cbBuscar.FormattingEnabled = true;
+            this.cbBuscar.Hint = "Buscar por";
+            this.cbBuscar.IntegralHeight = false;
+            this.cbBuscar.ItemHeight = 43;
+            this.cbBuscar.Location = new System.Drawing.Point(213, 79);
+            this.cbBuscar.MaxDropDownItems = 4;
+            this.cbBuscar.MouseState = MaterialSkin.MouseState.OUT;
+            this.cbBuscar.Name = "cbBuscar";
+            this.cbBuscar.Size = new System.Drawing.Size(180, 49);
+            this.cbBuscar.StartIndex = 0;
+            this.cbBuscar.TabIndex = 311;
+            // 
+            // mbtnAgregar
+            // 
+            this.mbtnAgregar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mbtnAgregar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.mbtnAgregar.Depth = 0;
+            this.mbtnAgregar.HighEmphasis = true;
+            this.mbtnAgregar.Icon = global::CapaPresentacion.Properties.Resources.agregar_32;
+            this.mbtnAgregar.Location = new System.Drawing.Point(18, 92);
+            this.mbtnAgregar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.mbtnAgregar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mbtnAgregar.Name = "mbtnAgregar";
+            this.mbtnAgregar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.mbtnAgregar.Size = new System.Drawing.Size(95, 36);
+            this.mbtnAgregar.TabIndex = 310;
+            this.mbtnAgregar.Text = "Crear";
+            this.mbtnAgregar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.mbtnAgregar.UseAccentColor = false;
+            this.mbtnAgregar.UseVisualStyleBackColor = true;
+            this.mbtnAgregar.Click += new System.EventHandler(this.btnCrear_Click);
+            // 
+            // lblListaCategorias
+            // 
+            this.lblListaCategorias.AutoSize = true;
+            this.lblListaCategorias.Depth = 0;
+            this.lblListaCategorias.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblListaCategorias.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.lblListaCategorias.Location = new System.Drawing.Point(249, 14);
+            this.lblListaCategorias.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblListaCategorias.Name = "lblListaCategorias";
+            this.lblListaCategorias.Size = new System.Drawing.Size(208, 29);
+            this.lblListaCategorias.TabIndex = 309;
+            this.lblListaCategorias.Text = "Lista de Categorias";
+            // 
+            // frmCategoria
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(1184, 453);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.pnlFormCategoria);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
+            this.ClientSize = new System.Drawing.Size(1005, 537);
             this.Controls.Add(this.pnlListaCategorias);
+            this.Controls.Add(this.pnlFormCategoria);
+            this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmCategorias";
+            this.Name = "frmCategoria";
             this.Text = "Categorías";
-            this.Load += new System.EventHandler(this.frmCategorias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).EndInit();
             this.pnlFormCategoria.ResumeLayout(false);
             this.pnlFormCategoria.PerformLayout();
@@ -453,24 +458,8 @@
         }
 
         #endregion
-
-        private FontAwesome.Sharp.IconButton btnLimpiarBuscar;
-        private FontAwesome.Sharp.IconButton btnCancelar;
-        private System.Windows.Forms.Label lblAdmUsuario;
-        private System.Windows.Forms.TextBox txtNomCategoria;
-        private System.Windows.Forms.ComboBox cbBuscar;
-        private System.Windows.Forms.TextBox txtBuscar;
-        private System.Windows.Forms.Label lblBuscar;
-        private System.Windows.Forms.Label lblListaCategorias;
-        private FontAwesome.Sharp.IconButton btnGuardar;
         private System.Windows.Forms.DataGridView dgvCategorias;
-        private System.Windows.Forms.Label lblNomCategoria;
-        private System.Windows.Forms.Label lblAlicuotaIVA;
-        private System.Windows.Forms.ComboBox cbAlicuotaIVA;
-        private FontAwesome.Sharp.IconButton btnCrear;
-        private System.Windows.Forms.Panel pnlFormCategoria;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel pnlListaCategorias;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_categoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaCreacion;
@@ -480,5 +469,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn estado;
         private System.Windows.Forms.DataGridViewButtonColumn btnEditar;
         private System.Windows.Forms.DataGridViewButtonColumn btnEliminar;
+        private MaterialSkin.Controls.MaterialCard pnlFormCategoria;
+        private MaterialSkin.Controls.MaterialButton btnCancelar;
+        private MaterialSkin.Controls.MaterialComboBox cbAlicuotaIva;
+        private MaterialSkin.Controls.MaterialButton btnGuardar;
+        private MaterialSkin.Controls.MaterialTextBox2 txtNombre;
+        private MaterialSkin.Controls.MaterialLabel lblFormUsuario;
+        private MaterialSkin.Controls.MaterialCard pnlListaCategorias;
+        private MaterialSkin.Controls.MaterialTextBox2 txtBuscar;
+        private MaterialSkin.Controls.MaterialComboBox cbBuscar;
+        private MaterialSkin.Controls.MaterialButton mbtnAgregar;
+        private MaterialSkin.Controls.MaterialLabel lblListaCategorias;
     }
 }

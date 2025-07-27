@@ -28,491 +28,652 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtRazonSocial = new System.Windows.Forms.TextBox();
-            this.txtCUIT = new System.Windows.Forms.TextBox();
-            this.txtIngresosBrutos = new System.Windows.Forms.TextBox();
-            this.lblRazonSocial = new System.Windows.Forms.Label();
-            this.lblCUIT = new System.Windows.Forms.Label();
-            this.lblIngBrutos = new System.Windows.Forms.Label();
-            this.lblPuntoVenta = new System.Windows.Forms.Label();
-            this.lblInicioAct = new System.Windows.Forms.Label();
-            this.dtInicioActividad = new System.Windows.Forms.DateTimePicker();
-            this.numPuntoVenta = new System.Windows.Forms.NumericUpDown();
-            this.txtTelefono = new System.Windows.Forms.TextBox();
-            this.txtCorreo = new System.Windows.Forms.TextBox();
-            this.lblTelefono = new System.Windows.Forms.Label();
-            this.lblCorreo = new System.Windows.Forms.Label();
-            this.lblRespIVA = new System.Windows.Forms.Label();
-            this.cbResponsableIVA = new System.Windows.Forms.ComboBox();
-            this.txtCiudad = new System.Windows.Forms.TextBox();
-            this.lblProvincia = new System.Windows.Forms.Label();
-            this.lblLocalidad = new System.Windows.Forms.Label();
-            this.cbProvincia = new System.Windows.Forms.ComboBox();
-            this.btnGuardar = new FontAwesome.Sharp.IconButton();
-            this.txtNomCalle = new System.Windows.Forms.TextBox();
-            this.lblNomCalle = new System.Windows.Forms.Label();
-            this.txtNumCalle = new System.Windows.Forms.TextBox();
-            this.lblNumCalle = new System.Windows.Forms.Label();
-            this.lblAdmComercio = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmComercio));
+            this.btnCambiarLogo = new MaterialSkin.Controls.MaterialButton();
             this.picLogo = new System.Windows.Forms.PictureBox();
-            this.btnActLogo = new FontAwesome.Sharp.IconButton();
-            this.lblLogo = new System.Windows.Forms.Label();
-            this.txtCP = new System.Windows.Forms.TextBox();
-            this.lblCP = new System.Windows.Forms.Label();
-            this.gbDireccion = new System.Windows.Forms.GroupBox();
-            this.txtFechaActualizacion = new System.Windows.Forms.TextBox();
-            this.lblFechaActualizacion = new System.Windows.Forms.Label();
-            this.gbContacto = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.numPuntoVenta)).BeginInit();
+            this.txtRazonSocial = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtCuit = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtIngresosBrutos = new MaterialSkin.Controls.MaterialTextBox2();
+            this.cbCondicionIva = new MaterialSkin.Controls.MaterialComboBox();
+            this.pnlComercioDatos = new MaterialSkin.Controls.MaterialCard();
+            this.btnQuitarLogo = new MaterialSkin.Controls.MaterialButton();
+            this.lblTitulo = new MaterialSkin.Controls.MaterialLabel();
+            this.btnCancelar = new MaterialSkin.Controls.MaterialButton();
+            this.txtTelefono = new MaterialSkin.Controls.MaterialTextBox2();
+            this.btnGuardar = new MaterialSkin.Controls.MaterialButton();
+            this.txtCorreo = new MaterialSkin.Controls.MaterialTextBox2();
+            this.materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
+            this.txtCodigoPostal = new MaterialSkin.Controls.MaterialTextBox2();
+            this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
+            this.cbProvincia = new MaterialSkin.Controls.MaterialComboBox();
+            this.txtPuntoVenta = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtCalleNombre = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtCiudad = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtFechaActualizacion = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtCalleNumero = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtInicioActividad = new MaterialSkin.Controls.MaterialMaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
-            this.gbDireccion.SuspendLayout();
-            this.gbContacto.SuspendLayout();
+            this.pnlComercioDatos.SuspendLayout();
             this.SuspendLayout();
             // 
-            // txtRazonSocial
+            // btnCambiarLogo
             // 
-            this.txtRazonSocial.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRazonSocial.Location = new System.Drawing.Point(231, 66);
-            this.txtRazonSocial.Name = "txtRazonSocial";
-            this.txtRazonSocial.Size = new System.Drawing.Size(206, 26);
-            this.txtRazonSocial.TabIndex = 228;
-            // 
-            // txtCUIT
-            // 
-            this.txtCUIT.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCUIT.Location = new System.Drawing.Point(443, 66);
-            this.txtCUIT.Name = "txtCUIT";
-            this.txtCUIT.Size = new System.Drawing.Size(206, 26);
-            this.txtCUIT.TabIndex = 229;
-            // 
-            // txtIngresosBrutos
-            // 
-            this.txtIngresosBrutos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIngresosBrutos.Location = new System.Drawing.Point(231, 114);
-            this.txtIngresosBrutos.Name = "txtIngresosBrutos";
-            this.txtIngresosBrutos.Size = new System.Drawing.Size(206, 26);
-            this.txtIngresosBrutos.TabIndex = 230;
-            // 
-            // lblRazonSocial
-            // 
-            this.lblRazonSocial.AutoSize = true;
-            this.lblRazonSocial.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRazonSocial.Location = new System.Drawing.Point(228, 47);
-            this.lblRazonSocial.Name = "lblRazonSocial";
-            this.lblRazonSocial.Size = new System.Drawing.Size(90, 16);
-            this.lblRazonSocial.TabIndex = 233;
-            this.lblRazonSocial.Text = "Razon Social:";
-            // 
-            // lblCUIT
-            // 
-            this.lblCUIT.AutoSize = true;
-            this.lblCUIT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCUIT.Location = new System.Drawing.Point(441, 47);
-            this.lblCUIT.Name = "lblCUIT";
-            this.lblCUIT.Size = new System.Drawing.Size(41, 16);
-            this.lblCUIT.TabIndex = 234;
-            this.lblCUIT.Text = "CUIT:";
-            // 
-            // lblIngBrutos
-            // 
-            this.lblIngBrutos.AutoSize = true;
-            this.lblIngBrutos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIngBrutos.Location = new System.Drawing.Point(229, 95);
-            this.lblIngBrutos.Name = "lblIngBrutos";
-            this.lblIngBrutos.Size = new System.Drawing.Size(103, 16);
-            this.lblIngBrutos.TabIndex = 235;
-            this.lblIngBrutos.Text = "Ingresos Brutos:";
-            // 
-            // lblPuntoVenta
-            // 
-            this.lblPuntoVenta.AutoSize = true;
-            this.lblPuntoVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPuntoVenta.Location = new System.Drawing.Point(228, 191);
-            this.lblPuntoVenta.Name = "lblPuntoVenta";
-            this.lblPuntoVenta.Size = new System.Drawing.Size(101, 16);
-            this.lblPuntoVenta.TabIndex = 238;
-            this.lblPuntoVenta.Text = "Punto de Venta:";
-            // 
-            // lblInicioAct
-            // 
-            this.lblInicioAct.AutoSize = true;
-            this.lblInicioAct.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInicioAct.Location = new System.Drawing.Point(228, 143);
-            this.lblInicioAct.Name = "lblInicioAct";
-            this.lblInicioAct.Size = new System.Drawing.Size(100, 16);
-            this.lblInicioAct.TabIndex = 237;
-            this.lblInicioAct.Text = "Inicio Actividad:";
-            // 
-            // dtInicioActividad
-            // 
-            this.dtInicioActividad.Checked = false;
-            this.dtInicioActividad.CustomFormat = "dd/MM/yyyy";
-            this.dtInicioActividad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtInicioActividad.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtInicioActividad.Location = new System.Drawing.Point(231, 162);
-            this.dtInicioActividad.Name = "dtInicioActividad";
-            this.dtInicioActividad.Size = new System.Drawing.Size(206, 26);
-            this.dtInicioActividad.TabIndex = 239;
-            this.dtInicioActividad.Value = new System.DateTime(2022, 3, 15, 0, 0, 0, 0);
-            // 
-            // numPuntoVenta
-            // 
-            this.numPuntoVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numPuntoVenta.Location = new System.Drawing.Point(231, 210);
-            this.numPuntoVenta.Name = "numPuntoVenta";
-            this.numPuntoVenta.Size = new System.Drawing.Size(206, 26);
-            this.numPuntoVenta.TabIndex = 240;
-            this.numPuntoVenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numPuntoVenta.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // txtTelefono
-            // 
-            this.txtTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTelefono.Location = new System.Drawing.Point(9, 35);
-            this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(196, 26);
-            this.txtTelefono.TabIndex = 241;
-            // 
-            // txtCorreo
-            // 
-            this.txtCorreo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCorreo.Location = new System.Drawing.Point(211, 35);
-            this.txtCorreo.Name = "txtCorreo";
-            this.txtCorreo.Size = new System.Drawing.Size(200, 26);
-            this.txtCorreo.TabIndex = 242;
-            // 
-            // lblTelefono
-            // 
-            this.lblTelefono.AutoSize = true;
-            this.lblTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTelefono.Location = new System.Drawing.Point(6, 16);
-            this.lblTelefono.Name = "lblTelefono";
-            this.lblTelefono.Size = new System.Drawing.Size(64, 16);
-            this.lblTelefono.TabIndex = 243;
-            this.lblTelefono.Text = "Teléfono:";
-            // 
-            // lblCorreo
-            // 
-            this.lblCorreo.AutoSize = true;
-            this.lblCorreo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCorreo.Location = new System.Drawing.Point(210, 16);
-            this.lblCorreo.Name = "lblCorreo";
-            this.lblCorreo.Size = new System.Drawing.Size(51, 16);
-            this.lblCorreo.TabIndex = 244;
-            this.lblCorreo.Text = "Correo:";
-            // 
-            // lblRespIVA
-            // 
-            this.lblRespIVA.AutoSize = true;
-            this.lblRespIVA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRespIVA.Location = new System.Drawing.Point(442, 95);
-            this.lblRespIVA.Name = "lblRespIVA";
-            this.lblRespIVA.Size = new System.Drawing.Size(116, 16);
-            this.lblRespIVA.TabIndex = 246;
-            this.lblRespIVA.Text = "Responsable IVA:";
-            // 
-            // cbResponsableIVA
-            // 
-            this.cbResponsableIVA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbResponsableIVA.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbResponsableIVA.FormattingEnabled = true;
-            this.cbResponsableIVA.Location = new System.Drawing.Point(444, 114);
-            this.cbResponsableIVA.Name = "cbResponsableIVA";
-            this.cbResponsableIVA.Size = new System.Drawing.Size(205, 28);
-            this.cbResponsableIVA.TabIndex = 247;
-            // 
-            // txtCiudad
-            // 
-            this.txtCiudad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCiudad.Location = new System.Drawing.Point(6, 85);
-            this.txtCiudad.Name = "txtCiudad";
-            this.txtCiudad.Size = new System.Drawing.Size(293, 26);
-            this.txtCiudad.TabIndex = 249;
-            // 
-            // lblProvincia
-            // 
-            this.lblProvincia.AutoSize = true;
-            this.lblProvincia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProvincia.Location = new System.Drawing.Point(3, 114);
-            this.lblProvincia.Name = "lblProvincia";
-            this.lblProvincia.Size = new System.Drawing.Size(66, 16);
-            this.lblProvincia.TabIndex = 250;
-            this.lblProvincia.Text = "Provincia:";
-            // 
-            // lblLocalidad
-            // 
-            this.lblLocalidad.AutoSize = true;
-            this.lblLocalidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLocalidad.Location = new System.Drawing.Point(4, 66);
-            this.lblLocalidad.Name = "lblLocalidad";
-            this.lblLocalidad.Size = new System.Drawing.Size(70, 16);
-            this.lblLocalidad.TabIndex = 251;
-            this.lblLocalidad.Text = "Localidad:";
-            // 
-            // cbProvincia
-            // 
-            this.cbProvincia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbProvincia.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbProvincia.FormattingEnabled = true;
-            this.cbProvincia.Location = new System.Drawing.Point(6, 133);
-            this.cbProvincia.Name = "cbProvincia";
-            this.cbProvincia.Size = new System.Drawing.Size(206, 28);
-            this.cbProvincia.TabIndex = 252;
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
-            this.btnGuardar.IconColor = System.Drawing.Color.Black;
-            this.btnGuardar.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.btnGuardar.IconSize = 20;
-            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnGuardar.Location = new System.Drawing.Point(232, 503);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(417, 31);
-            this.btnGuardar.TabIndex = 236;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // txtNomCalle
-            // 
-            this.txtNomCalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNomCalle.Location = new System.Drawing.Point(6, 37);
-            this.txtNomCalle.Name = "txtNomCalle";
-            this.txtNomCalle.Size = new System.Drawing.Size(293, 26);
-            this.txtNomCalle.TabIndex = 253;
-            // 
-            // lblNomCalle
-            // 
-            this.lblNomCalle.AutoSize = true;
-            this.lblNomCalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNomCalle.Location = new System.Drawing.Point(4, 18);
-            this.lblNomCalle.Name = "lblNomCalle";
-            this.lblNomCalle.Size = new System.Drawing.Size(41, 16);
-            this.lblNomCalle.TabIndex = 254;
-            this.lblNomCalle.Text = "Calle:";
-            // 
-            // txtNumCalle
-            // 
-            this.txtNumCalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNumCalle.Location = new System.Drawing.Point(305, 37);
-            this.txtNumCalle.Name = "txtNumCalle";
-            this.txtNumCalle.Size = new System.Drawing.Size(107, 26);
-            this.txtNumCalle.TabIndex = 255;
-            // 
-            // lblNumCalle
-            // 
-            this.lblNumCalle.AutoSize = true;
-            this.lblNumCalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumCalle.Location = new System.Drawing.Point(302, 18);
-            this.lblNumCalle.Name = "lblNumCalle";
-            this.lblNumCalle.Size = new System.Drawing.Size(58, 16);
-            this.lblNumCalle.TabIndex = 256;
-            this.lblNumCalle.Text = "Número:";
-            // 
-            // lblAdmComercio
-            // 
-            this.lblAdmComercio.AutoSize = true;
-            this.lblAdmComercio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdmComercio.Location = new System.Drawing.Point(349, 9);
-            this.lblAdmComercio.Name = "lblAdmComercio";
-            this.lblAdmComercio.Size = new System.Drawing.Size(219, 20);
-            this.lblAdmComercio.TabIndex = 257;
-            this.lblAdmComercio.Text = "Editar Datos del Comercio";
+            this.btnCambiarLogo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCambiarLogo.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCambiarLogo.Depth = 0;
+            this.btnCambiarLogo.HighEmphasis = true;
+            this.btnCambiarLogo.Icon = global::CapaPresentacion.Properties.Resources.add_image_32;
+            this.btnCambiarLogo.Location = new System.Drawing.Point(557, 267);
+            this.btnCambiarLogo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCambiarLogo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCambiarLogo.Name = "btnCambiarLogo";
+            this.btnCambiarLogo.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCambiarLogo.Size = new System.Drawing.Size(156, 36);
+            this.btnCambiarLogo.TabIndex = 311;
+            this.btnCambiarLogo.Text = "Cambiar logo";
+            this.btnCambiarLogo.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnCambiarLogo.UseAccentColor = false;
+            this.btnCambiarLogo.UseVisualStyleBackColor = true;
+            this.btnCambiarLogo.Click += new System.EventHandler(this.btnCambiarLogo_Click);
             // 
             // picLogo
             // 
-            this.picLogo.Location = new System.Drawing.Point(21, 66);
+            this.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.picLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picLogo.Image = global::CapaPresentacion.Properties.Resources.image_logo_96;
+            this.picLogo.InitialImage = null;
+            this.picLogo.Location = new System.Drawing.Point(557, 102);
             this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(190, 190);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picLogo.Size = new System.Drawing.Size(156, 156);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picLogo.TabIndex = 258;
             this.picLogo.TabStop = false;
             // 
-            // btnActLogo
+            // txtRazonSocial
             // 
-            this.btnActLogo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnActLogo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnActLogo.IconChar = FontAwesome.Sharp.IconChar.Upload;
-            this.btnActLogo.IconColor = System.Drawing.Color.Black;
-            this.btnActLogo.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.btnActLogo.IconSize = 20;
-            this.btnActLogo.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnActLogo.Location = new System.Drawing.Point(21, 262);
-            this.btnActLogo.Name = "btnActLogo";
-            this.btnActLogo.Size = new System.Drawing.Size(190, 31);
-            this.btnActLogo.TabIndex = 259;
-            this.btnActLogo.Text = "Cambiar Logo";
-            this.btnActLogo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnActLogo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnActLogo.UseVisualStyleBackColor = true;
-            this.btnActLogo.Click += new System.EventHandler(this.btnActLogo_Click);
+            this.txtRazonSocial.AnimateReadOnly = false;
+            this.txtRazonSocial.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtRazonSocial.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtRazonSocial.Depth = 0;
+            this.txtRazonSocial.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtRazonSocial.HideSelection = true;
+            this.txtRazonSocial.Hint = "Razon social";
+            this.txtRazonSocial.LeadingIcon = null;
+            this.txtRazonSocial.Location = new System.Drawing.Point(17, 102);
+            this.txtRazonSocial.MaxLength = 8;
+            this.txtRazonSocial.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtRazonSocial.Name = "txtRazonSocial";
+            this.txtRazonSocial.PasswordChar = '\0';
+            this.txtRazonSocial.PrefixSuffixText = null;
+            this.txtRazonSocial.ReadOnly = false;
+            this.txtRazonSocial.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtRazonSocial.SelectedText = "";
+            this.txtRazonSocial.SelectionLength = 0;
+            this.txtRazonSocial.SelectionStart = 0;
+            this.txtRazonSocial.ShortcutsEnabled = true;
+            this.txtRazonSocial.Size = new System.Drawing.Size(255, 48);
+            this.txtRazonSocial.TabIndex = 312;
+            this.txtRazonSocial.TabStop = false;
+            this.txtRazonSocial.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtRazonSocial.TrailingIcon = null;
+            this.txtRazonSocial.UseSystemPasswordChar = false;
             // 
-            // lblLogo
+            // txtCuit
             // 
-            this.lblLogo.AutoSize = true;
-            this.lblLogo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLogo.Location = new System.Drawing.Point(67, 9);
-            this.lblLogo.Name = "lblLogo";
-            this.lblLogo.Size = new System.Drawing.Size(102, 20);
-            this.lblLogo.TabIndex = 260;
-            this.lblLogo.Text = "Editar Logo";
+            this.txtCuit.AnimateReadOnly = false;
+            this.txtCuit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtCuit.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtCuit.Depth = 0;
+            this.txtCuit.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCuit.HideSelection = true;
+            this.txtCuit.Hint = "C.U.I.T";
+            this.txtCuit.LeadingIcon = null;
+            this.txtCuit.Location = new System.Drawing.Point(278, 102);
+            this.txtCuit.MaxLength = 8;
+            this.txtCuit.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtCuit.Name = "txtCuit";
+            this.txtCuit.PasswordChar = '\0';
+            this.txtCuit.PrefixSuffixText = null;
+            this.txtCuit.ReadOnly = false;
+            this.txtCuit.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtCuit.SelectedText = "";
+            this.txtCuit.SelectionLength = 0;
+            this.txtCuit.SelectionStart = 0;
+            this.txtCuit.ShortcutsEnabled = true;
+            this.txtCuit.Size = new System.Drawing.Size(255, 48);
+            this.txtCuit.TabIndex = 313;
+            this.txtCuit.TabStop = false;
+            this.txtCuit.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtCuit.TrailingIcon = null;
+            this.txtCuit.UseSystemPasswordChar = false;
             // 
-            // txtCP
+            // txtIngresosBrutos
             // 
-            this.txtCP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCP.Location = new System.Drawing.Point(305, 85);
-            this.txtCP.Name = "txtCP";
-            this.txtCP.Size = new System.Drawing.Size(107, 26);
-            this.txtCP.TabIndex = 261;
+            this.txtIngresosBrutos.AnimateReadOnly = false;
+            this.txtIngresosBrutos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtIngresosBrutos.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtIngresosBrutos.Depth = 0;
+            this.txtIngresosBrutos.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtIngresosBrutos.HideSelection = true;
+            this.txtIngresosBrutos.Hint = "Ingresos brutos";
+            this.txtIngresosBrutos.LeadingIcon = null;
+            this.txtIngresosBrutos.Location = new System.Drawing.Point(17, 156);
+            this.txtIngresosBrutos.MaxLength = 8;
+            this.txtIngresosBrutos.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtIngresosBrutos.Name = "txtIngresosBrutos";
+            this.txtIngresosBrutos.PasswordChar = '\0';
+            this.txtIngresosBrutos.PrefixSuffixText = null;
+            this.txtIngresosBrutos.ReadOnly = false;
+            this.txtIngresosBrutos.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtIngresosBrutos.SelectedText = "";
+            this.txtIngresosBrutos.SelectionLength = 0;
+            this.txtIngresosBrutos.SelectionStart = 0;
+            this.txtIngresosBrutos.ShortcutsEnabled = true;
+            this.txtIngresosBrutos.Size = new System.Drawing.Size(255, 48);
+            this.txtIngresosBrutos.TabIndex = 314;
+            this.txtIngresosBrutos.TabStop = false;
+            this.txtIngresosBrutos.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtIngresosBrutos.TrailingIcon = null;
+            this.txtIngresosBrutos.UseSystemPasswordChar = false;
             // 
-            // lblCP
+            // cbCondicionIva
             // 
-            this.lblCP.AutoSize = true;
-            this.lblCP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCP.Location = new System.Drawing.Point(302, 66);
-            this.lblCP.Name = "lblCP";
-            this.lblCP.Size = new System.Drawing.Size(95, 16);
-            this.lblCP.TabIndex = 262;
-            this.lblCP.Text = "Codigo Postal:";
+            this.cbCondicionIva.AutoResize = false;
+            this.cbCondicionIva.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cbCondicionIva.Depth = 0;
+            this.cbCondicionIva.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cbCondicionIva.DropDownHeight = 174;
+            this.cbCondicionIva.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCondicionIva.DropDownWidth = 121;
+            this.cbCondicionIva.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cbCondicionIva.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cbCondicionIva.FormattingEnabled = true;
+            this.cbCondicionIva.Hint = "Condición IVA";
+            this.cbCondicionIva.IntegralHeight = false;
+            this.cbCondicionIva.ItemHeight = 43;
+            this.cbCondicionIva.Location = new System.Drawing.Point(278, 155);
+            this.cbCondicionIva.MaxDropDownItems = 4;
+            this.cbCondicionIva.MouseState = MaterialSkin.MouseState.OUT;
+            this.cbCondicionIva.Name = "cbCondicionIva";
+            this.cbCondicionIva.Size = new System.Drawing.Size(256, 49);
+            this.cbCondicionIva.StartIndex = 0;
+            this.cbCondicionIva.TabIndex = 315;
             // 
-            // gbDireccion
+            // pnlComercioDatos
             // 
-            this.gbDireccion.Controls.Add(this.txtNumCalle);
-            this.gbDireccion.Controls.Add(this.lblNomCalle);
-            this.gbDireccion.Controls.Add(this.txtNomCalle);
-            this.gbDireccion.Controls.Add(this.txtCP);
-            this.gbDireccion.Controls.Add(this.lblCP);
-            this.gbDireccion.Controls.Add(this.lblNumCalle);
-            this.gbDireccion.Controls.Add(this.txtCiudad);
-            this.gbDireccion.Controls.Add(this.cbProvincia);
-            this.gbDireccion.Controls.Add(this.lblProvincia);
-            this.gbDireccion.Controls.Add(this.lblLocalidad);
-            this.gbDireccion.Location = new System.Drawing.Point(231, 242);
-            this.gbDireccion.Name = "gbDireccion";
-            this.gbDireccion.Size = new System.Drawing.Size(418, 178);
-            this.gbDireccion.TabIndex = 263;
-            this.gbDireccion.TabStop = false;
-            this.gbDireccion.Text = "Dirección";
+            this.pnlComercioDatos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.pnlComercioDatos.Controls.Add(this.btnQuitarLogo);
+            this.pnlComercioDatos.Controls.Add(this.lblTitulo);
+            this.pnlComercioDatos.Controls.Add(this.btnCancelar);
+            this.pnlComercioDatos.Controls.Add(this.txtTelefono);
+            this.pnlComercioDatos.Controls.Add(this.btnCambiarLogo);
+            this.pnlComercioDatos.Controls.Add(this.btnGuardar);
+            this.pnlComercioDatos.Controls.Add(this.picLogo);
+            this.pnlComercioDatos.Controls.Add(this.txtCorreo);
+            this.pnlComercioDatos.Controls.Add(this.materialDivider2);
+            this.pnlComercioDatos.Controls.Add(this.txtCodigoPostal);
+            this.pnlComercioDatos.Controls.Add(this.materialDivider1);
+            this.pnlComercioDatos.Controls.Add(this.cbProvincia);
+            this.pnlComercioDatos.Controls.Add(this.txtPuntoVenta);
+            this.pnlComercioDatos.Controls.Add(this.txtCalleNombre);
+            this.pnlComercioDatos.Controls.Add(this.txtCiudad);
+            this.pnlComercioDatos.Controls.Add(this.txtFechaActualizacion);
+            this.pnlComercioDatos.Controls.Add(this.txtCalleNumero);
+            this.pnlComercioDatos.Controls.Add(this.txtInicioActividad);
+            this.pnlComercioDatos.Controls.Add(this.cbCondicionIva);
+            this.pnlComercioDatos.Controls.Add(this.txtRazonSocial);
+            this.pnlComercioDatos.Controls.Add(this.txtIngresosBrutos);
+            this.pnlComercioDatos.Controls.Add(this.txtCuit);
+            this.pnlComercioDatos.Depth = 0;
+            this.pnlComercioDatos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pnlComercioDatos.Location = new System.Drawing.Point(23, 23);
+            this.pnlComercioDatos.Margin = new System.Windows.Forms.Padding(14);
+            this.pnlComercioDatos.MouseState = MaterialSkin.MouseState.HOVER;
+            this.pnlComercioDatos.Name = "pnlComercioDatos";
+            this.pnlComercioDatos.Padding = new System.Windows.Forms.Padding(14);
+            this.pnlComercioDatos.Size = new System.Drawing.Size(736, 690);
+            this.pnlComercioDatos.TabIndex = 316;
+            // 
+            // btnQuitarLogo
+            // 
+            this.btnQuitarLogo.AutoSize = false;
+            this.btnQuitarLogo.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnQuitarLogo.Depth = 0;
+            this.btnQuitarLogo.HighEmphasis = false;
+            this.btnQuitarLogo.Icon = global::CapaPresentacion.Properties.Resources.remove_image_32;
+            this.btnQuitarLogo.Location = new System.Drawing.Point(557, 315);
+            this.btnQuitarLogo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnQuitarLogo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnQuitarLogo.Name = "btnQuitarLogo";
+            this.btnQuitarLogo.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnQuitarLogo.Size = new System.Drawing.Size(156, 36);
+            this.btnQuitarLogo.TabIndex = 322;
+            this.btnQuitarLogo.Text = "Quitar Logo";
+            this.btnQuitarLogo.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnQuitarLogo.UseAccentColor = false;
+            this.btnQuitarLogo.UseVisualStyleBackColor = true;
+            this.btnQuitarLogo.Click += new System.EventHandler(this.btnQuitarLogo_Click);
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Depth = 0;
+            this.lblTitulo.Font = new System.Drawing.Font("Roboto", 34F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblTitulo.FontType = MaterialSkin.MaterialSkinManager.fontType.H4;
+            this.lblTitulo.Location = new System.Drawing.Point(227, 14);
+            this.lblTitulo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(284, 41);
+            this.lblTitulo.TabIndex = 317;
+            this.lblTitulo.Text = "Datos comerciales";
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCancelar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCancelar.Depth = 0;
+            this.btnCancelar.HighEmphasis = false;
+            this.btnCancelar.Icon = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Icon")));
+            this.btnCancelar.Location = new System.Drawing.Point(298, 629);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCancelar.Size = new System.Drawing.Size(124, 36);
+            this.btnCancelar.TabIndex = 321;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnCancelar.UseAccentColor = false;
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.frmComercio_Load);
+            // 
+            // txtTelefono
+            // 
+            this.txtTelefono.AnimateReadOnly = false;
+            this.txtTelefono.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtTelefono.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtTelefono.Depth = 0;
+            this.txtTelefono.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtTelefono.HideSelection = true;
+            this.txtTelefono.Hint = "Telefono";
+            this.txtTelefono.LeadingIcon = global::CapaPresentacion.Properties.Resources.cell_32;
+            this.txtTelefono.Location = new System.Drawing.Point(17, 529);
+            this.txtTelefono.MaxLength = 8;
+            this.txtTelefono.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.PasswordChar = '\0';
+            this.txtTelefono.PrefixSuffixText = null;
+            this.txtTelefono.ReadOnly = false;
+            this.txtTelefono.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtTelefono.SelectedText = "";
+            this.txtTelefono.SelectionLength = 0;
+            this.txtTelefono.SelectionStart = 0;
+            this.txtTelefono.ShortcutsEnabled = true;
+            this.txtTelefono.Size = new System.Drawing.Size(255, 48);
+            this.txtTelefono.TabIndex = 312;
+            this.txtTelefono.TabStop = false;
+            this.txtTelefono.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtTelefono.TrailingIcon = null;
+            this.txtTelefono.UseSystemPasswordChar = false;
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGuardar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnGuardar.Depth = 0;
+            this.btnGuardar.HighEmphasis = true;
+            this.btnGuardar.Icon = global::CapaPresentacion.Properties.Resources.save_32;
+            this.btnGuardar.Location = new System.Drawing.Point(132, 629);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnGuardar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnGuardar.Size = new System.Drawing.Size(116, 36);
+            this.btnGuardar.TabIndex = 320;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnGuardar.UseAccentColor = false;
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // txtCorreo
+            // 
+            this.txtCorreo.AnimateReadOnly = false;
+            this.txtCorreo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtCorreo.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtCorreo.Depth = 0;
+            this.txtCorreo.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCorreo.HideSelection = true;
+            this.txtCorreo.Hint = "Correo";
+            this.txtCorreo.LeadingIcon = global::CapaPresentacion.Properties.Resources.email_32;
+            this.txtCorreo.Location = new System.Drawing.Point(278, 529);
+            this.txtCorreo.MaxLength = 8;
+            this.txtCorreo.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtCorreo.Name = "txtCorreo";
+            this.txtCorreo.PasswordChar = '\0';
+            this.txtCorreo.PrefixSuffixText = null;
+            this.txtCorreo.ReadOnly = false;
+            this.txtCorreo.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtCorreo.SelectedText = "";
+            this.txtCorreo.SelectionLength = 0;
+            this.txtCorreo.SelectionStart = 0;
+            this.txtCorreo.ShortcutsEnabled = true;
+            this.txtCorreo.Size = new System.Drawing.Size(255, 48);
+            this.txtCorreo.TabIndex = 313;
+            this.txtCorreo.TabStop = false;
+            this.txtCorreo.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtCorreo.TrailingIcon = null;
+            this.txtCorreo.UseSystemPasswordChar = false;
+            // 
+            // materialDivider2
+            // 
+            this.materialDivider2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider2.Depth = 0;
+            this.materialDivider2.Location = new System.Drawing.Point(17, 508);
+            this.materialDivider2.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
+            this.materialDivider2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider2.Name = "materialDivider2";
+            this.materialDivider2.Size = new System.Drawing.Size(517, 12);
+            this.materialDivider2.TabIndex = 320;
+            this.materialDivider2.Text = "materialDivider2";
+            // 
+            // txtCodigoPostal
+            // 
+            this.txtCodigoPostal.AnimateReadOnly = false;
+            this.txtCodigoPostal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtCodigoPostal.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtCodigoPostal.Depth = 0;
+            this.txtCodigoPostal.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCodigoPostal.HideSelection = true;
+            this.txtCodigoPostal.Hint = "Código postal";
+            this.txtCodigoPostal.LeadingIcon = null;
+            this.txtCodigoPostal.Location = new System.Drawing.Point(279, 396);
+            this.txtCodigoPostal.MaxLength = 8;
+            this.txtCodigoPostal.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtCodigoPostal.Name = "txtCodigoPostal";
+            this.txtCodigoPostal.PasswordChar = '\0';
+            this.txtCodigoPostal.PrefixSuffixText = null;
+            this.txtCodigoPostal.ReadOnly = false;
+            this.txtCodigoPostal.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtCodigoPostal.SelectedText = "";
+            this.txtCodigoPostal.SelectionLength = 0;
+            this.txtCodigoPostal.SelectionStart = 0;
+            this.txtCodigoPostal.ShortcutsEnabled = true;
+            this.txtCodigoPostal.Size = new System.Drawing.Size(255, 48);
+            this.txtCodigoPostal.TabIndex = 318;
+            this.txtCodigoPostal.TabStop = false;
+            this.txtCodigoPostal.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtCodigoPostal.TrailingIcon = null;
+            this.txtCodigoPostal.UseSystemPasswordChar = false;
+            // 
+            // materialDivider1
+            // 
+            this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider1.Depth = 0;
+            this.materialDivider1.Location = new System.Drawing.Point(17, 321);
+            this.materialDivider1.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
+            this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider1.Name = "materialDivider1";
+            this.materialDivider1.Size = new System.Drawing.Size(517, 12);
+            this.materialDivider1.TabIndex = 319;
+            this.materialDivider1.Text = "materialDivider1";
+            // 
+            // cbProvincia
+            // 
+            this.cbProvincia.AutoResize = false;
+            this.cbProvincia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cbProvincia.Depth = 0;
+            this.cbProvincia.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cbProvincia.DropDownHeight = 174;
+            this.cbProvincia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProvincia.DropDownWidth = 121;
+            this.cbProvincia.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cbProvincia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cbProvincia.FormattingEnabled = true;
+            this.cbProvincia.Hint = "Provincia";
+            this.cbProvincia.IntegralHeight = false;
+            this.cbProvincia.ItemHeight = 43;
+            this.cbProvincia.Location = new System.Drawing.Point(17, 450);
+            this.cbProvincia.MaxDropDownItems = 4;
+            this.cbProvincia.MouseState = MaterialSkin.MouseState.OUT;
+            this.cbProvincia.Name = "cbProvincia";
+            this.cbProvincia.Size = new System.Drawing.Size(256, 49);
+            this.cbProvincia.StartIndex = 0;
+            this.cbProvincia.TabIndex = 315;
+            // 
+            // txtPuntoVenta
+            // 
+            this.txtPuntoVenta.AnimateReadOnly = false;
+            this.txtPuntoVenta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtPuntoVenta.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtPuntoVenta.Depth = 0;
+            this.txtPuntoVenta.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtPuntoVenta.HideSelection = true;
+            this.txtPuntoVenta.Hint = "Punto de venta";
+            this.txtPuntoVenta.LeadingIcon = null;
+            this.txtPuntoVenta.Location = new System.Drawing.Point(17, 264);
+            this.txtPuntoVenta.MaxLength = 8;
+            this.txtPuntoVenta.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtPuntoVenta.Name = "txtPuntoVenta";
+            this.txtPuntoVenta.PasswordChar = '\0';
+            this.txtPuntoVenta.PrefixSuffixText = null;
+            this.txtPuntoVenta.ReadOnly = false;
+            this.txtPuntoVenta.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtPuntoVenta.SelectedText = "";
+            this.txtPuntoVenta.SelectionLength = 0;
+            this.txtPuntoVenta.SelectionStart = 0;
+            this.txtPuntoVenta.ShortcutsEnabled = true;
+            this.txtPuntoVenta.Size = new System.Drawing.Size(255, 48);
+            this.txtPuntoVenta.TabIndex = 318;
+            this.txtPuntoVenta.TabStop = false;
+            this.txtPuntoVenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtPuntoVenta.TrailingIcon = null;
+            this.txtPuntoVenta.UseSystemPasswordChar = false;
+            this.txtPuntoVenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPuntoVenta_KeyPress);
+            // 
+            // txtCalleNombre
+            // 
+            this.txtCalleNombre.AnimateReadOnly = false;
+            this.txtCalleNombre.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtCalleNombre.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtCalleNombre.Depth = 0;
+            this.txtCalleNombre.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCalleNombre.HideSelection = true;
+            this.txtCalleNombre.Hint = "Calle";
+            this.txtCalleNombre.LeadingIcon = null;
+            this.txtCalleNombre.Location = new System.Drawing.Point(17, 342);
+            this.txtCalleNombre.MaxLength = 8;
+            this.txtCalleNombre.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtCalleNombre.Name = "txtCalleNombre";
+            this.txtCalleNombre.PasswordChar = '\0';
+            this.txtCalleNombre.PrefixSuffixText = null;
+            this.txtCalleNombre.ReadOnly = false;
+            this.txtCalleNombre.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtCalleNombre.SelectedText = "";
+            this.txtCalleNombre.SelectionLength = 0;
+            this.txtCalleNombre.SelectionStart = 0;
+            this.txtCalleNombre.ShortcutsEnabled = true;
+            this.txtCalleNombre.Size = new System.Drawing.Size(255, 48);
+            this.txtCalleNombre.TabIndex = 312;
+            this.txtCalleNombre.TabStop = false;
+            this.txtCalleNombre.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtCalleNombre.TrailingIcon = null;
+            this.txtCalleNombre.UseSystemPasswordChar = false;
+            // 
+            // txtCiudad
+            // 
+            this.txtCiudad.AnimateReadOnly = false;
+            this.txtCiudad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtCiudad.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtCiudad.Depth = 0;
+            this.txtCiudad.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCiudad.HideSelection = true;
+            this.txtCiudad.Hint = "Localidad";
+            this.txtCiudad.LeadingIcon = null;
+            this.txtCiudad.Location = new System.Drawing.Point(17, 396);
+            this.txtCiudad.MaxLength = 8;
+            this.txtCiudad.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtCiudad.Name = "txtCiudad";
+            this.txtCiudad.PasswordChar = '\0';
+            this.txtCiudad.PrefixSuffixText = null;
+            this.txtCiudad.ReadOnly = false;
+            this.txtCiudad.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtCiudad.SelectedText = "";
+            this.txtCiudad.SelectionLength = 0;
+            this.txtCiudad.SelectionStart = 0;
+            this.txtCiudad.ShortcutsEnabled = true;
+            this.txtCiudad.Size = new System.Drawing.Size(255, 48);
+            this.txtCiudad.TabIndex = 314;
+            this.txtCiudad.TabStop = false;
+            this.txtCiudad.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtCiudad.TrailingIcon = null;
+            this.txtCiudad.UseSystemPasswordChar = false;
             // 
             // txtFechaActualizacion
             // 
-            this.txtFechaActualizacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFechaActualizacion.Location = new System.Drawing.Point(442, 162);
+            this.txtFechaActualizacion.AnimateReadOnly = false;
+            this.txtFechaActualizacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtFechaActualizacion.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtFechaActualizacion.Depth = 0;
+            this.txtFechaActualizacion.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtFechaActualizacion.HideSelection = true;
+            this.txtFechaActualizacion.Hint = "Fecha de actualización";
+            this.txtFechaActualizacion.LeadingIcon = null;
+            this.txtFechaActualizacion.Location = new System.Drawing.Point(278, 210);
+            this.txtFechaActualizacion.MaxLength = 8;
+            this.txtFechaActualizacion.MouseState = MaterialSkin.MouseState.OUT;
             this.txtFechaActualizacion.Name = "txtFechaActualizacion";
+            this.txtFechaActualizacion.PasswordChar = '\0';
+            this.txtFechaActualizacion.PrefixSuffixText = null;
             this.txtFechaActualizacion.ReadOnly = true;
-            this.txtFechaActualizacion.Size = new System.Drawing.Size(206, 26);
-            this.txtFechaActualizacion.TabIndex = 264;
+            this.txtFechaActualizacion.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtFechaActualizacion.SelectedText = "";
+            this.txtFechaActualizacion.SelectionLength = 0;
+            this.txtFechaActualizacion.SelectionStart = 0;
+            this.txtFechaActualizacion.ShortcutsEnabled = true;
+            this.txtFechaActualizacion.Size = new System.Drawing.Size(255, 48);
+            this.txtFechaActualizacion.TabIndex = 317;
+            this.txtFechaActualizacion.TabStop = false;
+            this.txtFechaActualizacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtFechaActualizacion.TrailingIcon = null;
+            this.txtFechaActualizacion.UseSystemPasswordChar = false;
             // 
-            // lblFechaActualizacion
+            // txtCalleNumero
             // 
-            this.lblFechaActualizacion.AutoSize = true;
-            this.lblFechaActualizacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFechaActualizacion.Location = new System.Drawing.Point(440, 143);
-            this.lblFechaActualizacion.Name = "lblFechaActualizacion";
-            this.lblFechaActualizacion.Size = new System.Drawing.Size(130, 16);
-            this.lblFechaActualizacion.TabIndex = 265;
-            this.lblFechaActualizacion.Text = "Fecha Actualizacion:";
+            this.txtCalleNumero.AnimateReadOnly = false;
+            this.txtCalleNumero.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtCalleNumero.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtCalleNumero.Depth = 0;
+            this.txtCalleNumero.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCalleNumero.HideSelection = true;
+            this.txtCalleNumero.Hint = "Número";
+            this.txtCalleNumero.LeadingIcon = null;
+            this.txtCalleNumero.Location = new System.Drawing.Point(278, 342);
+            this.txtCalleNumero.MaxLength = 8;
+            this.txtCalleNumero.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtCalleNumero.Name = "txtCalleNumero";
+            this.txtCalleNumero.PasswordChar = '\0';
+            this.txtCalleNumero.PrefixSuffixText = null;
+            this.txtCalleNumero.ReadOnly = false;
+            this.txtCalleNumero.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtCalleNumero.SelectedText = "";
+            this.txtCalleNumero.SelectionLength = 0;
+            this.txtCalleNumero.SelectionStart = 0;
+            this.txtCalleNumero.ShortcutsEnabled = true;
+            this.txtCalleNumero.Size = new System.Drawing.Size(255, 48);
+            this.txtCalleNumero.TabIndex = 313;
+            this.txtCalleNumero.TabStop = false;
+            this.txtCalleNumero.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtCalleNumero.TrailingIcon = null;
+            this.txtCalleNumero.UseSystemPasswordChar = false;
             // 
-            // gbContacto
+            // txtInicioActividad
             // 
-            this.gbContacto.Controls.Add(this.txtCorreo);
-            this.gbContacto.Controls.Add(this.lblCorreo);
-            this.gbContacto.Controls.Add(this.lblTelefono);
-            this.gbContacto.Controls.Add(this.txtTelefono);
-            this.gbContacto.Location = new System.Drawing.Point(232, 426);
-            this.gbContacto.Name = "gbContacto";
-            this.gbContacto.Size = new System.Drawing.Size(417, 69);
-            this.gbContacto.TabIndex = 266;
-            this.gbContacto.TabStop = false;
-            this.gbContacto.Text = "Contacto";
+            this.txtInicioActividad.AllowPromptAsInput = true;
+            this.txtInicioActividad.AnimateReadOnly = false;
+            this.txtInicioActividad.AsciiOnly = false;
+            this.txtInicioActividad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtInicioActividad.BeepOnError = false;
+            this.txtInicioActividad.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
+            this.txtInicioActividad.Depth = 0;
+            this.txtInicioActividad.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtInicioActividad.HidePromptOnLeave = false;
+            this.txtInicioActividad.HideSelection = true;
+            this.txtInicioActividad.Hint = "Inicio de actividad";
+            this.txtInicioActividad.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
+            this.txtInicioActividad.LeadingIcon = null;
+            this.txtInicioActividad.Location = new System.Drawing.Point(17, 210);
+            this.txtInicioActividad.Mask = "00/00/0000";
+            this.txtInicioActividad.MaxLength = 32767;
+            this.txtInicioActividad.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtInicioActividad.Name = "txtInicioActividad";
+            this.txtInicioActividad.PasswordChar = '\0';
+            this.txtInicioActividad.PrefixSuffixText = null;
+            this.txtInicioActividad.PromptChar = '_';
+            this.txtInicioActividad.ReadOnly = false;
+            this.txtInicioActividad.RejectInputOnFirstFailure = false;
+            this.txtInicioActividad.ResetOnPrompt = true;
+            this.txtInicioActividad.ResetOnSpace = true;
+            this.txtInicioActividad.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtInicioActividad.SelectedText = "";
+            this.txtInicioActividad.SelectionLength = 0;
+            this.txtInicioActividad.SelectionStart = 0;
+            this.txtInicioActividad.ShortcutsEnabled = true;
+            this.txtInicioActividad.Size = new System.Drawing.Size(255, 48);
+            this.txtInicioActividad.SkipLiterals = true;
+            this.txtInicioActividad.TabIndex = 316;
+            this.txtInicioActividad.TabStop = false;
+            this.txtInicioActividad.Text = "  /  /";
+            this.txtInicioActividad.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtInicioActividad.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
+            this.txtInicioActividad.TrailingIcon = null;
+            this.txtInicioActividad.UseSystemPasswordChar = false;
+            this.txtInicioActividad.ValidatingType = null;
             // 
             // frmComercio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(689, 561);
-            this.Controls.Add(this.gbContacto);
-            this.Controls.Add(this.txtFechaActualizacion);
-            this.Controls.Add(this.lblFechaActualizacion);
-            this.Controls.Add(this.gbDireccion);
-            this.Controls.Add(this.lblLogo);
-            this.Controls.Add(this.btnActLogo);
-            this.Controls.Add(this.picLogo);
-            this.Controls.Add(this.lblAdmComercio);
-            this.Controls.Add(this.cbResponsableIVA);
-            this.Controls.Add(this.lblRespIVA);
-            this.Controls.Add(this.numPuntoVenta);
-            this.Controls.Add(this.dtInicioActividad);
-            this.Controls.Add(this.txtRazonSocial);
-            this.Controls.Add(this.txtCUIT);
-            this.Controls.Add(this.txtIngresosBrutos);
-            this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.lblRazonSocial);
-            this.Controls.Add(this.lblCUIT);
-            this.Controls.Add(this.lblIngBrutos);
-            this.Controls.Add(this.lblPuntoVenta);
-            this.Controls.Add(this.lblInicioAct);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
+            this.ClientSize = new System.Drawing.Size(782, 736);
+            this.Controls.Add(this.pnlComercioDatos);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmComercio";
             this.Text = "Comercio";
             this.Load += new System.EventHandler(this.frmComercio_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numPuntoVenta)).EndInit();
+            this.Resize += new System.EventHandler(this.frmComercio_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
-            this.gbDireccion.ResumeLayout(false);
-            this.gbDireccion.PerformLayout();
-            this.gbContacto.ResumeLayout(false);
-            this.gbContacto.PerformLayout();
+            this.pnlComercioDatos.ResumeLayout(false);
+            this.pnlComercioDatos.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtRazonSocial;
-        private System.Windows.Forms.TextBox txtCUIT;
-        private System.Windows.Forms.TextBox txtIngresosBrutos;
-        private FontAwesome.Sharp.IconButton btnGuardar;
-        private System.Windows.Forms.Label lblRazonSocial;
-        private System.Windows.Forms.Label lblCUIT;
-        private System.Windows.Forms.Label lblIngBrutos;
-        private System.Windows.Forms.Label lblPuntoVenta;
-        private System.Windows.Forms.Label lblInicioAct;
-        private System.Windows.Forms.DateTimePicker dtInicioActividad;
-        private System.Windows.Forms.NumericUpDown numPuntoVenta;
-        private System.Windows.Forms.TextBox txtTelefono;
-        private System.Windows.Forms.TextBox txtCorreo;
-        private System.Windows.Forms.Label lblTelefono;
-        private System.Windows.Forms.Label lblCorreo;
-        private System.Windows.Forms.Label lblRespIVA;
-        private System.Windows.Forms.ComboBox cbResponsableIVA;
-        private System.Windows.Forms.TextBox txtCiudad;
-        private System.Windows.Forms.Label lblProvincia;
-        private System.Windows.Forms.Label lblLocalidad;
-        private System.Windows.Forms.ComboBox cbProvincia;
-        private System.Windows.Forms.TextBox txtNomCalle;
-        private System.Windows.Forms.Label lblNomCalle;
-        private System.Windows.Forms.TextBox txtNumCalle;
-        private System.Windows.Forms.Label lblNumCalle;
-        private System.Windows.Forms.Label lblAdmComercio;
         private System.Windows.Forms.PictureBox picLogo;
-        private FontAwesome.Sharp.IconButton btnActLogo;
-        private System.Windows.Forms.Label lblLogo;
-        private System.Windows.Forms.TextBox txtCP;
-        private System.Windows.Forms.Label lblCP;
-        private System.Windows.Forms.GroupBox gbDireccion;
-        private System.Windows.Forms.TextBox txtFechaActualizacion;
-        private System.Windows.Forms.Label lblFechaActualizacion;
-        private System.Windows.Forms.GroupBox gbContacto;
+        private MaterialSkin.Controls.MaterialButton btnCambiarLogo;
+        private MaterialSkin.Controls.MaterialTextBox2 txtRazonSocial;
+        private MaterialSkin.Controls.MaterialTextBox2 txtCuit;
+        private MaterialSkin.Controls.MaterialTextBox2 txtIngresosBrutos;
+        private MaterialSkin.Controls.MaterialComboBox cbCondicionIva;
+        private MaterialSkin.Controls.MaterialCard pnlComercioDatos;
+        private MaterialSkin.Controls.MaterialLabel lblTitulo;
+        private MaterialSkin.Controls.MaterialMaskedTextBox txtInicioActividad;
+        private MaterialSkin.Controls.MaterialTextBox2 txtFechaActualizacion;
+        private MaterialSkin.Controls.MaterialComboBox cbProvincia;
+        private MaterialSkin.Controls.MaterialTextBox2 txtCalleNombre;
+        private MaterialSkin.Controls.MaterialTextBox2 txtCiudad;
+        private MaterialSkin.Controls.MaterialTextBox2 txtCalleNumero;
+        private MaterialSkin.Controls.MaterialTextBox2 txtCodigoPostal;
+        private MaterialSkin.Controls.MaterialTextBox2 txtPuntoVenta;
+        private MaterialSkin.Controls.MaterialTextBox2 txtTelefono;
+        private MaterialSkin.Controls.MaterialTextBox2 txtCorreo;
+        private MaterialSkin.Controls.MaterialButton btnGuardar;
+        private MaterialSkin.Controls.MaterialButton btnCancelar;
+        private MaterialSkin.Controls.MaterialDivider materialDivider2;
+        private MaterialSkin.Controls.MaterialDivider materialDivider1;
+        private MaterialSkin.Controls.MaterialButton btnQuitarLogo;
     }
 }

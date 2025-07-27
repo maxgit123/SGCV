@@ -39,7 +39,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\Nueva carpeta %283%29\</OutputPath>
+    <OutputPath>.\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -94,11 +94,15 @@
     <Reference Include="FontAwesome.Sharp, Version=6.6.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome.Sharp.6.6.0\lib\net472\FontAwesome.Sharp.dll</HintPath>
     </Reference>
+    <Reference Include="MaterialSkin, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialSkin.2.2.3.1\lib\net461\MaterialSkin.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -112,10 +116,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Formularios\Base\frmAbmBase.cs">
+    <Compile Include="Formularios\Base\MaterialFormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formularios\Base\frmMantenimientoBase.cs">
+    <Compile Include="Formularios\Base\MaterialModalBase.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\frmCliente.cs">
@@ -141,6 +145,12 @@
     </Compile>
     <Compile Include="Formularios\frmCompraDetalle.Designer.cs">
       <DependentUpon>frmCompraDetalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Modal\mdCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Modal\mdCliente.Designer.cs">
+      <DependentUpon>mdCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\Modal\mdProducto.cs">
       <SubType>Form</SubType>
@@ -208,6 +218,25 @@
     <Compile Include="Utilidades\OpcionCombo.cs" />
     <Compile Include="Utilidades\UtilidadesCB.cs" />
     <Compile Include="Utilidades\UtilidadesForm.cs" />
+    <Compile Include="Utilidades\UtilidadesModal.cs" />
+    <None Include="Resources\remove_image_32.png" />
+    <None Include="Resources\image_logo_961.png" />
+    <None Include="Resources\image_logo_96.png" />
+    <None Include="Resources\image_96.png" />
+    <None Include="Resources\add_image_32.png" />
+    <None Include="Resources\barcode_32.png" />
+    <None Include="Resources\agregar_32.png" />
+    <None Include="Resources\cancel-32.png" />
+    <None Include="Resources\save_32.png" />
+    <None Include="Resources\email_32.png" />
+    <None Include="Resources\cell_32.png" />
+    <None Include="Resources\cell_16.png" />
+    <None Include="Resources\delete2_16.png" />
+    <None Include="Resources\hide_32.png" />
+    <None Include="Resources\visible_32.png" />
+    <None Include="Resources\shop_100.png" />
+    <None Include="Resources\visible-16.png" />
+    <None Include="Resources\hide-16.png" />
     <EmbeddedResource Include="Formularios\frmCliente.resx">
       <DependentUpon>frmCliente.cs</DependentUpon>
     </EmbeddedResource>
@@ -219,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmCompraDetalle.resx">
       <DependentUpon>frmCompraDetalle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Modal\mdCliente.resx">
+      <DependentUpon>mdCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Modal\mdProducto.resx">
       <DependentUpon>mdProducto.cs</DependentUpon>

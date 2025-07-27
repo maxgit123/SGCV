@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\Nueva carpeta %283%29\</OutputPath>
+    <OutputPath>.\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -46,7 +46,8 @@
   <ItemGroup>
     <Compile Include="CN_Compra.cs" />
     <Compile Include="CN_Conexion.cs" />
-    <Compile Include="Utilidades\ClaveHash.cs" />
+    <Compile Include="CN_Venta.cs" />
+    <Compile Include="Utilidades\Hash.cs" />
     <Compile Include="CN_AlicuotaIVA.cs" />
     <Compile Include="CN_Categoria.cs" />
     <Compile Include="CN_Cliente.cs" />

@@ -28,20 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.lblAdmCliente = new System.Windows.Forms.Label();
-            this.txtDocumento = new System.Windows.Forms.TextBox();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.cbBuscar = new System.Windows.Forms.ComboBox();
-            this.txtBuscar = new System.Windows.Forms.TextBox();
-            this.txtApellido = new System.Windows.Forms.TextBox();
-            this.lblBuscar = new System.Windows.Forms.Label();
-            this.lblListaClientes = new System.Windows.Forms.Label();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCliente));
             this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.id_cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,133 +49,47 @@
             this.estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.lblDocumento = new System.Windows.Forms.Label();
-            this.lblRespIVA = new System.Windows.Forms.Label();
-            this.lblNombre = new System.Windows.Forms.Label();
-            this.cbRespIVA = new System.Windows.Forms.ComboBox();
-            this.lblApellido = new System.Windows.Forms.Label();
-            this.btnLimpiarBuscar = new FontAwesome.Sharp.IconButton();
-            this.btnCancelar = new FontAwesome.Sharp.IconButton();
-            this.btnGuardar = new FontAwesome.Sharp.IconButton();
-            this.btnCrear = new FontAwesome.Sharp.IconButton();
-            this.lblTelefono = new System.Windows.Forms.Label();
-            this.txtTelefono = new System.Windows.Forms.TextBox();
-            this.txtCorreo = new System.Windows.Forms.TextBox();
-            this.lblCorreo = new System.Windows.Forms.Label();
-            this.pnlFormCliente = new System.Windows.Forms.Panel();
-            this.pnlListaClientes = new System.Windows.Forms.Panel();
+            this.pnlFormCliente = new MaterialSkin.Controls.MaterialCard();
+            this.txtDocumento = new MaterialSkin.Controls.MaterialTextBox2();
+            this.lblFormCliente = new MaterialSkin.Controls.MaterialLabel();
+            this.txtTelefono = new MaterialSkin.Controls.MaterialTextBox2();
+            this.btnCancelar = new MaterialSkin.Controls.MaterialButton();
+            this.btnGuardar = new MaterialSkin.Controls.MaterialButton();
+            this.txtNombre = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtApellido = new MaterialSkin.Controls.MaterialTextBox2();
+            this.cbRespIva = new MaterialSkin.Controls.MaterialComboBox();
+            this.txtCorreo = new MaterialSkin.Controls.MaterialTextBox2();
+            this.cbBuscar = new MaterialSkin.Controls.MaterialComboBox();
+            this.lblListaClientes = new MaterialSkin.Controls.MaterialLabel();
+            this.mbtnAgregar = new MaterialSkin.Controls.MaterialButton();
+            this.txtBuscar = new MaterialSkin.Controls.MaterialTextBox2();
+            this.pnlListaClientes = new MaterialSkin.Controls.MaterialCard();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.pnlFormCliente.SuspendLayout();
             this.pnlListaClientes.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblAdmCliente
-            // 
-            this.lblAdmCliente.AutoSize = true;
-            this.lblAdmCliente.BackColor = System.Drawing.Color.Transparent;
-            this.lblAdmCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdmCliente.ForeColor = System.Drawing.Color.Black;
-            this.lblAdmCliente.Location = new System.Drawing.Point(30, 15);
-            this.lblAdmCliente.Margin = new System.Windows.Forms.Padding(3, 15, 3, 0);
-            this.lblAdmCliente.Name = "lblAdmCliente";
-            this.lblAdmCliente.Size = new System.Drawing.Size(206, 20);
-            this.lblAdmCliente.TabIndex = 255;
-            this.lblAdmCliente.Text = "Administrador de Cliente";
-            // 
-            // txtDocumento
-            // 
-            this.txtDocumento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDocumento.Location = new System.Drawing.Point(15, 99);
-            this.txtDocumento.MaxLength = 8;
-            this.txtDocumento.Name = "txtDocumento";
-            this.txtDocumento.Size = new System.Drawing.Size(236, 26);
-            this.txtDocumento.TabIndex = 4;
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.Location = new System.Drawing.Point(14, 152);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(236, 26);
-            this.txtNombre.TabIndex = 5;
-            // 
-            // cbBuscar
-            // 
-            this.cbBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbBuscar.FormattingEnabled = true;
-            this.cbBuscar.Location = new System.Drawing.Point(553, 64);
-            this.cbBuscar.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
-            this.cbBuscar.Name = "cbBuscar";
-            this.cbBuscar.Size = new System.Drawing.Size(145, 26);
-            this.cbBuscar.TabIndex = 1;
-            // 
-            // txtBuscar
-            // 
-            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.Location = new System.Drawing.Point(704, 64);
-            this.txtBuscar.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(135, 26);
-            this.txtBuscar.TabIndex = 2;
-            this.txtBuscar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscar_KeyUp);
-            // 
-            // txtApellido
-            // 
-            this.txtApellido.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtApellido.Location = new System.Drawing.Point(15, 205);
-            this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(236, 26);
-            this.txtApellido.TabIndex = 6;
-            // 
-            // lblBuscar
-            // 
-            this.lblBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblBuscar.AutoSize = true;
-            this.lblBuscar.BackColor = System.Drawing.SystemColors.Control;
-            this.lblBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBuscar.Location = new System.Drawing.Point(457, 70);
-            this.lblBuscar.Name = "lblBuscar";
-            this.lblBuscar.Size = new System.Drawing.Size(90, 20);
-            this.lblBuscar.TabIndex = 238;
-            this.lblBuscar.Text = "Buscar por:";
-            // 
-            // lblListaClientes
-            // 
-            this.lblListaClientes.AutoSize = true;
-            this.lblListaClientes.BackColor = System.Drawing.Color.Transparent;
-            this.lblListaClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblListaClientes.ForeColor = System.Drawing.Color.Black;
-            this.lblListaClientes.Location = new System.Drawing.Point(377, 15);
-            this.lblListaClientes.Name = "lblListaClientes";
-            this.lblListaClientes.Size = new System.Drawing.Size(143, 20);
-            this.lblListaClientes.TabIndex = 237;
-            this.lblListaClientes.Text = "Lista de Clientes";
-            // 
             // dgvClientes
             // 
             this.dgvClientes.AllowUserToAddRows = false;
             this.dgvClientes.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvClientes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle14.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id_cliente,
@@ -198,41 +105,40 @@
             this.estado,
             this.btnEditar,
             this.btnEliminar});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle16;
             this.dgvClientes.EnableHeadersVisualStyles = false;
             this.dgvClientes.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dgvClientes.Location = new System.Drawing.Point(11, 98);
-            this.dgvClientes.Margin = new System.Windows.Forms.Padding(15, 3, 15, 15);
+            this.dgvClientes.Location = new System.Drawing.Point(17, 137);
             this.dgvClientes.MultiSelect = false;
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.ReadOnly = true;
             this.dgvClientes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvClientes.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvClientes.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.dgvClientes.RowHeadersVisible = false;
             this.dgvClientes.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvClientes.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvClientes.RowsDefaultCellStyle = dataGridViewCellStyle18;
             this.dgvClientes.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.Control;
             this.dgvClientes.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
             this.dgvClientes.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvClientes.RowTemplate.Height = 28;
             this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClientes.Size = new System.Drawing.Size(862, 348);
+            this.dgvClientes.Size = new System.Drawing.Size(837, 400);
             this.dgvClientes.TabIndex = 236;
             this.dgvClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientes_CellContentClick);
             this.dgvClientes.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvClientes_CellPainting);
@@ -252,10 +158,10 @@
             // 
             // nombre
             // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            this.nombre.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Black;
+            this.nombre.DefaultCellStyle = dataGridViewCellStyle15;
             this.nombre.HeaderText = "Nombre";
             this.nombre.Name = "nombre";
             this.nombre.ReadOnly = true;
@@ -322,243 +228,386 @@
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.ReadOnly = true;
             // 
-            // lblDocumento
+            // pnlFormCliente
             // 
-            this.lblDocumento.AutoSize = true;
-            this.lblDocumento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDocumento.Location = new System.Drawing.Point(16, 80);
-            this.lblDocumento.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.lblDocumento.Name = "lblDocumento";
-            this.lblDocumento.Size = new System.Drawing.Size(33, 16);
-            this.lblDocumento.TabIndex = 246;
-            this.lblDocumento.Text = "DNI:";
+            this.pnlFormCliente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlFormCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.pnlFormCliente.Controls.Add(this.txtDocumento);
+            this.pnlFormCliente.Controls.Add(this.lblFormCliente);
+            this.pnlFormCliente.Controls.Add(this.txtTelefono);
+            this.pnlFormCliente.Controls.Add(this.btnCancelar);
+            this.pnlFormCliente.Controls.Add(this.btnGuardar);
+            this.pnlFormCliente.Controls.Add(this.txtNombre);
+            this.pnlFormCliente.Controls.Add(this.txtApellido);
+            this.pnlFormCliente.Controls.Add(this.cbRespIva);
+            this.pnlFormCliente.Controls.Add(this.txtCorreo);
+            this.pnlFormCliente.Depth = 0;
+            this.pnlFormCliente.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pnlFormCliente.Location = new System.Drawing.Point(23, 23);
+            this.pnlFormCliente.Margin = new System.Windows.Forms.Padding(14);
+            this.pnlFormCliente.MouseState = MaterialSkin.MouseState.HOVER;
+            this.pnlFormCliente.Name = "pnlFormCliente";
+            this.pnlFormCliente.Padding = new System.Windows.Forms.Padding(14);
+            this.pnlFormCliente.Size = new System.Drawing.Size(290, 554);
+            this.pnlFormCliente.TabIndex = 239;
             // 
-            // lblRespIVA
+            // txtDocumento
             // 
-            this.lblRespIVA.AutoSize = true;
-            this.lblRespIVA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRespIVA.Location = new System.Drawing.Point(16, 345);
-            this.lblRespIVA.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.lblRespIVA.Name = "lblRespIVA";
-            this.lblRespIVA.Size = new System.Drawing.Size(116, 16);
-            this.lblRespIVA.TabIndex = 252;
-            this.lblRespIVA.Text = "Responsable IVA:";
+            this.txtDocumento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDocumento.AnimateReadOnly = false;
+            this.txtDocumento.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtDocumento.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtDocumento.Depth = 0;
+            this.txtDocumento.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtDocumento.HideSelection = true;
+            this.txtDocumento.Hint = "Documento";
+            this.txtDocumento.LeadingIcon = null;
+            this.txtDocumento.Location = new System.Drawing.Point(18, 80);
+            this.txtDocumento.MaxLength = 8;
+            this.txtDocumento.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtDocumento.Name = "txtDocumento";
+            this.txtDocumento.PasswordChar = '\0';
+            this.txtDocumento.PrefixSuffixText = null;
+            this.txtDocumento.ReadOnly = false;
+            this.txtDocumento.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtDocumento.SelectedText = "";
+            this.txtDocumento.SelectionLength = 0;
+            this.txtDocumento.SelectionStart = 0;
+            this.txtDocumento.ShortcutsEnabled = true;
+            this.txtDocumento.Size = new System.Drawing.Size(255, 48);
+            this.txtDocumento.TabIndex = 307;
+            this.txtDocumento.TabStop = false;
+            this.txtDocumento.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtDocumento.TrailingIcon = null;
+            this.txtDocumento.UseSystemPasswordChar = false;
             // 
-            // lblNombre
+            // lblFormCliente
             // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombre.Location = new System.Drawing.Point(16, 133);
-            this.lblNombre.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(59, 16);
-            this.lblNombre.TabIndex = 248;
-            this.lblNombre.Text = "Nombre:";
+            this.lblFormCliente.AutoSize = true;
+            this.lblFormCliente.Depth = 0;
+            this.lblFormCliente.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblFormCliente.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.lblFormCliente.Location = new System.Drawing.Point(57, 14);
+            this.lblFormCliente.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblFormCliente.Name = "lblFormCliente";
+            this.lblFormCliente.Size = new System.Drawing.Size(178, 29);
+            this.lblFormCliente.TabIndex = 306;
+            this.lblFormCliente.Text = "Datos de Cliente";
             // 
-            // cbRespIVA
+            // txtTelefono
             // 
-            this.cbRespIVA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbRespIVA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbRespIVA.FormattingEnabled = true;
-            this.cbRespIVA.Location = new System.Drawing.Point(15, 364);
-            this.cbRespIVA.Name = "cbRespIVA";
-            this.cbRespIVA.Size = new System.Drawing.Size(236, 24);
-            this.cbRespIVA.TabIndex = 9;
-            // 
-            // lblApellido
-            // 
-            this.lblApellido.AutoSize = true;
-            this.lblApellido.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblApellido.Location = new System.Drawing.Point(16, 186);
-            this.lblApellido.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.lblApellido.Name = "lblApellido";
-            this.lblApellido.Size = new System.Drawing.Size(60, 16);
-            this.lblApellido.TabIndex = 249;
-            this.lblApellido.Text = "Apellido:";
-            // 
-            // btnLimpiarBuscar
-            // 
-            this.btnLimpiarBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLimpiarBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLimpiarBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLimpiarBuscar.IconChar = FontAwesome.Sharp.IconChar.Eraser;
-            this.btnLimpiarBuscar.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(63)))), ((int)(((byte)(84)))));
-            this.btnLimpiarBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnLimpiarBuscar.IconSize = 18;
-            this.btnLimpiarBuscar.Location = new System.Drawing.Point(836, 64);
-            this.btnLimpiarBuscar.Margin = new System.Windows.Forms.Padding(3, 15, 15, 5);
-            this.btnLimpiarBuscar.Name = "btnLimpiarBuscar";
-            this.btnLimpiarBuscar.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.btnLimpiarBuscar.Size = new System.Drawing.Size(37, 26);
-            this.btnLimpiarBuscar.TabIndex = 3;
-            this.btnLimpiarBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLimpiarBuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLimpiarBuscar.UseVisualStyleBackColor = true;
-            this.btnLimpiarBuscar.Click += new System.EventHandler(this.btnLimpiarBuscar_Click);
+            this.txtTelefono.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTelefono.AnimateReadOnly = false;
+            this.txtTelefono.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtTelefono.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtTelefono.Depth = 0;
+            this.txtTelefono.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtTelefono.HideSelection = true;
+            this.txtTelefono.Hint = "Teléfono";
+            this.txtTelefono.LeadingIcon = global::CapaPresentacion.Properties.Resources.cell_32;
+            this.txtTelefono.Location = new System.Drawing.Point(19, 242);
+            this.txtTelefono.MaxLength = 32767;
+            this.txtTelefono.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.PasswordChar = '\0';
+            this.txtTelefono.PrefixSuffixText = null;
+            this.txtTelefono.ReadOnly = false;
+            this.txtTelefono.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtTelefono.SelectedText = "";
+            this.txtTelefono.SelectionLength = 0;
+            this.txtTelefono.SelectionStart = 0;
+            this.txtTelefono.ShortcutsEnabled = true;
+            this.txtTelefono.Size = new System.Drawing.Size(255, 48);
+            this.txtTelefono.TabIndex = 305;
+            this.txtTelefono.TabStop = false;
+            this.txtTelefono.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtTelefono.TrailingIcon = null;
+            this.txtTelefono.UseSystemPasswordChar = false;
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancelar.BackColor = System.Drawing.SystemColors.Control;
-            this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.IconChar = FontAwesome.Sharp.IconChar.CircleXmark;
-            this.btnCancelar.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(96)))), ((int)(((byte)(132)))));
-            this.btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.btnCancelar.IconSize = 20;
-            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCancelar.Location = new System.Drawing.Point(142, 419);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(3, 15, 30, 15);
+            this.btnCancelar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCancelar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCancelar.Depth = 0;
+            this.btnCancelar.HighEmphasis = false;
+            this.btnCancelar.Icon = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Icon")));
+            this.btnCancelar.Location = new System.Drawing.Point(149, 450);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(94, 30);
-            this.btnCancelar.TabIndex = 11;
+            this.btnCancelar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCancelar.Size = new System.Drawing.Size(124, 36);
+            this.btnCancelar.TabIndex = 304;
             this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancelar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnCancelar.UseAccentColor = false;
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGuardar.BackColor = System.Drawing.SystemColors.Control;
-            this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
-            this.btnGuardar.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(96)))), ((int)(((byte)(132)))));
-            this.btnGuardar.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.btnGuardar.IconSize = 20;
-            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnGuardar.Location = new System.Drawing.Point(30, 419);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(30, 15, 3, 15);
+            this.btnGuardar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGuardar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnGuardar.Depth = 0;
+            this.btnGuardar.HighEmphasis = true;
+            this.btnGuardar.Icon = global::CapaPresentacion.Properties.Resources.save_32;
+            this.btnGuardar.Location = new System.Drawing.Point(17, 450);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnGuardar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(94, 30);
-            this.btnGuardar.TabIndex = 10;
+            this.btnGuardar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnGuardar.Size = new System.Drawing.Size(116, 36);
+            this.btnGuardar.TabIndex = 303;
             this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGuardar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnGuardar.UseAccentColor = false;
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // btnCrear
+            // txtNombre
             // 
-            this.btnCrear.BackColor = System.Drawing.SystemColors.Control;
-            this.btnCrear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCrear.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(96)))), ((int)(((byte)(132)))));
-            this.btnCrear.FlatAppearance.BorderSize = 0;
-            this.btnCrear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(160)))), ((int)(((byte)(189)))));
-            this.btnCrear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(132)))), ((int)(((byte)(170)))));
-            this.btnCrear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCrear.IconChar = FontAwesome.Sharp.IconChar.Plus;
-            this.btnCrear.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(96)))), ((int)(((byte)(132)))));
-            this.btnCrear.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.btnCrear.IconSize = 20;
-            this.btnCrear.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCrear.Location = new System.Drawing.Point(11, 64);
-            this.btnCrear.Margin = new System.Windows.Forms.Padding(15, 15, 3, 5);
-            this.btnCrear.Name = "btnCrear";
-            this.btnCrear.Size = new System.Drawing.Size(71, 26);
-            this.btnCrear.TabIndex = 0;
-            this.btnCrear.Text = "Crear";
-            this.btnCrear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCrear.UseVisualStyleBackColor = true;
-            this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
+            this.txtNombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNombre.AnimateReadOnly = false;
+            this.txtNombre.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtNombre.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtNombre.Depth = 0;
+            this.txtNombre.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtNombre.HideSelection = true;
+            this.txtNombre.Hint = "Nombre";
+            this.txtNombre.LeadingIcon = null;
+            this.txtNombre.Location = new System.Drawing.Point(18, 134);
+            this.txtNombre.MaxLength = 32767;
+            this.txtNombre.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.PasswordChar = '\0';
+            this.txtNombre.PrefixSuffixText = null;
+            this.txtNombre.ReadOnly = false;
+            this.txtNombre.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtNombre.SelectedText = "";
+            this.txtNombre.SelectionLength = 0;
+            this.txtNombre.SelectionStart = 0;
+            this.txtNombre.ShortcutsEnabled = true;
+            this.txtNombre.Size = new System.Drawing.Size(256, 48);
+            this.txtNombre.TabIndex = 301;
+            this.txtNombre.TabStop = false;
+            this.txtNombre.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtNombre.TrailingIcon = null;
+            this.txtNombre.UseSystemPasswordChar = false;
             // 
-            // lblTelefono
+            // txtApellido
             // 
-            this.lblTelefono.AutoSize = true;
-            this.lblTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTelefono.Location = new System.Drawing.Point(16, 239);
-            this.lblTelefono.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.lblTelefono.Name = "lblTelefono";
-            this.lblTelefono.Size = new System.Drawing.Size(64, 16);
-            this.lblTelefono.TabIndex = 297;
-            this.lblTelefono.Text = "Teléfono:";
+            this.txtApellido.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtApellido.AnimateReadOnly = false;
+            this.txtApellido.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtApellido.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtApellido.Depth = 0;
+            this.txtApellido.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtApellido.HideSelection = true;
+            this.txtApellido.Hint = "Apellido";
+            this.txtApellido.LeadingIcon = null;
+            this.txtApellido.Location = new System.Drawing.Point(18, 188);
+            this.txtApellido.MaxLength = 32767;
+            this.txtApellido.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtApellido.Name = "txtApellido";
+            this.txtApellido.PasswordChar = '\0';
+            this.txtApellido.PrefixSuffixText = null;
+            this.txtApellido.ReadOnly = false;
+            this.txtApellido.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtApellido.SelectedText = "";
+            this.txtApellido.SelectionLength = 0;
+            this.txtApellido.SelectionStart = 0;
+            this.txtApellido.ShortcutsEnabled = true;
+            this.txtApellido.Size = new System.Drawing.Size(256, 48);
+            this.txtApellido.TabIndex = 300;
+            this.txtApellido.TabStop = false;
+            this.txtApellido.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtApellido.TrailingIcon = null;
+            this.txtApellido.UseSystemPasswordChar = false;
             // 
-            // txtTelefono
+            // cbRespIva
             // 
-            this.txtTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTelefono.Location = new System.Drawing.Point(15, 258);
-            this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(236, 26);
-            this.txtTelefono.TabIndex = 7;
+            this.cbRespIva.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbRespIva.AutoResize = false;
+            this.cbRespIva.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cbRespIva.Depth = 0;
+            this.cbRespIva.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cbRespIva.DropDownHeight = 174;
+            this.cbRespIva.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbRespIva.DropDownWidth = 121;
+            this.cbRespIva.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cbRespIva.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cbRespIva.FormattingEnabled = true;
+            this.cbRespIva.Hint = "Condición IVA";
+            this.cbRespIva.IntegralHeight = false;
+            this.cbRespIva.ItemHeight = 43;
+            this.cbRespIva.Location = new System.Drawing.Point(19, 350);
+            this.cbRespIva.MaxDropDownItems = 4;
+            this.cbRespIva.MouseState = MaterialSkin.MouseState.OUT;
+            this.cbRespIva.Name = "cbRespIva";
+            this.cbRespIva.Size = new System.Drawing.Size(256, 49);
+            this.cbRespIva.StartIndex = 0;
+            this.cbRespIva.TabIndex = 298;
             // 
             // txtCorreo
             // 
-            this.txtCorreo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCorreo.Location = new System.Drawing.Point(15, 311);
+            this.txtCorreo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCorreo.AnimateReadOnly = false;
+            this.txtCorreo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtCorreo.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtCorreo.Depth = 0;
+            this.txtCorreo.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCorreo.HideSelection = true;
+            this.txtCorreo.Hint = "Correo";
+            this.txtCorreo.LeadingIcon = global::CapaPresentacion.Properties.Resources.email_32;
+            this.txtCorreo.Location = new System.Drawing.Point(18, 296);
+            this.txtCorreo.MaxLength = 32767;
+            this.txtCorreo.MouseState = MaterialSkin.MouseState.OUT;
             this.txtCorreo.Name = "txtCorreo";
-            this.txtCorreo.Size = new System.Drawing.Size(236, 26);
-            this.txtCorreo.TabIndex = 8;
+            this.txtCorreo.PasswordChar = '\0';
+            this.txtCorreo.PrefixSuffixText = null;
+            this.txtCorreo.ReadOnly = false;
+            this.txtCorreo.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtCorreo.SelectedText = "";
+            this.txtCorreo.SelectionLength = 0;
+            this.txtCorreo.SelectionStart = 0;
+            this.txtCorreo.ShortcutsEnabled = true;
+            this.txtCorreo.Size = new System.Drawing.Size(256, 48);
+            this.txtCorreo.TabIndex = 299;
+            this.txtCorreo.TabStop = false;
+            this.txtCorreo.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtCorreo.TrailingIcon = null;
+            this.txtCorreo.UseSystemPasswordChar = false;
             // 
-            // lblCorreo
+            // cbBuscar
             // 
-            this.lblCorreo.AutoSize = true;
-            this.lblCorreo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCorreo.Location = new System.Drawing.Point(16, 292);
-            this.lblCorreo.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.lblCorreo.Name = "lblCorreo";
-            this.lblCorreo.Size = new System.Drawing.Size(51, 16);
-            this.lblCorreo.TabIndex = 295;
-            this.lblCorreo.Text = "Correo:";
+            this.cbBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbBuscar.AutoResize = false;
+            this.cbBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.cbBuscar.Depth = 0;
+            this.cbBuscar.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cbBuscar.DropDownHeight = 174;
+            this.cbBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBuscar.DropDownWidth = 121;
+            this.cbBuscar.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cbBuscar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cbBuscar.FormattingEnabled = true;
+            this.cbBuscar.Hint = "Buscar por";
+            this.cbBuscar.IntegralHeight = false;
+            this.cbBuscar.ItemHeight = 43;
+            this.cbBuscar.Location = new System.Drawing.Point(443, 79);
+            this.cbBuscar.MaxDropDownItems = 4;
+            this.cbBuscar.MouseState = MaterialSkin.MouseState.OUT;
+            this.cbBuscar.Name = "cbBuscar";
+            this.cbBuscar.Size = new System.Drawing.Size(180, 49);
+            this.cbBuscar.StartIndex = 0;
+            this.cbBuscar.TabIndex = 289;
             // 
-            // pnlFormCliente
+            // lblListaClientes
             // 
-            this.pnlFormCliente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.pnlFormCliente.BackColor = System.Drawing.Color.Lavender;
-            this.pnlFormCliente.Controls.Add(this.lblAdmCliente);
-            this.pnlFormCliente.Controls.Add(this.lblTelefono);
-            this.pnlFormCliente.Controls.Add(this.txtDocumento);
-            this.pnlFormCliente.Controls.Add(this.txtTelefono);
-            this.pnlFormCliente.Controls.Add(this.lblApellido);
-            this.pnlFormCliente.Controls.Add(this.txtCorreo);
-            this.pnlFormCliente.Controls.Add(this.cbRespIVA);
-            this.pnlFormCliente.Controls.Add(this.lblCorreo);
-            this.pnlFormCliente.Controls.Add(this.lblNombre);
-            this.pnlFormCliente.Controls.Add(this.lblRespIVA);
-            this.pnlFormCliente.Controls.Add(this.lblDocumento);
-            this.pnlFormCliente.Controls.Add(this.btnCancelar);
-            this.pnlFormCliente.Controls.Add(this.btnGuardar);
-            this.pnlFormCliente.Controls.Add(this.txtApellido);
-            this.pnlFormCliente.Controls.Add(this.txtNombre);
-            this.pnlFormCliente.Enabled = false;
-            this.pnlFormCliente.Location = new System.Drawing.Point(12, 12);
-            this.pnlFormCliente.Name = "pnlFormCliente";
-            this.pnlFormCliente.Size = new System.Drawing.Size(266, 463);
-            this.pnlFormCliente.TabIndex = 298;
+            this.lblListaClientes.AutoSize = true;
+            this.lblListaClientes.Depth = 0;
+            this.lblListaClientes.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblListaClientes.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.lblListaClientes.Location = new System.Drawing.Point(346, 14);
+            this.lblListaClientes.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblListaClientes.Name = "lblListaClientes";
+            this.lblListaClientes.Size = new System.Drawing.Size(179, 29);
+            this.lblListaClientes.TabIndex = 308;
+            this.lblListaClientes.Text = "Lista de Clientes";
+            // 
+            // mbtnAgregar
+            // 
+            this.mbtnAgregar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mbtnAgregar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.mbtnAgregar.Depth = 0;
+            this.mbtnAgregar.HighEmphasis = true;
+            this.mbtnAgregar.Icon = global::CapaPresentacion.Properties.Resources.agregar_32;
+            this.mbtnAgregar.Location = new System.Drawing.Point(17, 92);
+            this.mbtnAgregar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.mbtnAgregar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mbtnAgregar.Name = "mbtnAgregar";
+            this.mbtnAgregar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.mbtnAgregar.Size = new System.Drawing.Size(95, 36);
+            this.mbtnAgregar.TabIndex = 308;
+            this.mbtnAgregar.Text = "Crear";
+            this.mbtnAgregar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.mbtnAgregar.UseAccentColor = false;
+            this.mbtnAgregar.UseVisualStyleBackColor = true;
+            this.mbtnAgregar.Click += new System.EventHandler(this.btnCrear_Click);
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBuscar.AnimateReadOnly = false;
+            this.txtBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.txtBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtBuscar.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtBuscar.Depth = 0;
+            this.txtBuscar.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtBuscar.HideSelection = true;
+            this.txtBuscar.Hint = "Buscar:";
+            this.txtBuscar.LeadingIcon = null;
+            this.txtBuscar.Location = new System.Drawing.Point(629, 80);
+            this.txtBuscar.MaxLength = 32767;
+            this.txtBuscar.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.PasswordChar = '\0';
+            this.txtBuscar.PrefixSuffixText = null;
+            this.txtBuscar.ReadOnly = false;
+            this.txtBuscar.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtBuscar.SelectedText = "";
+            this.txtBuscar.SelectionLength = 0;
+            this.txtBuscar.SelectionStart = 0;
+            this.txtBuscar.ShortcutsEnabled = true;
+            this.txtBuscar.Size = new System.Drawing.Size(225, 48);
+            this.txtBuscar.TabIndex = 290;
+            this.txtBuscar.TabStop = false;
+            this.txtBuscar.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtBuscar.TrailingIcon = ((System.Drawing.Image)(resources.GetObject("txtBuscar.TrailingIcon")));
+            this.txtBuscar.UseSystemPasswordChar = false;
+            this.txtBuscar.TrailingIconClick += new System.EventHandler(this.txtBuscar_TrailingIconClick);
+            this.txtBuscar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscar_KeyUp);
             // 
             // pnlListaClientes
             // 
             this.pnlListaClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlListaClientes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlListaClientes.Controls.Add(this.lblListaClientes);
+            this.pnlListaClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.pnlListaClientes.Controls.Add(this.mbtnAgregar);
             this.pnlListaClientes.Controls.Add(this.dgvClientes);
-            this.pnlListaClientes.Controls.Add(this.btnCrear);
-            this.pnlListaClientes.Controls.Add(this.lblBuscar);
-            this.pnlListaClientes.Controls.Add(this.btnLimpiarBuscar);
+            this.pnlListaClientes.Controls.Add(this.lblListaClientes);
             this.pnlListaClientes.Controls.Add(this.txtBuscar);
             this.pnlListaClientes.Controls.Add(this.cbBuscar);
-            this.pnlListaClientes.Location = new System.Drawing.Point(284, 12);
+            this.pnlListaClientes.Depth = 0;
+            this.pnlListaClientes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pnlListaClientes.Location = new System.Drawing.Point(341, 23);
+            this.pnlListaClientes.Margin = new System.Windows.Forms.Padding(14);
+            this.pnlListaClientes.MouseState = MaterialSkin.MouseState.HOVER;
             this.pnlListaClientes.Name = "pnlListaClientes";
-            this.pnlListaClientes.Size = new System.Drawing.Size(890, 463);
-            this.pnlListaClientes.TabIndex = 299;
+            this.pnlListaClientes.Padding = new System.Windows.Forms.Padding(14);
+            this.pnlListaClientes.Size = new System.Drawing.Size(871, 554);
+            this.pnlListaClientes.TabIndex = 300;
             this.pnlListaClientes.Resize += new System.EventHandler(this.pnlListaClientes_Resize);
             // 
-            // frmClientes
+            // frmCliente
             // 
-            this.AcceptButton = this.btnGuardar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(1186, 487);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
+            this.ClientSize = new System.Drawing.Size(1235, 600);
             this.Controls.Add(this.pnlListaClientes);
             this.Controls.Add(this.pnlFormCliente);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmClientes";
+            this.Name = "frmCliente";
             this.Text = "Cliente";
-            this.Load += new System.EventHandler(this.frmClientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.pnlFormCliente.ResumeLayout(false);
             this.pnlFormCliente.PerformLayout();
@@ -569,31 +618,7 @@
         }
 
         #endregion
-
-        private FontAwesome.Sharp.IconButton btnLimpiarBuscar;
-        private FontAwesome.Sharp.IconButton btnCancelar;
-        private System.Windows.Forms.Label lblAdmCliente;
-        private System.Windows.Forms.TextBox txtDocumento;
-        private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.ComboBox cbBuscar;
-        private System.Windows.Forms.TextBox txtBuscar;
-        private System.Windows.Forms.TextBox txtApellido;
-        private System.Windows.Forms.Label lblBuscar;
-        private System.Windows.Forms.Label lblListaClientes;
-        private FontAwesome.Sharp.IconButton btnGuardar;
         private System.Windows.Forms.DataGridView dgvClientes;
-        private System.Windows.Forms.Label lblDocumento;
-        private System.Windows.Forms.Label lblRespIVA;
-        private System.Windows.Forms.Label lblNombre;
-        private System.Windows.Forms.ComboBox cbRespIVA;
-        private System.Windows.Forms.Label lblApellido;
-        private FontAwesome.Sharp.IconButton btnCrear;
-        private System.Windows.Forms.Label lblTelefono;
-        private System.Windows.Forms.TextBox txtTelefono;
-        private System.Windows.Forms.TextBox txtCorreo;
-        private System.Windows.Forms.Label lblCorreo;
-        private System.Windows.Forms.Panel pnlFormCliente;
-        private System.Windows.Forms.Panel pnlListaClientes;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_cliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn documento;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
@@ -607,5 +632,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn estado;
         private System.Windows.Forms.DataGridViewButtonColumn btnEditar;
         private System.Windows.Forms.DataGridViewButtonColumn btnEliminar;
+        private MaterialSkin.Controls.MaterialComboBox cbRespIva;
+        private MaterialSkin.Controls.MaterialTextBox2 txtCorreo;
+        private MaterialSkin.Controls.MaterialTextBox2 txtNombre;
+        private MaterialSkin.Controls.MaterialTextBox2 txtApellido;
+        private MaterialSkin.Controls.MaterialCard pnlFormCliente;
+        private MaterialSkin.Controls.MaterialButton btnCancelar;
+        private MaterialSkin.Controls.MaterialButton btnGuardar;
+        private MaterialSkin.Controls.MaterialLabel lblFormCliente;
+        private MaterialSkin.Controls.MaterialTextBox2 txtTelefono;
+        private MaterialSkin.Controls.MaterialTextBox2 txtDocumento;
+        private MaterialSkin.Controls.MaterialButton mbtnAgregar;
+        private MaterialSkin.Controls.MaterialLabel lblListaClientes;
+        private MaterialSkin.Controls.MaterialComboBox cbBuscar;
+        private MaterialSkin.Controls.MaterialTextBox2 txtBuscar;
+        private MaterialSkin.Controls.MaterialCard pnlListaClientes;
     }
 }

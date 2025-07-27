@@ -13,6 +13,7 @@ namespace CapaEntidad
         public string Telefono { get; set; }
         public string Correo { get; set; }
         public DateTime FechaActualizacion { get; set; }
+        public byte[] Logo { get; set; }
         public CE_Direccion oDireccion { get; set; }
         public CE_Localidad oLocalidad { get; set; }
         public CE_Provincia oProvincia { get; set; }

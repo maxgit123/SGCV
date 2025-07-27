@@ -17,9 +17,20 @@ namespace CapaNegocio
         }
         public CE_Usuario Login(string documento, string clave, out string mensaje)
         {
-            string claveHash = ClaveHash.ObtenerSha256(clave?.Trim());
+            CE_Usuario oUsuario = oCD_Usuario.Login(documento, out mensaje);
 
-            return oCD_Usuario.Login(documento, claveHash, out mensaje);
+            if (oUsuario == null)
+                return null;
+
+            bool esValido = Hash.Verificar(oUsuario.Clave, clave);
+
+            if (!esValido)
+            {
+                mensaje = "Clave incorrecta";
+                return null;
+            }
+
+            return oUsuario;
         }
         public int Crear(CE_Usuario oUsuario, out string mensaje)
         {
@@ -52,7 +63,7 @@ namespace CapaNegocio
             }
 
             // Se genera el hash de la clave antes de enviar a la capa de datos.
-            oUsuario.Clave = ClaveHash.ObtenerSha256(oUsuario.Clave.Trim());
+            oUsuario.Clave = Hash.Generar(oUsuario.Clave);
 
             // Si no hay errores, se procede a la capa de datos.
             return oCD_Usuario.Crear(oUsuario, out mensaje);
@@ -99,6 +110,10 @@ namespace CapaNegocio
             if (string.IsNullOrWhiteSpace(claveNueva))
                 errores.AppendLine("Ingrese la clave nueva.");
 
+            // Se verifica si la clave actual ingresada coincide con la almacenada en la base de datos.
+            if (!Hash.Verificar(oUsuario.Clave, claveActual))
+                errores.AppendLine("La clave actual es incorrecta.");
+
             // Si se encontraron errores, se construye el mensaje de error.
             if (errores.Length > 0)
             {
@@ -106,19 +121,10 @@ namespace CapaNegocio
                 return false;
             }
 
-            // Si no se encontraron errores, se obtiene el hash de las claves.
-            var claveActualHash = ClaveHash.ObtenerSha256(claveActual?.Trim());
-            var claveNuevaHash = ClaveHash.ObtenerSha256(claveNueva?.Trim());
+            // Si no hay errores, se genera un nuevo hash y se actualiza el objeto usuario.
+            oUsuario.Clave = Hash.Generar(claveNueva?.Trim());
 
-            // Se verifica si la clave actual ingresada coincide con la almacenada en la base de datos.
-            if (!string.Equals(oUsuario.Clave, claveActualHash, StringComparison.Ordinal))
-            {
-                mensaje = "La clave actual es incorrecta.";
-                return false;
-            }
-
-            // Si no hay errores, se procede a la capa de datos.
-            oUsuario.Clave = claveNuevaHash;
+            // Se procede a la capa de datos.
             return oCD_Usuario.CambiarClave(oUsuario, out mensaje);
         }
     }

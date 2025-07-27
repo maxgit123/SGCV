@@ -11,7 +11,7 @@ namespace CapaPresentacion.Formularios
 {
     public partial class frmProducto : Form
     {
-        private int idProductoSeleccionado = 0;
+        private int _idProductoSeleccionado = 0;
         private static class NombreColumna
         {
             public const string ID_PRODUCTO = "id_producto";
@@ -22,25 +22,26 @@ namespace CapaPresentacion.Formularios
             public const string BTN_EDITAR = "btnEditar";
             public const string BTN_ELIMINAR = "btnEliminar";
         }
+
         public frmProducto()
         {
             InitializeComponent();
-        }
-        private void frmProductos_Load(object sender, EventArgs e)
-        {
+
+            BackColor = System.Drawing.Color.FromArgb(63, 81, 181); // Indigo 500
             UtilidadesDGV.Configurar(dgvProductos);
 
             UtilidadesCB.Cargar(cbCategoria, new CN_Categoria().Listar(), c => c.Id, c => c.Nombre);
-
             UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvProductos, "descripcion");
-
             UtilidadesForm.AlternarPanelHabilitado(pnlListaProductos, pnlFormProducto, txtBuscar);
-
             ListarProductosEnDGV();
         }
+
         private void dgvProductos_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, NombreColumna.BTN_EDITAR, NombreColumna.BTN_ELIMINAR);
+            UtilidadesDGV.PintarbtnEditarEliminar(sender, e,
+                nombreColEditar: NombreColumna.BTN_EDITAR,
+                nombreColEliminar: NombreColumna.BTN_ELIMINAR
+            );
         }
         private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -65,7 +66,7 @@ namespace CapaPresentacion.Formularios
         {
             UtilidadesDGV.AplicarFiltro(dgvProductos, cbBuscar, txtBuscar.Text);
         }
-        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
+        private void txtBuscar_TrailingIconClick(object sender, EventArgs e)
         {
             UtilidadesDGV.QuitarFiltro(dgvProductos, txtBuscar);
         }
@@ -77,12 +78,14 @@ namespace CapaPresentacion.Formularios
         {
             if (!ValidarCampos()) return;
 
+            int.TryParse(txtQuiebreStock.Text, out int quiebreStock);
+
             CE_Producto oProducto = new CE_Producto()
             {
-                Id = idProductoSeleccionado,
+                Id = _idProductoSeleccionado,
                 Codigo = txtCodigo.Text.Trim(),
                 Descripcion = txtDescripcion.Text.Trim(),
-                QuiebreStock = Convert.ToInt32(nudQuiebreStock.Value),
+                QuiebreStock = quiebreStock,
                 oCategoria = new CE_Categoria()
                 {
                     Id = Convert.ToInt32(((OpcionCombo)cbCategoria.SelectedItem).Valor)
@@ -92,7 +95,7 @@ namespace CapaPresentacion.Formularios
             string mensaje;
             bool operacionExitosa;
 
-            if (idProductoSeleccionado == 0)
+            if (_idProductoSeleccionado == 0)
                 operacionExitosa = new CN_Producto().Crear(oProducto, out mensaje) != 0;
             else
                 operacionExitosa = new CN_Producto().Actualizar(oProducto, out mensaje);
@@ -112,6 +115,18 @@ namespace CapaPresentacion.Formularios
             LimpiarForm();
             UtilidadesForm.AlternarPanelHabilitado(pnlListaProductos, pnlFormProducto, txtBuscar);
         }
+        private void pnlListaProductos_Resize(object sender, EventArgs e)
+        {
+            UtilidadesForm.CentrarHorizontalmente(lblListaProductos);
+        }
+        private void txtQuiebreStock_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsControl(e.KeyChar) || char.IsDigit(e.KeyChar))
+                return;
+            
+            e.Handled = true;
+        }
+
         private void ListarProductosEnDGV()
         {
             dgvProductos.Rows.Clear();
@@ -138,7 +153,7 @@ namespace CapaPresentacion.Formularios
         }
         private void LimpiarForm()
         {
-            idProductoSeleccionado = 0;
+            _idProductoSeleccionado = 0;
             UtilidadesForm.ReiniciarControles(pnlFormProducto);
         }
         private bool ValidarCampos()
@@ -151,8 +166,8 @@ namespace CapaPresentacion.Formularios
             if (string.IsNullOrWhiteSpace(txtDescripcion.Text))
                 errores.AppendLine("Ingrese la descripción del producto.");
 
-            if (nudQuiebreStock.Value < 0 || nudQuiebreStock.Value > nudQuiebreStock.Maximum)
-                errores.AppendLine("Ingrese un quiebre de stock dentro del rango valido");
+            if (!int.TryParse(txtQuiebreStock.Text, out int quiebreStock) || quiebreStock < 0)
+                errores.AppendLine("Ingrese un quiebre de stock válido.");
 
             if (cbCategoria.SelectedItem == null || !(cbCategoria.SelectedItem is OpcionCombo))
                 errores.AppendLine("Seleccione una categoría para el producto.");
@@ -172,7 +187,7 @@ namespace CapaPresentacion.Formularios
         {
             if (esNuevoProducto)
             {
-                idProductoSeleccionado = 0;
+                _idProductoSeleccionado = 0;
                 LimpiarForm();
             }
             UtilidadesForm.AlternarPanelHabilitado(pnlFormProducto, pnlListaProductos, txtCodigo);
@@ -181,10 +196,10 @@ namespace CapaPresentacion.Formularios
         {
             DataGridViewRow filaSeleccionada = dgvProductos.Rows[indiceFilaSeleccionada];
 
-            idProductoSeleccionado = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ID_PRODUCTO].Value);
+            _idProductoSeleccionado = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ID_PRODUCTO].Value);
             txtCodigo.Text = filaSeleccionada.Cells[NombreColumna.CODIGO].Value.ToString();
             txtDescripcion.Text = filaSeleccionada.Cells[NombreColumna.DESCRIPCION].Value.ToString();
-            nudQuiebreStock.Value = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.QUIEBRE_STOCK].Value);
+            txtQuiebreStock.Text = filaSeleccionada.Cells[NombreColumna.QUIEBRE_STOCK].Value.ToString();
 
             int idCategoriaSeleccionada = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.CATEGORIA_ID].Value);
             cbCategoria.SelectedItem = cbCategoria.Items
@@ -213,10 +228,6 @@ namespace CapaPresentacion.Formularios
 
             dgvProductos.Rows.RemoveAt(indiceFilaSeleccionada);
             return true;
-        }
-        private void pnlListaProductos_Resize(object sender, EventArgs e)
-        {
-            UtilidadesForm.CentrarHorizontalmente(lblListaProductos);
         }
     }
 }

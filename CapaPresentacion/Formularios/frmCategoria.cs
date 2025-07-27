@@ -11,7 +11,7 @@ namespace CapaPresentacion.Formularios
 {
     public partial class frmCategoria : Form
     {
-        private int idCategoriaSeleccionada = 0;
+        private int _idCategoriaSeleccionada = 0;
         private static class NombreColumna
         {
             public const string ID_CATEGORIA = "id_categoria";
@@ -23,20 +23,20 @@ namespace CapaPresentacion.Formularios
         public frmCategoria()
         {
             InitializeComponent();
-        }
-        private void frmCategorias_Load(object sender, EventArgs e)
-        {
+
+            BackColor = System.Drawing.Color.FromArgb(63, 81, 181); // Indigo 500
             UtilidadesDGV.Configurar(dgvCategorias);
 
-            UtilidadesCB.Cargar(cbAlicuotaIVA, new CN_AlicuotaIVA().Listar(), r => r.Id, r => Convert.ToString(r.Porcentaje));
-
+            UtilidadesCB.Cargar(cbAlicuotaIva, new CN_AlicuotaIVA().Listar(), r => r.Id, r => Convert.ToString(r.Porcentaje));
             UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvCategorias, NombreColumna.NOMBRE);
-
             ListarCategoriasEnDGV();
         }
         private void dgvCategorias_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, NombreColumna.BTN_EDITAR, NombreColumna.BTN_ELIMINAR);
+            UtilidadesDGV.PintarbtnEditarEliminar(sender, e,
+                nombreColEditar: NombreColumna.BTN_EDITAR,
+                nombreColEliminar: NombreColumna.BTN_ELIMINAR
+            );
         }
         private void dgvCategorias_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -61,7 +61,7 @@ namespace CapaPresentacion.Formularios
         {
             UtilidadesDGV.AplicarFiltro(dgvCategorias, cbBuscar, txtBuscar.Text);
         }
-        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
+        private void txtBuscar_TrailingIconClick(object sender, EventArgs e)
         {
             UtilidadesDGV.QuitarFiltro(dgvCategorias, txtBuscar);
         }
@@ -71,25 +71,26 @@ namespace CapaPresentacion.Formularios
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (!ValidarCampos()) return;
+            if (!ValidarCampos())
+                return;
 
             CE_Categoria oCategoria = new CE_Categoria()
             {
-                Id = idCategoriaSeleccionada,
-                Nombre = txtNomCategoria.Text.Trim(),
+                Id = _idCategoriaSeleccionada,
+                Nombre = txtNombre.Text.Trim(),
                 oAlicuotaIVA = new CE_AlicuotaIVA()
                 {
-                    Id = Convert.ToInt32(((OpcionCombo)cbAlicuotaIVA.SelectedItem).Valor)
+                    Id = Convert.ToInt32(((OpcionCombo)cbAlicuotaIva.SelectedItem).Valor)
                 }
             };
 
             string mensaje;
             bool operacionExitosa;
 
-            if (idCategoriaSeleccionada == 0)
+            if (_idCategoriaSeleccionada == 0)
                 operacionExitosa = new CN_Categoria().Crear(oCategoria, out mensaje) != 0;
             else
-               operacionExitosa = new CN_Categoria().Actualizar(oCategoria, out mensaje);
+                operacionExitosa = new CN_Categoria().Actualizar(oCategoria, out mensaje);
 
             ListarCategoriasEnDGV();
             LimpiarForm();
@@ -100,6 +101,11 @@ namespace CapaPresentacion.Formularios
             LimpiarForm();
             UtilidadesForm.AlternarPanelHabilitado(pnlListaCategorias, pnlFormCategoria, txtBuscar);
         }
+        private void pnlListaCategorias_Resize(object sender, EventArgs e)
+        {
+            UtilidadesForm.CentrarHorizontalmente(lblListaCategorias);
+        }
+
         private void ListarCategoriasEnDGV()
         {
             dgvCategorias.Rows.Clear();
@@ -119,14 +125,19 @@ namespace CapaPresentacion.Formularios
                 });
             }
         }
+        private void LimpiarForm()
+        {
+            _idCategoriaSeleccionada = 0;
+            UtilidadesForm.ReiniciarControles(pnlFormCategoria);
+        }
         private bool ValidarCampos()
         {
             var errores = new StringBuilder();
 
-            if (string.IsNullOrWhiteSpace(txtNomCategoria.Text))
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
                 errores.AppendLine("Ingrese el nombre de la categoría.");
 
-            if (cbAlicuotaIVA.SelectedItem == null || !(cbAlicuotaIVA.SelectedItem is OpcionCombo))
+            if (cbAlicuotaIva.SelectedItem == null || !(cbAlicuotaIva.SelectedItem is OpcionCombo))
                 errores.AppendLine("Seleccione una alícuota IVA.");
 
             if (errores.Length > 0)
@@ -140,29 +151,24 @@ namespace CapaPresentacion.Formularios
 
             return true;
         }
-        private void LimpiarForm()
-        {
-            idCategoriaSeleccionada = 0;
-            UtilidadesForm.ReiniciarControles(pnlFormCategoria);
-        }
         private void ConfigurarFormularioParaEdicion(bool esNuevaCategoria)
         {
             if (esNuevaCategoria)
             {
-                idCategoriaSeleccionada = 0;
+                _idCategoriaSeleccionada = 0;
                 LimpiarForm();
             }
-            UtilidadesForm.AlternarPanelHabilitado(pnlFormCategoria, pnlListaCategorias, txtNomCategoria);
+            UtilidadesForm.AlternarPanelHabilitado(pnlFormCategoria, pnlListaCategorias, txtNombre);
         }
         private void CargarDatosParaEdicion(int indiceFilaSeleccionada)
         {
             DataGridViewRow filaSeleccionada = dgvCategorias.Rows[indiceFilaSeleccionada];
 
-            idCategoriaSeleccionada = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ID_CATEGORIA].Value);
-            txtNomCategoria.Text = filaSeleccionada.Cells[NombreColumna.NOMBRE].Value.ToString();
+            _idCategoriaSeleccionada = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ID_CATEGORIA].Value);
+            txtNombre.Text = filaSeleccionada.Cells[NombreColumna.NOMBRE].Value.ToString();
 
             int idAlicuotaIvaSelecionada = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ALICUOTA_IVA_ID].Value);
-            cbAlicuotaIVA.SelectedItem = cbAlicuotaIVA.Items
+            cbAlicuotaIva.SelectedItem = cbAlicuotaIva.Items
                 .Cast<OpcionCombo>()
                 .FirstOrDefault(oc => Convert.ToInt32(oc.Valor) == idAlicuotaIvaSelecionada);
         }
@@ -189,9 +195,6 @@ namespace CapaPresentacion.Formularios
             dgvCategorias.Rows.RemoveAt(indiceFilaSeleccionada);
             return true;
         }
-        private void pnlListaCategorias_Resize(object sender, EventArgs e)
-        {
-            UtilidadesForm.CentrarHorizontalmente(lblListaCategorias);
-        }
+
     }
 }

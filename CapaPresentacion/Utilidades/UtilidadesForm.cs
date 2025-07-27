@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using MaterialSkin.Controls;
 
 namespace CapaPresentacion.Utilidades
 {
@@ -16,12 +17,12 @@ namespace CapaPresentacion.Utilidades
         public static void AlternarPanelHabilitado(Panel panelActivo, Panel panelInactivo, Control controlFocus = null)
         {
             panelActivo.Enabled = true;
-            panelActivo.BackColor = ColorActivo;
-            panelActivo.BorderStyle = BorderStyle.FixedSingle;
+            //panelActivo.BackColor = ColorActivo;
+            //panelActivo.BorderStyle = BorderStyle.FixedSingle;
 
             panelInactivo.Enabled = false;
-            panelInactivo.BackColor = ColorInactivo;
-            panelInactivo.BorderStyle = BorderStyle.None;
+            //panelInactivo.BackColor = ColorInactivo;
+            //panelInactivo.BorderStyle = BorderStyle.None;
 
             controlFocus?.Focus();
         }
@@ -36,9 +37,21 @@ namespace CapaPresentacion.Utilidades
             {
                 switch (control)
                 {
-                    case TextBox txt:
-                        txt.Clear();
-                        txt.BackColor = SystemColors.Window;
+                    // Controls de MaterialSkin
+                    case MaterialTextBox2 mtb:
+                        mtb.Clear();
+                        break;
+                    case MaterialComboBox mcb:
+                        mcb.SelectedIndex = -1;
+                        break;
+                    case MaterialMultiLineTextBox2 mltb:
+                        mltb.Clear();
+                        break;
+
+                    // Controls de Windows Forms
+                    case TextBox tb:
+                        tb.Clear();
+                        tb.BackColor = SystemColors.Window;
                         break;
                     case ComboBox cb:
                         cb.SelectedIndex = -1;
@@ -75,6 +88,11 @@ namespace CapaPresentacion.Utilidades
         /// </summary>
         /// <param name="ctrl">El control a centrar.</param>
         public static void CentrarHorizontalmente(Control ctrl)
+        {
+            if (ctrl?.Parent != null)
+                ctrl.Left = (ctrl.Parent.Width - ctrl.Width) / 2;
+        }
+        public static void CentrarHorizontalmente(MaterialLabel ctrl)
         {
             if (ctrl?.Parent != null)
                 ctrl.Left = (ctrl.Parent.Width - ctrl.Width) / 2;

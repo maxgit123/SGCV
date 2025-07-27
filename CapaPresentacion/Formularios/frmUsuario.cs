@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -23,25 +24,26 @@ namespace CapaPresentacion.Formularios
             public const string BTN_EDITAR = "btnEditar";
             public const string BTN_ELIMINAR = "btnEliminar";
         }
+
         public frmUsuario()
         {
             InitializeComponent();
-        }
-        private void frmUsuarios_Load(object sender, EventArgs e)
-        {
+
+            BackColor = Color.FromArgb(63, 81, 181); // Indigo 500
             UtilidadesDGV.Configurar(dgvUsuarios);
 
             UtilidadesCB.Cargar(cbRol, new CN_Rol().Listar(), r => r.Id, r => r.Nombre);
-
             UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvUsuarios, NombreColumna.APELLIDO);
-
             UtilidadesForm.AlternarPanelHabilitado(pnlListaUsuarios, pnlFormUsuario, txtBuscar);
-
             ListarUsuariosEnDGV();
         }
+
         private void dgvUsuarios_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, NombreColumna.BTN_EDITAR, NombreColumna.BTN_ELIMINAR);
+            UtilidadesDGV.PintarbtnEditarEliminar(sender, e,
+                nombreColEditar: NombreColumna.BTN_EDITAR,
+                nombreColEliminar: NombreColumna.BTN_ELIMINAR
+            );
         }
         private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -68,7 +70,7 @@ namespace CapaPresentacion.Formularios
         {
             UtilidadesDGV.AplicarFiltro(dgvUsuarios, cbBuscar, txtBuscar.Text);
         }
-        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
+        private void txtBuscar_TrailingIconClick(object sender, EventArgs e)
         {
             UtilidadesDGV.QuitarFiltro(dgvUsuarios, txtBuscar);
         }
@@ -78,7 +80,8 @@ namespace CapaPresentacion.Formularios
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (!ValidarCampos()) return;
+            if (!ValidarCampos())
+                return;
 
             CE_Usuario oUsuario = new CE_Usuario()
             {
@@ -116,6 +119,11 @@ namespace CapaPresentacion.Formularios
             LimpiarForm();
             UtilidadesForm.AlternarPanelHabilitado(pnlListaUsuarios, pnlFormUsuario, txtBuscar);
         }
+        private void pnlListaUsuarios_Resize(object sender, EventArgs e)
+        {
+            UtilidadesForm.CentrarHorizontalmente(lblListaUsuarios);
+        }
+
         private void ListarUsuariosEnDGV()
         {
             dgvUsuarios.Rows.Clear();
@@ -232,10 +240,6 @@ namespace CapaPresentacion.Formularios
 
             dgvUsuarios.Rows.RemoveAt(indiceFilaSeleccionada);
             return true;
-        }
-        private void pnlListaUsuarios_Resize(object sender, EventArgs e)
-        {
-            UtilidadesForm.CentrarHorizontalmente(lblListaUsuarios);
         }
     }
 }

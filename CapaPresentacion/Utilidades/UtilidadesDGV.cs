@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using System.Drawing;
+using MaterialSkin.Controls;
 
 namespace CapaPresentacion.Utilidades
 {
@@ -47,6 +48,20 @@ namespace CapaPresentacion.Utilidades
         /// <param name="dgv">El DataGridView al que se le aplica el filtro.</param>
         /// <param name="cbFiltro">El ComboBox que contiene la columna a filtrar (con valores de tipo OpcionCombo).</param>
         /// <param name="tbFiltro">El texto del TextBox a buscar.</param>
+        public static void AplicarFiltro(DataGridView dgv, MaterialComboBox cbFiltro, string tbFiltro)
+        {
+            if (dgv.Rows.Count == 0) return;
+            if (!(cbFiltro.SelectedItem is OpcionCombo opcion)) return;
+
+            string columnaFiltro = opcion.Valor.ToString();
+            string textoFiltro = tbFiltro.Trim().ToUpper();
+
+            foreach (DataGridViewRow fila in dgv.Rows)
+            {
+                var valorCelda = fila.Cells[columnaFiltro].Value?.ToString().Trim().ToUpper();
+                fila.Visible = !string.IsNullOrEmpty(valorCelda) && valorCelda.Contains(textoFiltro);
+            }
+        }
         public static void AplicarFiltro(DataGridView dgv, ComboBox cbFiltro, string tbFiltro)
         {
             if (dgv.Rows.Count == 0) return;
@@ -67,6 +82,15 @@ namespace CapaPresentacion.Utilidades
         /// </summary>
         /// <param name="dgv">El DataGridView al que se le quitará el filtro.</param>
         /// <param name="txtFiltro">El TextBox a limpiar.</param>
+        public static void QuitarFiltro(DataGridView dgv, MaterialTextBox2 txtFiltro)
+        {
+            foreach (DataGridViewRow fila in dgv.Rows)
+            {
+                fila.Visible = true;
+            }
+
+            txtFiltro.Clear();
+        }
         public static void QuitarFiltro(DataGridView dgv, TextBox txtFiltro)
         {
             foreach (DataGridViewRow fila in dgv.Rows)
@@ -82,9 +106,13 @@ namespace CapaPresentacion.Utilidades
         /// </summary>
         /// <param name="sender">El DataGridView que dispara el evento.</param>
         /// <param name="e">Datos del evento CellPainting.</param>
-        /// <param name="nombreColEditar">Nombre de la columna de editar.</param>
-        /// <param name="nombreColEliminar">Nombre de la columna de eliminar.</param>
-        public static void PintarbtnEditarEliminar(object sender, DataGridViewCellPaintingEventArgs e, string nombreColEditar, string nombreColEliminar)
+        /// <param name="nombreColEditar">Nombre de la columna de editar (opcional).</param>
+        /// <param name="nombreColEliminar">Nombre de la columna de eliminar (opcional).</param>
+        public static void PintarbtnEditarEliminar(
+            object sender,
+            DataGridViewCellPaintingEventArgs e,
+            string nombreColEditar = null,
+            string nombreColEliminar = null)
         {
             if (e.RowIndex < 0)
                 return;
@@ -96,13 +124,11 @@ namespace CapaPresentacion.Utilidades
 
             if (colNombre == nombreColEditar)
             {
-                //dgv.Columns[colNombre].Width = 30;
                 PintarIcono(e, Properties.Resources.edit16);
             }
 
             if (colNombre == nombreColEliminar)
             {
-                //dgv.Columns[colNombre].MinimumWidth = 30;
                 PintarIcono(e, Properties.Resources.delete16);
             }
         }

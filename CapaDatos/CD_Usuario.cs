@@ -60,7 +60,9 @@ namespace CapaDatos
             }
             return lista;
         }
-        public CE_Usuario Login(string documento, string clave, out string mensaje)
+        public CE_Usuario Login(string documento,
+            //string clave,
+            out string mensaje)
         {
             mensaje = string.Empty;
             CE_Usuario oUsuario = null;
@@ -69,9 +71,7 @@ namespace CapaDatos
             using (SqlCommand cmd = new SqlCommand("usp_loginUsuario", oConexion))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
-
                 cmd.Parameters.AddWithValue("@documento", documento);
-                cmd.Parameters.AddWithValue("@clave", clave);
 
                 try
                 {
@@ -261,7 +261,7 @@ namespace CapaDatos
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@id_usuario", oUsuario.Id);
-                    cmd.Parameters.AddWithValue("@nueva_clave", oUsuario.Clave);
+                    cmd.Parameters.AddWithValue("@nuevaClave", oUsuario.Clave);
                     cmd.Parameters.Add("@respuesta", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
 

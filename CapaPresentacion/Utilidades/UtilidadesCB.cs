@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using MaterialSkin.Controls;
 
 namespace CapaPresentacion.Utilidades
 {
@@ -42,6 +43,25 @@ namespace CapaPresentacion.Utilidades
         /// <param name="dgv">DataGridView desde el cual se toman los encabezados de columna visibles y no vacíos.</param>
         /// <param name="nomColumnaPorDefecto">Nombre de columna a seleccionar por defecto. Si no se encuentra, selecciona el primer ítem.</param>
         public static void CargarHeadersDesdeDGV(ComboBox cb, DataGridView dgv, string nomColumnaPorDefecto = null)
+        {
+            var columnasVisibles = dgv.Columns
+                .Cast<DataGridViewColumn>()
+                .Where(c => c.Visible && !string.IsNullOrWhiteSpace(c.HeaderText))
+                .Select(c => new OpcionCombo
+                {
+                    Valor = c.Name,
+                    Texto = c.HeaderText
+                })
+                .ToList();
+
+            cb.DataSource = columnasVisibles;
+            cb.ValueMember = "Valor";
+            cb.DisplayMember = "Texto";
+
+            var indicePorDefecto = columnasVisibles.FindIndex(o => o.Valor.ToString() == nomColumnaPorDefecto);
+            cb.SelectedIndex = indicePorDefecto >= 0 ? indicePorDefecto : 0;
+        }
+        public static void CargarHeadersDesdeDGV(MaterialComboBox cb, DataGridView dgv, string nomColumnaPorDefecto = null)
         {
             var columnasVisibles = dgv.Columns
                 .Cast<DataGridViewColumn>()

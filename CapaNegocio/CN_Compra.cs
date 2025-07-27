@@ -12,6 +12,7 @@ namespace CapaNegocio
     public class CN_Compra
     {
         private readonly CD_Compra oCD_Compra = new CD_Compra();
+
         public bool Crear(CE_Compra oCompra, DataTable compraDetalle, out string mensaje)
         {
             //var errores = new StringBuilder();

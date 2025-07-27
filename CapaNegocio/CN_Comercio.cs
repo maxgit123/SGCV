@@ -56,6 +56,9 @@ namespace CapaNegocio
             if (oComercio.oResponsableIVA.Id < 1 || oComercio.oResponsableIVA.Id > 16)
                 errores.AppendLine("Seleccione un responsable de IVA válido.\n");
 
+            //if (oComercio.Logo == null || oComercio.Logo.Length == 0)
+            //    errores.AppendLine("Seleccione una imagen de logo válida.\n");
+
             if (errores.Length > 0)
             {
                 mensaje = "Se encontraron los siguientes errores:\n\n" + errores.ToString();
@@ -63,20 +66,6 @@ namespace CapaNegocio
             }
             
             return oCD_Comercio.Actualizar(oComercio, out mensaje);
-        }
-        public byte[] LeerLogo(out bool leido)
-        {
-            return oCD_Comercio.LeerLogo(out leido);
-        }
-        public bool ActualizarLogo(byte[] imagen, out string mensaje)
-        {
-            if (imagen == null || imagen.Length == 0)
-            {
-                mensaje = "Seleccione una imagen válida.";
-                return false;
-            }
-
-            return oCD_Comercio.ActualizarLogo(imagen, out mensaje);
         }
     }
 }

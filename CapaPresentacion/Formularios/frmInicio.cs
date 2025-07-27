@@ -6,35 +6,38 @@ using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
 using FontAwesome.Sharp;
+using CapaPresentacion.Formularios.Base;
 
 namespace CapaPresentacion.Formularios
 {
-    public partial class frmInicio : Form
+    public partial class frmInicio : MaterialFormBase
     {
-        private static CE_Usuario usuarioActual;
-        private static IconMenuItem menuActivo = null;
-        private static Form formularioActivo = null;
-        private const int DEFAULT_WIDTH = 1024;
-        private const int DEFAULT_HEIGHT = 720;
-        private const int MIN_WIDTH = 850;
-        private const int MIN_HEIGHT = 720;
+        private static CE_Usuario _usuarioActual;
+        private static IconMenuItem _menuActivo = null;
+        private static Form _formularioActivo = null;
+        private const int DEFAULT_WIDTH = 1300;
+        private const int DEFAULT_HEIGHT = 860;
+        private const int MIN_WIDTH = 1024;
+        private const int MIN_HEIGHT = 860;
         public frmInicio(CE_Usuario oUsuario)
         {
-            usuarioActual = oUsuario;
             InitializeComponent();
+
+            _usuarioActual = oUsuario;
+            menuTitulo.BackColor = _materialColor;
+            lblTitulo.BackColor = _materialColor;
+            panelDashboard.BackColor = _materialColorLight;
+            StartPosition = FormStartPosition.CenterScreen;
+            Size = new Size(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+            MinimumSize = new Size(MIN_WIDTH, MIN_HEIGHT);
+
+            menuTituloUsuario.Text = $"{_usuarioActual.Apellido}, {_usuarioActual.Nombre}";
+            smenuRol.Text = _usuarioActual.oRol.Nombre;
         }
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            // ------ Configuraciones del Formulario ------
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.Size = new Size(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-            this.MinimumSize = new Size(MIN_WIDTH, MIN_HEIGHT);
-
-            menuTituloUsuario.Text = $"{usuarioActual.Apellido}, {usuarioActual.Nombre}";
-            smenuRol.Text = usuarioActual.oRol.Nombre;
-
             // Obtiene una lista de modulos permitidos para el usuario actual.
-            List<CE_Modulo> modulosPermitidos = new CN_Modulo().Listar(usuarioActual.Id);
+            List<CE_Modulo> modulosPermitidos = new CN_Modulo().Listar(_usuarioActual.Id);
 
             // Filtra los item del menu en base a los permisos del usuario.
             foreach (IconMenuItem iconmenu in menuPrincipal.Items) 
@@ -46,16 +49,16 @@ namespace CapaPresentacion.Formularios
         }
         private void AbrirFormulario(IconMenuItem menu, Form formulario)
         {
-            if (menuActivo != null)
-                menuActivo.BackColor = Color.White;
+            if (_menuActivo != null)
+                _menuActivo.BackColor = Color.White;
 
             menu.BackColor = Color.Silver;
-            menuActivo = menu;
+            _menuActivo = menu;
 
             // Si ya mostre uno anteriormente (si no es null), lo cierro para que se pueda mostrar uno nuevo.
-            formularioActivo?.Close();
+            _formularioActivo?.Close();
 
-            formularioActivo = formulario; // Que sea el form activo.
+            _formularioActivo = formulario; // Que sea el form activo.
             formulario.TopLevel = false; // Que no este sobre todo.
             formulario.FormBorderStyle = FormBorderStyle.None; // Que no tenga bordes.
             formulario.Dock = DockStyle.Fill; // Que rellene todo el conetenedor.
@@ -97,7 +100,7 @@ namespace CapaPresentacion.Formularios
         }
         private void smenuRegistCompra_Click(object sender, EventArgs e)
         {
-            HandleMenuClick(sender, new frmCompra(usuarioActual));
+            HandleMenuClick(sender, new frmCompra(_usuarioActual));
         }
         private void smenuDetalleCompras_Click(object sender, EventArgs e)
         {
@@ -105,7 +108,7 @@ namespace CapaPresentacion.Formularios
         }
         private void smenuRegistrarVenta_Click(object sender, EventArgs e)
         {
-            HandleMenuClick(sender, new frmVenta(usuarioActual));
+            HandleMenuClick(sender, new frmVenta(_usuarioActual));
         }
         private void smenuDetalleVentas_Click(object sender, EventArgs e)
         {
@@ -117,9 +120,26 @@ namespace CapaPresentacion.Formularios
         }
         private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form form = new Modal.mdUsuarioCambiarClave(usuarioActual);
+            Form form = new Modal.mdUsuarioCambiarClave(_usuarioActual);
             form.ShowDialog();
         }
+        private void frmInicio_Resize(object sender, EventArgs e)
+        {
+            // Si se usa dock top en el menu quedan espacios blancos por el padding de la ventana.
+            menuTitulo.Width = this.ClientSize.Width;
+        }
+        private void menuTituloUsuario_DropDownOpening(object sender, EventArgs e)
+        {
+            // Cambia el color del texto del menu al abrirlo.
+            //var item = sender as ToolStripMenuItem;
+            //if (item != null)
+            //    item.ForeColor = _materialColor;
 
+            menuTituloUsuario.ForeColor = _materialColor;
+        }
+        private void menuTituloUsuario_DropDownClosed(object sender, EventArgs e)
+        {
+            menuTituloUsuario.ForeColor = Color.White;
+        }
     }
 }

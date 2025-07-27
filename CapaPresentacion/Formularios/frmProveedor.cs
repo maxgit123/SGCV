@@ -10,7 +10,7 @@ namespace CapaPresentacion.Formularios
 {
     public partial class frmProveedor : Form
     {
-        private int idProveedorSeleccionado = 0;
+        private int _idProveedorSeleccionado = 0;
         private static class NombreColumna
         {
             public const string ID_PROVEEDOR = "id_proveedor";
@@ -21,23 +21,25 @@ namespace CapaPresentacion.Formularios
             public const string BTN_EDITAR = "btnEditar";
             public const string BTN_ELIMINAR = "btnEliminar";
         }
+
         public frmProveedor()
         {
             InitializeComponent();
-        }
-        private void frmProveedores_Load(object sender, EventArgs e)
-        {
+
+            BackColor = System.Drawing.Color.FromArgb(63, 81, 181); // Indigo 500
             UtilidadesDGV.Configurar(dgvProveedores);
 
             UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvProveedores, NombreColumna.RAZON_SOCIAL);
-
-            UtilidadesForm.AlternarPanelHabilitado(pnlListaProveedores, pnlFormProveedor, txtBuscar);
-
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaProveedores, mpnlFormProveedor, txtBuscar);
             ListarProveedoresEnDGV();
         }
+
         private void dgvProveedores_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            UtilidadesDGV.PintarbtnEditarEliminar(sender, e, NombreColumna.BTN_EDITAR, NombreColumna.BTN_ELIMINAR);
+            UtilidadesDGV.PintarbtnEditarEliminar(sender, e,
+                nombreColEditar: NombreColumna.BTN_EDITAR,
+                nombreColEliminar: NombreColumna.BTN_ELIMINAR
+            );
         }
         private void dgvProveedores_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -61,7 +63,7 @@ namespace CapaPresentacion.Formularios
         {
             UtilidadesDGV.AplicarFiltro(dgvProveedores, cbBuscar, txtBuscar.Text);
         }
-        private void btnLimpiarBuscar_Click(object sender, EventArgs e)
+        private void txtBuscar_TrailingIconClick(object sender, EventArgs e)
         {
             UtilidadesDGV.QuitarFiltro(dgvProveedores, txtBuscar);
         }
@@ -75,7 +77,7 @@ namespace CapaPresentacion.Formularios
 
             CE_Proveedor oProveedor = new CE_Proveedor()
             {
-                Id = idProveedorSeleccionado,
+                Id = _idProveedorSeleccionado,
                 Observacion = txtObservacion.Text.Trim(),
                 RazonSocial = txtRazonSocial.Text.Trim(),
                 Telefono = txtTelefono.Text.Trim(),
@@ -85,7 +87,7 @@ namespace CapaPresentacion.Formularios
             string mensaje;
             bool operacionExitosa;
 
-            if (idProveedorSeleccionado == 0)
+            if (_idProveedorSeleccionado == 0)
             {
                 operacionExitosa = new CN_Proveedor().Crear(oProveedor, out mensaje) != 0;
             }
@@ -103,13 +105,18 @@ namespace CapaPresentacion.Formularios
 
             ListarProveedoresEnDGV();
             LimpiarForm();
-            UtilidadesForm.AlternarPanelHabilitado(pnlListaProveedores, pnlFormProveedor, txtBuscar);
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaProveedores, mpnlFormProveedor, txtBuscar);
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             LimpiarForm();
-            UtilidadesForm.AlternarPanelHabilitado(pnlListaProveedores, pnlFormProveedor, txtBuscar);
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaProveedores, mpnlFormProveedor, txtBuscar);
         }
+        private void pnlListaProveedores_Resize(object sender, EventArgs e)
+        {
+            UtilidadesForm.CentrarHorizontalmente(lblListaProveedores);
+        }
+        
         private void ListarProveedoresEnDGV()
         {
             dgvProveedores.Rows.Clear();
@@ -138,8 +145,8 @@ namespace CapaPresentacion.Formularios
         }
         private void LimpiarForm()
         {
-            idProveedorSeleccionado = 0;
-            UtilidadesForm.ReiniciarControles(pnlFormProveedor);
+            _idProveedorSeleccionado = 0;
+            UtilidadesForm.ReiniciarControles(mpnlFormProveedor);
         }
         private bool ValidarCampos()
         {
@@ -165,16 +172,16 @@ namespace CapaPresentacion.Formularios
         {
             if (esNuevo)
             {
-                idProveedorSeleccionado = 0;
+                _idProveedorSeleccionado = 0;
                 LimpiarForm();
             }
-            UtilidadesForm.AlternarPanelHabilitado(pnlFormProveedor, pnlListaProveedores, txtRazonSocial);
+            UtilidadesForm.AlternarPanelHabilitado(mpnlFormProveedor, pnlListaProveedores, txtRazonSocial);
         }
         private void CargarDatosParaEdicion(int indiceFila)
         {
             var fila = dgvProveedores.Rows[indiceFila];
 
-            idProveedorSeleccionado = Convert.ToInt32(fila.Cells[NombreColumna.ID_PROVEEDOR].Value);
+            _idProveedorSeleccionado = Convert.ToInt32(fila.Cells[NombreColumna.ID_PROVEEDOR].Value);
             txtRazonSocial.Text = fila.Cells[NombreColumna.RAZON_SOCIAL].Value.ToString();
             txtObservacion.Text = fila.Cells[NombreColumna.OBSERVACION].Value.ToString();
             txtTelefono.Text = fila.Cells[NombreColumna.TELEFONO].Value.ToString();
@@ -200,9 +207,6 @@ namespace CapaPresentacion.Formularios
             dgvProveedores.Rows.RemoveAt(indiceFila);
             return true;
         }
-        private void pnlListaProveedores_Resize(object sender, EventArgs e)
-        {
-            UtilidadesForm.CentrarHorizontalmente(lblListaProveedores);
-        }
+
     }
 }
