@@ -29,9 +29,11 @@ namespace CapaPresentacion.Formularios.Modal
             UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvProductos, NombreColumna.CODIGO);
             ListarProductosEnDGV();
         }
+
         private void dgvProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
 
             var fila = dgvProductos.Rows[e.RowIndex];
 
@@ -64,7 +66,7 @@ namespace CapaPresentacion.Formularios.Modal
         private void ListarProductosEnDGV()
         {
             dgvProductos.Rows.Clear();
-            List<CE_Producto> listaProducto = new CN_Producto().Listar();
+            List<CE_Producto> listaProducto = new CN_Producto().Listar(soloActivos: true, soloConStock: true);
 
             // TODO: mensaje de error si listaProducto es null o vacía
             //if (!string.IsNullOrEmpty(mensaje))
@@ -86,6 +88,5 @@ namespace CapaPresentacion.Formularios.Modal
                 });
             }
         }
-
     }
 }

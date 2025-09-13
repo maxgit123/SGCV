@@ -8,9 +8,10 @@ namespace CapaNegocio
     public class CN_Producto
     {
         private readonly CD_Producto oCD_Producto = new CD_Producto();
-        public List<CE_Producto> Listar()
+
+        public List<CE_Producto> Listar(bool? soloActivos = null, bool? soloConStock = null)
         {
-            return oCD_Producto.Listar();
+            return oCD_Producto.Listar(soloActivos, soloConStock);
         }
         public int Crear(CE_Producto oProducto, out string mensaje)
         {

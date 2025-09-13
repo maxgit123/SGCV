@@ -74,6 +74,10 @@ namespace CapaPresentacion.Formularios
         {
             UtilidadesDGV.QuitarFiltro(dgvUsuarios, txtBuscar);
         }
+        private void txtClave_TrailingIconClick(object sender, EventArgs e)
+        {
+            UtilidadesTextBox.MostrarClave(txtClave);
+        }
         private void btnCrear_Click(object sender, EventArgs e)
         {
             ConfigurarFormularioParaEdicion(true);
@@ -241,5 +245,6 @@ namespace CapaPresentacion.Formularios
             dgvUsuarios.Rows.RemoveAt(indiceFilaSeleccionada);
             return true;
         }
+
     }
 }

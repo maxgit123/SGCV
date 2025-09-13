@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
 using CapaPresentacion.Formularios.Base;
+using CapaPresentacion.Utilidades;
 
 namespace CapaPresentacion.Formularios
 {
@@ -14,6 +15,7 @@ namespace CapaPresentacion.Formularios
 
             panel1.BackColor = _materialColorDark;
         }
+
         private void btnIngrsar_Click(object sender, EventArgs e)
         {
             if (!CN_Conexion.VerificarConexion(out string errorMessage))
@@ -63,25 +65,11 @@ namespace CapaPresentacion.Formularios
         }
         private void txtDocumento_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+            UtilidadesTextBox.PermitirSoloDigitos(sender, e);
         }
         private void txtClave_TrailingIconClick(object sender, EventArgs e)
         {
-            if (txtClave.UseSystemPasswordChar)
-            {
-                txtClave.UseSystemPasswordChar = false;
-                txtClave.PasswordChar = '\0';
-                txtClave.TrailingIcon = Properties.Resources.visible_32;
-            }
-            else
-            {
-                txtClave.UseSystemPasswordChar = true;
-                txtClave.PasswordChar = '●';
-                txtClave.TrailingIcon = Properties.Resources.hide_32;
-            }
+            UtilidadesTextBox.MostrarClave(txtClave);
         }
     }
 }

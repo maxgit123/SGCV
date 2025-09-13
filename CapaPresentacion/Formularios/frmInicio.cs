@@ -19,6 +19,7 @@ namespace CapaPresentacion.Formularios
         private const int DEFAULT_HEIGHT = 860;
         private const int MIN_WIDTH = 1024;
         private const int MIN_HEIGHT = 860;
+
         public frmInicio(CE_Usuario oUsuario)
         {
             InitializeComponent();

@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
-using CapaPresentacion.Formularios.Modal;
 using CapaPresentacion.Utilidades;
 
 namespace CapaPresentacion.Formularios
@@ -29,20 +28,17 @@ namespace CapaPresentacion.Formularios
 
         public frmCompra(CE_Usuario oUsuario = null)
         {
-            _usuario = oUsuario;
             InitializeComponent();
-        }
-        private void frmCompras_Load(object sender, EventArgs e)
-        {
+            _usuario = oUsuario;
+            BackColor = Color.FromArgb(63, 81, 181); // Indigo 500
             UtilidadesDGV.Configurar(dgvProductos);
             dtpFechaPedido.Value = DateTime.Now;
             dtpFechaEntrega.Value = DateTime.Now;
-            txtRazonSocial.ReadOnly = true;
-            txtDescripcionProducto.ReadOnly = true;
+            txtProveedor.ReadOnly = true;
+            txtProductoDescripcion.ReadOnly = true;
             txtTotal.ReadOnly = true;
-            nudCantidadProducto.Minimum = 1;
-            nudCantidadProducto.Maximum = 999;
         }
+
         private void dgvProductos_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             UtilidadesDGV.PintarbtnEditarEliminar(sender, e, nombreColEliminar: NombreColumna.BTN_ELIMINAR);
@@ -60,21 +56,6 @@ namespace CapaPresentacion.Formularios
             dgvProductos.Rows.RemoveAt(Convert.ToInt32(e.RowIndex));
             CalcularTotal();
         }
-        private void btnBuscarProducto_Click(object sender, EventArgs e)
-        {
-            UtilidadesModal.BuscarProducto(
-                txtCodigo: txtCodigoProducto,
-                txtDescripcion: txtDescripcionProducto,
-                idProductoSeleccionado: ref idProductoSeleccionado
-            );
-        }
-        private void btnBuscarProveedor_Click(object sender, EventArgs e)
-        {
-            UtilidadesModal.BuscarProveedor(
-                txtRazonSocial,
-                ref idProveedorSeleccionado
-            );
-        }
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             decimal precioCompra = 0;
@@ -89,14 +70,14 @@ namespace CapaPresentacion.Formularios
             }
 
             // Se valida el campo de precio de compra y se guarda como decimal
-            if (!UtilidadesForm.EsPrecioValido(txtPrecioCompra.Text))
+            if (!UtilidadesTextBox.EsPrecioValido(txtProductoPrecio.Text))
             {
                 MessageBox.Show("El formato del precio no es válido.", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtPrecioCompra.Select();
+                txtProductoPrecio.Select();
                 return;
             }
-            precioCompra = decimal.Parse(txtPrecioCompra.Text);
+            precioCompra = decimal.Parse(txtProductoPrecio.Text);
 
             // Se comprueba que no se agregue un producto ya agregado
             foreach (DataGridViewRow fila in dgvProductos.Rows)
@@ -112,21 +93,24 @@ namespace CapaPresentacion.Formularios
 
             if (!productoYaExiste)
             {
-                decimal subtotal = nudCantidadProducto.Value * precioCompra;
+                //decimal subtotal = txtProductoCantidad.Value * precioCompra;
+                Int32.TryParse(txtProductoCantidad.Text, out int cantidad);
+                decimal subtotal = cantidad * precioCompra;
 
                 dgvProductos.Rows.Add(new object[]
                 {
                     idProductoSeleccionado,
-                    txtDescripcionProducto.Text,
+                    txtProductoDescripcion.Text,
                     precioCompra.ToString(FormatoPrecio, culturaArgentina),
-                    nudCantidadProducto.Value.ToString(),
+                    txtProductoCantidad.Text,
                     (subtotal).ToString(FormatoPrecio, culturaArgentina),
                     "" // btnEliminar
                 });
 
                 CalcularTotal();
                 LimpiarProducto();
-                txtCodigoProducto.Select();
+                txtProductoCantidad.Text = "1";
+                txtProductoCodigo.Select();
             }
         }
         private void btnRegistrarCompra_Click(object sender, EventArgs e)
@@ -191,35 +175,65 @@ namespace CapaPresentacion.Formularios
 
             MessageBox.Show("Compra registrada correctamente.", "Éxito",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
-            txtRazonSocial.Clear();
+            txtProveedor.Clear();
             dgvProductos.Rows.Clear();
             CalcularTotal();
         }
-        private void txtCodProducto_KeyDown(object sender, KeyEventArgs e)
+        private void txtProductoCodigo_KeyDown(object sender, KeyEventArgs e)
         {
             // Se usa keyDown para detectar la tecla Enter (los lectores de código de barras envían Enter al finalizar la lectura)
             if (e.KeyCode != Keys.Enter)
                 return;
 
             CE_Producto oProducto = new CN_Producto().Listar()
-                .Find(p => p.Codigo == txtCodigoProducto.Text.Trim() && p.oEstado.Id == true);
+                .Find(p => p.Codigo == txtProductoCodigo.Text.Trim() && p.oEstado.Id == true);
 
             if (oProducto == null)
             {
-                txtCodigoProducto.BackColor = Color.LightCoral;
+                txtProductoCodigo.BackColor = Color.LightCoral;
                 idProductoSeleccionado = 0;
-                txtDescripcionProducto.Clear();
+                txtProductoDescripcion.Clear();
                 return;
             }
 
-            txtCodigoProducto.BackColor = Color.LightGreen;
+            txtProductoCodigo.BackColor = Color.LightGreen;
             idProductoSeleccionado = oProducto.Id;
-            txtDescripcionProducto.Text = oProducto.Descripcion;
-            txtPrecioCompra.Select();
+            txtProductoDescripcion.Text = oProducto.Descripcion;
+            txtProductoPrecio.Select();
+        }
+        private void txtProductoCodigo_TrailingIconClick(object sender, EventArgs e)
+        {
+            UtilidadesModal.BuscarProducto(
+                txtCodigo: txtProductoCodigo,
+                txtDescripcion: txtProductoDescripcion,
+                idProductoSeleccionado: ref idProductoSeleccionado
+            );
         }
         private void txtPrecioCompra_KeyPress(object sender, KeyPressEventArgs e)
         {
-            UtilidadesForm.EsEntradaPrecioValida(sender, e);
+            UtilidadesTextBox.PermitirSoloPrecio(sender, e);
+        }
+        private void txtProveedor_TrailingIconClick(object sender, EventArgs e)
+        {
+            UtilidadesModal.BuscarProveedor(
+                txtProveedor,
+                ref idProveedorSeleccionado
+            );
+        }
+        private void txtProductoCantidad_LeadingIconClick(object sender, EventArgs e)
+        {
+            if (!int.TryParse(txtProductoCantidad.Text, out int cantidad))
+                return;
+
+            if (cantidad > 1)
+                txtProductoCantidad.Text = (cantidad - 1).ToString();
+        }
+        private void txtProductoCantidad_TrailingIconClick(object sender, EventArgs e)
+        {
+            if (!int.TryParse(txtProductoCantidad.Text, out int cantidad))
+                return;
+
+            txtProductoCantidad.Text = (cantidad + 1).ToString();
         }
 
         private void LimpiarProducto()
@@ -264,5 +278,23 @@ namespace CapaPresentacion.Formularios
             }
             return true;
         }
+
+        private void txtFechaPedido_TrailingIconClick(object sender, EventArgs e)
+        {
+            UtilidadesTextBox.DesplegarCalendario(dtpFechaPedido);
+        }
+        private void dtpFechaPedido_ValueChanged(object sender, EventArgs e)
+        {
+            txtFechaPedido.Text = dtpFechaPedido.Value.ToString("dd/MM/yyyy", culturaArgentina);
+        }
+        private void txtFechaEntrega_TrailingIconClick(object sender, EventArgs e)
+        {
+            UtilidadesTextBox.DesplegarCalendario(dtpFechaEntrega);
+        }
+        private void dtpFechaEntrega_ValueChanged(object sender, EventArgs e)
+        {
+            txtFechaEntrega.Text = dtpFechaEntrega.Value.ToString("dd/MM/yyyy", culturaArgentina);
+        }
+
     }
 }

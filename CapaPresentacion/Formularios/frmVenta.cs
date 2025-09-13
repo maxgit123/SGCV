@@ -12,11 +12,12 @@ namespace CapaPresentacion.Formularios
     public partial class frmVenta : Form
     {
         private readonly CE_Usuario _usuario;
-        private int idClienteSeleccionado = 0;
-        private int idProductoSeleccionado = 0;
-        private int stockProducto = 0;
-        private const string formatoPrecio = "0.00";
-        private static readonly CultureInfo culturaArgentina = new CultureInfo("es-AR");
+        private int _idClienteSeleccionado = 0;
+        private int _idProductoSeleccionado = 0;
+        private int _productoCantidad = 1;
+        private int _productoStockMaximo = 0;
+        private const string _formatoPrecio = "0.00";
+        private static readonly CultureInfo _culturaArgentina = new CultureInfo("es-AR");
         private static class NombreColumna
         {
             public const string ID_PRODUCTO = "id_producto";
@@ -29,27 +30,26 @@ namespace CapaPresentacion.Formularios
 
         public frmVenta(CE_Usuario oUsuario = null)
         {
-            _usuario = oUsuario;
             InitializeComponent();
-        }
-        private void frmVentas_Load(object sender, EventArgs e)
-        {
+            _usuario = oUsuario;
+            BackColor = Color.FromArgb(63, 81, 181); // Indigo 500
             UtilidadesDGV.Configurar(dgvProductos);
-            dtpFechaVenta.Value = DateTime.Now;
-            txtNombreCompletoCliente.ReadOnly = true;
-            txtDescripcionProducto.ReadOnly = true;
-            txtPrecioVenta.ReadOnly = true;
-            txtPrecioVenta.TextAlign = HorizontalAlignment.Right;
-            txtStockProducto.ReadOnly = true;
-            txtStockProducto.TextAlign = HorizontalAlignment.Right;
+            dtpVentaFecha.Value = DateTime.Now;
+            txtClienteNombreCompleto.ReadOnly = true;
+            txtProductoDescripcion.ReadOnly = true;
+            txtProductoPrecio.ReadOnly = true;
+            txtProductoPrecio.TextAlign = HorizontalAlignment.Right;
+            txtProductoStock.ReadOnly = true;
+            txtProductoStock.TextAlign = HorizontalAlignment.Right;
             txtTotal.ReadOnly = true;
             txtTotal.TextAlign = HorizontalAlignment.Right;
             txtVuelto.TextAlign = HorizontalAlignment.Right;
             txtPago.TextAlign = HorizontalAlignment.Right;
-            nudCantidadProducto.TextAlign = HorizontalAlignment.Right;
-            nudCantidadProducto.Minimum = 1;
-            nudCantidadProducto.Maximum = 999; // Este podria setearse en base al stock del producto
+            txtProductoCantidad.TextAlign = HorizontalAlignment.Center;
+            //txtProductoCantidad.Minimum = 1;
+            //txtProductoCantidad.Maximum = 999; // Este podria setearse en base al stock del producto
         }
+
         private void dgvProductos_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             UtilidadesDGV.PintarbtnEditarEliminar(sender, e, nombreColEliminar: NombreColumna.ELIMINAR);
@@ -67,34 +67,60 @@ namespace CapaPresentacion.Formularios
             dgvProductos.Rows.RemoveAt(e.RowIndex);
             CalcularTotal();
         }
-        private void btnBuscarProducto_Click(object sender, EventArgs e)
+        private void txtProductoCodigo_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode != Keys.Enter)
+                return;
+
+            CE_Producto oProducto = new CN_Producto().Listar()
+                .Find(p => p.Codigo == txtProductoCodigo.Text.Trim() && p.oEstado.Id == true && p.Stock >= 1);
+            
+            if (oProducto == null)
+            {
+                //txtProductoCodigo.BackColor = Color.LightCoral;
+                txtProductoCodigo.SetErrorState(true);
+                //txtProductoCodigo.ShowAssistiveText = true;
+                _idProductoSeleccionado = 0;
+                txtProductoDescripcion.Clear();
+                txtProductoPrecio.Text = "0,00";
+                txtProductoCantidad.Text = "1";
+                txtProductoStock.Text = "0";
+                _productoStockMaximo = 0;
+                return;
+            }
+
+            //txtProductoCodigo.BackColor = Color.LightGreen;
+            txtProductoCodigo.SetErrorState(false);
+            //txtProductoCodigo.ShowAssistiveText = false;
+            _idProductoSeleccionado = oProducto.Id;
+            txtProductoDescripcion.Text = oProducto.Descripcion;
+            txtProductoPrecio.Text = oProducto.PrecioVenta.ToString();
+            txtProductoCantidad.Text = "1";
+            txtProductoStock.Text = oProducto.Stock.ToString();
+            _productoStockMaximo = oProducto.Stock;
+        }
+        private void txtProductoCodigo_TrailingIconClick(object sender, EventArgs e)
+        {
+            LimpiarProducto();
+
             UtilidadesModal.BuscarProducto(
-                txtCodigo: txtCodigoProducto,
-                txtDescripcion: txtDescripcionProducto,
-                idProductoSeleccionado: ref idProductoSeleccionado,
-                txtPrecioVenta: txtPrecioVenta,
-                txtStockProducto: txtStockProducto
+                txtCodigo: txtProductoCodigo,
+                txtDescripcion: txtProductoDescripcion,
+                idProductoSeleccionado: ref _idProductoSeleccionado,
+                txtPrecio: txtProductoPrecio,
+                txtStock: txtProductoStock
             );
 
-            if (int.TryParse(txtStockProducto.Text, out int stock))
+            if (int.TryParse(txtProductoStock.Text, out int stock))
             {
-                nudCantidadProducto.Maximum = stock;
+                _productoStockMaximo = stock;
             }
-        }
-        private void btnBuscarCliente_Click(object sender, EventArgs e)
-        {
-            UtilidadesModal.BuscarCliente(
-                txtDniCliente,
-                txtNombreCompletoCliente,
-                ref idClienteSeleccionado
-            );
         }
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            decimal precioVenta;
+            decimal productoPrecio;
 
-            if (idProductoSeleccionado == 0)
+            if (_idProductoSeleccionado == 0)
             {
                 MessageBox.Show("Debe seleccionar un producto.", "Advertencia",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -103,27 +129,27 @@ namespace CapaPresentacion.Formularios
 
             // --- Validación de stock ---
             CE_Producto oProducto = new CN_Producto().Listar()
-                .Find(p => p.Id == idProductoSeleccionado && p.oEstado.Id == true);
+                .Find(p => p.Id == _idProductoSeleccionado && p.oEstado.Id == true);
 
-            if (nudCantidadProducto.Value > oProducto.Stock)
+            if (!EsCantidadValida(txtProductoCantidad.Text, out int productoCantidad))
             {
-                MessageBox.Show($"La cantidad solicitada ({nudCantidadProducto.Value}) supera el stock disponible ({oProducto.Stock}).",
+                MessageBox.Show($"La cantidad ingresada ({txtProductoCantidad.Text}) supera el stock disponible ({oProducto.Stock}).",
                     "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (!UtilidadesForm.EsPrecioValido(txtPrecioVenta.Text))
+            if (!UtilidadesTextBox.EsPrecioValido(txtProductoPrecio.Text))
             {
                 MessageBox.Show("El formato del precio no es válido.", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtPrecioVenta.Select();
+                txtProductoPrecio.Select();
                 return;
             }
-            precioVenta = decimal.Parse(txtPrecioVenta.Text, culturaArgentina);
+            productoPrecio = decimal.Parse(txtProductoPrecio.Text, _culturaArgentina);
 
             foreach (DataGridViewRow fila in dgvProductos.Rows)
             {
-                if (Convert.ToInt32(fila.Cells[NombreColumna.ID_PRODUCTO].Value) == idProductoSeleccionado)
+                if (Convert.ToInt32(fila.Cells[NombreColumna.ID_PRODUCTO].Value) == _idProductoSeleccionado)
                 {
                     MessageBox.Show("El producto que se intenta agregar ya fue agregado.", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -131,21 +157,20 @@ namespace CapaPresentacion.Formularios
                 }
             }
 
-            decimal subtotal = nudCantidadProducto.Value * precioVenta;
+            decimal subtotal = productoCantidad * productoPrecio;
 
             dgvProductos.Rows.Add(new object[]
             {
-                idProductoSeleccionado,
-                txtDescripcionProducto.Text,
-                precioVenta.ToString(formatoPrecio, culturaArgentina),
-                nudCantidadProducto.Value,
-                subtotal.ToString(formatoPrecio, culturaArgentina),
+                _idProductoSeleccionado,
+                txtProductoDescripcion.Text,
+                productoPrecio.ToString(_formatoPrecio, _culturaArgentina),
+                productoCantidad,
+                subtotal.ToString(_formatoPrecio, _culturaArgentina),
                 "" // btnEliminar
             });
 
             CalcularTotal();
-            LimpiarProducto();
-            txtCodigoProducto.Select();
+            LimpiarProducto(); 
         }
         private void btnRegistrarVenta_Click(object sender, EventArgs e)
         {
@@ -189,10 +214,10 @@ namespace CapaPresentacion.Formularios
                 },
                 oCliente = new CE_Cliente()
                 {
-                    Id = idClienteSeleccionado
+                    Id = _idClienteSeleccionado
                 },
                 //FechaVenta = dtpFechaVenta.Value,
-                Total = Convert.ToDecimal(txtTotal.Text, culturaArgentina),
+                Total = Convert.ToDecimal(txtTotal.Text, _culturaArgentina),
             };
 
             int respuesta = new CN_Venta().Crear(oVenta, ventaDetalle, out string mensaje);
@@ -205,40 +230,35 @@ namespace CapaPresentacion.Formularios
 
             MessageBox.Show("Venta registrada correctamente.", "Éxito",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
-            txtNombreCompletoCliente.Clear();
+            txtClienteNombreCompleto.Clear();
             dgvProductos.Rows.Clear();
             CalcularTotal();
         }
-        private void txtCodigoProducto_KeyDown(object sender, KeyEventArgs e)
+        private void txtClienteDocumento_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyCode != Keys.Enter)
-                return;
-
-            CE_Producto oProducto = new CN_Producto().Listar()
-                .Find(p => p.Codigo == txtCodigoProducto.Text.Trim() && p.oEstado.Id == true);
-            
-            if (oProducto == null)
-            {
-                txtCodigoProducto.BackColor = Color.LightCoral;
-                idProductoSeleccionado = 0;
-                txtDescripcionProducto.Clear();
-                return;
-            }
-
-            txtCodigoProducto.BackColor = Color.LightGreen;
-            idProductoSeleccionado = oProducto.Id;
-            txtDescripcionProducto.Text = oProducto.Descripcion;
-            txtPrecioVenta.Select();
+            UtilidadesTextBox.PermitirSoloDigitos(sender, e);
+        }
+        private void txtClienteDocumento_TrailingIconClick(object sender, EventArgs e)
+        {
+            UtilidadesModal.BuscarCliente(
+                txtClienteDocumento,
+                txtClienteNombreCompleto,
+                ref _idClienteSeleccionado
+            );
         }
         private void txtPrecioVenta_KeyPress(object sender, KeyPressEventArgs e)
         {
-            UtilidadesForm.EsEntradaPrecioValida(sender, e);
+            UtilidadesTextBox.PermitirSoloPrecio(sender, e);
         }
 
         private void LimpiarProducto()
         {
-            idProductoSeleccionado = 0;
-            UtilidadesForm.ReiniciarControles(gbInfoProducto);
+            _idProductoSeleccionado = 0;
+            UtilidadesForm.ReiniciarControles(gbProducto);
+            txtProductoCantidad.Text = "1";
+            _productoCantidad = 1;
+            txtProductoCodigo.SetErrorState(false);
+            txtProductoCodigo.Select();
         }
         private void CalcularTotal()
         {
@@ -258,13 +278,50 @@ namespace CapaPresentacion.Formularios
                     continue;
 
                 string textoCelda = valorCelda.ToString();
-                if (decimal.TryParse(textoCelda, NumberStyles.Any, culturaArgentina, out decimal subtotal))
+                if (decimal.TryParse(textoCelda, NumberStyles.Any, _culturaArgentina, out decimal subtotal))
                 {
                     total += subtotal;
                 }
             }
 
-            txtTotal.Text = total.ToString(formatoPrecio, culturaArgentina);
+            txtTotal.Text = total.ToString(_formatoPrecio, _culturaArgentina);
+        }
+        private bool EsCantidadValida(string texto, out int cantidad)
+        {
+            cantidad = 0;
+
+            if (!int.TryParse(texto, out cantidad))
+                return false;
+
+            if (cantidad < 1 || cantidad > _productoStockMaximo)
+                return false;
+
+            return true;
+        }
+
+        private void txtVentaFecha_TrailingIconClick(object sender, EventArgs e)
+        {
+            UtilidadesTextBox.DesplegarCalendario(dtpVentaFecha);
+        }
+        private void dtpVentaFecha_ValueChanged(object sender, EventArgs e)
+        {
+            txtVentaFecha.Text = dtpVentaFecha.Value.ToString("dd/MM/yyyy", _culturaArgentina);
+        }
+        private void txtProductoCantidad_LeadingIconClick(object sender, EventArgs e)
+        {
+            if (_productoCantidad <= 1)
+                return;
+
+            _productoCantidad--;
+            txtProductoCantidad.Text = _productoCantidad.ToString();
+        }
+        private void txtProductoCantidad_TrailingIconClick(object sender, EventArgs e)
+        {
+            if (_productoCantidad >= _productoStockMaximo)
+                return;
+
+            _productoCantidad++;
+            txtProductoCantidad.Text = _productoCantidad.ToString();
         }
     }
 }

@@ -1,62 +1,72 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using CapaEntidad;
 
 namespace CapaDatos
 {
     public class CD_Producto
     {
-        public List<CE_Producto> Listar()
+        public List<CE_Producto> Listar(bool? soloActivos = null, bool? soloConStock = null)
         {
             List<CE_Producto> lista = new List<CE_Producto>();
+
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
-            using (SqlCommand cmd = new SqlCommand(
-                @"SELECT p.id_producto, p.codigo, p.descripcion, p.precioCompra, p.precioVenta, p.stock, p.quiebreStock, p.fechaCreacion,
+            {
+                string query = @"SELECT p.id_producto, p.codigo, p.descripcion, p.precioCompra,
+                p.precioVenta, p.stock, p.quiebreStock, p.fechaCreacion,
                 c.id_categoria, c.nombre AS [categoria],
                 e.id_estado, e.nombre AS [estado]
                 FROM Producto p
                 INNER JOIN Categoria c ON c.id_categoria = p.categoria_id
-                INNER JOIN cEstado e ON e.id_estado = p.estado_id;", oConexion))
-            {
-                try
-                {
-                    oConexion.Open();
+                INNER JOIN cEstado e ON e.id_estado = p.estado_id";
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                if (soloActivos == true)
+                    query += " AND e.id_estado = 1";
+                if (soloConStock == true)
+                    query += " AND p.stock > 0";
+
+                using (SqlCommand cmd = new SqlCommand(query, oConexion))
+                {
+                    try
                     {
-                        while (reader.Read())
+                        oConexion.Open();
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            lista.Add(new CE_Producto()
+                            while (reader.Read())
                             {
-                                Id = Convert.ToInt32(reader["id_producto"]),
-                                Codigo = reader["codigo"].ToString(),
-                                Descripcion = reader["descripcion"].ToString(),
-                                PrecioCompra = Convert.ToDecimal(reader["precioCompra"]),
-                                PrecioVenta = Convert.ToDecimal(reader["precioVenta"]),
-                                Stock = Convert.ToInt32(reader["stock"]),
-                                QuiebreStock = Convert.ToInt32(reader["quiebreStock"]),
-                                FechaCreacion = reader["fechaCreacion"].ToString(),
-                                oCategoria = new CE_Categoria()
+                                lista.Add(new CE_Producto()
                                 {
-                                    Id = Convert.ToInt32(reader["id_categoria"]),
-                                    Nombre = reader["categoria"].ToString()
-                                },
-                                oEstado = new CE_Estado()
-                                {
-                                    Id = Convert.ToBoolean(reader["id_estado"]),
-                                    Nombre = reader["estado"].ToString()
-                                }
-                            });
+                                    Id = Convert.ToInt32(reader["id_producto"]),
+                                    Codigo = reader["codigo"].ToString(),
+                                    Descripcion = reader["descripcion"].ToString(),
+                                    PrecioCompra = Convert.ToDecimal(reader["precioCompra"]),
+                                    PrecioVenta = Convert.ToDecimal(reader["precioVenta"]),
+                                    Stock = Convert.ToInt32(reader["stock"]),
+                                    QuiebreStock = Convert.ToInt32(reader["quiebreStock"]),
+                                    FechaCreacion = reader["fechaCreacion"].ToString(),
+                                    oCategoria = new CE_Categoria()
+                                    {
+                                        Id = Convert.ToInt32(reader["id_categoria"]),
+                                        Nombre = reader["categoria"].ToString()
+                                    },
+                                    oEstado = new CE_Estado()
+                                    {
+                                        Id = Convert.ToBoolean(reader["id_estado"]),
+                                        Nombre = reader["estado"].ToString()
+                                    }
+                                });
+                            }
                         }
                     }
-                }
-                catch (SqlException)
-                {
-                    //mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
-                    lista = new List<CE_Producto>();
+                    catch (SqlException)
+                    {
+                        //mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
+                        lista = new List<CE_Producto>();
+                    }
                 }
             }
             return lista;

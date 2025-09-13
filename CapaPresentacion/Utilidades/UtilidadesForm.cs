@@ -28,7 +28,7 @@ namespace CapaPresentacion.Utilidades
         }
 
         /// <summary>
-        /// Reinicia a los valores por defecto los controles de un contenedor, como un TextBox o ComboBox.
+        /// Reinicia a los valores por defecto los controles de un contenedor y sus subcontenedores.
         /// </summary>
         /// <param name="contenedor">El control contenedor que contiene los controles a reiniciar.</param>
         public static void ReiniciarControles(Control contenedor)
@@ -69,6 +69,12 @@ namespace CapaPresentacion.Utilidades
                         rb.Checked = false;
                         break;
                 }
+
+                // Si el control actual tiene controles hijos, se reiniciaran recursivamente.
+                if (control.Controls.Count > 0)
+                {
+                    ReiniciarControles(control);
+                }
             }
         }
 
@@ -96,86 +102,6 @@ namespace CapaPresentacion.Utilidades
         {
             if (ctrl?.Parent != null)
                 ctrl.Left = (ctrl.Parent.Width - ctrl.Width) / 2;
-        }
-
-        /// <summary>
-        /// Permite solo números, un punto decimal y teclas de control en un TextBox para precios.
-        /// Usar en el evento KeyPress del TextBox.
-        /// </summary>
-        public static void EsEntradaPrecioValida(object sender, KeyPressEventArgs e)
-        {
-            // CultureInfo en el programa esta seteada como "es-AR" en el archivo Program.cs
-
-            if (!(sender is TextBox textBox))
-            {
-                e.Handled = true;
-                return;
-            }
-
-            // Permitir teclas de control (backspace, etc)
-            if (char.IsControl(e.KeyChar))
-                return;
-
-            // Permitir solo una sola coma decimal, pero no como primer carácter
-            if (e.KeyChar == ',')
-            {
-                // No permitir el punto como primer carácter o si ya hay un punto
-                if (textBox.Text.Length == 0 || textBox.Text.Contains(","))
-                {
-                    e.Handled = true;
-                    return;
-                }
-                return;
-            }
-
-            // Permitir números
-            if (char.IsDigit(e.KeyChar))
-            {
-                // Si ya hay una coma, limitar a dos decimales
-                int indiceComa = textBox.Text.IndexOf(',');
-
-                if (indiceComa >= 0)
-                {
-                    // Si el cursor está después del punto, contar los decimales actuales
-                    int decimalesActuales = textBox.Text.Length - indiceComa - 1;
-
-                    // Si el cursor está después del punto y ya hay dos decimales, bloquear
-                    if (textBox.SelectionStart > indiceComa && decimalesActuales >= 2)
-                    {
-                        e.Handled = true;
-                        return;
-                    }
-                }
-                return;
-            }
-
-            // Bloquear cualquier otro carácter
-            e.Handled = true;
-        }
-
-        /// <summary>
-        /// Valida que el string ingresado sea un precio válido (decimal positivo, hasta 2 decimales).
-        /// </summary>
-        /// <param name="texto">El precio a validar.</param>
-        public static bool EsPrecioValido(string texto)
-        {
-            // CultureInfo en el programa esta seteada como "es-AR" en el archivo Program.cs
-
-            if (string.IsNullOrWhiteSpace(texto))
-                return false;
-
-            if (!decimal.TryParse(texto, out decimal valor))
-                return false;
-
-            if (valor < 0)
-                return false;
-
-            // Validar hasta 2 decimales
-            int decimales = texto.Contains(",") ? texto.Split(',')[1].Length : 0;
-            if (decimales > 2)
-                return false;
-
-            return true;
         }
     }
 }

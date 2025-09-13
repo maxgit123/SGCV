@@ -6,12 +6,16 @@ namespace CapaPresentacion.Utilidades
 {
     public static class UtilidadesDGV
     {
+        private static readonly Color _materialColor = Color.FromArgb(63, 81, 181); // Indigo 500
+        //private static readonly Color _foreColor = Color.FromArgb(235, 230, 255); // Indigo 500
+
         /// <summary>
         /// Aplica configuración general a un DataGridView para ajuste automático de columnas y tamaño fijo en botones.
         /// </summary>
         /// <param name="dgv">El DataGridView a configurar.</param>
         public static void Configurar(DataGridView dgv)
         {
+            // --- Comportamiento ---
             dgv.AllowUserToResizeRows = false;
             dgv.AllowUserToResizeColumns = false;
             dgv.AllowUserToAddRows = false;
@@ -20,8 +24,27 @@ namespace CapaPresentacion.Utilidades
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.ReadOnly = true;
 
-            dgv.BackgroundColor = SystemColors.ControlLight;
+            // --- Estilo ---
             dgv.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised;
+            dgv.ColumnHeadersHeight = 28;
+            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dgv.EnableHeadersVisualStyles = false;
+            dgv.RowHeadersVisible = false;
+            dgv.RowTemplate.Height = 30;
+
+            // --- Fuente ---
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Roboto", 10, FontStyle.Regular);
+
+            // --- Colores ---
+            dgv.GridColor = Color.LightGray;
+            dgv.BackgroundColor = Color.White;
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.White;
+            dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.White;
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+            dgv.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
 
             foreach (DataGridViewColumn col in dgv.Columns)
             {
@@ -29,15 +52,15 @@ namespace CapaPresentacion.Utilidades
                 //{
                 //    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 //}
-                if (col.Name != "btnEditar" && col.Name != "btnEliminar")
-                {
-                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                }
-                else
+                if (col.Name == "btnEditar" || col.Name == "btnEliminar")
                 {
                     col.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
                     col.Width = 30;
                     col.Resizable = DataGridViewTriState.False;
+                }
+                else
+                {
+                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 }
             }
         }

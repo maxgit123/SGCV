@@ -2,7 +2,7 @@
 {
     public class CE_CompraDetalle
     {
-        public int IdDetalleCompra { get; set; }
+        public int Id { get; set; }
         public CE_Compra oCompra { get; set; }
         public CE_Producto oProducto { get; set; }
         public decimal PrecioCompraUnitario { get; set; }

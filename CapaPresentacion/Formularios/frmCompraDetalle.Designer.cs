@@ -33,265 +33,148 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btnLimpiarBuscar = new FontAwesome.Sharp.IconButton();
-            this.txtBuscar = new System.Windows.Forms.TextBox();
-            this.lblBuscar = new System.Windows.Forms.Label();
-            this.lblListaUsuarios = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtDocumento = new System.Windows.Forms.TextBox();
-            this.lblDocumento = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dgvUsuarios = new System.Windows.Forms.DataGridView();
+            this.gbInfoProveedor = new System.Windows.Forms.GroupBox();
+            this.txtCorreo = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtRazonSocial = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtTelefono = new MaterialSkin.Controls.MaterialTextBox2();
+            this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnImprimir = new FontAwesome.Sharp.IconButton();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
+            this.Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlInfoCompra = new MaterialSkin.Controls.MaterialCard();
+            this.btnBorrarCampos = new MaterialSkin.Controls.MaterialButton();
+            this.txtFechaCreacion = new MaterialSkin.Controls.MaterialTextBox2();
+            this.materialDivider4 = new MaterialSkin.Controls.MaterialDivider();
+            this.txtNroCompra = new MaterialSkin.Controls.MaterialTextBox2();
+            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            this.txtTotal = new MaterialSkin.Controls.MaterialTextBox2();
+            this.materialDivider3 = new MaterialSkin.Controls.MaterialDivider();
+            this.txtFechaPedido = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtFechaEntrega = new MaterialSkin.Controls.MaterialTextBox2();
+            this.lblTitulo = new MaterialSkin.Controls.MaterialLabel();
+            this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
+            this.txtUsuario = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtDocumento = new MaterialSkin.Controls.MaterialTextBox2();
+            this.gbInfoProveedor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
+            this.pnlInfoCompra.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnLimpiarBuscar
+            // gbInfoProveedor
             // 
-            this.btnLimpiarBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLimpiarBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLimpiarBuscar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(96)))), ((int)(((byte)(132)))));
-            this.btnLimpiarBuscar.IconChar = FontAwesome.Sharp.IconChar.Eraser;
-            this.btnLimpiarBuscar.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(63)))), ((int)(((byte)(84)))));
-            this.btnLimpiarBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnLimpiarBuscar.IconSize = 18;
-            this.btnLimpiarBuscar.Location = new System.Drawing.Point(586, 33);
-            this.btnLimpiarBuscar.Name = "btnLimpiarBuscar";
-            this.btnLimpiarBuscar.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.btnLimpiarBuscar.Size = new System.Drawing.Size(37, 26);
-            this.btnLimpiarBuscar.TabIndex = 240;
-            this.btnLimpiarBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLimpiarBuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLimpiarBuscar.UseVisualStyleBackColor = true;
+            this.gbInfoProveedor.Controls.Add(this.txtCorreo);
+            this.gbInfoProveedor.Controls.Add(this.txtRazonSocial);
+            this.gbInfoProveedor.Controls.Add(this.txtTelefono);
+            this.gbInfoProveedor.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbInfoProveedor.ForeColor = System.Drawing.Color.DimGray;
+            this.gbInfoProveedor.Location = new System.Drawing.Point(16, 257);
+            this.gbInfoProveedor.Name = "gbInfoProveedor";
+            this.gbInfoProveedor.Size = new System.Drawing.Size(1038, 90);
+            this.gbInfoProveedor.TabIndex = 242;
+            this.gbInfoProveedor.TabStop = false;
+            this.gbInfoProveedor.Text = "Proveedor";
             // 
-            // txtBuscar
+            // txtCorreo
             // 
-            this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.Location = new System.Drawing.Point(445, 33);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(135, 26);
-            this.txtBuscar.TabIndex = 239;
+            this.txtCorreo.AnimateReadOnly = false;
+            this.txtCorreo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtCorreo.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtCorreo.Depth = 0;
+            this.txtCorreo.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCorreo.HideSelection = true;
+            this.txtCorreo.Hint = "Correo";
+            this.txtCorreo.LeadingIcon = null;
+            this.txtCorreo.Location = new System.Drawing.Point(532, 26);
+            this.txtCorreo.MaxLength = 32767;
+            this.txtCorreo.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtCorreo.Name = "txtCorreo";
+            this.txtCorreo.PasswordChar = '\0';
+            this.txtCorreo.PrefixSuffixText = null;
+            this.txtCorreo.ReadOnly = true;
+            this.txtCorreo.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtCorreo.SelectedText = "";
+            this.txtCorreo.SelectionLength = 0;
+            this.txtCorreo.SelectionStart = 0;
+            this.txtCorreo.ShortcutsEnabled = true;
+            this.txtCorreo.Size = new System.Drawing.Size(255, 48);
+            this.txtCorreo.TabIndex = 339;
+            this.txtCorreo.TabStop = false;
+            this.txtCorreo.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtCorreo.TrailingIcon = null;
+            this.txtCorreo.UseSystemPasswordChar = false;
             // 
-            // lblBuscar
+            // txtRazonSocial
             // 
-            this.lblBuscar.AutoSize = true;
-            this.lblBuscar.BackColor = System.Drawing.SystemColors.Control;
-            this.lblBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBuscar.Location = new System.Drawing.Point(313, 39);
-            this.lblBuscar.Name = "lblBuscar";
-            this.lblBuscar.Size = new System.Drawing.Size(126, 20);
-            this.lblBuscar.TabIndex = 237;
-            this.lblBuscar.Text = "Número compra:";
+            this.txtRazonSocial.AnimateReadOnly = false;
+            this.txtRazonSocial.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtRazonSocial.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtRazonSocial.Depth = 0;
+            this.txtRazonSocial.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtRazonSocial.HideSelection = true;
+            this.txtRazonSocial.Hint = "Razon social";
+            this.txtRazonSocial.LeadingIcon = null;
+            this.txtRazonSocial.Location = new System.Drawing.Point(10, 26);
+            this.txtRazonSocial.MaxLength = 32767;
+            this.txtRazonSocial.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtRazonSocial.Name = "txtRazonSocial";
+            this.txtRazonSocial.PasswordChar = '\0';
+            this.txtRazonSocial.PrefixSuffixText = null;
+            this.txtRazonSocial.ReadOnly = true;
+            this.txtRazonSocial.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtRazonSocial.SelectedText = "";
+            this.txtRazonSocial.SelectionLength = 0;
+            this.txtRazonSocial.SelectionStart = 0;
+            this.txtRazonSocial.ShortcutsEnabled = true;
+            this.txtRazonSocial.Size = new System.Drawing.Size(255, 48);
+            this.txtRazonSocial.TabIndex = 337;
+            this.txtRazonSocial.TabStop = false;
+            this.txtRazonSocial.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtRazonSocial.TrailingIcon = null;
+            this.txtRazonSocial.UseSystemPasswordChar = false;
             // 
-            // lblListaUsuarios
+            // txtTelefono
             // 
-            this.lblListaUsuarios.AutoSize = true;
-            this.lblListaUsuarios.BackColor = System.Drawing.SystemColors.Control;
-            this.lblListaUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblListaUsuarios.ForeColor = System.Drawing.Color.Black;
-            this.lblListaUsuarios.Location = new System.Drawing.Point(29, 23);
-            this.lblListaUsuarios.Name = "lblListaUsuarios";
-            this.lblListaUsuarios.Size = new System.Drawing.Size(133, 20);
-            this.lblListaUsuarios.TabIndex = 236;
-            this.lblListaUsuarios.Text = "Detalle Compra";
+            this.txtTelefono.AnimateReadOnly = false;
+            this.txtTelefono.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtTelefono.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtTelefono.Depth = 0;
+            this.txtTelefono.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtTelefono.HideSelection = true;
+            this.txtTelefono.Hint = "Telefono";
+            this.txtTelefono.LeadingIcon = null;
+            this.txtTelefono.Location = new System.Drawing.Point(271, 26);
+            this.txtTelefono.MaxLength = 32767;
+            this.txtTelefono.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.PasswordChar = '\0';
+            this.txtTelefono.PrefixSuffixText = null;
+            this.txtTelefono.ReadOnly = true;
+            this.txtTelefono.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtTelefono.SelectedText = "";
+            this.txtTelefono.SelectionLength = 0;
+            this.txtTelefono.SelectionStart = 0;
+            this.txtTelefono.ShortcutsEnabled = true;
+            this.txtTelefono.Size = new System.Drawing.Size(255, 48);
+            this.txtTelefono.TabIndex = 338;
+            this.txtTelefono.TabStop = false;
+            this.txtTelefono.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtTelefono.TrailingIcon = null;
+            this.txtTelefono.UseSystemPasswordChar = false;
             // 
-            // groupBox1
+            // dgvProductos
             // 
-            this.groupBox1.Controls.Add(this.textBox5);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtDocumento);
-            this.groupBox1.Controls.Add(this.lblDocumento);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 65);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(611, 73);
-            this.groupBox1.TabIndex = 241;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Información compra";
-            // 
-            // textBox6
-            // 
-            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(61, 412);
-            this.textBox6.MaxLength = 1000;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(101, 26);
-            this.textBox6.TabIndex = 226;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(7, 415);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 20);
-            this.label6.TabIndex = 227;
-            this.label6.Text = "Total:";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(252, 38);
-            this.textBox5.MaxLength = 1000;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(202, 26);
-            this.textBox5.TabIndex = 224;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(249, 19);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(57, 16);
-            this.label5.TabIndex = 225;
-            this.label5.Text = "Usuario:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(129, 38);
-            this.textBox1.MaxLength = 1000;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(117, 26);
-            this.textBox1.TabIndex = 222;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(126, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 16);
-            this.label1.TabIndex = 223;
-            this.label1.Text = "Fecha entrega:";
-            // 
-            // txtDocumento
-            // 
-            this.txtDocumento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDocumento.Location = new System.Drawing.Point(6, 38);
-            this.txtDocumento.MaxLength = 1000;
-            this.txtDocumento.Name = "txtDocumento";
-            this.txtDocumento.Size = new System.Drawing.Size(117, 26);
-            this.txtDocumento.TabIndex = 220;
-            // 
-            // lblDocumento
-            // 
-            this.lblDocumento.AutoSize = true;
-            this.lblDocumento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDocumento.Location = new System.Drawing.Point(3, 19);
-            this.lblDocumento.Name = "lblDocumento";
-            this.lblDocumento.Size = new System.Drawing.Size(94, 16);
-            this.lblDocumento.TabIndex = 221;
-            this.lblDocumento.Text = "Fecha pedido:";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.textBox4);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.textBox3);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.textBox2);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(12, 144);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(611, 73);
-            this.groupBox2.TabIndex = 242;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Información proveedor";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(396, 41);
-            this.textBox4.MaxLength = 1000;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(206, 26);
-            this.textBox4.TabIndex = 228;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(393, 22);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 16);
-            this.label4.TabIndex = 229;
-            this.label4.Text = "Correo:";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(218, 41);
-            this.textBox3.MaxLength = 1000;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(172, 26);
-            this.textBox3.TabIndex = 226;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(215, 22);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 16);
-            this.label3.TabIndex = 227;
-            this.label3.Text = "Teléfono";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(6, 41);
-            this.textBox2.MaxLength = 1000;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(206, 26);
-            this.textBox2.TabIndex = 224;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 16);
-            this.label2.TabIndex = 225;
-            this.label2.Text = "Razón social:";
-            // 
-            // dgvUsuarios
-            // 
-            this.dgvUsuarios.AllowUserToAddRows = false;
-            this.dgvUsuarios.AllowUserToResizeRows = false;
+            this.dgvProductos.AllowUserToAddRows = false;
+            this.dgvProductos.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvUsuarios.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvUsuarios.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvProductos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvProductos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvUsuarios.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dgvProductos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -300,48 +183,55 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvUsuarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvUsuarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.codigo,
             this.Producto,
-            this.Costo,
+            this.Precio,
             this.Cantidad,
-            this.SubTotal});
+            this.Subtotal});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUsuarios.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvUsuarios.EnableHeadersVisualStyles = false;
-            this.dgvUsuarios.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dgvUsuarios.Location = new System.Drawing.Point(12, 223);
-            this.dgvUsuarios.MultiSelect = false;
-            this.dgvUsuarios.Name = "dgvUsuarios";
-            this.dgvUsuarios.ReadOnly = true;
-            this.dgvUsuarios.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvProductos.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvProductos.EnableHeadersVisualStyles = false;
+            this.dgvProductos.GridColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.dgvProductos.Location = new System.Drawing.Point(17, 379);
+            this.dgvProductos.MultiSelect = false;
+            this.dgvProductos.Name = "dgvProductos";
+            this.dgvProductos.ReadOnly = true;
+            this.dgvProductos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvUsuarios.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvUsuarios.RowHeadersVisible = false;
-            this.dgvUsuarios.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvProductos.RowHeadersVisible = false;
+            this.dgvProductos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvUsuarios.RowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvUsuarios.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.Control;
-            this.dgvUsuarios.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
-            this.dgvUsuarios.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvUsuarios.RowTemplate.Height = 28;
-            this.dgvUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUsuarios.Size = new System.Drawing.Size(611, 173);
-            this.dgvUsuarios.TabIndex = 243;
+            this.dgvProductos.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvProductos.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.Control;
+            this.dgvProductos.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
+            this.dgvProductos.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvProductos.RowTemplate.Height = 28;
+            this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProductos.Size = new System.Drawing.Size(1037, 317);
+            this.dgvProductos.TabIndex = 243;
+            // 
+            // codigo
+            // 
+            this.codigo.HeaderText = "Codigo";
+            this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
             // 
             // Producto
             // 
@@ -349,11 +239,11 @@
             this.Producto.Name = "Producto";
             this.Producto.ReadOnly = true;
             // 
-            // Costo
+            // Precio
             // 
-            this.Costo.HeaderText = "Costo";
-            this.Costo.Name = "Costo";
-            this.Costo.ReadOnly = true;
+            this.Precio.HeaderText = "Precio";
+            this.Precio.Name = "Precio";
+            this.Precio.ReadOnly = true;
             // 
             // Cantidad
             // 
@@ -361,94 +251,379 @@
             this.Cantidad.Name = "Cantidad";
             this.Cantidad.ReadOnly = true;
             // 
-            // SubTotal
+            // Subtotal
             // 
-            this.SubTotal.HeaderText = "SubTotal";
-            this.SubTotal.Name = "SubTotal";
-            this.SubTotal.ReadOnly = true;
+            this.Subtotal.HeaderText = "Subtotal";
+            this.Subtotal.Name = "Subtotal";
+            this.Subtotal.ReadOnly = true;
             // 
-            // btnImprimir
+            // pnlInfoCompra
             // 
-            this.btnImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImprimir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(96)))), ((int)(((byte)(132)))));
-            this.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnImprimir.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(96)))), ((int)(((byte)(132)))));
-            this.btnImprimir.FlatAppearance.BorderSize = 0;
-            this.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(160)))), ((int)(((byte)(189)))));
-            this.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(132)))), ((int)(((byte)(170)))));
-            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImprimir.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnImprimir.IconChar = FontAwesome.Sharp.IconChar.FilePdf;
-            this.btnImprimir.IconColor = System.Drawing.SystemColors.Control;
-            this.btnImprimir.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.btnImprimir.IconSize = 20;
-            this.btnImprimir.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnImprimir.Location = new System.Drawing.Point(522, 409);
-            this.btnImprimir.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
-            this.btnImprimir.Name = "btnImprimir";
-            this.btnImprimir.Size = new System.Drawing.Size(101, 26);
-            this.btnImprimir.TabIndex = 244;
-            this.btnImprimir.Text = "Imprimir";
-            this.btnImprimir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnImprimir.UseVisualStyleBackColor = false;
+            this.pnlInfoCompra.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.pnlInfoCompra.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.pnlInfoCompra.Controls.Add(this.btnBorrarCampos);
+            this.pnlInfoCompra.Controls.Add(this.txtFechaCreacion);
+            this.pnlInfoCompra.Controls.Add(this.materialDivider4);
+            this.pnlInfoCompra.Controls.Add(this.txtNroCompra);
+            this.pnlInfoCompra.Controls.Add(this.materialButton1);
+            this.pnlInfoCompra.Controls.Add(this.txtTotal);
+            this.pnlInfoCompra.Controls.Add(this.dgvProductos);
+            this.pnlInfoCompra.Controls.Add(this.materialDivider3);
+            this.pnlInfoCompra.Controls.Add(this.txtFechaPedido);
+            this.pnlInfoCompra.Controls.Add(this.txtFechaEntrega);
+            this.pnlInfoCompra.Controls.Add(this.lblTitulo);
+            this.pnlInfoCompra.Controls.Add(this.materialDivider1);
+            this.pnlInfoCompra.Controls.Add(this.txtUsuario);
+            this.pnlInfoCompra.Controls.Add(this.gbInfoProveedor);
+            this.pnlInfoCompra.Controls.Add(this.txtDocumento);
+            this.pnlInfoCompra.Depth = 0;
+            this.pnlInfoCompra.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pnlInfoCompra.Location = new System.Drawing.Point(23, 23);
+            this.pnlInfoCompra.Margin = new System.Windows.Forms.Padding(14);
+            this.pnlInfoCompra.MouseState = MaterialSkin.MouseState.HOVER;
+            this.pnlInfoCompra.Name = "pnlInfoCompra";
+            this.pnlInfoCompra.Padding = new System.Windows.Forms.Padding(14);
+            this.pnlInfoCompra.Size = new System.Drawing.Size(1071, 767);
+            this.pnlInfoCompra.TabIndex = 331;
             // 
-            // frmDetalleCompra
+            // btnBorrarCampos
+            // 
+            this.btnBorrarCampos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnBorrarCampos.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnBorrarCampos.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnBorrarCampos.Depth = 0;
+            this.btnBorrarCampos.HighEmphasis = true;
+            this.btnBorrarCampos.Icon = global::CapaPresentacion.Properties.Resources.erase_32;
+            this.btnBorrarCampos.Location = new System.Drawing.Point(140, 708);
+            this.btnBorrarCampos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnBorrarCampos.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnBorrarCampos.Name = "btnBorrarCampos";
+            this.btnBorrarCampos.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnBorrarCampos.Size = new System.Drawing.Size(170, 36);
+            this.btnBorrarCampos.TabIndex = 345;
+            this.btnBorrarCampos.Text = "Borrar campos";
+            this.btnBorrarCampos.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnBorrarCampos.UseAccentColor = true;
+            this.btnBorrarCampos.UseVisualStyleBackColor = true;
+            this.btnBorrarCampos.Click += new System.EventHandler(this.btnBorrarCampos_Click);
+            // 
+            // txtFechaCreacion
+            // 
+            this.txtFechaCreacion.AnimateReadOnly = false;
+            this.txtFechaCreacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtFechaCreacion.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtFechaCreacion.Depth = 0;
+            this.txtFechaCreacion.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtFechaCreacion.HideSelection = true;
+            this.txtFechaCreacion.Hint = "Fecha y hora";
+            this.txtFechaCreacion.LeadingIcon = null;
+            this.txtFechaCreacion.Location = new System.Drawing.Point(538, 177);
+            this.txtFechaCreacion.MaxLength = 32767;
+            this.txtFechaCreacion.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtFechaCreacion.Name = "txtFechaCreacion";
+            this.txtFechaCreacion.PasswordChar = '\0';
+            this.txtFechaCreacion.PrefixSuffixText = null;
+            this.txtFechaCreacion.ReadOnly = true;
+            this.txtFechaCreacion.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtFechaCreacion.SelectedText = "";
+            this.txtFechaCreacion.SelectionLength = 0;
+            this.txtFechaCreacion.SelectionStart = 0;
+            this.txtFechaCreacion.ShortcutsEnabled = true;
+            this.txtFechaCreacion.Size = new System.Drawing.Size(255, 48);
+            this.txtFechaCreacion.TabIndex = 344;
+            this.txtFechaCreacion.TabStop = false;
+            this.txtFechaCreacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtFechaCreacion.TrailingIcon = null;
+            this.txtFechaCreacion.UseSystemPasswordChar = false;
+            // 
+            // materialDivider4
+            // 
+            this.materialDivider4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider4.Depth = 0;
+            this.materialDivider4.Location = new System.Drawing.Point(16, 356);
+            this.materialDivider4.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
+            this.materialDivider4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider4.Name = "materialDivider4";
+            this.materialDivider4.Size = new System.Drawing.Size(1038, 14);
+            this.materialDivider4.TabIndex = 343;
+            this.materialDivider4.Text = "materialDivider3";
+            // 
+            // txtNroCompra
+            // 
+            this.txtNroCompra.AnimateReadOnly = false;
+            this.txtNroCompra.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtNroCompra.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtNroCompra.Depth = 0;
+            this.txtNroCompra.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtNroCompra.HideSelection = true;
+            this.txtNroCompra.Hint = "Nro de compra";
+            this.txtNroCompra.LeadingIcon = null;
+            this.txtNroCompra.Location = new System.Drawing.Point(16, 97);
+            this.txtNroCompra.MaxLength = 50;
+            this.txtNroCompra.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtNroCompra.Name = "txtNroCompra";
+            this.txtNroCompra.PasswordChar = '\0';
+            this.txtNroCompra.PrefixSuffixText = null;
+            this.txtNroCompra.ReadOnly = false;
+            this.txtNroCompra.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtNroCompra.SelectedText = "";
+            this.txtNroCompra.SelectionLength = 0;
+            this.txtNroCompra.SelectionStart = 0;
+            this.txtNroCompra.ShortcutsEnabled = true;
+            this.txtNroCompra.Size = new System.Drawing.Size(255, 48);
+            this.txtNroCompra.TabIndex = 342;
+            this.txtNroCompra.TabStop = false;
+            this.txtNroCompra.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtNroCompra.TrailingIcon = global::CapaPresentacion.Properties.Resources.search_32;
+            this.txtNroCompra.UseSystemPasswordChar = false;
+            this.txtNroCompra.TrailingIconClick += new System.EventHandler(this.txtNroCompra_TrailingIconClick);
+            this.txtNroCompra.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNroCompra_KeyDown);
+            // 
+            // materialButton1
+            // 
+            this.materialButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.materialButton1.Depth = 0;
+            this.materialButton1.HighEmphasis = true;
+            this.materialButton1.Icon = global::CapaPresentacion.Properties.Resources.print_32;
+            this.materialButton1.Location = new System.Drawing.Point(17, 708);
+            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButton1.Name = "materialButton1";
+            this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.materialButton1.Size = new System.Drawing.Size(115, 36);
+            this.materialButton1.TabIndex = 341;
+            this.materialButton1.Text = "Imprimir";
+            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButton1.UseAccentColor = false;
+            this.materialButton1.UseVisualStyleBackColor = true;
+            // 
+            // txtTotal
+            // 
+            this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTotal.AnimateReadOnly = false;
+            this.txtTotal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtTotal.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtTotal.Depth = 0;
+            this.txtTotal.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtTotal.HideSelection = true;
+            this.txtTotal.Hint = "TOTAL";
+            this.txtTotal.LeadingIcon = null;
+            this.txtTotal.Location = new System.Drawing.Point(799, 702);
+            this.txtTotal.MaxLength = 32767;
+            this.txtTotal.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.PasswordChar = '\0';
+            this.txtTotal.PrefixSuffixText = null;
+            this.txtTotal.ReadOnly = false;
+            this.txtTotal.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtTotal.SelectedText = "";
+            this.txtTotal.SelectionLength = 0;
+            this.txtTotal.SelectionStart = 0;
+            this.txtTotal.ShortcutsEnabled = true;
+            this.txtTotal.Size = new System.Drawing.Size(255, 48);
+            this.txtTotal.TabIndex = 340;
+            this.txtTotal.TabStop = false;
+            this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtTotal.TrailingIcon = null;
+            this.txtTotal.UseSystemPasswordChar = false;
+            // 
+            // materialDivider3
+            // 
+            this.materialDivider3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider3.Depth = 0;
+            this.materialDivider3.Location = new System.Drawing.Point(16, 154);
+            this.materialDivider3.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
+            this.materialDivider3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider3.Name = "materialDivider3";
+            this.materialDivider3.Size = new System.Drawing.Size(1038, 14);
+            this.materialDivider3.TabIndex = 338;
+            this.materialDivider3.Text = "materialDivider3";
+            // 
+            // txtFechaPedido
+            // 
+            this.txtFechaPedido.AnimateReadOnly = false;
+            this.txtFechaPedido.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtFechaPedido.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtFechaPedido.Depth = 0;
+            this.txtFechaPedido.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtFechaPedido.HideSelection = true;
+            this.txtFechaPedido.Hint = "Fecha de pedido";
+            this.txtFechaPedido.LeadingIcon = null;
+            this.txtFechaPedido.Location = new System.Drawing.Point(277, 97);
+            this.txtFechaPedido.MaxLength = 32767;
+            this.txtFechaPedido.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtFechaPedido.Name = "txtFechaPedido";
+            this.txtFechaPedido.PasswordChar = '\0';
+            this.txtFechaPedido.PrefixSuffixText = null;
+            this.txtFechaPedido.ReadOnly = true;
+            this.txtFechaPedido.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtFechaPedido.SelectedText = "";
+            this.txtFechaPedido.SelectionLength = 0;
+            this.txtFechaPedido.SelectionStart = 0;
+            this.txtFechaPedido.ShortcutsEnabled = true;
+            this.txtFechaPedido.Size = new System.Drawing.Size(255, 48);
+            this.txtFechaPedido.TabIndex = 333;
+            this.txtFechaPedido.TabStop = false;
+            this.txtFechaPedido.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtFechaPedido.TrailingIcon = null;
+            this.txtFechaPedido.UseSystemPasswordChar = false;
+            // 
+            // txtFechaEntrega
+            // 
+            this.txtFechaEntrega.AnimateReadOnly = false;
+            this.txtFechaEntrega.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtFechaEntrega.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtFechaEntrega.Depth = 0;
+            this.txtFechaEntrega.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtFechaEntrega.HideSelection = true;
+            this.txtFechaEntrega.Hint = "Fecha de entrega";
+            this.txtFechaEntrega.LeadingIcon = null;
+            this.txtFechaEntrega.Location = new System.Drawing.Point(538, 97);
+            this.txtFechaEntrega.MaxLength = 32767;
+            this.txtFechaEntrega.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtFechaEntrega.Name = "txtFechaEntrega";
+            this.txtFechaEntrega.PasswordChar = '\0';
+            this.txtFechaEntrega.PrefixSuffixText = null;
+            this.txtFechaEntrega.ReadOnly = true;
+            this.txtFechaEntrega.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtFechaEntrega.SelectedText = "";
+            this.txtFechaEntrega.SelectionLength = 0;
+            this.txtFechaEntrega.SelectionStart = 0;
+            this.txtFechaEntrega.ShortcutsEnabled = true;
+            this.txtFechaEntrega.Size = new System.Drawing.Size(255, 48);
+            this.txtFechaEntrega.TabIndex = 334;
+            this.txtFechaEntrega.TabStop = false;
+            this.txtFechaEntrega.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtFechaEntrega.TrailingIcon = null;
+            this.txtFechaEntrega.UseSystemPasswordChar = false;
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Depth = 0;
+            this.lblTitulo.Font = new System.Drawing.Font("Roboto", 34F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblTitulo.FontType = MaterialSkin.MaterialSkinManager.fontType.H4;
+            this.lblTitulo.Location = new System.Drawing.Point(356, 14);
+            this.lblTitulo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(359, 41);
+            this.lblTitulo.TabIndex = 332;
+            this.lblTitulo.Text = "Información de Compra";
+            // 
+            // materialDivider1
+            // 
+            this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider1.Depth = 0;
+            this.materialDivider1.Location = new System.Drawing.Point(16, 234);
+            this.materialDivider1.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
+            this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider1.Name = "materialDivider1";
+            this.materialDivider1.Size = new System.Drawing.Size(1038, 14);
+            this.materialDivider1.TabIndex = 332;
+            this.materialDivider1.Text = "materialDivider3";
+            // 
+            // txtUsuario
+            // 
+            this.txtUsuario.AnimateReadOnly = false;
+            this.txtUsuario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtUsuario.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtUsuario.Depth = 0;
+            this.txtUsuario.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtUsuario.HideSelection = true;
+            this.txtUsuario.Hint = "Usuario";
+            this.txtUsuario.LeadingIcon = null;
+            this.txtUsuario.Location = new System.Drawing.Point(16, 177);
+            this.txtUsuario.MaxLength = 32767;
+            this.txtUsuario.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtUsuario.Name = "txtUsuario";
+            this.txtUsuario.PasswordChar = '\0';
+            this.txtUsuario.PrefixSuffixText = null;
+            this.txtUsuario.ReadOnly = true;
+            this.txtUsuario.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtUsuario.SelectedText = "";
+            this.txtUsuario.SelectionLength = 0;
+            this.txtUsuario.SelectionStart = 0;
+            this.txtUsuario.ShortcutsEnabled = true;
+            this.txtUsuario.Size = new System.Drawing.Size(255, 48);
+            this.txtUsuario.TabIndex = 335;
+            this.txtUsuario.TabStop = false;
+            this.txtUsuario.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtUsuario.TrailingIcon = null;
+            this.txtUsuario.UseSystemPasswordChar = false;
+            // 
+            // txtDocumento
+            // 
+            this.txtDocumento.AnimateReadOnly = false;
+            this.txtDocumento.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtDocumento.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtDocumento.Depth = 0;
+            this.txtDocumento.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtDocumento.HideSelection = true;
+            this.txtDocumento.Hint = "Documento";
+            this.txtDocumento.LeadingIcon = null;
+            this.txtDocumento.Location = new System.Drawing.Point(277, 177);
+            this.txtDocumento.MaxLength = 32767;
+            this.txtDocumento.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtDocumento.Name = "txtDocumento";
+            this.txtDocumento.PasswordChar = '\0';
+            this.txtDocumento.PrefixSuffixText = null;
+            this.txtDocumento.ReadOnly = true;
+            this.txtDocumento.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtDocumento.SelectedText = "";
+            this.txtDocumento.SelectionLength = 0;
+            this.txtDocumento.SelectionStart = 0;
+            this.txtDocumento.ShortcutsEnabled = true;
+            this.txtDocumento.Size = new System.Drawing.Size(255, 48);
+            this.txtDocumento.TabIndex = 336;
+            this.txtDocumento.TabStop = false;
+            this.txtDocumento.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtDocumento.TrailingIcon = null;
+            this.txtDocumento.UseSystemPasswordChar = false;
+            // 
+            // frmCompraDetalle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(635, 450);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.btnImprimir);
-            this.Controls.Add(this.dgvUsuarios);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnLimpiarBuscar);
-            this.Controls.Add(this.txtBuscar);
-            this.Controls.Add(this.lblBuscar);
-            this.Controls.Add(this.lblListaUsuarios);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
+            this.ClientSize = new System.Drawing.Size(1120, 803);
+            this.Controls.Add(this.pnlInfoCompra);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmDetalleCompra";
+            this.Name = "frmCompraDetalle";
             this.Text = "Detalle de Compra";
-            this.Load += new System.EventHandler(this.frmDetalleCompra_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
+            this.gbInfoProveedor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
+            this.pnlInfoCompra.ResumeLayout(false);
+            this.pnlInfoCompra.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private FontAwesome.Sharp.IconButton btnLimpiarBuscar;
-        private System.Windows.Forms.TextBox txtBuscar;
-        private System.Windows.Forms.Label lblBuscar;
-        private System.Windows.Forms.Label lblListaUsuarios;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox txtDocumento;
-        private System.Windows.Forms.Label lblDocumento;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dgvUsuarios;
+        private System.Windows.Forms.GroupBox gbInfoProveedor;
+        private System.Windows.Forms.DataGridView dgvProductos;
+        private MaterialSkin.Controls.MaterialCard pnlInfoCompra;
+        private MaterialSkin.Controls.MaterialTextBox2 txtFechaPedido;
+        private MaterialSkin.Controls.MaterialTextBox2 txtFechaEntrega;
+        private MaterialSkin.Controls.MaterialTextBox2 txtDocumento;
+        private MaterialSkin.Controls.MaterialTextBox2 txtUsuario;
+        private MaterialSkin.Controls.MaterialDivider materialDivider1;
+        private MaterialSkin.Controls.MaterialTextBox2 txtTelefono;
+        private MaterialSkin.Controls.MaterialTextBox2 txtRazonSocial;
+        private MaterialSkin.Controls.MaterialTextBox2 txtCorreo;
+        private MaterialSkin.Controls.MaterialLabel lblTitulo;
+        private MaterialSkin.Controls.MaterialDivider materialDivider3;
+        private MaterialSkin.Controls.MaterialTextBox2 txtTotal;
+        private MaterialSkin.Controls.MaterialButton materialButton1;
+        private MaterialSkin.Controls.MaterialTextBox2 txtNroCompra;
+        private MaterialSkin.Controls.MaterialDivider materialDivider4;
+        private MaterialSkin.Controls.MaterialTextBox2 txtFechaCreacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Costo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SubTotal;
-        private FontAwesome.Sharp.IconButton btnImprimir;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
+        private MaterialSkin.Controls.MaterialButton btnBorrarCampos;
     }
 }

@@ -152,6 +152,12 @@
     <Compile Include="Formularios\Modal\mdCliente.Designer.cs">
       <DependentUpon>mdCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\Modal\mdCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Modal\mdCompra.Designer.cs">
+      <DependentUpon>mdCompra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\Modal\mdProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -219,6 +225,14 @@
     <Compile Include="Utilidades\UtilidadesCB.cs" />
     <Compile Include="Utilidades\UtilidadesForm.cs" />
     <Compile Include="Utilidades\UtilidadesModal.cs" />
+    <Compile Include="Utilidades\UtilidadesTextBox.cs" />
+    <None Include="Resources\erase-32.png" />
+    <None Include="Resources\print_32.png" />
+    <None Include="Resources\btn_search_48.png" />
+    <None Include="Resources\btn_search-32.png" />
+    <None Include="Resources\subtract_32.png" />
+    <None Include="Resources\search_32.png" />
+    <None Include="Resources\calendar_32.png" />
     <None Include="Resources\remove_image_32.png" />
     <None Include="Resources\image_logo_961.png" />
     <None Include="Resources\image_logo_96.png" />
@@ -251,6 +265,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Modal\mdCliente.resx">
       <DependentUpon>mdCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Modal\mdCompra.resx">
+      <DependentUpon>mdCompra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Modal\mdProducto.resx">
       <DependentUpon>mdProducto.cs</DependentUpon>

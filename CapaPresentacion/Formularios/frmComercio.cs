@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,6 +14,7 @@ namespace CapaPresentacion.Formularios
     public partial class frmComercio : Form
     {
         private byte[] _logoBytes = null;
+        private bool _isLoading = true;
 
         public frmComercio()
         {
@@ -22,6 +24,9 @@ namespace CapaPresentacion.Formularios
 
         private void frmComercio_Load(object sender, EventArgs e)
         {
+            _isLoading = true;
+            btnGuardar.Enabled = false;
+
             List<CE_ResponsableIVA> listaRespIVA = new CN_ResponsableIVA().Listar();
             cbCondicionIva.DataSource = listaRespIVA
                 .Select(r => new OpcionCombo { Valor = r.Id, Texto = r.Nombre })
@@ -65,6 +70,12 @@ namespace CapaPresentacion.Formularios
                 picLogo.SizeMode = PictureBoxSizeMode.CenterImage;
                 picLogo.Image = Properties.Resources.image_logo_96;
             }
+
+            _isLoading = false;
+        }
+        private void frmComercio_Resize(object sender, EventArgs e)
+        {
+            UtilidadesForm.CentrarHorizontalmente(pnlComercioDatos);
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -122,21 +133,6 @@ namespace CapaPresentacion.Formularios
                 MessageBox.Show(mensaje, "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        private bool EsFechaValida(string fecha, out DateTime fechaValida)
-        {
-            fechaValida = DateTime.MinValue;
-
-            if (string.IsNullOrWhiteSpace(fecha))
-                return false;
-
-            fecha = fecha.Replace('-', '/').Replace('.', '/');
-
-            return DateTime.TryParseExact(fecha,
-                "dd/MM/yyyy",
-                System.Globalization.CultureInfo.InvariantCulture,
-                System.Globalization.DateTimeStyles.None,
-                out fechaValida);
-        }
         private void btnCambiarLogo_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog oOpenFileDialog = new OpenFileDialog())
@@ -148,6 +144,8 @@ namespace CapaPresentacion.Formularios
                     _logoBytes = File.ReadAllBytes(oOpenFileDialog.FileName);
                     picLogo.SizeMode = PictureBoxSizeMode.StretchImage;
                     picLogo.Image = ByteToImage(_logoBytes);
+                    // Marca el formulario como modificado al cambiar el logo.
+                    ctrl_ModifiedChanged(sender, e);
                 }
             }
         }
@@ -157,6 +155,35 @@ namespace CapaPresentacion.Formularios
             picLogo.Image = Properties.Resources.image_logo_96;
             _logoBytes = null;
         }
+        private void txtPuntoVenta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            UtilidadesTextBox.PermitirSoloDigitos(sender, e);
+        }
+        private void ctrl_ModifiedChanged(object sender, EventArgs e)
+        {
+            // Este evento se dispara cuando cualquier control del formulario es modificado.
+            // Se usa _isLoading porque al parecer no funciona el evento ModifiedChanged del MaskedTextBox
+            if (_isLoading)
+                return;
+
+            btnGuardar.Enabled = true;
+        }
+
+        private bool EsFechaValida(string fecha, out DateTime fechaValida)
+        {
+            fechaValida = DateTime.MinValue;
+
+            if (string.IsNullOrWhiteSpace(fecha))
+                return false;
+
+            fecha = fecha.Replace('-', '/').Replace('.', '/');
+
+            return DateTime.TryParseExact(fecha,
+                "dd/MM/yyyy",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out fechaValida);
+        }
         public Image ByteToImage(byte[] imageBytes)
         {
             using (MemoryStream ms = new MemoryStream(imageBytes))
@@ -164,17 +191,15 @@ namespace CapaPresentacion.Formularios
                 return Image.FromStream(ms);
             }
         }
-        private void txtPuntoVenta_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void txtInicioActividad_TrailingIconClick(object sender, EventArgs e)
         {
-            // Permitir solo dígitos y teclas de control (backspace, etc)
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+            dtpInicioActividad.Focus();
+            SendKeys.Send("%{DOWN}"); // Alt + flecha abajo
         }
-        private void frmComercio_Resize(object sender, EventArgs e)
+        private void dtpInicioActividad_ValueChanged(object sender, EventArgs e)
         {
-            UtilidadesForm.CentrarHorizontalmente(pnlComercioDatos);
+            txtInicioActividad.Text = dtpInicioActividad.Value.ToString("dd/MM/yyyy");
         }
     }
 }

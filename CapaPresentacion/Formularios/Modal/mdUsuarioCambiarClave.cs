@@ -4,18 +4,22 @@ using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
 using CapaPresentacion.Formularios.Base;
+using CapaPresentacion.Utilidades;
+using MaterialSkin.Controls;
 
 namespace CapaPresentacion.Formularios.Modal
 {
     public partial class mdUsuarioCambiarClave : MaterialModalBase
     {
         private static CE_Usuario _usuarioActual;
+
         public mdUsuarioCambiarClave(CE_Usuario oUsuario)
         {
             InitializeComponent();
             _usuarioActual = oUsuario;
             Size = new Size(292, 321);
         }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             bool resultado = new CN_Usuario().CambiarClave(
@@ -38,6 +42,10 @@ namespace CapaPresentacion.Formularios.Modal
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+        private void txtClave_TrailingIconClick(object sender, EventArgs e)
+        {
+            UtilidadesTextBox.MostrarClave((MaterialTextBox2)sender);
         }
     }
 }

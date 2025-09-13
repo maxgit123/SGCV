@@ -11,7 +11,7 @@ namespace CapaEntidad
         public decimal Pago { get; set; }
         public decimal Vuelto { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public List<CE_VentaDetalle> oDetalleVenta { get; set; }
+        public List<CE_VentaDetalle> oVentaDetalle { get; set; }
         public CE_Estado oEstado { get; set; }
         public CE_Usuario oUsuario { get; set; }
         public CE_Comercio oComercio { get; set; }

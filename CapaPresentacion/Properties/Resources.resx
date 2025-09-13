@@ -121,17 +121,26 @@
   <data name="visible_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\visible_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="delete2_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delete2_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="image_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image_96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="agregar_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\agregar_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="calendar_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\calendar_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="email_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\email_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="barcode_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\barcode_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="btn_search-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_search-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cell_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cell_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="image_logo_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image_logo_961.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -139,17 +148,23 @@
   <data name="save_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\save_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="print_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\print_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shop_100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shop_100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="add_image_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add_image_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="delete2_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\delete2_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="delete16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delete16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="hide_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hide_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="delete16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\delete16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="subtract_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\subtract_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="visible_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\visible-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -157,22 +172,28 @@
   <data name="cancel-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cancel-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="hide_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hide-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="cell_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cell_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="barcode_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\barcode_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="edit16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\edit16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cell_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cell_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="shop_100" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\shop_100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="remove_image_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\remove_image_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_search_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_search_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="search_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\search_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hide_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hide-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="erase-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\erase-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
