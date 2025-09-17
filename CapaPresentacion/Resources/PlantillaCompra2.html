@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plantilla_compra</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            width: 21cm;
+            min-height: 27cm;
+            max-height: 29.7cm;
+            font-size: 13px;
+        }
+
+        .wrapper {
+            border: 1.5px solid #333;
+            padding: 5px;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .inline-block {
+            display: inline-block;
+        }
+
+        .flex {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .no-margin {
+            margin: 0;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        .floating-mid {
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            width: 75px;
+            position: absolute;
+            top: 1px;
+            background: #fff;
+        }
+
+        .space-around {
+            justify-content: space-around;
+        }
+
+        .space-between {
+            justify-content: space-between;
+        }
+
+        .w50 {
+            width: 50%;
+        }
+
+        th {
+            border: 1px solid #000;
+            background: #ccc;
+            padding: 5px;
+        }
+
+        td {
+            padding: 5px;
+            font-size: 11px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .text-20 {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex relative">
+
+        <div class="wrapper inline-block w50 flex" style="border-right: 0">
+            <h3 class="text-center" style="font-size:24px;margin-bottom: 3px;width: 100%;">@Negocio</h3>
+            <p style="font-size: 13px;line-height: 1.5;margin-bottom: 0;align-self: flex-end;">
+                <b>Razón Social:</b> @RazonSocial<br/>
+                <b>CUIT:</b> @Cuit<br/>
+                <b>Domicilio Comercial:</b> @Direccion<br/>
+                <b>Condición frente al IVA:</b> @RespIVA
+            </p>
+        </div>
+
+        <div class="wrapper inline-block w50">
+            <h3 class="text-center" style="font-size:24px;margin-bottom: 3px;">@Proveedor</h3>
+            <p style="font-size: 13px;line-height: 1.5;margin-bottom: 0;">
+                <b>Razón Social:</b> @RazonSocial<br/>
+                <!-- <b>CUIT:</b> @Cuit<br/> -->
+                <!-- <b>Condición frente al IVA:</b> @RespIVA<br/> -->
+                <b>Teléfono:</b> @Telefono<br/>
+                <b>Correo:</b> @Correo
+            </p>
+        </div>
+
+        <div class="wrapper floating-mid">
+            <h3 class="no-margin text-center" style="font-size: 20px;">@Logo</h3>
+        </div>
+
+    </div>
+
+    <div class="wrapper flex space-around" style="margin-top: 1px;">
+        <span><b>Fecha de pedido:</b> @FechaPedido</span>
+        <span><b>Fecha de entrega:</b> @FechaEntrega</span>
+    </div>
+
+    <div class="wrapper" style="margin-top: 2px;font-size: 12px;">
+
+        <div class="flex" style="margin-bottom: 15px;">
+            <span style="width:50%"><b>Comp. Nro:</b> @Id</span>
+            <span><b>Fecha de Emisión:</b> @FechaCreacion</span>
+        </div>
+
+        <div class="flex">
+            <span><b>Condición de venta:</b> @</span>
+        </div>
+
+    </div>
+
+    <table style="margin-top: 5px;">
+        <thead>
+            <tr>
+                <th class="text-left">Código</th>
+                <th class="text-left">Producto / Servicio</th>
+                <th>Cantidad</th>
+                <th>Precio Unit.</th>
+                <th>Subtotal</th>
+                <th>Alicuota IVA</th>
+                <th>Subtotal c/IVA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-left">@CodProducto</td>
+                <td class="text-left">@Descripcion</td>
+                <td class="text-right">@Cantidad</td>
+                <td class="text-right">@PrecioVenta</td>
+                <td class="text-center">@Subtotal</td>
+                <td class="text-right">@Iva</td>
+                <td class="text-right">@Subtotal + @Iva</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer" style="margin-top: 300px;">
+        <div class="flex wrapper space-between">
+            <div style="width:55%">
+
+            </div>
+            <div style="width:40%;margin-top: 40px;" class="flex wrapper">
+                <span class="text-right" style="width:60%">
+                    <b>Importe Total: $</b>
+                </span>
+                <span class="text-right" style="width:40%">
+                    <b>@Total</b>
+                </span>
+            </div>
+        </div>
+
+        <div class="flex relative" style="margin-top: 20px;">
+            <div class="qr-container" style="padding: 0 20px 20px 20px;width: 20%;">
+                <img src="qr.png" alt="QR" style="max-width: 100%;"/>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

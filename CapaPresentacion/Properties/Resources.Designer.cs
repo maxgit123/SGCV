@@ -241,6 +241,73 @@ namespace CapaPresentacion.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;Web Page Design&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        table.border {
+        ///            border-collapse: collapse;
+        ///        }
+        ///
+        ///            table.border th {
+        ///                text-align: center;
+        ///                padding: 5px;
+        ///                border: 1px solid black;
+        ///            }
+        ///
+        ///            table.border td {
+        ///                text-align: center;
+        ///                padding: 5px;
+        ///                border: 1px solid black;
+        ///            }
+        ///    &lt;/style&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;tab [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string PlantillaCompra {
+            get {
+                return ResourceManager.GetString("PlantillaCompra", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;Plantilla_compra&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        * {
+        ///            box-sizing: border-box;
+        ///            font-family: Arial, sans-serif;
+        ///        }
+        ///
+        ///        body {
+        ///            width: 21cm;
+        ///            min-height: 27cm;
+        ///            max-height: 29.7cm;
+        ///            font-size: 13px;
+        ///        }
+        ///
+        ///        .wrapper {
+        ///            border: 1.5px solid #333;
+        ///            padding: 5px;
+        ///        }
+        ///
+        ///        .text-left {
+        ///            text-align: left;
+        ///        }
+        ///
+        ///        [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string PlantillaCompra2 {
+            get {
+                return ResourceManager.GetString("PlantillaCompra2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap print_32 {

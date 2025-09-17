@@ -48,7 +48,7 @@
             this.txtFechaCreacion = new MaterialSkin.Controls.MaterialTextBox2();
             this.materialDivider4 = new MaterialSkin.Controls.MaterialDivider();
             this.txtNroCompra = new MaterialSkin.Controls.MaterialTextBox2();
-            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            this.btnGenerarPdf = new MaterialSkin.Controls.MaterialButton();
             this.txtTotal = new MaterialSkin.Controls.MaterialTextBox2();
             this.materialDivider3 = new MaterialSkin.Controls.MaterialDivider();
             this.txtFechaPedido = new MaterialSkin.Controls.MaterialTextBox2();
@@ -265,7 +265,7 @@
             this.pnlInfoCompra.Controls.Add(this.txtFechaCreacion);
             this.pnlInfoCompra.Controls.Add(this.materialDivider4);
             this.pnlInfoCompra.Controls.Add(this.txtNroCompra);
-            this.pnlInfoCompra.Controls.Add(this.materialButton1);
+            this.pnlInfoCompra.Controls.Add(this.btnGenerarPdf);
             this.pnlInfoCompra.Controls.Add(this.txtTotal);
             this.pnlInfoCompra.Controls.Add(this.dgvProductos);
             this.pnlInfoCompra.Controls.Add(this.materialDivider3);
@@ -379,25 +379,26 @@
             this.txtNroCompra.TrailingIconClick += new System.EventHandler(this.txtNroCompra_TrailingIconClick);
             this.txtNroCompra.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNroCompra_KeyDown);
             // 
-            // materialButton1
+            // btnGenerarPdf
             // 
-            this.materialButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.materialButton1.Depth = 0;
-            this.materialButton1.HighEmphasis = true;
-            this.materialButton1.Icon = global::CapaPresentacion.Properties.Resources.print_32;
-            this.materialButton1.Location = new System.Drawing.Point(17, 708);
-            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButton1.Name = "materialButton1";
-            this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton1.Size = new System.Drawing.Size(115, 36);
-            this.materialButton1.TabIndex = 341;
-            this.materialButton1.Text = "Imprimir";
-            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton1.UseAccentColor = false;
-            this.materialButton1.UseVisualStyleBackColor = true;
+            this.btnGenerarPdf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnGenerarPdf.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGenerarPdf.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnGenerarPdf.Depth = 0;
+            this.btnGenerarPdf.HighEmphasis = true;
+            this.btnGenerarPdf.Icon = global::CapaPresentacion.Properties.Resources.print_32;
+            this.btnGenerarPdf.Location = new System.Drawing.Point(17, 708);
+            this.btnGenerarPdf.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnGenerarPdf.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnGenerarPdf.Name = "btnGenerarPdf";
+            this.btnGenerarPdf.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnGenerarPdf.Size = new System.Drawing.Size(115, 36);
+            this.btnGenerarPdf.TabIndex = 341;
+            this.btnGenerarPdf.Text = "Imprimir";
+            this.btnGenerarPdf.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnGenerarPdf.UseAccentColor = false;
+            this.btnGenerarPdf.UseVisualStyleBackColor = true;
+            this.btnGenerarPdf.Click += new System.EventHandler(this.btnGenerarPdf_Click);
             // 
             // txtTotal
             // 
@@ -615,7 +616,7 @@
         private MaterialSkin.Controls.MaterialLabel lblTitulo;
         private MaterialSkin.Controls.MaterialDivider materialDivider3;
         private MaterialSkin.Controls.MaterialTextBox2 txtTotal;
-        private MaterialSkin.Controls.MaterialButton materialButton1;
+        private MaterialSkin.Controls.MaterialButton btnGenerarPdf;
         private MaterialSkin.Controls.MaterialTextBox2 txtNroCompra;
         private MaterialSkin.Controls.MaterialDivider materialDivider4;
         private MaterialSkin.Controls.MaterialTextBox2 txtFechaCreacion;

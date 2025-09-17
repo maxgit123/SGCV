@@ -1,8 +1,13 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
 using CapaPresentacion.Utilidades;
+using iText.Html2pdf;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
+using iText.Layout;
 
 namespace CapaPresentacion.Formularios
 {
@@ -68,6 +73,43 @@ namespace CapaPresentacion.Formularios
             UtilidadesForm.ReiniciarControles(pnlInfoCompra);
             txtNroCompra.SetErrorState(false);
             dgvProductos.Rows.Clear();
+        }
+
+        private void btnGenerarPdf_Click(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtUsuario.Text))
+            {
+                MessageBox.Show("No hay datos caragdos para generar el PDF.", "Generar PDF",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            string texto_html = Properties.Resources.PlantillaCompra2.ToString();
+            //string texto_html = Properties.Resources.PlantillaCompra.ToString();
+            CE_Comercio oComercio = new CN_Comercio().Leer();
+
+            texto_html = texto_html.Replace("@Negocio", oComercio.RazonSocial);
+            texto_html = texto_html.Replace("@Total", txtTotal.Text);
+
+            SaveFileDialog saveFile = new SaveFileDialog
+            {
+                Title = "Guardar archivo PDF",
+                Filter = "Archivo PDF (*.pdf)|*.pdf",
+                FileName = $"Compra_{txtNroCompra.Text}.pdf"
+            };
+
+            if (saveFile.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream fs = new FileStream(saveFile.FileName, FileMode.Create))
+                {
+                    ConverterProperties converterProperties = new ConverterProperties();
+                    PdfDocument pdf = new PdfDocument(new PdfWriter(fs));
+                    Document pdfDoc = new Document(pdf, PageSize.A4);
+                    HtmlConverter.ConvertToPdf(texto_html, pdf, converterProperties);
+                }
+
+                MessageBox.Show("PDF generado correctamente.", "Generar PDF",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
