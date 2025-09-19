@@ -8,7 +8,6 @@ using iText.Html2pdf;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using iText.Layout;
-using Org.BouncyCastle.Ocsp;
 
 namespace CapaPresentacion.Formularios
 {
@@ -17,43 +16,6 @@ namespace CapaPresentacion.Formularios
         public frmCompraDetalle()
         {
             InitializeComponent();
-        }
-
-        private void CargarDatosCompra(CE_Compra oCompra)
-        {
-            if (oCompra.Id == 0)
-            {
-                txtNroCompra.SetErrorState(true);
-                return;
-            }
-
-            txtNroCompra.Text = oCompra.Id.ToString();
-            txtNroCompra.SetErrorState(false);
-
-            txtFechaPedido.Text = oCompra.FechaPedido.ToString("dd/MM/yyyy");
-            txtFechaEntrega.Text = oCompra.FechaEntrega.ToString("dd/MM/yyyy");
-            txtUsuario.Text = oCompra.oUsuario.NombreCompleto;
-            txtDocumento.Text = oCompra.oUsuario.Documento;
-            txtFechaCreacion.Text = oCompra.FechaCreacion.ToString("dd/MM/yyyy HH:mm:ss");
-            txtRazonSocial.Text = oCompra.oProveedor.RazonSocial;
-            txtTelefono.Text = oCompra.oProveedor.Telefono;
-            txtCorreo.Text = oCompra.oProveedor.Correo;
-            txtTotal.Text = oCompra.Total.ToString("N2");
-
-            dgvProductos.Rows.Clear();
-            foreach (CE_CompraDetalle cd in oCompra.oCompraDetalle)
-            {
-                dgvProductos.Rows.Add(new object[]
-                {
-                    cd.oProducto.Codigo,
-                    cd.oProducto.Descripcion,
-                    cd.Cantidad,
-                    cd.PrecioCompraUnitario,
-                    cd.Subtotal,
-                    "Alicuota IVA", // TODO: Placeholder, no implementado
-                    "Subtotal c/IVA" // TODO: Placeholder, no implementado
-                });
-            }
         }
 
         private void txtNroCompra_TrailingIconClick(object sender, EventArgs e)
@@ -77,7 +39,6 @@ namespace CapaPresentacion.Formularios
             txtNroCompra.SetErrorState(false);
             dgvProductos.Rows.Clear();
         }
-
         private void btnGenerarPdf_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(txtUsuario.Text))
@@ -102,6 +63,23 @@ namespace CapaPresentacion.Formularios
                 string texto_html = Properties.Resources.PlantillaCompra2.ToString();
                 CE_Comercio oComercio = new CN_Comercio().Leer();
 
+                // --- Logo ---
+                if (oComercio.Logo != null && oComercio.Logo.Length > 0)
+                {
+                    byte[] byteImage = oComercio.Logo;
+                    string imgBase64 = Convert.ToBase64String(byteImage);
+                    texto_html = texto_html.Replace("@Logo", $"data:image/png;base64,{imgBase64}");
+                }
+                else
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        Properties.Resources.image_logo_96.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                        byte[] byteImage = ms.ToArray();
+                        string imgBase64 = Convert.ToBase64String(byteImage);
+                        texto_html = texto_html.Replace("@Logo", $"data:image/png;base64,{imgBase64}");
+                    }
+                }
                 // --- Comercio ---
                 texto_html = texto_html.Replace("@RazonSocial", oComercio.RazonSocial);
                 texto_html = texto_html.Replace("@Cuit", oComercio.Cuit);
@@ -151,6 +129,43 @@ namespace CapaPresentacion.Formularios
             {
                 MessageBox.Show($"Error al generar el PDF: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CargarDatosCompra(CE_Compra oCompra)
+        {
+            if (oCompra.Id == 0)
+            {
+                txtNroCompra.SetErrorState(true);
+                return;
+            }
+
+            txtNroCompra.Text = oCompra.Id.ToString();
+            txtNroCompra.SetErrorState(false);
+
+            txtFechaPedido.Text = oCompra.FechaPedido.ToString("dd/MM/yyyy");
+            txtFechaEntrega.Text = oCompra.FechaEntrega.ToString("dd/MM/yyyy");
+            txtUsuario.Text = oCompra.oUsuario.NombreCompleto;
+            txtDocumento.Text = oCompra.oUsuario.Documento;
+            txtFechaCreacion.Text = oCompra.FechaCreacion.ToString("dd/MM/yyyy HH:mm:ss");
+            txtRazonSocial.Text = oCompra.oProveedor.RazonSocial;
+            txtTelefono.Text = oCompra.oProveedor.Telefono;
+            txtCorreo.Text = oCompra.oProveedor.Correo;
+            txtTotal.Text = oCompra.Total.ToString("N2");
+
+            dgvProductos.Rows.Clear();
+            foreach (CE_CompraDetalle cd in oCompra.oCompraDetalle)
+            {
+                dgvProductos.Rows.Add(new object[]
+                {
+                    cd.oProducto.Codigo,
+                    cd.oProducto.Descripcion,
+                    cd.Cantidad,
+                    cd.PrecioCompraUnitario,
+                    cd.Subtotal,
+                    "Alicuota IVA", // TODO: Placeholder, no implementado
+                    "Subtotal c/IVA" // TODO: Placeholder, no implementado
+                });
             }
         }
     }

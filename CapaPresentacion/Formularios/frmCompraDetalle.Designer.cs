@@ -38,6 +38,13 @@
             this.txtRazonSocial = new MaterialSkin.Controls.MaterialTextBox2();
             this.txtTelefono = new MaterialSkin.Controls.MaterialTextBox2();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.alicuotaIva = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subtotalconIva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlInfoCompra = new MaterialSkin.Controls.MaterialCard();
             this.btnBorrarCampos = new MaterialSkin.Controls.MaterialButton();
             this.txtFechaCreacion = new MaterialSkin.Controls.MaterialTextBox2();
@@ -52,13 +59,6 @@
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.txtUsuario = new MaterialSkin.Controls.MaterialTextBox2();
             this.txtDocumento = new MaterialSkin.Controls.MaterialTextBox2();
-            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precioUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.alicuotaIva = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subtotalconIva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbInfoProveedor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.pnlInfoCompra.SuspendLayout();
@@ -231,6 +231,48 @@
             this.dgvProductos.Size = new System.Drawing.Size(1037, 317);
             this.dgvProductos.TabIndex = 243;
             // 
+            // codigo
+            // 
+            this.codigo.HeaderText = "Código";
+            this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
+            // 
+            // descripcion
+            // 
+            this.descripcion.HeaderText = "Descripción";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.ReadOnly = true;
+            // 
+            // cantidad
+            // 
+            this.cantidad.HeaderText = "Cantidad";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            // 
+            // precioUnit
+            // 
+            this.precioUnit.HeaderText = "Precio Unit.";
+            this.precioUnit.Name = "precioUnit";
+            this.precioUnit.ReadOnly = true;
+            // 
+            // subtotal
+            // 
+            this.subtotal.HeaderText = "Subtotal";
+            this.subtotal.Name = "subtotal";
+            this.subtotal.ReadOnly = true;
+            // 
+            // alicuotaIva
+            // 
+            this.alicuotaIva.HeaderText = "Alicuota IVA";
+            this.alicuotaIva.Name = "alicuotaIva";
+            this.alicuotaIva.ReadOnly = true;
+            // 
+            // subtotalconIva
+            // 
+            this.subtotalconIva.HeaderText = "Subtotal c/ IVA";
+            this.subtotalconIva.Name = "subtotalconIva";
+            this.subtotalconIva.ReadOnly = true;
+            // 
             // pnlInfoCompra
             // 
             this.pnlInfoCompra.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
@@ -267,13 +309,13 @@
             this.btnBorrarCampos.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnBorrarCampos.Depth = 0;
             this.btnBorrarCampos.HighEmphasis = true;
-            this.btnBorrarCampos.Icon = global::CapaPresentacion.Properties.Resources.erase_32;
-            this.btnBorrarCampos.Location = new System.Drawing.Point(140, 708);
+            this.btnBorrarCampos.Icon = null;
+            this.btnBorrarCampos.Location = new System.Drawing.Point(171, 708);
             this.btnBorrarCampos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnBorrarCampos.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnBorrarCampos.Name = "btnBorrarCampos";
             this.btnBorrarCampos.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnBorrarCampos.Size = new System.Drawing.Size(170, 36);
+            this.btnBorrarCampos.Size = new System.Drawing.Size(142, 36);
             this.btnBorrarCampos.TabIndex = 345;
             this.btnBorrarCampos.Text = "Borrar campos";
             this.btnBorrarCampos.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -360,15 +402,15 @@
             this.btnGenerarPdf.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnGenerarPdf.Depth = 0;
             this.btnGenerarPdf.HighEmphasis = true;
-            this.btnGenerarPdf.Icon = global::CapaPresentacion.Properties.Resources.print_32;
+            this.btnGenerarPdf.Icon = global::CapaPresentacion.Properties.Resources.pdf_32;
             this.btnGenerarPdf.Location = new System.Drawing.Point(17, 708);
             this.btnGenerarPdf.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnGenerarPdf.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnGenerarPdf.Name = "btnGenerarPdf";
             this.btnGenerarPdf.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnGenerarPdf.Size = new System.Drawing.Size(115, 36);
+            this.btnGenerarPdf.Size = new System.Drawing.Size(146, 36);
             this.btnGenerarPdf.TabIndex = 341;
-            this.btnGenerarPdf.Text = "Imprimir";
+            this.btnGenerarPdf.Text = "Generar PDF";
             this.btnGenerarPdf.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnGenerarPdf.UseAccentColor = false;
             this.btnGenerarPdf.UseVisualStyleBackColor = true;
@@ -556,48 +598,6 @@
             this.txtDocumento.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtDocumento.TrailingIcon = null;
             this.txtDocumento.UseSystemPasswordChar = false;
-            // 
-            // codigo
-            // 
-            this.codigo.HeaderText = "Código";
-            this.codigo.Name = "codigo";
-            this.codigo.ReadOnly = true;
-            // 
-            // descripcion
-            // 
-            this.descripcion.HeaderText = "Descripción";
-            this.descripcion.Name = "descripcion";
-            this.descripcion.ReadOnly = true;
-            // 
-            // cantidad
-            // 
-            this.cantidad.HeaderText = "Cantidad";
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
-            // 
-            // precioUnit
-            // 
-            this.precioUnit.HeaderText = "Precio Unit.";
-            this.precioUnit.Name = "precioUnit";
-            this.precioUnit.ReadOnly = true;
-            // 
-            // subtotal
-            // 
-            this.subtotal.HeaderText = "Subtotal";
-            this.subtotal.Name = "subtotal";
-            this.subtotal.ReadOnly = true;
-            // 
-            // alicuotaIva
-            // 
-            this.alicuotaIva.HeaderText = "Alicuota IVA";
-            this.alicuotaIva.Name = "alicuotaIva";
-            this.alicuotaIva.ReadOnly = true;
-            // 
-            // subtotalconIva
-            // 
-            this.subtotalconIva.HeaderText = "Subtotal c/ IVA";
-            this.subtotalconIva.Name = "subtotalconIva";
-            this.subtotalconIva.ReadOnly = true;
             // 
             // frmCompraDetalle
             // 
