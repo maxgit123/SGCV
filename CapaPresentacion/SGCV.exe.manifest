@@ -415,14 +415,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SGCV.exe" size="437248">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SGCV.exe" size="446464">
       <assemblyIdentity name="SGCV" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>GSeTQ6y5igOMYuyi8CBeXgdwU6wshzmPYSQ0QHenH1A=</dsig:DigestValue>
+        <dsig:DigestValue>zsmMTDYXep6AT2184Fno1P4+L+yteAi5HWW1W3Drufc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

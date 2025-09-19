@@ -8,6 +8,7 @@ using iText.Html2pdf;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using iText.Layout;
+using Org.BouncyCastle.Ocsp;
 
 namespace CapaPresentacion.Formularios
 {
@@ -46,9 +47,11 @@ namespace CapaPresentacion.Formularios
                 {
                     cd.oProducto.Codigo,
                     cd.oProducto.Descripcion,
-                    cd.PrecioCompraUnitario,
                     cd.Cantidad,
-                    cd.Subtotal
+                    cd.PrecioCompraUnitario,
+                    cd.Subtotal,
+                    "Alicuota IVA", // TODO: Placeholder, no implementado
+                    "Subtotal c/IVA" // TODO: Placeholder, no implementado
                 });
             }
         }
@@ -81,14 +84,8 @@ namespace CapaPresentacion.Formularios
             {
                 MessageBox.Show("No hay datos caragdos para generar el PDF.", "Generar PDF",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
-
-            string texto_html = Properties.Resources.PlantillaCompra2.ToString();
-            //string texto_html = Properties.Resources.PlantillaCompra.ToString();
-            CE_Comercio oComercio = new CN_Comercio().Leer();
-
-            texto_html = texto_html.Replace("@Negocio", oComercio.RazonSocial);
-            texto_html = texto_html.Replace("@Total", txtTotal.Text);
 
             SaveFileDialog saveFile = new SaveFileDialog
             {
@@ -97,8 +94,48 @@ namespace CapaPresentacion.Formularios
                 FileName = $"Compra_{txtNroCompra.Text}.pdf"
             };
 
-            if (saveFile.ShowDialog() == DialogResult.OK)
+            if (saveFile.ShowDialog() != DialogResult.OK)
+                return;
+
+            try
             {
+                string texto_html = Properties.Resources.PlantillaCompra2.ToString();
+                CE_Comercio oComercio = new CN_Comercio().Leer();
+
+                // --- Comercio ---
+                texto_html = texto_html.Replace("@RazonSocial", oComercio.RazonSocial);
+                texto_html = texto_html.Replace("@Cuit", oComercio.Cuit);
+                texto_html = texto_html.Replace("@Direccion", $"{oComercio.oDireccion.Calle} {oComercio.oDireccion.Numero}");
+                texto_html = texto_html.Replace("@RespIVA", oComercio.oResponsableIVA.Nombre);
+                // --- Proveedor ---
+                texto_html = texto_html.Replace("@PrRazonSocial", txtRazonSocial.Text);
+                texto_html = texto_html.Replace("@PrTelefono", txtTelefono.Text);
+                texto_html = texto_html.Replace("@PrCorreo", txtCorreo.Text);
+                // --- Compra ---
+                texto_html = texto_html.Replace("@FechaPedido", txtFechaPedido.Text);
+                texto_html = texto_html.Replace("@FechaEntrega", txtFechaEntrega.Text);
+                texto_html = texto_html.Replace("@FechaCreacion", txtFechaCreacion.Text);
+                texto_html = texto_html.Replace("@NroCompra", txtNroCompra.Text);
+                texto_html = texto_html.Replace("@Usuario", txtUsuario.Text);
+                //texto_html = texto_html.Replace("@Documento", txtDocumento.Text);
+                texto_html = texto_html.Replace("@CondCompra", "Condicion de compra"); // No implementado
+                // --- Detalle de productos ---
+                string filas = string.Empty;
+                foreach (DataGridViewRow fila in dgvProductos.Rows)
+                {
+                    filas += "<tr>";
+                    filas += $"<td class=\"text-left\">{fila.Cells["codigo"].Value}</td>";
+                    filas += $"<td class=\"text-left\">{fila.Cells["descripcion"].Value}</td>";
+                    filas += $"<td class=\"text-right\">{fila.Cells["cantidad"].Value}</td>";
+                    filas += $"<td class=\"text-right\">{Convert.ToDecimal(fila.Cells["precioUnit"].Value):N2}</td>";
+                    filas += $"<td class=\"text-center\">{Convert.ToDecimal(fila.Cells["subtotal"].Value):N2}</td>";
+                    filas += $"<td class=\"text-right\">Alicuota IVA</td>"; // TODO: Agregar campo IVA en el futuro
+                    filas += $"<td class=\"text-right\">Subtotal c/IVA</td>"; // TODO: Agregar campo Subtotal c/IVA en el futuro
+                    filas += "</tr>";
+                }
+                texto_html = texto_html.Replace("@Filas", filas);
+                texto_html = texto_html.Replace("@Total", txtTotal.Text);
+
                 using (FileStream fs = new FileStream(saveFile.FileName, FileMode.Create))
                 {
                     ConverterProperties converterProperties = new ConverterProperties();
@@ -109,6 +146,11 @@ namespace CapaPresentacion.Formularios
 
                 MessageBox.Show("PDF generado correctamente.", "Generar PDF",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al generar el PDF: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

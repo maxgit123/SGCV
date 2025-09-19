@@ -38,11 +38,6 @@
             this.txtRazonSocial = new MaterialSkin.Controls.MaterialTextBox2();
             this.txtTelefono = new MaterialSkin.Controls.MaterialTextBox2();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
-            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlInfoCompra = new MaterialSkin.Controls.MaterialCard();
             this.btnBorrarCampos = new MaterialSkin.Controls.MaterialButton();
             this.txtFechaCreacion = new MaterialSkin.Controls.MaterialTextBox2();
@@ -57,6 +52,13 @@
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.txtUsuario = new MaterialSkin.Controls.MaterialTextBox2();
             this.txtDocumento = new MaterialSkin.Controls.MaterialTextBox2();
+            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.alicuotaIva = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subtotalconIva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbInfoProveedor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.pnlInfoCompra.SuspendLayout();
@@ -187,10 +189,12 @@
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.codigo,
-            this.Producto,
-            this.Precio,
-            this.Cantidad,
-            this.Subtotal});
+            this.descripcion,
+            this.cantidad,
+            this.precioUnit,
+            this.subtotal,
+            this.alicuotaIva,
+            this.subtotalconIva});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -226,36 +230,6 @@
             this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProductos.Size = new System.Drawing.Size(1037, 317);
             this.dgvProductos.TabIndex = 243;
-            // 
-            // codigo
-            // 
-            this.codigo.HeaderText = "Codigo";
-            this.codigo.Name = "codigo";
-            this.codigo.ReadOnly = true;
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "Producto";
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
-            // 
-            // Precio
-            // 
-            this.Precio.HeaderText = "Precio";
-            this.Precio.Name = "Precio";
-            this.Precio.ReadOnly = true;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
-            // 
-            // Subtotal
-            // 
-            this.Subtotal.HeaderText = "Subtotal";
-            this.Subtotal.Name = "Subtotal";
-            this.Subtotal.ReadOnly = true;
             // 
             // pnlInfoCompra
             // 
@@ -583,6 +557,48 @@
             this.txtDocumento.TrailingIcon = null;
             this.txtDocumento.UseSystemPasswordChar = false;
             // 
+            // codigo
+            // 
+            this.codigo.HeaderText = "Código";
+            this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
+            // 
+            // descripcion
+            // 
+            this.descripcion.HeaderText = "Descripción";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.ReadOnly = true;
+            // 
+            // cantidad
+            // 
+            this.cantidad.HeaderText = "Cantidad";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            // 
+            // precioUnit
+            // 
+            this.precioUnit.HeaderText = "Precio Unit.";
+            this.precioUnit.Name = "precioUnit";
+            this.precioUnit.ReadOnly = true;
+            // 
+            // subtotal
+            // 
+            this.subtotal.HeaderText = "Subtotal";
+            this.subtotal.Name = "subtotal";
+            this.subtotal.ReadOnly = true;
+            // 
+            // alicuotaIva
+            // 
+            this.alicuotaIva.HeaderText = "Alicuota IVA";
+            this.alicuotaIva.Name = "alicuotaIva";
+            this.alicuotaIva.ReadOnly = true;
+            // 
+            // subtotalconIva
+            // 
+            this.subtotalconIva.HeaderText = "Subtotal c/ IVA";
+            this.subtotalconIva.Name = "subtotalconIva";
+            this.subtotalconIva.ReadOnly = true;
+            // 
             // frmCompraDetalle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -620,11 +636,13 @@
         private MaterialSkin.Controls.MaterialTextBox2 txtNroCompra;
         private MaterialSkin.Controls.MaterialDivider materialDivider4;
         private MaterialSkin.Controls.MaterialTextBox2 txtFechaCreacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
         private MaterialSkin.Controls.MaterialButton btnBorrarCampos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precioUnit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn subtotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn alicuotaIva;
+        private System.Windows.Forms.DataGridViewTextBoxColumn subtotalconIva;
     }
 }

@@ -104,52 +104,53 @@
 
 <body>
     <div class="flex relative">
-
+        <!-- COMERCIO -->
         <div class="wrapper inline-block w50 flex" style="border-right: 0">
-            <h3 class="text-center" style="font-size:24px;margin-bottom: 3px;width: 100%;">@Negocio</h3>
+            <h3 class="text-center" style="font-size:24px;margin-bottom: 3px;width: 100%;">Comercio</h3>
             <p style="font-size: 13px;line-height: 1.5;margin-bottom: 0;align-self: flex-end;">
-                <b>Razón Social:</b> @RazonSocial<br/>
-                <b>CUIT:</b> @Cuit<br/>
-                <b>Domicilio Comercial:</b> @Direccion<br/>
+                <b>Razón Social:</b> @RazonSocial<br />
+                <b>CUIT:</b> @Cuit<br />
+                <b>Domicilio Comercial:</b> @Direccion<br />
                 <b>Condición frente al IVA:</b> @RespIVA
             </p>
         </div>
-
+        <!-- PROVEEDOR -->
         <div class="wrapper inline-block w50">
-            <h3 class="text-center" style="font-size:24px;margin-bottom: 3px;">@Proveedor</h3>
+            <h3 class="text-center" style="font-size:24px;margin-bottom: 3px;">Proveedor</h3>
             <p style="font-size: 13px;line-height: 1.5;margin-bottom: 0;">
-                <b>Razón Social:</b> @RazonSocial<br/>
-                <!-- <b>CUIT:</b> @Cuit<br/> -->
-                <!-- <b>Condición frente al IVA:</b> @RespIVA<br/> -->
-                <b>Teléfono:</b> @Telefono<br/>
-                <b>Correo:</b> @Correo
+                <b>Razón Social:</b> @PrRazonSocial<br />
+                <!-- <b>CUIT:</b> @PrCuit<br/> -->
+                <!-- <b>Condición frente al IVA:</b> @PrRespIVA<br/> -->
+                <b>Teléfono:</b> @PrTelefono<br />
+                <b>Correo:</b> @PrCorreo
             </p>
         </div>
-
-        <div class="wrapper floating-mid">
+        <!-- LOGO -->
+        <div class="wrapper floating-mid" style="margin: 0 auto;">
             <h3 class="no-margin text-center" style="font-size: 20px;">@Logo</h3>
         </div>
 
     </div>
-
+    <!-- FECHAS DE PEDIDO Y ENTREGA -->
     <div class="wrapper flex space-around" style="margin-top: 1px;">
-        <span><b>Fecha de pedido:</b> @FechaPedido</span>
+        <span style="width:50%"><b>Fecha de pedido:</b> @FechaPedido</span>
         <span><b>Fecha de entrega:</b> @FechaEntrega</span>
     </div>
 
     <div class="wrapper" style="margin-top: 2px;font-size: 12px;">
 
         <div class="flex" style="margin-bottom: 15px;">
-            <span style="width:50%"><b>Comp. Nro:</b> @Id</span>
+            <span style="width:50%"><b>Comp. Nro:</b> @NroCompra</span>
             <span><b>Fecha de Emisión:</b> @FechaCreacion</span>
         </div>
 
         <div class="flex">
-            <span><b>Condición de venta:</b> @</span>
+            <span style="width:50%"><b>Usuario:</b> @Usuario</span>
+            <span><b>Condición de compra:</b> @CondCompra</span>
         </div>
 
     </div>
-
+    <!-- LISTADO DE PRODUCTOS -->
     <table style="margin-top: 5px;">
         <thead>
             <tr>
@@ -163,7 +164,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+            @Filas
+            <!--<tr>
                 <td class="text-left">@CodProducto</td>
                 <td class="text-left">@Descripcion</td>
                 <td class="text-right">@Cantidad</td>
@@ -171,7 +173,7 @@
                 <td class="text-center">@Subtotal</td>
                 <td class="text-right">@Iva</td>
                 <td class="text-right">@Subtotal + @Iva</td>
-            </tr>
+            </tr>-->
         </tbody>
     </table>
 
@@ -192,7 +194,7 @@
 
         <div class="flex relative" style="margin-top: 20px;">
             <div class="qr-container" style="padding: 0 20px 20px 20px;width: 20%;">
-                <img src="qr.png" alt="QR" style="max-width: 100%;"/>
+                <img src="qr.png" alt="QR" style="max-width: 100%;" />
             </div>
         </div>
     </div>
