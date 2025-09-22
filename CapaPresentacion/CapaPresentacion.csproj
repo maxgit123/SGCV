@@ -330,15 +330,13 @@
     <Compile Include="Utilidades\UtilidadesForm.cs" />
     <Compile Include="Utilidades\UtilidadesModal.cs" />
     <Compile Include="Utilidades\UtilidadesTextBox.cs" />
+    <None Include="Resources\subtract_32.png" />
     <None Include="Resources\pdf-32.png" />
     <None Include="Resources\loading.gif" />
     <None Include="Resources\PlantillaCompra.html" />
     <None Include="Resources\PlantillaCompra2.html" />
     <None Include="Resources\erase-32.png" />
     <None Include="Resources\print_32.png" />
-    <None Include="Resources\btn_search_48.png" />
-    <None Include="Resources\btn_search-32.png" />
-    <None Include="Resources\subtract_32.png" />
     <None Include="Resources\search_32.png" />
     <None Include="Resources\calendar_32.png" />
     <None Include="Resources\remove_image_32.png" />
@@ -352,13 +350,9 @@
     <None Include="Resources\save_32.png" />
     <None Include="Resources\email_32.png" />
     <None Include="Resources\cell_32.png" />
-    <None Include="Resources\cell_16.png" />
-    <None Include="Resources\delete2_16.png" />
     <None Include="Resources\hide_32.png" />
     <None Include="Resources\visible_32.png" />
     <None Include="Resources\shop_100.png" />
-    <None Include="Resources\visible-16.png" />
-    <None Include="Resources\hide-16.png" />
     <EmbeddedResource Include="Formularios\frmCliente.resx">
       <DependentUpon>frmCliente.cs</DependentUpon>
     </EmbeddedResource>

@@ -13,6 +13,8 @@ namespace CapaPresentacion.Formularios
 {
     public partial class frmCompraDetalle : Form
     {
+        private bool _datosCargados = false;
+
         public frmCompraDetalle()
         {
             InitializeComponent();
@@ -33,11 +35,33 @@ namespace CapaPresentacion.Formularios
             CE_Compra oCompra = new CN_Compra().ObtenerCompra(Convert.ToInt32(txtNroCompra.Text));
             CargarDatosCompra(oCompra);
         }
+        private void txtNroCompra_AlternarTrailingIcon()
+        {
+            ActualizarTrailingIcon();
+
+            if (_datosCargados)
+            {
+                txtNroCompra.ReadOnly = true;
+                //txtNroCompra.TrailingIcon = Properties.Resources.cancel_32;
+                txtNroCompra.TrailingIconClick -= txtNroCompra_TrailingIconClick;
+                txtNroCompra.TrailingIconClick += btnBorrarCampos_Click;
+            }
+            else
+            {
+                txtNroCompra.ReadOnly = false;
+                //txtNroCompra.TrailingIcon = Properties.Resources.search_32;
+                txtNroCompra.TrailingIconClick -= btnBorrarCampos_Click;
+                txtNroCompra.TrailingIconClick += txtNroCompra_TrailingIconClick;
+            }
+        }
         private void btnBorrarCampos_Click(object sender, EventArgs e)
         {
             UtilidadesForm.ReiniciarControles(pnlInfoCompra);
             txtNroCompra.SetErrorState(false);
             dgvProductos.Rows.Clear();
+
+            _datosCargados = false;
+            txtNroCompra_AlternarTrailingIcon();
         }
         private void btnGenerarPdf_Click(object sender, EventArgs e)
         {
@@ -167,6 +191,16 @@ namespace CapaPresentacion.Formularios
                     "Subtotal c/IVA" // TODO: Placeholder, no implementado
                 });
             }
+
+            _datosCargados = true;
+            txtNroCompra_AlternarTrailingIcon();
+        }
+        private void ActualizarTrailingIcon()
+        {
+            txtNroCompra.ReadOnly = _datosCargados;
+            txtNroCompra.TrailingIcon = _datosCargados
+                ? Properties.Resources.cancel_32
+                : Properties.Resources.search_32;
         }
     }
 }
