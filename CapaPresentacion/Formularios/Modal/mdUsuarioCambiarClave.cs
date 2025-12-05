@@ -17,15 +17,16 @@ namespace CapaPresentacion.Formularios.Modal
         {
             InitializeComponent();
             _usuarioActual = oUsuario;
-            Size = new Size(292, 321);
+            Size = new Size(292, 375); //321
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
-        {
+        {            
             bool resultado = new CN_Usuario().CambiarClave(
                 _usuarioActual,
                 txtClaveActual.Text,
                 txtClaveNueva.Text,
+                txtClaveNueva2.Text,
                 out string mensaje
             );
 

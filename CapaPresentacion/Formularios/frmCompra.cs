@@ -206,7 +206,8 @@ namespace CapaPresentacion.Formularios
             UtilidadesModal.BuscarProducto(
                 txtCodigo: txtProductoCodigo,
                 txtDescripcion: txtProductoDescripcion,
-                idProductoSeleccionado: ref idProductoSeleccionado
+                idProductoSeleccionado: ref idProductoSeleccionado,
+                requerirStock: false
             );
         }
         private void txtPrecioCompra_KeyPress(object sender, KeyPressEventArgs e)

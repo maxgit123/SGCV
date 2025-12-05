@@ -19,14 +19,15 @@ namespace CapaPresentacion.Utilidades
         /// <param name="txtCodigo">TextBox para mostrar el código del producto.</param>
         /// <param name="txtDescripcion">TextBox para mostrar la descripción del producto.</param>
         /// <param name="idProductoSeleccionado">Variable de referencia para almacenar el ID del producto.</param>
+        /// <param name="requerirStock">Si es true, solo lista productos con stock.</param>
         /// <returns>true si se seleccionó un producto, false si se canceló la selección.</returns>
         public static bool BuscarProducto(
             TextBox txtCodigo, TextBox txtDescripcion,
             ref int idProductoSeleccionado,
-            TextBox txtPrecio = null, TextBox txtStock = null
+            TextBox txtPrecio = null, TextBox txtStock = null, bool requerirStock = true
         )
         {
-            using (var modal = new mdProducto())
+            using (var modal = new mdProducto(requerirStock))
             {
                 var result = modal.ShowDialog();
 
@@ -54,10 +55,10 @@ namespace CapaPresentacion.Utilidades
         public static bool BuscarProducto(
             MaterialTextBox2 txtCodigo, MaterialTextBox2 txtDescripcion,
             ref int idProductoSeleccionado,
-            MaterialTextBox2 txtPrecio = null, MaterialTextBox2 txtStock = null
+            MaterialTextBox2 txtPrecio = null, MaterialTextBox2 txtStock = null, bool requerirStock = true
         )
         {
-            using (var modal = new mdProducto())
+            using (var modal = new mdProducto(requerirStock))
             {
                 var result = modal.ShowDialog();
 

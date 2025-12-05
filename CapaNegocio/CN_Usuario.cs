@@ -99,7 +99,7 @@ namespace CapaNegocio
         {
             return oCD_Usuario.Eliminar(oUsuario, out mensaje);
         }
-        public bool CambiarClave(CE_Usuario oUsuario, string claveActual, string claveNueva, out string mensaje)
+        public bool CambiarClave(CE_Usuario oUsuario, string claveActual, string claveNueva, string claveNuevaRep, out string mensaje)
         {
             var errores = new StringBuilder();
 
@@ -110,9 +110,15 @@ namespace CapaNegocio
             if (string.IsNullOrWhiteSpace(claveNueva))
                 errores.AppendLine("Ingrese la clave nueva.");
 
+            if (string.IsNullOrWhiteSpace(claveNuevaRep))
+                errores.AppendLine("Repetir la clave nueva.");
+
+            if (!string.Equals(claveNueva, claveNuevaRep, StringComparison.Ordinal))
+                errores.AppendLine("Las claves nuevas no coinciden.");
+
             // Se verifica si la clave actual ingresada coincide con la almacenada en la base de datos.
             if (!Hash.Verificar(oUsuario.Clave, claveActual))
-                errores.AppendLine("La clave actual es incorrecta.");
+            errores.AppendLine("La clave actual es incorrecta.");
 
             // Si se encontraron errores, se construye el mensaje de error.
             if (errores.Length > 0)

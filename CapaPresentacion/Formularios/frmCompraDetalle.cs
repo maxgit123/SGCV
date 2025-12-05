@@ -42,14 +42,12 @@ namespace CapaPresentacion.Formularios
             if (_datosCargados)
             {
                 txtNroCompra.ReadOnly = true;
-                //txtNroCompra.TrailingIcon = Properties.Resources.cancel_32;
                 txtNroCompra.TrailingIconClick -= txtNroCompra_TrailingIconClick;
                 txtNroCompra.TrailingIconClick += btnBorrarCampos_Click;
             }
             else
             {
                 txtNroCompra.ReadOnly = false;
-                //txtNroCompra.TrailingIcon = Properties.Resources.search_32;
                 txtNroCompra.TrailingIconClick -= btnBorrarCampos_Click;
                 txtNroCompra.TrailingIconClick += txtNroCompra_TrailingIconClick;
             }
@@ -84,6 +82,7 @@ namespace CapaPresentacion.Formularios
 
             try
             {
+                Cursor = Cursors.WaitCursor;
                 string texto_html = Properties.Resources.PlantillaCompra2.ToString();
                 CE_Comercio oComercio = new CN_Comercio().Leer();
 
@@ -148,12 +147,15 @@ namespace CapaPresentacion.Formularios
 
                 MessageBox.Show("PDF generado correctamente.", "Generar PDF",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al generar el PDF: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            Cursor = Cursors.Default;
         }
 
         private void CargarDatosCompra(CE_Compra oCompra)

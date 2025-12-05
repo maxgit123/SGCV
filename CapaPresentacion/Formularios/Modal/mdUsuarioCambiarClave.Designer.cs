@@ -34,6 +34,7 @@
             this.btnCancelar = new MaterialSkin.Controls.MaterialButton();
             this.btnGuardar = new MaterialSkin.Controls.MaterialButton();
             this.txtClaveNueva = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtClaveNueva2 = new MaterialSkin.Controls.MaterialTextBox2();
             this.materialCard1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,6 +74,7 @@
             // materialCard1
             // 
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard1.Controls.Add(this.txtClaveNueva2);
             this.materialCard1.Controls.Add(this.btnCancelar);
             this.materialCard1.Controls.Add(this.btnGuardar);
             this.materialCard1.Controls.Add(this.txtClaveNueva);
@@ -85,11 +87,12 @@
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard1.Size = new System.Drawing.Size(292, 257);
+            this.materialCard1.Size = new System.Drawing.Size(292, 311);
             this.materialCard1.TabIndex = 1;
             // 
             // btnCancelar
             // 
+            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnCancelar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.btnCancelar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
@@ -97,7 +100,7 @@
             this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnCancelar.HighEmphasis = false;
             this.btnCancelar.Icon = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Icon")));
-            this.btnCancelar.Location = new System.Drawing.Point(150, 186);
+            this.btnCancelar.Location = new System.Drawing.Point(150, 240);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCancelar.Name = "btnCancelar";
@@ -112,6 +115,7 @@
             // 
             // btnGuardar
             // 
+            this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnGuardar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.btnGuardar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
@@ -119,7 +123,7 @@
             this.btnGuardar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnGuardar.HighEmphasis = true;
             this.btnGuardar.Icon = global::CapaPresentacion.Properties.Resources.save_32;
-            this.btnGuardar.Location = new System.Drawing.Point(18, 186);
+            this.btnGuardar.Location = new System.Drawing.Point(18, 240);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnGuardar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnGuardar.Name = "btnGuardar";
@@ -165,11 +169,43 @@
             this.txtClaveNueva.UseSystemPasswordChar = true;
             this.txtClaveNueva.TrailingIconClick += new System.EventHandler(this.txtClave_TrailingIconClick);
             // 
+            // txtClaveNueva2
+            // 
+            this.txtClaveNueva2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtClaveNueva2.AnimateReadOnly = false;
+            this.txtClaveNueva2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.txtClaveNueva2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtClaveNueva2.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtClaveNueva2.Depth = 0;
+            this.txtClaveNueva2.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtClaveNueva2.HideSelection = true;
+            this.txtClaveNueva2.Hint = "Repetir clave nueva";
+            this.txtClaveNueva2.LeadingIcon = null;
+            this.txtClaveNueva2.Location = new System.Drawing.Point(17, 140);
+            this.txtClaveNueva2.MaxLength = 32767;
+            this.txtClaveNueva2.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtClaveNueva2.Name = "txtClaveNueva2";
+            this.txtClaveNueva2.PasswordChar = '●';
+            this.txtClaveNueva2.PrefixSuffixText = null;
+            this.txtClaveNueva2.ReadOnly = false;
+            this.txtClaveNueva2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtClaveNueva2.SelectedText = "";
+            this.txtClaveNueva2.SelectionLength = 0;
+            this.txtClaveNueva2.SelectionStart = 0;
+            this.txtClaveNueva2.ShortcutsEnabled = true;
+            this.txtClaveNueva2.Size = new System.Drawing.Size(258, 48);
+            this.txtClaveNueva2.TabIndex = 318;
+            this.txtClaveNueva2.TabStop = false;
+            this.txtClaveNueva2.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtClaveNueva2.TrailingIcon = global::CapaPresentacion.Properties.Resources.hide_32;
+            this.txtClaveNueva2.UseSystemPasswordChar = true;
+            // 
             // mdUsuarioCambiarClave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 321);
+            this.ClientSize = new System.Drawing.Size(292, 375);
             this.Controls.Add(this.materialCard1);
             this.Name = "mdUsuarioCambiarClave";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -187,5 +223,6 @@
         private MaterialSkin.Controls.MaterialTextBox2 txtClaveNueva;
         private MaterialSkin.Controls.MaterialButton btnCancelar;
         private MaterialSkin.Controls.MaterialButton btnGuardar;
+        private MaterialSkin.Controls.MaterialTextBox2 txtClaveNueva2;
     }
 }

@@ -11,6 +11,7 @@ namespace CapaPresentacion.Formularios.Modal
     public partial class mdProducto : MaterialModalBase
     {
         public CE_Producto _producto { get; set; }
+        private bool _requerirStock = true;
         private static class NombreColumna
         {
             public const string ID_PRODUCTO = "id_producto";
@@ -22,9 +23,10 @@ namespace CapaPresentacion.Formularios.Modal
             public const string CATEGORIA = "categoria";
         }
 
-        public mdProducto()
+        public mdProducto(bool requerirStock = true)
         {
             InitializeComponent();
+            _requerirStock = requerirStock;
             UtilidadesDGV.Configurar(dgvProductos);
             UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvProductos, NombreColumna.CODIGO);
             ListarProductosEnDGV();
@@ -66,7 +68,7 @@ namespace CapaPresentacion.Formularios.Modal
         private void ListarProductosEnDGV()
         {
             dgvProductos.Rows.Clear();
-            List<CE_Producto> listaProducto = new CN_Producto().Listar(soloActivos: true, soloConStock: true);
+            List<CE_Producto> listaProducto = new CN_Producto().Listar(soloActivos: true, soloConStock: _requerirStock);
 
             // TODO: mensaje de error si listaProducto es null o vacía
             //if (!string.IsNullOrEmpty(mensaje))

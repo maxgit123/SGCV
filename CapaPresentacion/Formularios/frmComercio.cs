@@ -25,6 +25,7 @@ namespace CapaPresentacion.Formularios
         private void frmComercio_Load(object sender, EventArgs e)
         {
             _isLoading = true;
+            _logoBytes = null;
             btnGuardar.Enabled = false;
 
             List<CE_ResponsableIVA> listaRespIVA = new CN_ResponsableIVA().Listar();
@@ -68,7 +69,7 @@ namespace CapaPresentacion.Formularios
             else
             {
                 picLogo.SizeMode = PictureBoxSizeMode.CenterImage;
-                picLogo.Image = Properties.Resources.image_logo_96;
+                picLogo.Image = Properties.Resources.image_logo_96;   
             }
 
             _isLoading = false;
@@ -151,13 +152,27 @@ namespace CapaPresentacion.Formularios
         }
         private void btnQuitarLogo_Click(object sender, EventArgs e)
         {
+            if (picLogo.Image == Properties.Resources.image_logo_96)
+                return;
+
             picLogo.SizeMode = PictureBoxSizeMode.CenterImage;
             picLogo.Image = Properties.Resources.image_logo_96;
             _logoBytes = null;
+
+            btnGuardar.Enabled = true;
         }
         private void txtPuntoVenta_KeyPress(object sender, KeyPressEventArgs e)
         {
             UtilidadesTextBox.PermitirSoloDigitos(sender, e);
+        }
+        private void txtInicioActividad_TrailingIconClick(object sender, EventArgs e)
+        {
+            dtpInicioActividad.Focus();
+            SendKeys.Send("%{DOWN}"); // Alt + flecha abajo
+        }
+        private void dtpInicioActividad_ValueChanged(object sender, EventArgs e)
+        {
+            txtInicioActividad.Text = dtpInicioActividad.Value.ToString("dd/MM/yyyy");
         }
         private void ctrl_ModifiedChanged(object sender, EventArgs e)
         {
@@ -192,14 +207,5 @@ namespace CapaPresentacion.Formularios
             }
         }
 
-        private void txtInicioActividad_TrailingIconClick(object sender, EventArgs e)
-        {
-            dtpInicioActividad.Focus();
-            SendKeys.Send("%{DOWN}"); // Alt + flecha abajo
-        }
-        private void dtpInicioActividad_ValueChanged(object sender, EventArgs e)
-        {
-            txtInicioActividad.Text = dtpInicioActividad.Value.ToString("dd/MM/yyyy");
-        }
     }
 }

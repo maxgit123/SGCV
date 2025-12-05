@@ -207,6 +207,5 @@ namespace CapaPresentacion.Formularios
             dgvProveedores.Rows.RemoveAt(indiceFila);
             return true;
         }
-
     }
 }
