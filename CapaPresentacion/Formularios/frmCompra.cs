@@ -15,7 +15,7 @@ namespace CapaPresentacion.Formularios
         private int idProveedorSeleccionado = 0;
         private int idProductoSeleccionado = 0;
         private const string FormatoPrecio = "0.00";
-        private static readonly CultureInfo culturaArgentina = new CultureInfo("es-AR");
+        private static readonly CultureInfo _culturaArgentina = new CultureInfo("es-AR");
         private static class NombreColumna
         {
             public const string ID_PRODUCTO = "id_producto";
@@ -101,9 +101,9 @@ namespace CapaPresentacion.Formularios
                 {
                     idProductoSeleccionado,
                     txtProductoDescripcion.Text,
-                    precioCompra.ToString(FormatoPrecio, culturaArgentina),
+                    precioCompra.ToString(FormatoPrecio, _culturaArgentina),
                     txtProductoCantidad.Text,
-                    (subtotal).ToString(FormatoPrecio, culturaArgentina),
+                    (subtotal).ToString(FormatoPrecio, _culturaArgentina),
                     "" // btnEliminar
                 });
 
@@ -162,7 +162,7 @@ namespace CapaPresentacion.Formularios
                 },
                 FechaPedido = dtpFechaPedido.Value,
                 FechaEntrega = dtpFechaEntrega.Value,
-                Total = Convert.ToDecimal(txtTotal.Text, culturaArgentina)
+                Total = Convert.ToDecimal(txtTotal.Text, _culturaArgentina)
             };
 
             bool respuesta = new CN_Compra().Crear(oCompra, compraDetalle, out string mensaje);
@@ -261,13 +261,13 @@ namespace CapaPresentacion.Formularios
                     continue;
 
                 string textoCelda = valorCelda.ToString();
-                if (decimal.TryParse(textoCelda, NumberStyles.Any, culturaArgentina, out decimal subTotal))
+                if (decimal.TryParse(textoCelda, NumberStyles.Any, _culturaArgentina, out decimal subTotal))
                 {
                     total += subTotal;
                 }
             }
 
-            txtTotal.Text = total.ToString(FormatoPrecio, culturaArgentina);
+            txtTotal.Text = total.ToString(FormatoPrecio, _culturaArgentina);
         }
         private bool ValidarFechas()
         {
@@ -286,7 +286,7 @@ namespace CapaPresentacion.Formularios
         }
         private void dtpFechaPedido_ValueChanged(object sender, EventArgs e)
         {
-            txtFechaPedido.Text = dtpFechaPedido.Value.ToString("dd/MM/yyyy", culturaArgentina);
+            txtFechaPedido.Text = dtpFechaPedido.Value.ToString("dd/MM/yyyy", _culturaArgentina);
         }
         private void txtFechaEntrega_TrailingIconClick(object sender, EventArgs e)
         {
@@ -294,7 +294,7 @@ namespace CapaPresentacion.Formularios
         }
         private void dtpFechaEntrega_ValueChanged(object sender, EventArgs e)
         {
-            txtFechaEntrega.Text = dtpFechaEntrega.Value.ToString("dd/MM/yyyy", culturaArgentina);
+            txtFechaEntrega.Text = dtpFechaEntrega.Value.ToString("dd/MM/yyyy", _culturaArgentina);
         }
 
     }

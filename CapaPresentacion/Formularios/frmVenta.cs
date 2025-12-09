@@ -34,7 +34,7 @@ namespace CapaPresentacion.Formularios
             _usuario = oUsuario;
             BackColor = Color.FromArgb(63, 81, 181); // Indigo 500
             UtilidadesDGV.Configurar(dgvProductos);
-            dtpVentaFecha.Value = DateTime.Now;
+            dtpFechaVenta.Value = DateTime.Now;
             txtClienteNombreCompleto.ReadOnly = true;
             txtProductoDescripcion.ReadOnly = true;
             txtProductoPrecio.ReadOnly = true;
@@ -188,6 +188,46 @@ namespace CapaPresentacion.Formularios
                 return;
             }
 
+            // Validar pago y vuelto
+            if (!decimal.TryParse(txtPago.Text, NumberStyles.Any, _culturaArgentina, out decimal pago))
+            {
+                MessageBox.Show("El pago ingresado no es válido.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtPago.Select();
+                return;
+            }
+
+            if (!decimal.TryParse(txtVuelto.Text, NumberStyles.Any, _culturaArgentina, out decimal vuelto))
+            {
+                MessageBox.Show("El vuelto ingresado no es válido.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtVuelto.Select();
+                return;
+            }
+
+            decimal total = Convert.ToDecimal(txtTotal.Text, _culturaArgentina);
+
+            if (pago < 0 || vuelto < 0)
+            {
+                MessageBox.Show("El pago y el vuelto no pueden ser negativos.", "Advertencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (vuelto > pago)
+            {
+                MessageBox.Show("El vuelto no puede ser mayor al pago.", "Advertencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (pago < total)
+            {
+                MessageBox.Show("El pago debe ser mayor o igual al total de la venta.", "Advertencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             DataTable ventaDetalle = new DataTable();
 
             ventaDetalle.Columns.Add("id_producto", typeof(int));
@@ -216,8 +256,15 @@ namespace CapaPresentacion.Formularios
                 {
                     Id = _idClienteSeleccionado
                 },
-                //FechaVenta = dtpFechaVenta.Value,
+                oComercio = new CE_Comercio()
+                {
+                    Id = 1 // Solo hay un comercio en este sistema
+                },
+                TipoFactura = cbTipoFactura.Text,
                 Total = Convert.ToDecimal(txtTotal.Text, _culturaArgentina),
+                Pago = Convert.ToDecimal(txtPago.Text, _culturaArgentina),
+                Vuelto = Convert.ToDecimal(txtVuelto.Text, _culturaArgentina), // TODO: Comprobar que no sea mayor al pago, ni menor a 0
+                FechaVenta = dtpFechaVenta.Value,
             };
 
             int respuesta = new CN_Venta().Crear(oVenta, ventaDetalle, out string mensaje);
@@ -246,7 +293,11 @@ namespace CapaPresentacion.Formularios
                 ref _idClienteSeleccionado
             );
         }
-        private void txtPrecioVenta_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtPago_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            UtilidadesTextBox.PermitirSoloPrecio(sender, e);
+        }
+        private void txtVuelto_KeyPress(object sender, KeyPressEventArgs e)
         {
             UtilidadesTextBox.PermitirSoloPrecio(sender, e);
         }
@@ -301,11 +352,11 @@ namespace CapaPresentacion.Formularios
 
         private void txtVentaFecha_TrailingIconClick(object sender, EventArgs e)
         {
-            UtilidadesTextBox.DesplegarCalendario(dtpVentaFecha);
+            UtilidadesTextBox.DesplegarCalendario(dtpFechaVenta);
         }
         private void dtpVentaFecha_ValueChanged(object sender, EventArgs e)
         {
-            txtVentaFecha.Text = dtpVentaFecha.Value.ToString("dd/MM/yyyy", _culturaArgentina);
+            txtVentaFecha.Text = dtpFechaVenta.Value.ToString("dd/MM/yyyy", _culturaArgentina);
         }
         private void txtProductoCantidad_LeadingIconClick(object sender, EventArgs e)
         {

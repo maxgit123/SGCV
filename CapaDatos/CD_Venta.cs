@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CapaEntidad;
 
 namespace CapaDatos
@@ -26,10 +23,18 @@ namespace CapaDatos
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@usuario_id", oVenta.oUsuario.Id);
-                cmd.Parameters.AddWithValue("@cliente_id", oVenta.oCliente.Id);
+                cmd.Parameters.AddWithValue("@comercio_id", oVenta.oComercio.Id);
+
+                if (oVenta.oCliente != null && oVenta.oCliente.Id > 0)
+                    cmd.Parameters.AddWithValue("@cliente_id", oVenta.oCliente.Id);
+                else
+                    cmd.Parameters.AddWithValue("@cliente_id", DBNull.Value);
+
                 cmd.Parameters.AddWithValue("@tipoFactura", oVenta.TipoFactura);
-                //cmd.Parameters.AddWithValue("@fechaVenta", oVenta.FechaVenta);
                 cmd.Parameters.AddWithValue("@total", oVenta.Total);
+                cmd.Parameters.AddWithValue("@pago", oVenta.Pago);
+                cmd.Parameters.AddWithValue("@vuelto", oVenta.Vuelto);
+                cmd.Parameters.AddWithValue("@fechaVenta", oVenta.FechaVenta);
                 cmd.Parameters.AddWithValue("@ventaDetalle", ventaDetalle);
                 cmd.Parameters.Add("@respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
                 cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;

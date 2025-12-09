@@ -134,7 +134,7 @@ namespace CapaDatos
             using (SqlCommand cmd = new SqlCommand(@"
                     SELECT
 	                    p.codigo, p.descripcion,
-	                    cd.precioCompraUnitario, cd.cantidad, cd.subtotal, cd.fechaCreacion	
+	                    cd.precioCompraUnitario, cd.cantidad, cd.subtotal
                     FROM CompraDetalle cd
                     INNER JOIN Producto p ON p.id_producto = cd.producto_id
                     WHERE cd.compra_id = @idCompra;", oConexion))

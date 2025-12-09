@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbVenta = new System.Windows.Forms.GroupBox();
             this.cbTipoFactura = new MaterialSkin.Controls.MaterialComboBox();
             this.txtVentaFecha = new MaterialSkin.Controls.MaterialMaskedTextBox();
-            this.dtpVentaFecha = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaVenta = new System.Windows.Forms.DateTimePicker();
             this.gbCliente = new System.Windows.Forms.GroupBox();
             this.txtClienteNombreCompleto = new MaterialSkin.Controls.MaterialTextBox2();
             this.txtClienteDocumento = new MaterialSkin.Controls.MaterialTextBox2();
@@ -49,6 +49,10 @@
             this.btnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.lblTitulo = new MaterialSkin.Controls.MaterialLabel();
             this.pnlVenta = new MaterialSkin.Controls.MaterialCard();
+            this.txtTotal = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtPago = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtVuelto = new MaterialSkin.Controls.MaterialTextBox2();
+            this.btnRegistrarVenta = new MaterialSkin.Controls.MaterialButton();
             this.materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
             this.gbProducto = new System.Windows.Forms.GroupBox();
             this.txtProductoStock = new MaterialSkin.Controls.MaterialTextBox2();
@@ -57,10 +61,6 @@
             this.txtProductoCodigo = new MaterialSkin.Controls.MaterialTextBox2();
             this.txtProductoPrecio = new MaterialSkin.Controls.MaterialTextBox2();
             this.txtProductoDescripcion = new MaterialSkin.Controls.MaterialTextBox2();
-            this.btnRegistrarVenta = new MaterialSkin.Controls.MaterialButton();
-            this.txtVuelto = new MaterialSkin.Controls.MaterialTextBox2();
-            this.txtPago = new MaterialSkin.Controls.MaterialTextBox2();
-            this.txtTotal = new MaterialSkin.Controls.MaterialTextBox2();
             this.gbVenta.SuspendLayout();
             this.gbCliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
@@ -72,7 +72,7 @@
             // 
             this.gbVenta.Controls.Add(this.cbTipoFactura);
             this.gbVenta.Controls.Add(this.txtVentaFecha);
-            this.gbVenta.Controls.Add(this.dtpVentaFecha);
+            this.gbVenta.Controls.Add(this.dtpFechaVenta);
             this.gbVenta.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbVenta.ForeColor = System.Drawing.Color.DimGray;
             this.gbVenta.Location = new System.Drawing.Point(17, 102);
@@ -121,7 +121,7 @@
             this.txtVentaFecha.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtVentaFecha.HidePromptOnLeave = false;
             this.txtVentaFecha.HideSelection = true;
-            this.txtVentaFecha.Hint = "Fecha de pedido";
+            this.txtVentaFecha.Hint = "Fecha";
             this.txtVentaFecha.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
             this.txtVentaFecha.LeadingIcon = null;
             this.txtVentaFecha.Location = new System.Drawing.Point(6, 26);
@@ -153,16 +153,16 @@
             this.txtVentaFecha.ValidatingType = null;
             this.txtVentaFecha.TrailingIconClick += new System.EventHandler(this.txtVentaFecha_TrailingIconClick);
             // 
-            // dtpVentaFecha
+            // dtpFechaVenta
             // 
-            this.dtpVentaFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpVentaFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpVentaFecha.Location = new System.Drawing.Point(6, 43);
-            this.dtpVentaFecha.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
-            this.dtpVentaFecha.Name = "dtpVentaFecha";
-            this.dtpVentaFecha.Size = new System.Drawing.Size(158, 31);
-            this.dtpVentaFecha.TabIndex = 328;
-            this.dtpVentaFecha.ValueChanged += new System.EventHandler(this.dtpVentaFecha_ValueChanged);
+            this.dtpFechaVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpFechaVenta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFechaVenta.Location = new System.Drawing.Point(6, 43);
+            this.dtpFechaVenta.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
+            this.dtpFechaVenta.Name = "dtpFechaVenta";
+            this.dtpFechaVenta.Size = new System.Drawing.Size(158, 31);
+            this.dtpFechaVenta.TabIndex = 328;
+            this.dtpFechaVenta.ValueChanged += new System.EventHandler(this.dtpVentaFecha_ValueChanged);
             // 
             // gbCliente
             // 
@@ -241,23 +241,23 @@
             // 
             this.dgvProductos.AllowUserToAddRows = false;
             this.dgvProductos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvProductos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvProductos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvProductos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvProductos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id_producto,
@@ -266,14 +266,14 @@
             this.cantidad,
             this.subtotal,
             this.btnEliminar});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProductos.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProductos.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvProductos.EnableHeadersVisualStyles = false;
             this.dgvProductos.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgvProductos.Location = new System.Drawing.Point(17, 308);
@@ -281,19 +281,19 @@
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.ReadOnly = true;
             this.dgvProductos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvProductos.RowHeadersVisible = false;
             this.dgvProductos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvProductos.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvProductos.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvProductos.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.Control;
             this.dgvProductos.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
             this.dgvProductos.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
@@ -377,6 +377,122 @@
             this.pnlVenta.Padding = new System.Windows.Forms.Padding(14);
             this.pnlVenta.Size = new System.Drawing.Size(918, 617);
             this.pnlVenta.TabIndex = 326;
+            // 
+            // txtTotal
+            // 
+            this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTotal.AnimateReadOnly = false;
+            this.txtTotal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtTotal.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtTotal.Depth = 0;
+            this.txtTotal.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtTotal.HideSelection = true;
+            this.txtTotal.Hint = "Total";
+            this.txtTotal.LeadingIcon = null;
+            this.txtTotal.Location = new System.Drawing.Point(370, 552);
+            this.txtTotal.MaxLength = 50;
+            this.txtTotal.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.PasswordChar = '\0';
+            this.txtTotal.PrefixSuffix = MaterialSkin.Controls.MaterialTextBox2.PrefixSuffixTypes.Prefix;
+            this.txtTotal.PrefixSuffixText = "$";
+            this.txtTotal.ReadOnly = false;
+            this.txtTotal.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtTotal.SelectedText = "";
+            this.txtTotal.SelectionLength = 0;
+            this.txtTotal.SelectionStart = 0;
+            this.txtTotal.ShortcutsEnabled = true;
+            this.txtTotal.Size = new System.Drawing.Size(128, 48);
+            this.txtTotal.TabIndex = 337;
+            this.txtTotal.TabStop = false;
+            this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtTotal.TrailingIcon = null;
+            this.txtTotal.UseSystemPasswordChar = false;
+            // 
+            // txtPago
+            // 
+            this.txtPago.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPago.AnimateReadOnly = false;
+            this.txtPago.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtPago.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtPago.Depth = 0;
+            this.txtPago.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtPago.HideSelection = true;
+            this.txtPago.Hint = "Pago";
+            this.txtPago.LeadingIcon = null;
+            this.txtPago.Location = new System.Drawing.Point(504, 552);
+            this.txtPago.MaxLength = 50;
+            this.txtPago.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtPago.Name = "txtPago";
+            this.txtPago.PasswordChar = '\0';
+            this.txtPago.PrefixSuffix = MaterialSkin.Controls.MaterialTextBox2.PrefixSuffixTypes.Prefix;
+            this.txtPago.PrefixSuffixText = "$";
+            this.txtPago.ReadOnly = false;
+            this.txtPago.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtPago.SelectedText = "";
+            this.txtPago.SelectionLength = 0;
+            this.txtPago.SelectionStart = 0;
+            this.txtPago.ShortcutsEnabled = true;
+            this.txtPago.Size = new System.Drawing.Size(128, 48);
+            this.txtPago.TabIndex = 336;
+            this.txtPago.TabStop = false;
+            this.txtPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPago.TrailingIcon = null;
+            this.txtPago.UseSystemPasswordChar = false;
+            this.txtPago.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPago_KeyPress);
+            // 
+            // txtVuelto
+            // 
+            this.txtVuelto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtVuelto.AnimateReadOnly = false;
+            this.txtVuelto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtVuelto.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtVuelto.Depth = 0;
+            this.txtVuelto.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtVuelto.HideSelection = true;
+            this.txtVuelto.Hint = "Vuelto";
+            this.txtVuelto.LeadingIcon = null;
+            this.txtVuelto.Location = new System.Drawing.Point(638, 552);
+            this.txtVuelto.MaxLength = 50;
+            this.txtVuelto.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtVuelto.Name = "txtVuelto";
+            this.txtVuelto.PasswordChar = '\0';
+            this.txtVuelto.PrefixSuffix = MaterialSkin.Controls.MaterialTextBox2.PrefixSuffixTypes.Prefix;
+            this.txtVuelto.PrefixSuffixText = "$";
+            this.txtVuelto.ReadOnly = false;
+            this.txtVuelto.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtVuelto.SelectedText = "";
+            this.txtVuelto.SelectionLength = 0;
+            this.txtVuelto.SelectionStart = 0;
+            this.txtVuelto.ShortcutsEnabled = true;
+            this.txtVuelto.Size = new System.Drawing.Size(128, 48);
+            this.txtVuelto.TabIndex = 335;
+            this.txtVuelto.TabStop = false;
+            this.txtVuelto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtVuelto.TrailingIcon = null;
+            this.txtVuelto.UseSystemPasswordChar = false;
+            this.txtVuelto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtVuelto_KeyPress);
+            // 
+            // btnRegistrarVenta
+            // 
+            this.btnRegistrarVenta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRegistrarVenta.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnRegistrarVenta.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnRegistrarVenta.Depth = 0;
+            this.btnRegistrarVenta.HighEmphasis = true;
+            this.btnRegistrarVenta.Icon = global::CapaPresentacion.Properties.Resources.agregar_32;
+            this.btnRegistrarVenta.Location = new System.Drawing.Point(773, 558);
+            this.btnRegistrarVenta.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnRegistrarVenta.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnRegistrarVenta.Name = "btnRegistrarVenta";
+            this.btnRegistrarVenta.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnRegistrarVenta.Size = new System.Drawing.Size(127, 36);
+            this.btnRegistrarVenta.TabIndex = 335;
+            this.btnRegistrarVenta.Text = "Registrar";
+            this.btnRegistrarVenta.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnRegistrarVenta.UseAccentColor = false;
+            this.btnRegistrarVenta.UseVisualStyleBackColor = true;
+            this.btnRegistrarVenta.Click += new System.EventHandler(this.btnRegistrarVenta_Click);
             // 
             // materialDivider2
             // 
@@ -578,119 +694,6 @@
             this.txtProductoDescripcion.TrailingIcon = null;
             this.txtProductoDescripcion.UseSystemPasswordChar = false;
             // 
-            // btnRegistrarVenta
-            // 
-            this.btnRegistrarVenta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRegistrarVenta.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnRegistrarVenta.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnRegistrarVenta.Depth = 0;
-            this.btnRegistrarVenta.HighEmphasis = true;
-            this.btnRegistrarVenta.Icon = global::CapaPresentacion.Properties.Resources.agregar_32;
-            this.btnRegistrarVenta.Location = new System.Drawing.Point(773, 558);
-            this.btnRegistrarVenta.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnRegistrarVenta.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnRegistrarVenta.Name = "btnRegistrarVenta";
-            this.btnRegistrarVenta.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnRegistrarVenta.Size = new System.Drawing.Size(127, 36);
-            this.btnRegistrarVenta.TabIndex = 335;
-            this.btnRegistrarVenta.Text = "Registrar";
-            this.btnRegistrarVenta.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnRegistrarVenta.UseAccentColor = false;
-            this.btnRegistrarVenta.UseVisualStyleBackColor = true;
-            // 
-            // txtVuelto
-            // 
-            this.txtVuelto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtVuelto.AnimateReadOnly = false;
-            this.txtVuelto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtVuelto.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtVuelto.Depth = 0;
-            this.txtVuelto.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtVuelto.HideSelection = true;
-            this.txtVuelto.Hint = "Vuelto";
-            this.txtVuelto.LeadingIcon = null;
-            this.txtVuelto.Location = new System.Drawing.Point(638, 552);
-            this.txtVuelto.MaxLength = 50;
-            this.txtVuelto.MouseState = MaterialSkin.MouseState.OUT;
-            this.txtVuelto.Name = "txtVuelto";
-            this.txtVuelto.PasswordChar = '\0';
-            this.txtVuelto.PrefixSuffix = MaterialSkin.Controls.MaterialTextBox2.PrefixSuffixTypes.Prefix;
-            this.txtVuelto.PrefixSuffixText = "$";
-            this.txtVuelto.ReadOnly = false;
-            this.txtVuelto.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtVuelto.SelectedText = "";
-            this.txtVuelto.SelectionLength = 0;
-            this.txtVuelto.SelectionStart = 0;
-            this.txtVuelto.ShortcutsEnabled = true;
-            this.txtVuelto.Size = new System.Drawing.Size(128, 48);
-            this.txtVuelto.TabIndex = 335;
-            this.txtVuelto.TabStop = false;
-            this.txtVuelto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtVuelto.TrailingIcon = null;
-            this.txtVuelto.UseSystemPasswordChar = false;
-            // 
-            // txtPago
-            // 
-            this.txtPago.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPago.AnimateReadOnly = false;
-            this.txtPago.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtPago.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtPago.Depth = 0;
-            this.txtPago.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtPago.HideSelection = true;
-            this.txtPago.Hint = "Pago";
-            this.txtPago.LeadingIcon = null;
-            this.txtPago.Location = new System.Drawing.Point(504, 552);
-            this.txtPago.MaxLength = 50;
-            this.txtPago.MouseState = MaterialSkin.MouseState.OUT;
-            this.txtPago.Name = "txtPago";
-            this.txtPago.PasswordChar = '\0';
-            this.txtPago.PrefixSuffix = MaterialSkin.Controls.MaterialTextBox2.PrefixSuffixTypes.Prefix;
-            this.txtPago.PrefixSuffixText = "$";
-            this.txtPago.ReadOnly = false;
-            this.txtPago.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtPago.SelectedText = "";
-            this.txtPago.SelectionLength = 0;
-            this.txtPago.SelectionStart = 0;
-            this.txtPago.ShortcutsEnabled = true;
-            this.txtPago.Size = new System.Drawing.Size(128, 48);
-            this.txtPago.TabIndex = 336;
-            this.txtPago.TabStop = false;
-            this.txtPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPago.TrailingIcon = null;
-            this.txtPago.UseSystemPasswordChar = false;
-            // 
-            // txtTotal
-            // 
-            this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTotal.AnimateReadOnly = false;
-            this.txtTotal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtTotal.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtTotal.Depth = 0;
-            this.txtTotal.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtTotal.HideSelection = true;
-            this.txtTotal.Hint = "Total";
-            this.txtTotal.LeadingIcon = null;
-            this.txtTotal.Location = new System.Drawing.Point(370, 552);
-            this.txtTotal.MaxLength = 50;
-            this.txtTotal.MouseState = MaterialSkin.MouseState.OUT;
-            this.txtTotal.Name = "txtTotal";
-            this.txtTotal.PasswordChar = '\0';
-            this.txtTotal.PrefixSuffix = MaterialSkin.Controls.MaterialTextBox2.PrefixSuffixTypes.Prefix;
-            this.txtTotal.PrefixSuffixText = "$";
-            this.txtTotal.ReadOnly = false;
-            this.txtTotal.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtTotal.SelectedText = "";
-            this.txtTotal.SelectionLength = 0;
-            this.txtTotal.SelectionStart = 0;
-            this.txtTotal.ShortcutsEnabled = true;
-            this.txtTotal.Size = new System.Drawing.Size(128, 48);
-            this.txtTotal.TabIndex = 337;
-            this.txtTotal.TabStop = false;
-            this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtTotal.TrailingIcon = null;
-            this.txtTotal.UseSystemPasswordChar = false;
-            // 
             // frmVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -724,7 +727,7 @@
         private System.Windows.Forms.DataGridViewButtonColumn btnEliminar;
         private MaterialSkin.Controls.MaterialLabel lblTitulo;
         private MaterialSkin.Controls.MaterialCard pnlVenta;
-        private System.Windows.Forms.DateTimePicker dtpVentaFecha;
+        private System.Windows.Forms.DateTimePicker dtpFechaVenta;
         private MaterialSkin.Controls.MaterialMaskedTextBox txtVentaFecha;
         private MaterialSkin.Controls.MaterialComboBox cbTipoFactura;
         private MaterialSkin.Controls.MaterialTextBox2 txtClienteDocumento;

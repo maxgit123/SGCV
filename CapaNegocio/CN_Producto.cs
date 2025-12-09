@@ -23,6 +23,9 @@ namespace CapaNegocio
             if (string.IsNullOrWhiteSpace(oProducto.Descripcion))
                 errores.AppendLine("Ingrese la descripción del producto.");
 
+            if (oProducto.PrecioVenta < 0)
+                errores.AppendLine("Ingrese un precio de venta válido.");
+
             if (oProducto.QuiebreStock < 0)
                 errores.AppendLine("Ingrese un quiebre de stock dentro del rango valido.");
 
@@ -46,6 +49,9 @@ namespace CapaNegocio
 
             if (string.IsNullOrWhiteSpace(oProducto.Descripcion))
                 errores.AppendLine("Ingrese la descripción del producto.");
+
+            if (oProducto.PrecioVenta < 0)
+                errores.AppendLine("Ingrese un precio de venta válido.");
 
             if (oProducto.QuiebreStock < 0)
                 errores.AppendLine("Ingrese un quiebre de stock dentro del rango valido.");

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -12,11 +13,15 @@ namespace CapaPresentacion.Formularios
     public partial class frmProducto : Form
     {
         private int _idProductoSeleccionado = 0;
+        private const string FormatoPrecio = "0.00";
+        private static readonly CultureInfo _culturaArgentina = new CultureInfo("es-AR");
+
         private static class NombreColumna
         {
             public const string ID_PRODUCTO = "id_producto";
             public const string CODIGO = "codigo";
             public const string DESCRIPCION = "descripcion";
+            public const string PRECIO = "precio";
             public const string QUIEBRE_STOCK = "quiebreStock";
             public const string CATEGORIA_ID = "id_categoria";
             public const string BTN_EDITAR = "btnEditar";
@@ -79,12 +84,14 @@ namespace CapaPresentacion.Formularios
             if (!ValidarCampos()) return;
 
             int.TryParse(txtQuiebreStock.Text, out int quiebreStock);
+            decimal.TryParse(txtPrecio.Text, NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands, _culturaArgentina, out decimal precioVenta);
 
             CE_Producto oProducto = new CE_Producto()
             {
                 Id = _idProductoSeleccionado,
                 Codigo = txtCodigo.Text.Trim(),
                 Descripcion = txtDescripcion.Text.Trim(),
+                PrecioVenta = precioVenta,
                 QuiebreStock = quiebreStock,
                 oCategoria = new CE_Categoria()
                 {
@@ -118,6 +125,10 @@ namespace CapaPresentacion.Formularios
         private void pnlListaProductos_Resize(object sender, EventArgs e)
         {
             UtilidadesForm.CentrarHorizontalmente(lblListaProductos);
+        }
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            UtilidadesTextBox.PermitirSoloPrecio(sender, e);
         }
         private void txtQuiebreStock_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -166,6 +177,9 @@ namespace CapaPresentacion.Formularios
             if (string.IsNullOrWhiteSpace(txtDescripcion.Text))
                 errores.AppendLine("Ingrese la descripción del producto.");
 
+            if(string.IsNullOrWhiteSpace(txtPrecio.Text))
+                errores.AppendLine("Ingrese un precio para el producto.");
+
             if (!int.TryParse(txtQuiebreStock.Text, out int quiebreStock) || quiebreStock < 0)
                 errores.AppendLine("Ingrese un quiebre de stock válido.");
 
@@ -182,7 +196,7 @@ namespace CapaPresentacion.Formularios
             }
 
             return true;
-        }
+        } 
         private void ConfigurarFormularioParaEdicion(bool esNuevoProducto)
         {
             if (esNuevoProducto)
@@ -199,6 +213,7 @@ namespace CapaPresentacion.Formularios
             _idProductoSeleccionado = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.ID_PRODUCTO].Value);
             txtCodigo.Text = filaSeleccionada.Cells[NombreColumna.CODIGO].Value.ToString();
             txtDescripcion.Text = filaSeleccionada.Cells[NombreColumna.DESCRIPCION].Value.ToString();
+            txtPrecio.Text = filaSeleccionada.Cells[NombreColumna.PRECIO].Value.ToString();
             txtQuiebreStock.Text = filaSeleccionada.Cells[NombreColumna.QUIEBRE_STOCK].Value.ToString();
 
             int idCategoriaSeleccionada = Convert.ToInt32(filaSeleccionada.Cells[NombreColumna.CATEGORIA_ID].Value);
@@ -229,5 +244,6 @@ namespace CapaPresentacion.Formularios
             dgvProductos.Rows.RemoveAt(indiceFilaSeleccionada);
             return true;
         }
+
     }
 }

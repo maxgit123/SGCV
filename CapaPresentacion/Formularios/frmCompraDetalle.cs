@@ -188,9 +188,9 @@ namespace CapaPresentacion.Formularios
                     cd.oProducto.Descripcion,
                     cd.Cantidad,
                     cd.PrecioCompraUnitario,
-                    cd.Subtotal,
-                    "Alicuota IVA", // TODO: Placeholder, no implementado
-                    "Subtotal c/IVA" // TODO: Placeholder, no implementado
+                    cd.Subtotal
+                    //"Alicuota IVA", // TODO: Placeholder, no implementado
+                    //"Subtotal c/IVA" // TODO: Placeholder, no implementado
                 });
             }
 
