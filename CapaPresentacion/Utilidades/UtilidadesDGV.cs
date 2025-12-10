@@ -21,7 +21,7 @@ namespace CapaPresentacion.Utilidades
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
             dgv.MultiSelect = false;
-            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dgv.ReadOnly = true;
 
             // --- Estilo ---
@@ -148,11 +148,13 @@ namespace CapaPresentacion.Utilidades
             if (colNombre == nombreColEditar)
             {
                 PintarIcono(e, Properties.Resources.edit16);
+                return;
             }
 
             if (colNombre == nombreColEliminar)
             {
                 PintarIcono(e, Properties.Resources.delete16);
+                return;
             }
         }
 

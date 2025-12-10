@@ -161,7 +161,6 @@ namespace CapaPresentacion.Utilidades
                 return false;
             }
         }
-        
         public static bool BuscarCompra(Form formularioPadre, Action<CE_Compra> callbackActualizacion)
         {
             using (var modal = new mdCompra())
@@ -174,6 +173,23 @@ namespace CapaPresentacion.Utilidades
                     if (compra.Id != 0)
                     {
                         callbackActualizacion(compra);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+        public static bool BuscarVenta(Form formularioPadre, Action<CE_Venta> callbackActualizacion)
+        {
+            using (var modal = new mdVenta())
+            {
+                modal.StartPosition = FormStartPosition.CenterParent;
+                if (modal.ShowDialog(formularioPadre) == DialogResult.OK)
+                {
+                    var venta = new CN_Venta().ObtenerVenta(modal._IdVentaSeleccionada);
+                    if (venta.Id != 0)
+                    {
+                        callbackActualizacion(venta);
                         return true;
                     }
                 }

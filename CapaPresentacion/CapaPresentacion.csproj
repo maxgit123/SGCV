@@ -250,6 +250,12 @@
     <Compile Include="Formularios\frmCompraDetalle.Designer.cs">
       <DependentUpon>frmCompraDetalle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\frmVentaDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmVentaDetalle.Designer.cs">
+      <DependentUpon>frmVentaDetalle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\Modal\mdCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -364,6 +370,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmCompraDetalle.resx">
       <DependentUpon>frmCompraDetalle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmVentaDetalle.resx">
+      <DependentUpon>frmVentaDetalle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Modal\mdCliente.resx">
       <DependentUpon>mdCliente.cs</DependentUpon>

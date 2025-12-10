@@ -18,6 +18,7 @@ namespace CapaPresentacion.Formularios
         public frmCompraDetalle()
         {
             InitializeComponent();
+            UtilidadesDGV.Configurar(dgvProductos);
         }
 
         private void txtNroCompra_TrailingIconClick(object sender, EventArgs e)
@@ -34,24 +35,7 @@ namespace CapaPresentacion.Formularios
 
             CE_Compra oCompra = new CN_Compra().ObtenerCompra(Convert.ToInt32(txtNroCompra.Text));
             CargarDatosCompra(oCompra);
-        }
-        private void txtNroCompra_AlternarTrailingIcon()
-        {
-            ActualizarTrailingIcon();
-
-            if (_datosCargados)
-            {
-                txtNroCompra.ReadOnly = true;
-                txtNroCompra.TrailingIconClick -= txtNroCompra_TrailingIconClick;
-                txtNroCompra.TrailingIconClick += btnBorrarCampos_Click;
-            }
-            else
-            {
-                txtNroCompra.ReadOnly = false;
-                txtNroCompra.TrailingIconClick -= btnBorrarCampos_Click;
-                txtNroCompra.TrailingIconClick += txtNroCompra_TrailingIconClick;
-            }
-        }
+        }        
         private void btnBorrarCampos_Click(object sender, EventArgs e)
         {
             UtilidadesForm.ReiniciarControles(pnlInfoCompra);
@@ -166,9 +150,8 @@ namespace CapaPresentacion.Formularios
                 return;
             }
 
-            txtNroCompra.Text = oCompra.Id.ToString();
             txtNroCompra.SetErrorState(false);
-
+            txtNroCompra.Text = oCompra.Id.ToString();
             txtFechaPedido.Text = oCompra.FechaPedido.ToString("dd/MM/yyyy");
             txtFechaEntrega.Text = oCompra.FechaEntrega.ToString("dd/MM/yyyy");
             txtUsuario.Text = oCompra.oUsuario.NombreCompleto;
@@ -203,6 +186,23 @@ namespace CapaPresentacion.Formularios
             txtNroCompra.TrailingIcon = _datosCargados
                 ? Properties.Resources.cancel_32
                 : Properties.Resources.search_32;
+        }
+        private void txtNroCompra_AlternarTrailingIcon()
+        {
+            ActualizarTrailingIcon();
+
+            if (_datosCargados)
+            {
+                txtNroCompra.ReadOnly = true;
+                txtNroCompra.TrailingIconClick -= txtNroCompra_TrailingIconClick;
+                txtNroCompra.TrailingIconClick += btnBorrarCampos_Click;
+            }
+            else
+            {
+                txtNroCompra.ReadOnly = false;
+                txtNroCompra.TrailingIconClick -= btnBorrarCampos_Click;
+                txtNroCompra.TrailingIconClick += txtNroCompra_TrailingIconClick;
+            }
         }
     }
 }

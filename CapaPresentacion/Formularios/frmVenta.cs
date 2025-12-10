@@ -228,6 +228,13 @@ namespace CapaPresentacion.Formularios
                 return;
             }
 
+            if (pago - vuelto < total)
+            {
+                MessageBox.Show("El pago debe ser mayor o igual al total de la venta.", "Advertencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             DataTable ventaDetalle = new DataTable();
 
             ventaDetalle.Columns.Add("id_producto", typeof(int));
@@ -279,6 +286,9 @@ namespace CapaPresentacion.Formularios
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             txtClienteNombreCompleto.Clear();
             dgvProductos.Rows.Clear();
+            txtPago.Clear();
+            txtVuelto.Clear();
+            LimpiarProducto();
             CalcularTotal();
         }
         private void txtClienteDocumento_KeyPress(object sender, KeyPressEventArgs e)

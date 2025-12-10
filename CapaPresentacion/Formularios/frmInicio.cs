@@ -113,7 +113,7 @@ namespace CapaPresentacion.Formularios
         }
         private void smenuDetalleVentas_Click(object sender, EventArgs e)
         {
-            //HandleMenuClick(sender, new Ventas.frmDetalleVenta());
+            HandleMenuClick(sender, new frmVentaDetalle());
         }
         private void smenuCerrarSesion_Click(object sender, EventArgs e)
         {

@@ -20,7 +20,6 @@ namespace CapaNegocio
             if (oCompra.Id != 0)
             {
                 List<CE_CompraDetalle> oCompraDetalle = oCD_Compra.ObtenerCompraDetallePorId(idCompra);
-
                 oCompra.oCompraDetalle = oCompraDetalle;
             }
 

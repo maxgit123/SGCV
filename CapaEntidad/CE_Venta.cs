@@ -5,7 +5,7 @@ namespace CapaEntidad
 {
     public class CE_Venta
     {
-        public int IdVenta { get; set; }
+        public int Id { get; set; }
         public string TipoFactura { get; set; }
         public decimal Total { get; set; }
         public decimal Pago { get; set; }

@@ -149,7 +149,6 @@ namespace CapaDatos
                         {
                             lista.Add(new CE_CompraDetalle()
                             {
-                                //Id = Convert.ToInt32(reader["id_compraDetalle"]),
                                 oProducto = new CE_Producto()
                                 {
                                     Codigo = reader["codigo"].ToString(),

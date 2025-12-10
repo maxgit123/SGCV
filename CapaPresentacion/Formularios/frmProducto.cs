@@ -22,6 +22,7 @@ namespace CapaPresentacion.Formularios
             public const string CODIGO = "codigo";
             public const string DESCRIPCION = "descripcion";
             public const string PRECIO = "precio";
+            public const string STOCK = "stock";
             public const string QUIEBRE_STOCK = "quiebreStock";
             public const string CATEGORIA_ID = "id_categoria";
             public const string BTN_EDITAR = "btnEditar";
@@ -145,7 +146,7 @@ namespace CapaPresentacion.Formularios
 
             foreach (CE_Producto item in listaProducto)
             {
-                dgvProductos.Rows.Add(new object[] {
+                int nuevaFila = dgvProductos.Rows.Add(new object[] {
                     item.Id,
                     item.Codigo,
                     item.Descripcion,
@@ -160,6 +161,14 @@ namespace CapaPresentacion.Formularios
                     item.oEstado.Nombre,
                     "",""
                 });
+
+                // Cambia estilo de color de la celda de stock si está por debajo del quiebre
+                if (item.Stock < item.QuiebreStock)
+                {
+                    DataGridViewCell celdaStock = dgvProductos.Rows[nuevaFila].Cells[NombreColumna.STOCK];
+                    celdaStock.Style.BackColor = System.Drawing.Color.FromArgb(255, 200, 200); // Rojo suave
+                    celdaStock.Style.ForeColor = System.Drawing.Color.DarkRed;
+                }
             }
         }
         private void LimpiarForm()
