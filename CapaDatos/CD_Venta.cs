@@ -72,7 +72,7 @@ namespace CapaDatos
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             using (SqlCommand cmd = new SqlCommand(@"
                     SELECT
-                        v.id_venta, v.tipoFactura, v.total, v.fechaVenta, v.fechaCreacion,
+                        v.id_venta, v.tipoFactura, v.total, v.pago, v.vuelto, v.fechaVenta, v.fechaCreacion,
                         u.apellido, u.nombre, u.documento,
                         c.nombre AS nomCliente, c.apellido AS apellidoCliente, c.telefono, c.correo,
                         e.nombre AS estado
@@ -80,7 +80,7 @@ namespace CapaDatos
                     INNER JOIN Usuario u ON u.id_usuario = v.usuario_id
                     LEFT JOIN Cliente c ON c.id_cliente = v.cliente_id
                     INNER JOIN cEstado e ON e.id_estado = v.estado_id
-                    WHERE = @idVenta;", oConexion))
+                    WHERE v.id_venta = @idVenta;", oConexion))
             {
                 cmd.Parameters.AddWithValue("@idVenta", idVenta);
                 try

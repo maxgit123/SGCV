@@ -8,7 +8,19 @@
         public string Apellido { get; set; }
         public string NombreCompleto
         {
-            get { return $"{Apellido}, {Nombre}"; }
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Apellido) && string.IsNullOrWhiteSpace(Nombre))
+                    return string.Empty;
+
+                if (string.IsNullOrWhiteSpace(Apellido))
+                    return Nombre;
+
+                if (string.IsNullOrWhiteSpace(Nombre))
+                    return Apellido;
+
+                return $"{Apellido}, {Nombre}";
+            }
         }
         public string Clave { get; set; }
         public string FechaCreacion { get; set; }

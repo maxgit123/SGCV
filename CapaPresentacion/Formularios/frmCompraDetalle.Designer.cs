@@ -224,7 +224,7 @@
             this.dgvProductos.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvProductos.RowTemplate.Height = 28;
             this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProductos.Size = new System.Drawing.Size(1037, 317);
+            this.dgvProductos.Size = new System.Drawing.Size(1037, 307);
             this.dgvProductos.TabIndex = 243;
             // 
             // codigo
@@ -283,7 +283,7 @@
             this.pnlInfoCompra.MouseState = MaterialSkin.MouseState.HOVER;
             this.pnlInfoCompra.Name = "pnlInfoCompra";
             this.pnlInfoCompra.Padding = new System.Windows.Forms.Padding(14);
-            this.pnlInfoCompra.Size = new System.Drawing.Size(1071, 767);
+            this.pnlInfoCompra.Size = new System.Drawing.Size(1071, 757);
             this.pnlInfoCompra.TabIndex = 331;
             // 
             // btnBorrarCampos
@@ -294,7 +294,7 @@
             this.btnBorrarCampos.Depth = 0;
             this.btnBorrarCampos.HighEmphasis = true;
             this.btnBorrarCampos.Icon = null;
-            this.btnBorrarCampos.Location = new System.Drawing.Point(171, 708);
+            this.btnBorrarCampos.Location = new System.Drawing.Point(171, 698);
             this.btnBorrarCampos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnBorrarCampos.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnBorrarCampos.Name = "btnBorrarCampos";
@@ -387,7 +387,7 @@
             this.btnGenerarPdf.Depth = 0;
             this.btnGenerarPdf.HighEmphasis = true;
             this.btnGenerarPdf.Icon = global::CapaPresentacion.Properties.Resources.pdf_32;
-            this.btnGenerarPdf.Location = new System.Drawing.Point(17, 708);
+            this.btnGenerarPdf.Location = new System.Drawing.Point(17, 698);
             this.btnGenerarPdf.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnGenerarPdf.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnGenerarPdf.Name = "btnGenerarPdf";
@@ -411,7 +411,7 @@
             this.txtTotal.HideSelection = true;
             this.txtTotal.Hint = "TOTAL";
             this.txtTotal.LeadingIcon = null;
-            this.txtTotal.Location = new System.Drawing.Point(799, 702);
+            this.txtTotal.Location = new System.Drawing.Point(799, 692);
             this.txtTotal.MaxLength = 32767;
             this.txtTotal.MouseState = MaterialSkin.MouseState.OUT;
             this.txtTotal.Name = "txtTotal";

@@ -53,6 +53,7 @@
             // materialCard1
             // 
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.materialCard1.Controls.Add(this.cbBuscar);
             this.materialCard1.Controls.Add(this.txtBuscar);
             this.materialCard1.Controls.Add(this.dgvCompras);
@@ -83,7 +84,7 @@
             this.cbBuscar.Hint = "Buscar por";
             this.cbBuscar.IntegralHeight = false;
             this.cbBuscar.ItemHeight = 43;
-            this.cbBuscar.Location = new System.Drawing.Point(421, 19);
+            this.cbBuscar.Location = new System.Drawing.Point(419, 19);
             this.cbBuscar.MaxDropDownItems = 4;
             this.cbBuscar.MouseState = MaterialSkin.MouseState.OUT;
             this.cbBuscar.Name = "cbBuscar";
@@ -103,7 +104,7 @@
             this.txtBuscar.HideSelection = true;
             this.txtBuscar.Hint = "Buscar:";
             this.txtBuscar.LeadingIcon = null;
-            this.txtBuscar.Location = new System.Drawing.Point(612, 20);
+            this.txtBuscar.Location = new System.Drawing.Point(610, 20);
             this.txtBuscar.MaxLength = 32767;
             this.txtBuscar.MouseState = MaterialSkin.MouseState.OUT;
             this.txtBuscar.Name = "txtBuscar";
@@ -121,6 +122,8 @@
             this.txtBuscar.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtBuscar.TrailingIcon = ((System.Drawing.Image)(resources.GetObject("txtBuscar.TrailingIcon")));
             this.txtBuscar.UseSystemPasswordChar = false;
+            this.txtBuscar.TrailingIconClick += new System.EventHandler(this.txtBuscar_TrailingIconClick);
+            this.txtBuscar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscar_KeyUp);
             // 
             // dgvCompras
             // 
@@ -187,7 +190,7 @@
             this.dgvCompras.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvCompras.RowTemplate.Height = 28;
             this.dgvCompras.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCompras.Size = new System.Drawing.Size(820, 209);
+            this.dgvCompras.Size = new System.Drawing.Size(818, 207);
             this.dgvCompras.TabIndex = 292;
             this.dgvCompras.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCompras_CellContentDoubleClick);
             // 
@@ -243,6 +246,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.ClientSize = new System.Drawing.Size(854, 364);
             this.Controls.Add(this.materialCard1);
             this.Name = "mdCompra";

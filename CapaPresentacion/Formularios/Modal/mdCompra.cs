@@ -29,12 +29,20 @@ namespace CapaPresentacion.Formularios.Modal
             DialogResult = DialogResult.OK;
             Close();
         }
+        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
+        {
+            UtilidadesDGV.AplicarFiltro(dgvCompras, cbBuscar, txtBuscar.Text);
+        }
+        private void txtBuscar_TrailingIconClick(object sender, EventArgs e)
+        {
+            UtilidadesDGV.QuitarFiltro(dgvCompras, txtBuscar);
+        }
         
         private void ListarComprasEnDGV()
         {
             List<CE_Compra> listaCompras = new CN_Compra().Listar(out String mensaje);
-
             dgvCompras.Rows.Clear();
+            
             foreach (var compra in listaCompras)
             {
                 dgvCompras.Rows.Add(new object[]

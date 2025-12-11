@@ -130,8 +130,7 @@ namespace CapaPresentacion.Formularios
                 }
 
                 MessageBox.Show("PDF generado correctamente.", "Generar PDF",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);                
             }
             catch (Exception ex)
             {

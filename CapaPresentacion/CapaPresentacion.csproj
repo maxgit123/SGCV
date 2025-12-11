@@ -328,6 +328,12 @@
     <Compile Include="Formularios\frmVenta.Designer.cs">
       <DependentUpon>frmVenta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\Modal\mdVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Modal\mdVenta.Designer.cs">
+      <DependentUpon>mdVenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilidades\UtilidadesDGV.cs" />
@@ -336,6 +342,7 @@
     <Compile Include="Utilidades\UtilidadesForm.cs" />
     <Compile Include="Utilidades\UtilidadesModal.cs" />
     <Compile Include="Utilidades\UtilidadesTextBox.cs" />
+    <None Include="Resources\PlantillaVenta.html" />
     <None Include="Resources\subtract_32.png" />
     <None Include="Resources\pdf-32.png" />
     <None Include="Resources\loading.gif" />
@@ -409,6 +416,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmVenta.resx">
       <DependentUpon>frmVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Modal\mdVenta.resx">
+      <DependentUpon>mdVenta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

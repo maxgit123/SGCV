@@ -268,6 +268,26 @@ namespace CapaPresentacion.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html lang=&quot;es&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
+        ///    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+        ///    &lt;title&gt;Ticket&lt;/title&gt;
+        ///    &lt;link href=&quot;index.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///&lt;h1 style=&quot;text-align: center;&quot;&gt;AEM&lt;/h1&gt;
+        ///&lt;p&gt;AEM S.A.&lt;br /&gt;CUIT: 30-11111111-2&lt;br /&gt;INGR. BRUTOS: 11111111-00&lt;br /&gt;AV. 9 DE JULIO 2070&lt;br /&gt;CP: 3228 - CHAJARI - ENTRE RIOS&lt;br /&gt;TEL: (3456) 42-0701&lt;br  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string PlantillaVenta {
+            get {
+                return ResourceManager.GetString("PlantillaVenta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap print_32 {

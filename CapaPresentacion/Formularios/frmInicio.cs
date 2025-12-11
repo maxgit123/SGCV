@@ -71,7 +71,7 @@ namespace CapaPresentacion.Formularios
         {
             if (sender is IconMenuItem menuItem)
             {
-               AbrirFormulario(menuItem, forAabrir);
+                AbrirFormulario(menuItem, forAabrir);
             }
         }
         private void menuUsuarios_Click(object sender, EventArgs e)
