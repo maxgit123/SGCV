@@ -103,7 +103,7 @@ namespace CapaPresentacion.Formularios
                 texto_html = texto_html.Replace("@NroCompra", txtNroCompra.Text);
                 texto_html = texto_html.Replace("@Usuario", txtUsuario.Text);
                 //texto_html = texto_html.Replace("@Documento", txtDocumento.Text);
-                texto_html = texto_html.Replace("@CondCompra", "Condicion de compra"); // No implementado
+                //texto_html = texto_html.Replace("@CondCompra", "Condicion de compra"); // No implementado
                 // --- Detalle de productos ---
                 string filas = string.Empty;
                 foreach (DataGridViewRow fila in dgvProductos.Rows)

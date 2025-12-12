@@ -31,10 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mdUsuarioCambiarClave));
             this.txtClaveActual = new MaterialSkin.Controls.MaterialTextBox2();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.txtClaveNueva2 = new MaterialSkin.Controls.MaterialTextBox2();
             this.btnCancelar = new MaterialSkin.Controls.MaterialButton();
             this.btnGuardar = new MaterialSkin.Controls.MaterialButton();
             this.txtClaveNueva = new MaterialSkin.Controls.MaterialTextBox2();
-            this.txtClaveNueva2 = new MaterialSkin.Controls.MaterialTextBox2();
             this.materialCard1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,7 +63,7 @@
             this.txtClaveActual.SelectionLength = 0;
             this.txtClaveActual.SelectionStart = 0;
             this.txtClaveActual.ShortcutsEnabled = true;
-            this.txtClaveActual.Size = new System.Drawing.Size(258, 48);
+            this.txtClaveActual.Size = new System.Drawing.Size(256, 48);
             this.txtClaveActual.TabIndex = 0;
             this.txtClaveActual.TabStop = false;
             this.txtClaveActual.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -74,6 +74,7 @@
             // materialCard1
             // 
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.materialCard1.Controls.Add(this.txtClaveNueva2);
             this.materialCard1.Controls.Add(this.btnCancelar);
             this.materialCard1.Controls.Add(this.btnGuardar);
@@ -90,6 +91,39 @@
             this.materialCard1.Size = new System.Drawing.Size(292, 311);
             this.materialCard1.TabIndex = 1;
             // 
+            // txtClaveNueva2
+            // 
+            this.txtClaveNueva2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtClaveNueva2.AnimateReadOnly = false;
+            this.txtClaveNueva2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.txtClaveNueva2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtClaveNueva2.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtClaveNueva2.Depth = 0;
+            this.txtClaveNueva2.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtClaveNueva2.HideSelection = true;
+            this.txtClaveNueva2.Hint = "Repetir clave nueva";
+            this.txtClaveNueva2.LeadingIcon = null;
+            this.txtClaveNueva2.Location = new System.Drawing.Point(17, 140);
+            this.txtClaveNueva2.MaxLength = 32767;
+            this.txtClaveNueva2.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtClaveNueva2.Name = "txtClaveNueva2";
+            this.txtClaveNueva2.PasswordChar = '●';
+            this.txtClaveNueva2.PrefixSuffixText = null;
+            this.txtClaveNueva2.ReadOnly = false;
+            this.txtClaveNueva2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtClaveNueva2.SelectedText = "";
+            this.txtClaveNueva2.SelectionLength = 0;
+            this.txtClaveNueva2.SelectionStart = 0;
+            this.txtClaveNueva2.ShortcutsEnabled = true;
+            this.txtClaveNueva2.Size = new System.Drawing.Size(256, 48);
+            this.txtClaveNueva2.TabIndex = 318;
+            this.txtClaveNueva2.TabStop = false;
+            this.txtClaveNueva2.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtClaveNueva2.TrailingIcon = global::CapaPresentacion.Properties.Resources.hide_32;
+            this.txtClaveNueva2.UseSystemPasswordChar = true;
+            this.txtClaveNueva2.TrailingIconClick += new System.EventHandler(this.txtClave_TrailingIconClick);
+            // 
             // btnCancelar
             // 
             this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
@@ -100,7 +134,7 @@
             this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnCancelar.HighEmphasis = false;
             this.btnCancelar.Icon = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Icon")));
-            this.btnCancelar.Location = new System.Drawing.Point(150, 240);
+            this.btnCancelar.Location = new System.Drawing.Point(149, 238);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCancelar.Name = "btnCancelar";
@@ -123,7 +157,7 @@
             this.btnGuardar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnGuardar.HighEmphasis = true;
             this.btnGuardar.Icon = global::CapaPresentacion.Properties.Resources.save_32;
-            this.btnGuardar.Location = new System.Drawing.Point(18, 240);
+            this.btnGuardar.Location = new System.Drawing.Point(17, 238);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnGuardar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnGuardar.Name = "btnGuardar";
@@ -161,45 +195,13 @@
             this.txtClaveNueva.SelectionLength = 0;
             this.txtClaveNueva.SelectionStart = 0;
             this.txtClaveNueva.ShortcutsEnabled = true;
-            this.txtClaveNueva.Size = new System.Drawing.Size(258, 48);
+            this.txtClaveNueva.Size = new System.Drawing.Size(256, 48);
             this.txtClaveNueva.TabIndex = 1;
             this.txtClaveNueva.TabStop = false;
             this.txtClaveNueva.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtClaveNueva.TrailingIcon = global::CapaPresentacion.Properties.Resources.hide_32;
             this.txtClaveNueva.UseSystemPasswordChar = true;
             this.txtClaveNueva.TrailingIconClick += new System.EventHandler(this.txtClave_TrailingIconClick);
-            // 
-            // txtClaveNueva2
-            // 
-            this.txtClaveNueva2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtClaveNueva2.AnimateReadOnly = false;
-            this.txtClaveNueva2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.txtClaveNueva2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtClaveNueva2.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtClaveNueva2.Depth = 0;
-            this.txtClaveNueva2.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtClaveNueva2.HideSelection = true;
-            this.txtClaveNueva2.Hint = "Repetir clave nueva";
-            this.txtClaveNueva2.LeadingIcon = null;
-            this.txtClaveNueva2.Location = new System.Drawing.Point(17, 140);
-            this.txtClaveNueva2.MaxLength = 32767;
-            this.txtClaveNueva2.MouseState = MaterialSkin.MouseState.OUT;
-            this.txtClaveNueva2.Name = "txtClaveNueva2";
-            this.txtClaveNueva2.PasswordChar = '●';
-            this.txtClaveNueva2.PrefixSuffixText = null;
-            this.txtClaveNueva2.ReadOnly = false;
-            this.txtClaveNueva2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtClaveNueva2.SelectedText = "";
-            this.txtClaveNueva2.SelectionLength = 0;
-            this.txtClaveNueva2.SelectionStart = 0;
-            this.txtClaveNueva2.ShortcutsEnabled = true;
-            this.txtClaveNueva2.Size = new System.Drawing.Size(258, 48);
-            this.txtClaveNueva2.TabIndex = 318;
-            this.txtClaveNueva2.TabStop = false;
-            this.txtClaveNueva2.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtClaveNueva2.TrailingIcon = global::CapaPresentacion.Properties.Resources.hide_32;
-            this.txtClaveNueva2.UseSystemPasswordChar = true;
             // 
             // mdUsuarioCambiarClave
             // 
