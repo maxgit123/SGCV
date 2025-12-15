@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CapaDatos.dll" size="46080">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CapaDatos.dll" size="45568">
       <assemblyIdentity name="CapaDatos" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ujyTiQI2Zasz0VY4QBdnddnfyxUFECP0Ub6csGObvoo=</dsig:DigestValue>
+        <dsig:DigestValue>Zw2dYYrwQktRrwTmcPXQwxiBeIN8jz47+M4AObSU1a0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -86,7 +86,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>0rGipyi6MwH1avzVXK+IDzAEi4kdloB+/gzT2u/MVwA=</dsig:DigestValue>
+        <dsig:DigestValue>gPQieoCYMSdqGCNVGM9jDAwPpaRfhsdnvTYxXP78X5E=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -1,9 +1,4 @@
-﻿//using System;
-using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//Lo que agregue:
+﻿using System.Collections.Generic;
 using CapaDatos;
 using CapaEntidad;
 

@@ -34,7 +34,7 @@ namespace CapaDatos
                         reader.Close();
                     }
                 }
-                catch (SqlException ex)
+                catch (SqlException)
                 {
                     lista = new List<CE_Provincia>();
                 }

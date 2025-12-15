@@ -60,9 +60,7 @@ namespace CapaDatos
             }
             return lista;
         }
-        public CE_Usuario Login(string documento,
-            //string clave,
-            out string mensaje)
+        public CE_Usuario Login(string documento, out string mensaje)
         {
             mensaje = string.Empty;
             CE_Usuario oUsuario = null;

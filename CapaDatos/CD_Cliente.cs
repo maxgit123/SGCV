@@ -139,7 +139,7 @@ namespace CapaDatos
             {
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@id", oCliente.Id);
+                cmd.Parameters.AddWithValue("@id_cliente", oCliente.Id);
                 cmd.Parameters.Add("@respuesta", SqlDbType.Bit).Direction = ParameterDirection.Output;
                 cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
 

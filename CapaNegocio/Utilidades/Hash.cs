@@ -16,17 +16,17 @@ namespace CapaNegocio.Utilidades
         /// </summary>
         /// <param name="texto">Texto original (clave en texto plano)</param>
         /// <returns>Hash SHA256 en forma de cadena hexadecimal</returns>
-        public static string ObtenerSha256(string texto)
-        {
-            StringBuilder sb = new StringBuilder();
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(texto));
-                foreach (byte b in hash)
-                    sb.Append(b.ToString("x2")); // formato hexadecimal en minúscula
-            }
-            return sb.ToString();
-        }
+        //public static string ObtenerSha256(string texto)
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    using (SHA256 sha256 = SHA256.Create())
+        //    {
+        //        byte[] hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(texto));
+        //        foreach (byte b in hash)
+        //            sb.Append(b.ToString("x2")); // formato hexadecimal en minúscula
+        //    }
+        //    return sb.ToString();
+        //}
 
         /// <summary>
         /// Genera un hash de un string en texto plano utilizando PBKDF2 con salt y un marcador de versión.

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -12,12 +11,12 @@ namespace CapaDatos
         public List<CE_Proveedor> Listar(out string mensaje)
         {
             mensaje = string.Empty;
+            var lista = new List<CE_Proveedor>();
 
-            List<CE_Proveedor> lista = new List<CE_Proveedor>();
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             using (SqlCommand cmd = new SqlCommand(@"
                     SELECT p.id_proveedor, p.razonSocial, p.observacion, p.fechaCreacion, p.telefono, p.correo,
-                    e.nombre AS [estado]
+                    e.id_estado, e.nombre AS estado
                     FROM Proveedor p
                     INNER JOIN cEstado e ON e.id_estado = p.estado_id;", oConexion))
             {
@@ -49,116 +48,103 @@ namespace CapaDatos
                 {
                     mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
                     lista = new List<CE_Proveedor>();
-                    //Console.WriteLine("Error en Listar(): " + ex.Message);
-                    //Log.Error("Error al listar proveedores", ex);
                 }
             }
             return lista;
         }
+
         public int Crear(CE_Proveedor oProveedor, out string mensaje)
         {
             mensaje = string.Empty;
-            int respuesta = 0;
+            int idProveedorCreado = 0;
 
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
+            using (SqlCommand cmd = new SqlCommand("usp_crearProveedor", oConexion))
             {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@razonSocial", oProveedor.RazonSocial);
+                cmd.Parameters.AddWithValue("@observacion", oProveedor.Observacion);
+                cmd.Parameters.AddWithValue("@telefono", oProveedor.Telefono);
+                cmd.Parameters.AddWithValue("@correo", oProveedor.Correo);
+                cmd.Parameters.Add("@idProveedorCreado", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+
                 try
                 {
-                    StringBuilder query = new StringBuilder();
-
-                    query.AppendLine("INSERT INTO Proveedor (razonSocial,observacion,telefono,correo)");
-                    query.AppendLine("VALUES (@razonSocial,@observacion,@telefono,@correo);");
-                    query.AppendLine("SELECT SCOPE_IDENTITY();");
-
-                    SqlCommand cmd = new SqlCommand(query.ToString(), oConexion)
-                    { CommandType = CommandType.Text };
-
-                    cmd.Parameters.AddWithValue("@razonSocial", oProveedor.RazonSocial);
-                    cmd.Parameters.AddWithValue("@observacion", oProveedor.Observacion);
-                    cmd.Parameters.AddWithValue("@telefono", oProveedor.Telefono);
-                    cmd.Parameters.AddWithValue("@correo", oProveedor.Correo);
-
                     oConexion.Open();
-                    
-                    // ExecuteScalar devuelve la 1ra columna de la 1ra fila. En este caso el ID del usuario.
-                    object result = cmd.ExecuteScalar();
-
-                    if (result != null)
-                    {
-                        respuesta = Convert.ToInt32(result);
-                    }
+                    cmd.ExecuteNonQuery();
+                    mensaje = cmd.Parameters["@mensaje"].Value.ToString();
+                    idProveedorCreado = Convert.ToInt32(cmd.Parameters["@idProveedorCreado"].Value);
                 }
                 catch (SqlException ex)
                 {
-                    respuesta = 0;
-                    mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
-                }
-                finally
-                {
-                    if (oConexion != null && oConexion.State != ConnectionState.Closed)
-                        oConexion.Close();
+                    mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
+                    idProveedorCreado = 0;
                 }
             }
-            return respuesta;
+            return idProveedorCreado;
         }
+
         public bool Actualizar(CE_Proveedor oProveedor, out string mensaje)
         {
-            mensaje = string.Empty;
             bool respuesta = false;
+            mensaje = string.Empty;
 
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
+            using (SqlCommand cmd = new SqlCommand("usp_actualizarProveedor", oConexion))
             {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@id_proveedor", oProveedor.Id);
+                cmd.Parameters.AddWithValue("@razonSocial", oProveedor.RazonSocial);
+                cmd.Parameters.AddWithValue("@observacion", oProveedor.Observacion);
+                cmd.Parameters.AddWithValue("@telefono", oProveedor.Telefono);
+                cmd.Parameters.AddWithValue("@correo", oProveedor.Correo);
+                cmd.Parameters.Add("@respuesta", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+
                 try
                 {
                     oConexion.Open();
-                    StringBuilder query = new StringBuilder();
-                    query.AppendLine("UPDATE Proveedor SET");
-                    query.AppendLine("razonSocial = @razonSocial, observacion = @observacion,");
-                    query.AppendLine("telefono = @telefono, correo = @correo");
-                    query.AppendLine("WHERE id_proveedor = @id_proveedor");
-
-                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oConexion))
-                    { 
-                        cmd.Parameters.AddWithValue("@razonSocial", oProveedor.RazonSocial);
-                        cmd.Parameters.AddWithValue("@observacion", oProveedor.Observacion);
-                        cmd.Parameters.AddWithValue("@telefono", oProveedor.Telefono);
-                        cmd.Parameters.AddWithValue("@correo", oProveedor.Correo);
-                        cmd.Parameters.AddWithValue("@id_proveedor", oProveedor.Id);
-                    
-                        respuesta = cmd.ExecuteNonQuery() > 0;
-                    }
+                    cmd.ExecuteNonQuery();
+                    mensaje = cmd.Parameters["@mensaje"].Value.ToString();
+                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
                 }
                 catch (SqlException ex)
                 {
-                    mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
+                    mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
                     respuesta = false;
                 }
             }
             return respuesta;
         }
+
         public bool Eliminar(CE_Proveedor oProveedor, out string mensaje)
         {
             bool respuesta = false;
-            mensaje = String.Empty;
+            mensaje = string.Empty;
 
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
+            using (SqlCommand cmd = new SqlCommand("usp_eliminarProveedor", oConexion))
             {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@id_proveedor", oProveedor.Id);
+                cmd.Parameters.Add("@respuesta", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+
                 try
                 {
                     oConexion.Open();
-
-                    string query = "DELETE FROM Proveedor WHERE id_proveedor = @id_proveedor;";
-
-                    using (SqlCommand cmd = new SqlCommand(query, oConexion))
-                    {
-                        cmd.Parameters.AddWithValue("@id_proveedor", oProveedor.Id);
-                        respuesta = cmd.ExecuteNonQuery() > 0;
-                    }
+                    cmd.ExecuteNonQuery();
+                    mensaje = cmd.Parameters["@mensaje"].Value.ToString();
+                    respuesta = Convert.ToBoolean(cmd.Parameters["@respuesta"].Value);
                 }
                 catch (SqlException ex)
                 {
+                    mensaje = $"Código de error: {ex.ErrorCode}\n{ex.Message}";
                     respuesta = false;
-                    mensaje = "Codigo de error: " + ex.ErrorCode + "\n" + ex.Message;
                 }
             }
             return respuesta;
