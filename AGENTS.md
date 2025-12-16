@@ -205,25 +205,24 @@ Los DAOs implementan la lógica de acceso a datos mediante SQL Server con stored
 
 ##### CD_Proveedor
 - CRUD de proveedores
-- Inserción directa sin stored procedure
-- Búsqueda de proveedores
+- Ejecución de `usp_crearProveedor`, `usp_actualizarProveedor` y `usp_eliminarProveedor`
 
 **Referencia:** [CD_Proveedor.cs](CapaDatos/CD_Proveedor.cs)
 
 ##### CD_Comercio
-- Lectura de datos comerciales
-- Joins con direcciones, localidades y provincias
+- Lectura y actualización de datos comerciales
+- Joins con Direccion, Localidad, cProvincia y cResponsableIVA
 - Gestión de logo
 
 **Referencia:** [CD_Comercio.cs](CapaDatos/CD_Comercio.cs)
 
 **Referencia Base:** [CapaDatos](CapaDatos/)
 
-## Capa de Presentación (CapaPresentacion)
+### Capa de Presentación (CapaPresentacion)
 
-### Forms Principales
+#### Forms Principales
 
-#### frmInicio
+##### frmInicio
 **Responsabilidades:**
 - Dashboard principal y menú de navegación
 - Gestión de sesión de usuario
@@ -231,7 +230,7 @@ Los DAOs implementan la lógica de acceso a datos mediante SQL Server con stored
 
 **Referencia:** [frmInicio](CapaPresentacion/Formularios/frmInicio.cs)
 
-#### frmProducto
+##### frmProducto
 **Responsabilidades:**
 - CRUD de productos
 - Validación de campos (código, descripción, precio, categoría)
@@ -239,17 +238,17 @@ Los DAOs implementan la lógica de acceso a datos mediante SQL Server con stored
 
 **Referencia:** [frmProducto](CapaPresentacion/Formularios/frmProducto.cs)
 
-#### frmCompra
+##### frmCompra
 **Responsabilidades:**
 - Registro de compras
 - Selección de proveedor
 - Agregación de productos con cantidades y precios
 - Validación de fechas de pedido y entrega
-- Cálculo de totales
+- Cálculo de total
 
 **Referencia:** [frmCompra](CapaPresentacion/Formularios/frmCompra.cs)
 
-#### frmCompraDetalle
+##### frmCompraDetalle
 **Responsabilidades:**
 - Consulta de compras registradas
 - Visualización de detalle de compra
@@ -258,26 +257,26 @@ Los DAOs implementan la lógica de acceso a datos mediante SQL Server con stored
 
 **Referencia:** [frmCompraDetalle](CapaPresentacion/Formularios/frmCompraDetalle.cs)
 
-#### frmVenta
+##### frmVenta
 **Responsabilidades:**
 - Registro de ventas
-- Búsqueda y selección de cliente (opcional)
-- Búsqueda de productos y agregación
+- Selección de cliente (opcional)
+- Agregación de productos con cantidades y precios
+- Cálculo de total
 - Validación de monto de pago vs total
-- Cálculo de vuelto
 
 **Referencia:** [frmVenta](CapaPresentacion/Formularios/frmVenta.cs)
 
-#### frmVentaDetalle
+##### frmVentaDetalle
 **Responsabilidades:**
 - Consulta de ventas registradas
 - Visualización de detalle de venta
-- Generación de PDF con tipo de factura (A, B, C)
-- Reemplazo de tokens según tipo de cliente
+- Generación de PDF con plantilla HTML
+- Reemplazo de tokens en plantilla
 
 **Referencia:** [frmVentaDetalle](CapaPresentacion/Formularios/frmVentaDetalle.cs)
 
-#### frmCliente
+##### frmCliente
 **Responsabilidades:**
 - CRUD de clientes
 - Validación de documento (8 dígitos)
@@ -286,24 +285,23 @@ Los DAOs implementan la lógica de acceso a datos mediante SQL Server con stored
 
 **Referencia:** [frmCliente](CapaPresentacion/Formularios/frmCliente.cs)
 
-#### frmProveedor
+##### frmProveedor
 **Responsabilidades:**
 - CRUD de proveedores
 - Validación de razón social
-- Gestión de contactos
+- Gestión de datos de contacto
 
 **Referencia:** [frmProveedor](CapaPresentacion/Formularios/frmProveedor.cs)
 
-#### frmUsuario
+##### frmUsuario
 **Responsabilidades:**
 - CRUD de usuarios
 - Validación de documento (8 dígitos)
 - Asignación de roles
-- Creación con clave hashada
 
 **Referencia:** [frmUsuario](CapaPresentacion/Formularios/frmUsuario.cs)
 
-#### frmComercio
+##### frmComercio
 **Responsabilidades:**
 - Edición de datos comerciales
 - Gestión de logo
@@ -311,16 +309,16 @@ Los DAOs implementan la lógica de acceso a datos mediante SQL Server con stored
 
 **Referencia:** [frmComercio](CapaPresentacion/Formularios/frmComercio.cs)
 
-#### frmCategoria
+##### frmCategoria
 **Responsabilidades:**
 - CRUD de categorías de productos
 - Búsqueda y filtrado
 
 **Referencia:** [frmCategoria](CapaPresentacion/Formularios/frmCategoria.cs)
 
-### Formularios Modales
+#### Formularios Modales
 
-#### mdUsuarioCambiarClave
+##### mdUsuarioCambiarClave
 **Responsabilidades:**
 - Cambio de contraseña del usuario actual
 - Validación de clave actual
@@ -328,29 +326,29 @@ Los DAOs implementan la lógica de acceso a datos mediante SQL Server con stored
 
 **Referencia:** [mdUsuarioCambiarClave](CapaPresentacion/Formularios/Modal/mdUsuarioCambiarClave.cs)
 
-#### mdProducto
+##### mdProducto
 **Responsabilidades:**
 - Modal de búsqueda y selección de productos
 - Selección desde DataGridView
 
-#### mdProveedor
+##### mdProveedor
 **Responsabilidades:**
 - Modal de búsqueda y selección de proveedores
 
-#### mdCompra
+##### mdCompra
 **Responsabilidades:**
 - Modal de búsqueda de compras anteriores
 
-## Utilidades de Presentación
+#### Utilidades de Presentación
 
-### UtilidadesForm.cs
+##### UtilidadesForm.cs
 **Responsabilidades:**
 - Reinicio de controles (TextBox, ComboBox, MaterialSkin controls)
 - Alternancia de panel habilitado/deshabilitado
 
 **Referencia:** [UtilidadesForm](CapaPresentacion/Utilidades/UtilidadesForm.cs)
 
-### UtilidadesDGV.cs
+##### UtilidadesDGV.cs
 **Responsabilidades:**
 - Configuración general de DataGridView
 - Aplicación de filtros por columna y texto
@@ -358,19 +356,19 @@ Los DAOs implementan la lógica de acceso a datos mediante SQL Server con stored
 
 **Referencia:** [UtilidadesDGV](CapaPresentacion/Utilidades/UtilidadesDGV.cs)
 
-### UtilidadesCB.cs
+##### UtilidadesCB.cs
 **Responsabilidades:**
 - Carga de ComboBox con opciones genéricas
 - Carga de headers desde DataGridView
 
 **Referencia:** [UtilidadesCB](CapaPresentacion/Utilidades/UtilidadesCB.cs)
 
-### UtilidadesTextBox.cs
+##### UtilidadesTextBox.cs
 **Responsabilidades:**
 - Validación de entrada: solo dígitos, solo precios
 - Validación de documentos
 
-### UtilidadesModal.cs
+##### UtilidadesModal.cs
 **Responsabilidades:**
 - Búsqueda de cliente, proveedor, compra, venta
 - Callbacks para actualizar formularios principales

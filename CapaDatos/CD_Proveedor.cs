@@ -52,7 +52,6 @@ namespace CapaDatos
             }
             return lista;
         }
-
         public int Crear(CE_Proveedor oProveedor, out string mensaje)
         {
             mensaje = string.Empty;
@@ -85,7 +84,6 @@ namespace CapaDatos
             }
             return idProveedorCreado;
         }
-
         public bool Actualizar(CE_Proveedor oProveedor, out string mensaje)
         {
             bool respuesta = false;
@@ -119,7 +117,6 @@ namespace CapaDatos
             }
             return respuesta;
         }
-
         public bool Eliminar(CE_Proveedor oProveedor, out string mensaje)
         {
             bool respuesta = false;

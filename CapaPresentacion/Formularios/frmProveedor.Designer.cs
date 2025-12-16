@@ -226,7 +226,7 @@
             this.txtRazonSocial.Hint = "Razon social";
             this.txtRazonSocial.LeadingIcon = null;
             this.txtRazonSocial.Location = new System.Drawing.Point(18, 80);
-            this.txtRazonSocial.MaxLength = 8;
+            this.txtRazonSocial.MaxLength = 50;
             this.txtRazonSocial.MouseState = MaterialSkin.MouseState.OUT;
             this.txtRazonSocial.Name = "txtRazonSocial";
             this.txtRazonSocial.PasswordChar = '\0';
