@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocio;
+using CapaPresentacion.Formularios.Modal;
 using CapaPresentacion.Utilidades;
 using iText.Html2pdf;
 using iText.Kernel.Geom;
@@ -25,6 +26,10 @@ namespace CapaPresentacion.Formularios
         {
             UtilidadesModal.BuscarCompra(this, CargarDatosCompra);
         }
+        private void txtNroCompra_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            UtilidadesTextBox.PermitirSoloDigitos(sender, e);
+        }
         private void txtNroCompra_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter)
@@ -33,7 +38,16 @@ namespace CapaPresentacion.Formularios
             if (string.IsNullOrWhiteSpace(txtNroCompra.Text))
                 return;
 
-            CE_Compra oCompra = new CN_Compra().ObtenerCompra(Convert.ToInt32(txtNroCompra.Text));
+            // Validar que sea un número entero
+            if (!int.TryParse(txtNroCompra.Text, out int idCompra))
+            {
+                txtNroCompra.SetErrorState(true);
+                MessageBox.Show("Ingrese un número de compra válido.", "Advertencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            CE_Compra oCompra = new CN_Compra().ObtenerCompra(idCompra);
             CargarDatosCompra(oCompra);
         }        
         private void btnBorrarCampos_Click(object sender, EventArgs e)
@@ -114,8 +128,8 @@ namespace CapaPresentacion.Formularios
                     filas += $"<td class=\"text-right\">{fila.Cells["cantidad"].Value}</td>";
                     filas += $"<td class=\"text-right\">{Convert.ToDecimal(fila.Cells["precioUnit"].Value):N2}</td>";
                     filas += $"<td class=\"text-center\">{Convert.ToDecimal(fila.Cells["subtotal"].Value):N2}</td>";
-                    filas += $"<td class=\"text-right\">Alicuota IVA</td>"; // TODO: Agregar campo IVA en el futuro
-                    filas += $"<td class=\"text-right\">Subtotal c/IVA</td>"; // TODO: Agregar campo Subtotal c/IVA en el futuro
+                    //filas += $"<td class=\"text-right\">Alicuota IVA</td>";
+                    //filas += $"<td class=\"text-right\">Subtotal c/IVA</td>";
                     filas += "</tr>";
                 }
                 texto_html = texto_html.Replace("@Filas", filas);
@@ -203,5 +217,6 @@ namespace CapaPresentacion.Formularios
                 txtNroCompra.TrailingIconClick += txtNroCompra_TrailingIconClick;
             }
         }
+
     }
 }

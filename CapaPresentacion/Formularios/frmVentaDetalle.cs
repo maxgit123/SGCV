@@ -25,6 +25,10 @@ namespace CapaPresentacion.Formularios
         {
             UtilidadesModal.BuscarVenta(this, CargarDatosVenta);
         }
+        private void txtNroVenta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            UtilidadesTextBox.PermitirSoloDigitos(sender, e);
+        }
         private void txtNroVenta_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter)
@@ -33,7 +37,15 @@ namespace CapaPresentacion.Formularios
             if (string.IsNullOrWhiteSpace(txtNroVenta.Text))
                 return;
 
-            CE_Venta oVenta = new CN_Venta().ObtenerVenta(Convert.ToInt32(txtNroVenta.Text));
+            if (!int.TryParse(txtNroVenta.Text, out int idVenta))
+            {
+                txtNroVenta.SetErrorState(true);
+                MessageBox.Show("Ingrese un número de venta válido.", "Advertencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            CE_Venta oVenta = new CN_Venta().ObtenerVenta(idVenta);
             CargarDatosVenta(oVenta);
         }
         private void btnBorrarCampos_Click(object sender, EventArgs e)
@@ -217,5 +229,6 @@ namespace CapaPresentacion.Formularios
                 txtNroVenta.TrailingIconClick += txtNroVenta_TrailingIconClick;
             }
         }
+
     }
 }

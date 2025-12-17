@@ -22,7 +22,7 @@ namespace CapaPresentacion.Formularios
             //public const string DESCRIPCION = "descripcion";
             public const string PRECIO_COMPRA = "precioCompra";
             public const string CANTIDAD = "cantidad";
-            public const string SUBTOTAL = "subTotal";
+            public const string SUBTOTAL = "subtotal";
             public const string BTN_ELIMINAR = "btnEliminar";
         }
 
@@ -183,6 +183,9 @@ namespace CapaPresentacion.Formularios
         {
             // Se usa keyDown para detectar la tecla Enter (los lectores de código de barras envían Enter al finalizar la lectura)
             if (e.KeyCode != Keys.Enter)
+                return;
+
+            if (string.IsNullOrWhiteSpace(txtProductoCodigo.Text))
                 return;
 
             CE_Producto oProducto = new CN_Producto().Listar()

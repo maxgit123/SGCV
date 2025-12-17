@@ -34,12 +34,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
-            this.id_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precioCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.gbInfoProducto = new System.Windows.Forms.GroupBox();
             this.btnAgregar = new MaterialSkin.Controls.MaterialButton();
             this.txtProductoCantidad = new MaterialSkin.Controls.MaterialTextBox2();
@@ -57,6 +51,12 @@
             this.dtpFechaEntrega = new System.Windows.Forms.DateTimePicker();
             this.txtFechaPedido = new MaterialSkin.Controls.MaterialMaskedTextBox();
             this.dtpFechaPedido = new System.Windows.Forms.DateTimePicker();
+            this.id_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.gbInfoProducto.SuspendLayout();
             this.pnlFormCompra.SuspendLayout();
@@ -90,7 +90,7 @@
             this.descripcion,
             this.precioCompra,
             this.cantidad,
-            this.subTotal,
+            this.subtotal,
             this.btnEliminar});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -129,43 +129,6 @@
             this.dgvProductos.TabIndex = 258;
             this.dgvProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellContentClick);
             this.dgvProductos.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvProductos_CellPainting);
-            // 
-            // id_producto
-            // 
-            this.id_producto.HeaderText = "ID Producto";
-            this.id_producto.Name = "id_producto";
-            this.id_producto.ReadOnly = true;
-            this.id_producto.Visible = false;
-            // 
-            // descripcion
-            // 
-            this.descripcion.HeaderText = "Descripcion";
-            this.descripcion.Name = "descripcion";
-            this.descripcion.ReadOnly = true;
-            // 
-            // precioCompra
-            // 
-            this.precioCompra.HeaderText = "Precio";
-            this.precioCompra.Name = "precioCompra";
-            this.precioCompra.ReadOnly = true;
-            // 
-            // cantidad
-            // 
-            this.cantidad.HeaderText = "Cantidad";
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
-            // 
-            // subTotal
-            // 
-            this.subTotal.HeaderText = "SubTotal";
-            this.subTotal.Name = "subTotal";
-            this.subTotal.ReadOnly = true;
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.HeaderText = "";
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.ReadOnly = true;
             // 
             // gbInfoProducto
             // 
@@ -580,6 +543,43 @@
             this.dtpFechaPedido.TabIndex = 326;
             this.dtpFechaPedido.ValueChanged += new System.EventHandler(this.dtpFechaPedido_ValueChanged);
             // 
+            // id_producto
+            // 
+            this.id_producto.HeaderText = "ID Producto";
+            this.id_producto.Name = "id_producto";
+            this.id_producto.ReadOnly = true;
+            this.id_producto.Visible = false;
+            // 
+            // descripcion
+            // 
+            this.descripcion.HeaderText = "Descripcion";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.ReadOnly = true;
+            // 
+            // precioCompra
+            // 
+            this.precioCompra.HeaderText = "Precio";
+            this.precioCompra.Name = "precioCompra";
+            this.precioCompra.ReadOnly = true;
+            // 
+            // cantidad
+            // 
+            this.cantidad.HeaderText = "Cantidad";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            // 
+            // subtotal
+            // 
+            this.subtotal.HeaderText = "Subtotal";
+            this.subtotal.Name = "subtotal";
+            this.subtotal.ReadOnly = true;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.HeaderText = "";
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.ReadOnly = true;
+            // 
             // frmCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -602,12 +602,6 @@
         #endregion
         private System.Windows.Forms.DataGridView dgvProductos;
         private System.Windows.Forms.GroupBox gbInfoProducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id_producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precioCompra;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn subTotal;
-        private System.Windows.Forms.DataGridViewButtonColumn btnEliminar;
         private MaterialSkin.Controls.MaterialLabel lblTitulo;
         private MaterialSkin.Controls.MaterialCard pnlFormCompra;
         private System.Windows.Forms.DateTimePicker dtpFechaEntrega;
@@ -624,5 +618,11 @@
         private MaterialSkin.Controls.MaterialDivider materialDivider2;
         private MaterialSkin.Controls.MaterialTextBox2 txtTotal;
         private MaterialSkin.Controls.MaterialButton btnRegistrarCompra;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precioCompra;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn subtotal;
+        private System.Windows.Forms.DataGridViewButtonColumn btnEliminar;
     }
 }

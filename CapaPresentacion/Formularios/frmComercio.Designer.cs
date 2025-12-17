@@ -34,7 +34,14 @@
             this.txtIngresosBrutos = new MaterialSkin.Controls.MaterialTextBox2();
             this.cbCondicionIva = new MaterialSkin.Controls.MaterialComboBox();
             this.pnlComercioDatos = new MaterialSkin.Controls.MaterialCard();
+            this.btnQuitarLogo = new MaterialSkin.Controls.MaterialButton();
             this.lblTitulo = new MaterialSkin.Controls.MaterialLabel();
+            this.btnCancelar = new MaterialSkin.Controls.MaterialButton();
+            this.txtTelefono = new MaterialSkin.Controls.MaterialTextBox2();
+            this.btnCambiarLogo = new MaterialSkin.Controls.MaterialButton();
+            this.btnGuardar = new MaterialSkin.Controls.MaterialButton();
+            this.picLogo = new System.Windows.Forms.PictureBox();
+            this.txtCorreo = new MaterialSkin.Controls.MaterialTextBox2();
             this.materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
             this.txtCodigoPostal = new MaterialSkin.Controls.MaterialTextBox2();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
@@ -44,15 +51,8 @@
             this.txtCiudad = new MaterialSkin.Controls.MaterialTextBox2();
             this.txtFechaActualizacion = new MaterialSkin.Controls.MaterialTextBox2();
             this.txtCalleNumero = new MaterialSkin.Controls.MaterialTextBox2();
-            this.dtpInicioActividad = new System.Windows.Forms.DateTimePicker();
-            this.btnQuitarLogo = new MaterialSkin.Controls.MaterialButton();
-            this.btnCancelar = new MaterialSkin.Controls.MaterialButton();
-            this.txtTelefono = new MaterialSkin.Controls.MaterialTextBox2();
-            this.btnCambiarLogo = new MaterialSkin.Controls.MaterialButton();
-            this.btnGuardar = new MaterialSkin.Controls.MaterialButton();
-            this.picLogo = new System.Windows.Forms.PictureBox();
-            this.txtCorreo = new MaterialSkin.Controls.MaterialTextBox2();
             this.txtInicioActividad = new MaterialSkin.Controls.MaterialMaskedTextBox();
+            this.dtpInicioActividad = new System.Windows.Forms.DateTimePicker();
             this.pnlComercioDatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
@@ -173,6 +173,7 @@
             // 
             // pnlComercioDatos
             // 
+            this.pnlComercioDatos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.pnlComercioDatos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.pnlComercioDatos.Controls.Add(this.btnQuitarLogo);
             this.pnlComercioDatos.Controls.Add(this.lblTitulo);
@@ -207,6 +208,27 @@
             this.pnlComercioDatos.Size = new System.Drawing.Size(736, 690);
             this.pnlComercioDatos.TabIndex = 316;
             // 
+            // btnQuitarLogo
+            // 
+            this.btnQuitarLogo.AutoSize = false;
+            this.btnQuitarLogo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQuitarLogo.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnQuitarLogo.Depth = 0;
+            this.btnQuitarLogo.HighEmphasis = false;
+            this.btnQuitarLogo.Icon = global::CapaPresentacion.Properties.Resources.remove_image_32;
+            this.btnQuitarLogo.Location = new System.Drawing.Point(557, 315);
+            this.btnQuitarLogo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnQuitarLogo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnQuitarLogo.Name = "btnQuitarLogo";
+            this.btnQuitarLogo.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnQuitarLogo.Size = new System.Drawing.Size(156, 36);
+            this.btnQuitarLogo.TabIndex = 322;
+            this.btnQuitarLogo.Text = "Quitar Logo";
+            this.btnQuitarLogo.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnQuitarLogo.UseAccentColor = false;
+            this.btnQuitarLogo.UseVisualStyleBackColor = true;
+            this.btnQuitarLogo.Click += new System.EventHandler(this.btnQuitarLogo_Click);
+            // 
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
@@ -219,6 +241,140 @@
             this.lblTitulo.Size = new System.Drawing.Size(284, 41);
             this.lblTitulo.TabIndex = 317;
             this.lblTitulo.Text = "Datos comerciales";
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCancelar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCancelar.Depth = 0;
+            this.btnCancelar.HighEmphasis = false;
+            this.btnCancelar.Icon = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Icon")));
+            this.btnCancelar.Location = new System.Drawing.Point(298, 629);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCancelar.Size = new System.Drawing.Size(124, 36);
+            this.btnCancelar.TabIndex = 321;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnCancelar.UseAccentColor = false;
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.frmComercio_Load);
+            // 
+            // txtTelefono
+            // 
+            this.txtTelefono.AnimateReadOnly = false;
+            this.txtTelefono.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtTelefono.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtTelefono.Depth = 0;
+            this.txtTelefono.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtTelefono.HideSelection = true;
+            this.txtTelefono.Hint = "Telefono";
+            this.txtTelefono.LeadingIcon = global::CapaPresentacion.Properties.Resources.cell_32;
+            this.txtTelefono.Location = new System.Drawing.Point(17, 529);
+            this.txtTelefono.MaxLength = 50;
+            this.txtTelefono.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.PasswordChar = '\0';
+            this.txtTelefono.PrefixSuffixText = null;
+            this.txtTelefono.ReadOnly = false;
+            this.txtTelefono.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtTelefono.SelectedText = "";
+            this.txtTelefono.SelectionLength = 0;
+            this.txtTelefono.SelectionStart = 0;
+            this.txtTelefono.ShortcutsEnabled = true;
+            this.txtTelefono.Size = new System.Drawing.Size(255, 48);
+            this.txtTelefono.TabIndex = 312;
+            this.txtTelefono.TabStop = false;
+            this.txtTelefono.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtTelefono.TrailingIcon = null;
+            this.txtTelefono.UseSystemPasswordChar = false;
+            this.txtTelefono.ModifiedChanged += new System.EventHandler(this.ctrl_ModifiedChanged);
+            // 
+            // btnCambiarLogo
+            // 
+            this.btnCambiarLogo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCambiarLogo.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCambiarLogo.Depth = 0;
+            this.btnCambiarLogo.HighEmphasis = true;
+            this.btnCambiarLogo.Icon = global::CapaPresentacion.Properties.Resources.add_image_32;
+            this.btnCambiarLogo.Location = new System.Drawing.Point(557, 267);
+            this.btnCambiarLogo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCambiarLogo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCambiarLogo.Name = "btnCambiarLogo";
+            this.btnCambiarLogo.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCambiarLogo.Size = new System.Drawing.Size(156, 36);
+            this.btnCambiarLogo.TabIndex = 311;
+            this.btnCambiarLogo.Text = "Cambiar logo";
+            this.btnCambiarLogo.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnCambiarLogo.UseAccentColor = false;
+            this.btnCambiarLogo.UseVisualStyleBackColor = true;
+            this.btnCambiarLogo.Click += new System.EventHandler(this.btnCambiarLogo_Click);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGuardar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnGuardar.Depth = 0;
+            this.btnGuardar.Enabled = false;
+            this.btnGuardar.HighEmphasis = true;
+            this.btnGuardar.Icon = global::CapaPresentacion.Properties.Resources.save_32;
+            this.btnGuardar.Location = new System.Drawing.Point(132, 629);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnGuardar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnGuardar.Size = new System.Drawing.Size(116, 36);
+            this.btnGuardar.TabIndex = 320;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnGuardar.UseAccentColor = false;
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // picLogo
+            // 
+            this.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.picLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picLogo.Image = global::CapaPresentacion.Properties.Resources.image_logo_96;
+            this.picLogo.InitialImage = null;
+            this.picLogo.Location = new System.Drawing.Point(557, 102);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(156, 156);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picLogo.TabIndex = 258;
+            this.picLogo.TabStop = false;
+            // 
+            // txtCorreo
+            // 
+            this.txtCorreo.AnimateReadOnly = false;
+            this.txtCorreo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtCorreo.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtCorreo.Depth = 0;
+            this.txtCorreo.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCorreo.HideSelection = true;
+            this.txtCorreo.Hint = "Correo";
+            this.txtCorreo.LeadingIcon = global::CapaPresentacion.Properties.Resources.email_32;
+            this.txtCorreo.Location = new System.Drawing.Point(278, 529);
+            this.txtCorreo.MaxLength = 50;
+            this.txtCorreo.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtCorreo.Name = "txtCorreo";
+            this.txtCorreo.PasswordChar = '\0';
+            this.txtCorreo.PrefixSuffixText = null;
+            this.txtCorreo.ReadOnly = false;
+            this.txtCorreo.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtCorreo.SelectedText = "";
+            this.txtCorreo.SelectionLength = 0;
+            this.txtCorreo.SelectionStart = 0;
+            this.txtCorreo.ShortcutsEnabled = true;
+            this.txtCorreo.Size = new System.Drawing.Size(255, 48);
+            this.txtCorreo.TabIndex = 313;
+            this.txtCorreo.TabStop = false;
+            this.txtCorreo.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtCorreo.TrailingIcon = null;
+            this.txtCorreo.UseSystemPasswordChar = false;
+            this.txtCorreo.ModifiedChanged += new System.EventHandler(this.ctrl_ModifiedChanged);
             // 
             // materialDivider2
             // 
@@ -449,172 +605,6 @@
             this.txtCalleNumero.UseSystemPasswordChar = false;
             this.txtCalleNumero.ModifiedChanged += new System.EventHandler(this.ctrl_ModifiedChanged);
             // 
-            // dtpInicioActividad
-            // 
-            this.dtpInicioActividad.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpInicioActividad.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpInicioActividad.Location = new System.Drawing.Point(17, 227);
-            this.dtpInicioActividad.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
-            this.dtpInicioActividad.Name = "dtpInicioActividad";
-            this.dtpInicioActividad.Size = new System.Drawing.Size(255, 31);
-            this.dtpInicioActividad.TabIndex = 323;
-            this.dtpInicioActividad.ValueChanged += new System.EventHandler(this.dtpInicioActividad_ValueChanged);
-            // 
-            // btnQuitarLogo
-            // 
-            this.btnQuitarLogo.AutoSize = false;
-            this.btnQuitarLogo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnQuitarLogo.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnQuitarLogo.Depth = 0;
-            this.btnQuitarLogo.HighEmphasis = false;
-            this.btnQuitarLogo.Icon = global::CapaPresentacion.Properties.Resources.remove_image_32;
-            this.btnQuitarLogo.Location = new System.Drawing.Point(557, 315);
-            this.btnQuitarLogo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnQuitarLogo.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnQuitarLogo.Name = "btnQuitarLogo";
-            this.btnQuitarLogo.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnQuitarLogo.Size = new System.Drawing.Size(156, 36);
-            this.btnQuitarLogo.TabIndex = 322;
-            this.btnQuitarLogo.Text = "Quitar Logo";
-            this.btnQuitarLogo.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
-            this.btnQuitarLogo.UseAccentColor = false;
-            this.btnQuitarLogo.UseVisualStyleBackColor = true;
-            this.btnQuitarLogo.Click += new System.EventHandler(this.btnQuitarLogo_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCancelar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnCancelar.Depth = 0;
-            this.btnCancelar.HighEmphasis = false;
-            this.btnCancelar.Icon = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Icon")));
-            this.btnCancelar.Location = new System.Drawing.Point(298, 629);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnCancelar.Size = new System.Drawing.Size(124, 36);
-            this.btnCancelar.TabIndex = 321;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
-            this.btnCancelar.UseAccentColor = false;
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.frmComercio_Load);
-            // 
-            // txtTelefono
-            // 
-            this.txtTelefono.AnimateReadOnly = false;
-            this.txtTelefono.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtTelefono.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtTelefono.Depth = 0;
-            this.txtTelefono.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtTelefono.HideSelection = true;
-            this.txtTelefono.Hint = "Telefono";
-            this.txtTelefono.LeadingIcon = global::CapaPresentacion.Properties.Resources.cell_32;
-            this.txtTelefono.Location = new System.Drawing.Point(17, 529);
-            this.txtTelefono.MaxLength = 50;
-            this.txtTelefono.MouseState = MaterialSkin.MouseState.OUT;
-            this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.PasswordChar = '\0';
-            this.txtTelefono.PrefixSuffixText = null;
-            this.txtTelefono.ReadOnly = false;
-            this.txtTelefono.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtTelefono.SelectedText = "";
-            this.txtTelefono.SelectionLength = 0;
-            this.txtTelefono.SelectionStart = 0;
-            this.txtTelefono.ShortcutsEnabled = true;
-            this.txtTelefono.Size = new System.Drawing.Size(255, 48);
-            this.txtTelefono.TabIndex = 312;
-            this.txtTelefono.TabStop = false;
-            this.txtTelefono.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtTelefono.TrailingIcon = null;
-            this.txtTelefono.UseSystemPasswordChar = false;
-            this.txtTelefono.ModifiedChanged += new System.EventHandler(this.ctrl_ModifiedChanged);
-            // 
-            // btnCambiarLogo
-            // 
-            this.btnCambiarLogo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCambiarLogo.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnCambiarLogo.Depth = 0;
-            this.btnCambiarLogo.HighEmphasis = true;
-            this.btnCambiarLogo.Icon = global::CapaPresentacion.Properties.Resources.add_image_32;
-            this.btnCambiarLogo.Location = new System.Drawing.Point(557, 267);
-            this.btnCambiarLogo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnCambiarLogo.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnCambiarLogo.Name = "btnCambiarLogo";
-            this.btnCambiarLogo.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnCambiarLogo.Size = new System.Drawing.Size(156, 36);
-            this.btnCambiarLogo.TabIndex = 311;
-            this.btnCambiarLogo.Text = "Cambiar logo";
-            this.btnCambiarLogo.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnCambiarLogo.UseAccentColor = false;
-            this.btnCambiarLogo.UseVisualStyleBackColor = true;
-            this.btnCambiarLogo.Click += new System.EventHandler(this.btnCambiarLogo_Click);
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnGuardar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnGuardar.Depth = 0;
-            this.btnGuardar.Enabled = false;
-            this.btnGuardar.HighEmphasis = true;
-            this.btnGuardar.Icon = global::CapaPresentacion.Properties.Resources.save_32;
-            this.btnGuardar.Location = new System.Drawing.Point(132, 629);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnGuardar.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnGuardar.Size = new System.Drawing.Size(116, 36);
-            this.btnGuardar.TabIndex = 320;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnGuardar.UseAccentColor = false;
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // picLogo
-            // 
-            this.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.picLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picLogo.Image = global::CapaPresentacion.Properties.Resources.image_logo_96;
-            this.picLogo.InitialImage = null;
-            this.picLogo.Location = new System.Drawing.Point(557, 102);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(156, 156);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picLogo.TabIndex = 258;
-            this.picLogo.TabStop = false;
-            // 
-            // txtCorreo
-            // 
-            this.txtCorreo.AnimateReadOnly = false;
-            this.txtCorreo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtCorreo.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtCorreo.Depth = 0;
-            this.txtCorreo.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtCorreo.HideSelection = true;
-            this.txtCorreo.Hint = "Correo";
-            this.txtCorreo.LeadingIcon = global::CapaPresentacion.Properties.Resources.email_32;
-            this.txtCorreo.Location = new System.Drawing.Point(278, 529);
-            this.txtCorreo.MaxLength = 50;
-            this.txtCorreo.MouseState = MaterialSkin.MouseState.OUT;
-            this.txtCorreo.Name = "txtCorreo";
-            this.txtCorreo.PasswordChar = '\0';
-            this.txtCorreo.PrefixSuffixText = null;
-            this.txtCorreo.ReadOnly = false;
-            this.txtCorreo.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtCorreo.SelectedText = "";
-            this.txtCorreo.SelectionLength = 0;
-            this.txtCorreo.SelectionStart = 0;
-            this.txtCorreo.ShortcutsEnabled = true;
-            this.txtCorreo.Size = new System.Drawing.Size(255, 48);
-            this.txtCorreo.TabIndex = 313;
-            this.txtCorreo.TabStop = false;
-            this.txtCorreo.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtCorreo.TrailingIcon = null;
-            this.txtCorreo.UseSystemPasswordChar = false;
-            this.txtCorreo.ModifiedChanged += new System.EventHandler(this.ctrl_ModifiedChanged);
-            // 
             // txtInicioActividad
             // 
             this.txtInicioActividad.AllowPromptAsInput = true;
@@ -660,10 +650,22 @@
             this.txtInicioActividad.TrailingIconClick += new System.EventHandler(this.txtInicioActividad_TrailingIconClick);
             this.txtInicioActividad.TextChanged += new System.EventHandler(this.ctrl_ModifiedChanged);
             // 
+            // dtpInicioActividad
+            // 
+            this.dtpInicioActividad.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpInicioActividad.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpInicioActividad.Location = new System.Drawing.Point(17, 227);
+            this.dtpInicioActividad.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
+            this.dtpInicioActividad.Name = "dtpInicioActividad";
+            this.dtpInicioActividad.Size = new System.Drawing.Size(255, 31);
+            this.dtpInicioActividad.TabIndex = 323;
+            this.dtpInicioActividad.ValueChanged += new System.EventHandler(this.dtpInicioActividad_ValueChanged);
+            // 
             // frmComercio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
             this.ClientSize = new System.Drawing.Size(782, 736);
             this.Controls.Add(this.pnlComercioDatos);

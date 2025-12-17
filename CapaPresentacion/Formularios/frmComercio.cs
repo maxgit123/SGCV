@@ -142,9 +142,31 @@ namespace CapaPresentacion.Formularios
 
                 if (oOpenFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    _logoBytes = File.ReadAllBytes(oOpenFileDialog.FileName);
+                    // Almacena la imagen como un array de bytes.
+                    _logoBytes = File.ReadAllBytes(oOpenFileDialog.FileName); 
+
+                    // Verificar tamaño máximo
+                    const int maxSizeBytes = 1 * 1024 * 1024; // 5 MB
+                    if (_logoBytes.Length > maxSizeBytes)
+                    {
+                        MessageBox.Show("La imagen no puede exceder 1 MB", "Advertencia",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        _logoBytes = null;
+                        return;
+                    }
+
+                    // Validar que sea una imagen cuadrada
+                    if (!EsImagenCuadrada(_logoBytes))
+                    {
+                        MessageBox.Show("La imagen debe ser cuadrada (mismo alto y ancho)", "Advertencia",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        _logoBytes = null;
+                        return;
+                    }
+
                     picLogo.SizeMode = PictureBoxSizeMode.StretchImage;
                     picLogo.Image = ByteToImage(_logoBytes);
+
                     // Marca el formulario como modificado al cambiar el logo.
                     ctrl_ModifiedChanged(sender, e);
                 }
@@ -204,6 +226,25 @@ namespace CapaPresentacion.Formularios
             using (MemoryStream ms = new MemoryStream(imageBytes))
             {
                 return Image.FromStream(ms);
+            }
+        }
+        private bool EsImagenCuadrada(byte[] imageBytes)
+        {
+            try
+            {
+                using (MemoryStream ms = new MemoryStream(imageBytes))
+                {
+                    using (Image img = Image.FromStream(ms))
+                    {
+                        // Compara alto y ancho
+                        return img.Height == img.Width;
+                    }
+                }
+            }
+            catch
+            {
+                // Si hay error al procesar la imagen, retorna false
+                return false;
             }
         }
 

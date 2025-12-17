@@ -37,6 +37,10 @@ namespace CapaPresentacion.Formularios
         }
         private void Dashboard_Load(object sender, EventArgs e)
         {
+            //var bounds = Screen.FromControl(this).Bounds;
+            //this.Width = bounds.Width - 100;
+            //this.Height = bounds.Height - 100;
+
             // Obtiene una lista de modulos permitidos para el usuario actual.
             List<CE_Modulo> modulosPermitidos = new CN_Modulo().Listar(_usuarioActual.Id);
 

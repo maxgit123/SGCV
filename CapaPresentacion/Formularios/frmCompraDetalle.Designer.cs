@@ -378,6 +378,7 @@
             this.txtNroCompra.UseSystemPasswordChar = false;
             this.txtNroCompra.TrailingIconClick += new System.EventHandler(this.txtNroCompra_TrailingIconClick);
             this.txtNroCompra.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNroCompra_KeyDown);
+            this.txtNroCompra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroCompra_KeyPress);
             // 
             // btnGenerarPdf
             // 

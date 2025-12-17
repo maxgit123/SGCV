@@ -94,7 +94,7 @@
             this.txtClave.Hint = "Clave";
             this.txtClave.LeadingIcon = null;
             this.txtClave.Location = new System.Drawing.Point(18, 73);
-            this.txtClave.MaxLength = 32767;
+            this.txtClave.MaxLength = 200;
             this.txtClave.MouseState = MaterialSkin.MouseState.OUT;
             this.txtClave.Name = "txtClave";
             this.txtClave.PasswordChar = '●';

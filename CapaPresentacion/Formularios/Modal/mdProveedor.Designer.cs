@@ -57,7 +57,7 @@
             this.txtBuscar.HideSelection = true;
             this.txtBuscar.Hint = "Buscar:";
             this.txtBuscar.LeadingIcon = null;
-            this.txtBuscar.Location = new System.Drawing.Point(208, 20);
+            this.txtBuscar.Location = new System.Drawing.Point(206, 20);
             this.txtBuscar.MaxLength = 32767;
             this.txtBuscar.MouseState = MaterialSkin.MouseState.OUT;
             this.txtBuscar.Name = "txtBuscar";
@@ -138,7 +138,7 @@
             this.dgvProveedores.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvProveedores.RowTemplate.Height = 28;
             this.dgvProveedores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProveedores.Size = new System.Drawing.Size(416, 209);
+            this.dgvProveedores.Size = new System.Drawing.Size(414, 207);
             this.dgvProveedores.TabIndex = 286;
             this.dgvProveedores.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProveedores_CellContentDoubleClick);
             // 
@@ -177,7 +177,7 @@
             this.cbBuscar.Hint = "Buscar por";
             this.cbBuscar.IntegralHeight = false;
             this.cbBuscar.ItemHeight = 43;
-            this.cbBuscar.Location = new System.Drawing.Point(17, 19);
+            this.cbBuscar.Location = new System.Drawing.Point(15, 19);
             this.cbBuscar.MaxDropDownItems = 4;
             this.cbBuscar.MouseState = MaterialSkin.MouseState.OUT;
             this.cbBuscar.Name = "cbBuscar";
@@ -188,6 +188,7 @@
             // materialCard1
             // 
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.materialCard1.Controls.Add(this.cbBuscar);
             this.materialCard1.Controls.Add(this.dgvProveedores);
             this.materialCard1.Controls.Add(this.txtBuscar);
@@ -209,7 +210,6 @@
             this.ClientSize = new System.Drawing.Size(450, 364);
             this.Controls.Add(this.materialCard1);
             this.Name = "mdProveedor";
-            this.Padding = new System.Windows.Forms.Padding(0, 64, 0, 0);
             this.Text = "Lista de Proveedores";
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).EndInit();
             this.materialCard1.ResumeLayout(false);
