@@ -73,7 +73,7 @@ namespace CapaDatos
             using (SqlCommand cmd = new SqlCommand(@"
                     SELECT
                         v.id_venta, v.tipoFactura, v.total, v.pago, v.vuelto, v.fechaVenta, v.fechaCreacion,
-                        u.apellido, u.nombre, u.documento,
+                        u.id_usuario, u.apellido, u.nombre, u.documento,
                         c.documento AS docCliente, c.nombre AS nomCliente, c.apellido AS apellidoCliente, c.telefono, c.correo,
                         e.nombre AS estado
                     FROM Venta v
@@ -101,6 +101,7 @@ namespace CapaDatos
                                 Vuelto = Convert.ToDecimal(reader["Vuelto"]),
                                 oUsuario = new CE_Usuario()
                                 {
+                                    Id = Convert.ToInt32(reader["id_usuario"]),
                                     Nombre = reader["Nombre"].ToString(),
                                     Apellido = reader["Apellido"].ToString(),
                                     Documento = reader["Documento"].ToString()

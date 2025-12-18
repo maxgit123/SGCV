@@ -14,6 +14,7 @@ namespace CapaPresentacion.Formularios
     public partial class frmVentaDetalle : Form
     {
         private bool _datosCargados = false;
+        private int _usuarioId = 0;
 
         public frmVentaDetalle()
         {
@@ -55,6 +56,7 @@ namespace CapaPresentacion.Formularios
             dgvProductos.Rows.Clear();
 
             _datosCargados = false;
+            _usuarioId = 0;
             txtNroVenta_AlternarTrailingIcon();
         }
         private void btnGenerarPdf_Click(object sender, EventArgs e)
@@ -111,6 +113,7 @@ namespace CapaPresentacion.Formularios
                 texto_html = texto_html.Replace("@InicioActividad", oComercio.InicioActividad.ToString("dd/MM/yyyy"));
                 texto_html = texto_html.Replace("@RespIVA", oComercio.oResponsableIVA.Nombre);
                 texto_html = texto_html.Replace("@PuntoVenta", oComercio.PuntoVenta.ToString());
+                texto_html = texto_html.Replace("@codUsuario", _usuarioId.ToString());
                 // --- Venta ---
                 texto_html = texto_html.Replace("@FechaVenta", txtFechaVenta.Text);
                 texto_html = texto_html.Replace("@NroVenta", txtNroVenta.Text);
@@ -174,6 +177,7 @@ namespace CapaPresentacion.Formularios
                 return;
             }
 
+            _usuarioId = oVenta.oUsuario.Id;
             txtNroVenta.SetErrorState(false);
             txtNroVenta.Text = oVenta.Id.ToString();
             txtFechaVenta.Text = oVenta.FechaVenta.ToString("dd/MM/yyyy");
