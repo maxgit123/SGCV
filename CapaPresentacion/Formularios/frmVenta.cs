@@ -35,6 +35,7 @@ namespace CapaPresentacion.Formularios
             BackColor = Color.FromArgb(63, 81, 181); // Indigo 500
             UtilidadesDGV.Configurar(dgvProductos);
             dtpFechaVenta.Value = DateTime.Now;
+            cbTipoFactura.SelectedIndex = 1; // B
             txtClienteNombreCompleto.ReadOnly = true;
             txtProductoDescripcion.ReadOnly = true;
             txtProductoPrecio.ReadOnly = true;
@@ -43,6 +44,7 @@ namespace CapaPresentacion.Formularios
             txtProductoStock.TextAlign = HorizontalAlignment.Right;
             txtTotal.ReadOnly = true;
             txtTotal.TextAlign = HorizontalAlignment.Right;
+            txtVuelto.ReadOnly = true;
             txtVuelto.TextAlign = HorizontalAlignment.Right;
             txtPago.TextAlign = HorizontalAlignment.Right;
             txtProductoCantidad.TextAlign = HorizontalAlignment.Center;
@@ -174,12 +176,14 @@ namespace CapaPresentacion.Formularios
         }
         private void btnRegistrarVenta_Click(object sender, EventArgs e)
         {
-            //if (idClienteSeleccionado == 0)
+            //if (idClienteSeleccionado == 0) // Cliente no obligatorio
             //{
             //    MessageBox.Show("Debe seleccionar un cliente.", "Advertencia",
             //        MessageBoxButtons.OK, MessageBoxIcon.Warning);
             //    return;
             //}
+
+            // --- Validaciones generales ---
 
             if (dgvProductos.Rows.Count < 1)
             {
@@ -188,7 +192,9 @@ namespace CapaPresentacion.Formularios
                 return;
             }
 
-            // Validar pago y vuelto
+            // --- Validaciones de entrada ---
+
+            // Validar pago
             if (!decimal.TryParse(txtPago.Text, NumberStyles.Any, _culturaArgentina, out decimal pago))
             {
                 MessageBox.Show("El pago ingresado no es válido.", "Error",
@@ -197,6 +203,7 @@ namespace CapaPresentacion.Formularios
                 return;
             }
 
+            // Validar vuelto (esta deshabilitado el ingreso, pero por las dudas)
             if (!decimal.TryParse(txtVuelto.Text, NumberStyles.Any, _culturaArgentina, out decimal vuelto))
             {
                 MessageBox.Show("El vuelto ingresado no es válido.", "Error",
@@ -205,32 +212,17 @@ namespace CapaPresentacion.Formularios
                 return;
             }
 
-            decimal total = Convert.ToDecimal(txtTotal.Text, _culturaArgentina);
-
-            if (pago < 0 || vuelto < 0)
+            // Validar total (esta deshabilitado el ingreso, pero por las dudas)
+            if (!decimal.TryParse(txtTotal.Text, NumberStyles.Any, _culturaArgentina, out decimal total))
             {
-                MessageBox.Show("El pago y el vuelto no pueden ser negativos.", "Advertencia",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (vuelto > pago)
-            {
-                MessageBox.Show("El vuelto no puede ser mayor al pago.", "Advertencia",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El total ingresado no es válido.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (pago < total)
             {
-                MessageBox.Show("El pago debe ser mayor o igual al total de la venta.", "Advertencia",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (pago - vuelto < total)
-            {
-                MessageBox.Show("El pago debe ser mayor o igual al total de la venta.", "Advertencia",
+                MessageBox.Show("Pago insuficiente.", "Advertencia",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -311,6 +303,52 @@ namespace CapaPresentacion.Formularios
         {
             UtilidadesTextBox.PermitirSoloPrecio(sender, e);
         }
+        private void ActualizarVuelto_TextChanged(object sender, EventArgs e)
+        {
+            if (!decimal.TryParse(txtTotal.Text, NumberStyles.Any, _culturaArgentina, out decimal total))
+                total = 0;
+
+            if (!decimal.TryParse(txtPago.Text, NumberStyles.Any, _culturaArgentina, out decimal pagoIngresado))
+                pagoIngresado = 0;
+
+            if (!decimal.TryParse(txtVuelto.Text, NumberStyles.Any, _culturaArgentina, out decimal vuelto))
+                vuelto = 0;
+
+            txtPago.SetErrorState(pagoIngresado < total);
+
+            if (pagoIngresado < total)
+            {
+                txtVuelto.Text = "0,00";
+                return;
+            }
+            
+            vuelto = pagoIngresado - total;
+            txtVuelto.Text = vuelto.ToString(_formatoPrecio, _culturaArgentina);
+        }
+        private void txtVentaFecha_TrailingIconClick(object sender, EventArgs e)
+        {
+            UtilidadesTextBox.DesplegarCalendario(dtpFechaVenta);
+        }
+        private void dtpVentaFecha_ValueChanged(object sender, EventArgs e)
+        {
+            txtVentaFecha.Text = dtpFechaVenta.Value.ToString("dd/MM/yyyy", _culturaArgentina);
+        }
+        private void txtProductoCantidad_LeadingIconClick(object sender, EventArgs e)
+        {
+            if (_productoCantidad <= 1)
+                return;
+
+            _productoCantidad--;
+            txtProductoCantidad.Text = _productoCantidad.ToString();
+        }
+        private void txtProductoCantidad_TrailingIconClick(object sender, EventArgs e)
+        {
+            if (_productoCantidad >= _productoStockMaximo)
+                return;
+
+            _productoCantidad++;
+            txtProductoCantidad.Text = _productoCantidad.ToString();
+        }
 
         private void LimpiarProducto()
         {
@@ -327,7 +365,7 @@ namespace CapaPresentacion.Formularios
 
             if (dgvProductos.Rows.Count < 1)
             {
-                txtTotal.Text = "0.00";
+                txtTotal.Text = "0,00";
                 return;
             }
 
@@ -360,29 +398,6 @@ namespace CapaPresentacion.Formularios
             return true;
         }
 
-        private void txtVentaFecha_TrailingIconClick(object sender, EventArgs e)
-        {
-            UtilidadesTextBox.DesplegarCalendario(dtpFechaVenta);
-        }
-        private void dtpVentaFecha_ValueChanged(object sender, EventArgs e)
-        {
-            txtVentaFecha.Text = dtpFechaVenta.Value.ToString("dd/MM/yyyy", _culturaArgentina);
-        }
-        private void txtProductoCantidad_LeadingIconClick(object sender, EventArgs e)
-        {
-            if (_productoCantidad <= 1)
-                return;
 
-            _productoCantidad--;
-            txtProductoCantidad.Text = _productoCantidad.ToString();
-        }
-        private void txtProductoCantidad_TrailingIconClick(object sender, EventArgs e)
-        {
-            if (_productoCantidad >= _productoStockMaximo)
-                return;
-
-            _productoCantidad++;
-            txtProductoCantidad.Text = _productoCantidad.ToString();
-        }
     }
 }

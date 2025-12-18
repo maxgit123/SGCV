@@ -460,7 +460,7 @@
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.PasswordChar = '\0';
             this.txtTotal.PrefixSuffixText = null;
-            this.txtTotal.ReadOnly = false;
+            this.txtTotal.ReadOnly = true;
             this.txtTotal.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtTotal.SelectedText = "";
             this.txtTotal.SelectionLength = 0;
@@ -605,7 +605,7 @@
             this.txtVuelto.Name = "txtVuelto";
             this.txtVuelto.PasswordChar = '\0';
             this.txtVuelto.PrefixSuffixText = null;
-            this.txtVuelto.ReadOnly = false;
+            this.txtVuelto.ReadOnly = true;
             this.txtVuelto.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtVuelto.SelectedText = "";
             this.txtVuelto.SelectionLength = 0;
@@ -635,7 +635,7 @@
             this.txtPago.Name = "txtPago";
             this.txtPago.PasswordChar = '\0';
             this.txtPago.PrefixSuffixText = null;
-            this.txtPago.ReadOnly = false;
+            this.txtPago.ReadOnly = true;
             this.txtPago.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtPago.SelectedText = "";
             this.txtPago.SelectionLength = 0;

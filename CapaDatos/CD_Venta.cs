@@ -74,7 +74,7 @@ namespace CapaDatos
                     SELECT
                         v.id_venta, v.tipoFactura, v.total, v.pago, v.vuelto, v.fechaVenta, v.fechaCreacion,
                         u.apellido, u.nombre, u.documento,
-                        c.nombre AS nomCliente, c.apellido AS apellidoCliente, c.telefono, c.correo,
+                        c.documento AS docCliente, c.nombre AS nomCliente, c.apellido AS apellidoCliente, c.telefono, c.correo,
                         e.nombre AS estado
                     FROM Venta v
                     INNER JOIN Usuario u ON u.id_usuario = v.usuario_id
@@ -107,6 +107,7 @@ namespace CapaDatos
                                 },
                                 oCliente = new CE_Cliente()
                                 {
+                                    Documento = reader["docCliente"].ToString(),
                                     Nombre = reader["nomCliente"].ToString(),
                                     Apellido = reader["apellidoCliente"].ToString(),
                                     Telefono = reader["Telefono"].ToString(),

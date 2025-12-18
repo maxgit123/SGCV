@@ -418,7 +418,7 @@
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.PasswordChar = '\0';
             this.txtTotal.PrefixSuffixText = null;
-            this.txtTotal.ReadOnly = false;
+            this.txtTotal.ReadOnly = true;
             this.txtTotal.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtTotal.SelectedText = "";
             this.txtTotal.SelectionLength = 0;

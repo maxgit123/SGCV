@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Bj35v2PeEh4gj8K8oKTrWL72YMJAio15vBCUt6Vgf1s=</dsig:DigestValue>
+        <dsig:DigestValue>wvkexRCUTLPKtc4ZBmc1bpIkPpMhY64tAS8pnu/5Geg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -415,14 +415,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SGCV.exe" size="464896">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SGCV.exe" size="465408">
       <assemblyIdentity name="SGCV" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>K0FrVkJCuox7TTXhJMJryVEmcbCMDEsLIvcCvd49cbg=</dsig:DigestValue>
+        <dsig:DigestValue>uUqzbOIMwd1FpQd11VXmn6fPQQAMoG18FLdzGC3MQnI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
