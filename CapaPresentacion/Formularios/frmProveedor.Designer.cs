@@ -34,7 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.mpnlFormProveedor = new MaterialSkin.Controls.MaterialCard();
+            this.pnlFormProveedor = new MaterialSkin.Controls.MaterialCard();
             this.txtObservacion = new MaterialSkin.Controls.MaterialMultiLineTextBox2();
             this.btnCancelar = new MaterialSkin.Controls.MaterialButton();
             this.btnGuardar = new MaterialSkin.Controls.MaterialButton();
@@ -58,32 +58,32 @@
             this.cbBuscar = new MaterialSkin.Controls.MaterialComboBox();
             this.mbtnAgregar = new MaterialSkin.Controls.MaterialButton();
             this.lblListaProveedores = new MaterialSkin.Controls.MaterialLabel();
-            this.mpnlFormProveedor.SuspendLayout();
+            this.pnlFormProveedor.SuspendLayout();
             this.pnlListaProveedores.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).BeginInit();
             this.SuspendLayout();
             // 
             // mpnlFormProveedor
             // 
-            this.mpnlFormProveedor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pnlFormProveedor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.mpnlFormProveedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.mpnlFormProveedor.Controls.Add(this.txtObservacion);
-            this.mpnlFormProveedor.Controls.Add(this.btnCancelar);
-            this.mpnlFormProveedor.Controls.Add(this.btnGuardar);
-            this.mpnlFormProveedor.Controls.Add(this.txtTelefono);
-            this.mpnlFormProveedor.Controls.Add(this.txtCorreo);
-            this.mpnlFormProveedor.Controls.Add(this.txtRazonSocial);
-            this.mpnlFormProveedor.Controls.Add(this.lblFormProveedor);
-            this.mpnlFormProveedor.Depth = 0;
-            this.mpnlFormProveedor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.mpnlFormProveedor.Location = new System.Drawing.Point(23, 20);
-            this.mpnlFormProveedor.Margin = new System.Windows.Forms.Padding(14);
-            this.mpnlFormProveedor.MouseState = MaterialSkin.MouseState.HOVER;
-            this.mpnlFormProveedor.Name = "mpnlFormProveedor";
-            this.mpnlFormProveedor.Padding = new System.Windows.Forms.Padding(14);
-            this.mpnlFormProveedor.Size = new System.Drawing.Size(290, 484);
-            this.mpnlFormProveedor.TabIndex = 294;
+            this.pnlFormProveedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.pnlFormProveedor.Controls.Add(this.txtObservacion);
+            this.pnlFormProveedor.Controls.Add(this.btnCancelar);
+            this.pnlFormProveedor.Controls.Add(this.btnGuardar);
+            this.pnlFormProveedor.Controls.Add(this.txtTelefono);
+            this.pnlFormProveedor.Controls.Add(this.txtCorreo);
+            this.pnlFormProveedor.Controls.Add(this.txtRazonSocial);
+            this.pnlFormProveedor.Controls.Add(this.lblFormProveedor);
+            this.pnlFormProveedor.Depth = 0;
+            this.pnlFormProveedor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pnlFormProveedor.Location = new System.Drawing.Point(23, 20);
+            this.pnlFormProveedor.Margin = new System.Windows.Forms.Padding(14);
+            this.pnlFormProveedor.MouseState = MaterialSkin.MouseState.HOVER;
+            this.pnlFormProveedor.Name = "mpnlFormProveedor";
+            this.pnlFormProveedor.Padding = new System.Windows.Forms.Padding(14);
+            this.pnlFormProveedor.Size = new System.Drawing.Size(290, 484);
+            this.pnlFormProveedor.TabIndex = 294;
             // 
             // txtObservacion
             // 
@@ -512,12 +512,12 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
             this.ClientSize = new System.Drawing.Size(1245, 527);
             this.Controls.Add(this.pnlListaProveedores);
-            this.Controls.Add(this.mpnlFormProveedor);
+            this.Controls.Add(this.pnlFormProveedor);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmProveedor";
             this.Text = "Proveedores";
-            this.mpnlFormProveedor.ResumeLayout(false);
-            this.mpnlFormProveedor.PerformLayout();
+            this.pnlFormProveedor.ResumeLayout(false);
+            this.pnlFormProveedor.PerformLayout();
             this.pnlListaProveedores.ResumeLayout(false);
             this.pnlListaProveedores.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).EndInit();
@@ -526,7 +526,7 @@
         }
 
         #endregion
-        private MaterialSkin.Controls.MaterialCard mpnlFormProveedor;
+        private MaterialSkin.Controls.MaterialCard pnlFormProveedor;
         private MaterialSkin.Controls.MaterialButton btnCancelar;
         private MaterialSkin.Controls.MaterialButton btnGuardar;
         private MaterialSkin.Controls.MaterialTextBox2 txtTelefono;

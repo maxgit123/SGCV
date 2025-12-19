@@ -29,6 +29,7 @@ namespace CapaPresentacion.Formularios
 
             UtilidadesCB.Cargar(cbAlicuotaIva, new CN_AlicuotaIVA().Listar(), r => r.Id, r => Convert.ToString(r.Porcentaje));
             UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvCategorias, NombreColumna.NOMBRE);
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaCategorias, pnlFormCategoria, txtBuscar);
             ListarCategoriasEnDGV();
         }
         private void dgvCategorias_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)

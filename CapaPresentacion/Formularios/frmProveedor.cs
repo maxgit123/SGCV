@@ -30,7 +30,7 @@ namespace CapaPresentacion.Formularios
             UtilidadesDGV.Configurar(dgvProveedores);
 
             UtilidadesCB.CargarHeadersDesdeDGV(cbBuscar, dgvProveedores, NombreColumna.RAZON_SOCIAL);
-            UtilidadesForm.AlternarPanelHabilitado(pnlListaProveedores, mpnlFormProveedor, txtBuscar);
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaProveedores, pnlFormProveedor, txtBuscar);
             ListarProveedoresEnDGV();
         }
 
@@ -105,12 +105,12 @@ namespace CapaPresentacion.Formularios
 
             ListarProveedoresEnDGV();
             LimpiarForm();
-            UtilidadesForm.AlternarPanelHabilitado(pnlListaProveedores, mpnlFormProveedor, txtBuscar);
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaProveedores, pnlFormProveedor, txtBuscar);
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             LimpiarForm();
-            UtilidadesForm.AlternarPanelHabilitado(pnlListaProveedores, mpnlFormProveedor, txtBuscar);
+            UtilidadesForm.AlternarPanelHabilitado(pnlListaProveedores, pnlFormProveedor, txtBuscar);
         }
         private void pnlListaProveedores_Resize(object sender, EventArgs e)
         {
@@ -146,7 +146,7 @@ namespace CapaPresentacion.Formularios
         private void LimpiarForm()
         {
             _idProveedorSeleccionado = 0;
-            UtilidadesForm.ReiniciarControles(mpnlFormProveedor);
+            UtilidadesForm.ReiniciarControles(pnlFormProveedor);
         }
         private bool ValidarCampos()
         {
@@ -175,7 +175,7 @@ namespace CapaPresentacion.Formularios
                 _idProveedorSeleccionado = 0;
                 LimpiarForm();
             }
-            UtilidadesForm.AlternarPanelHabilitado(mpnlFormProveedor, pnlListaProveedores, txtRazonSocial);
+            UtilidadesForm.AlternarPanelHabilitado(pnlFormProveedor, pnlListaProveedores, txtRazonSocial);
         }
         private void CargarDatosParaEdicion(int indiceFila)
         {
