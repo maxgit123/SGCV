@@ -81,7 +81,7 @@ namespace CapaPresentacion.Formularios
             try
             {
                 Cursor = Cursors.WaitCursor;
-                string texto_html = Properties.Resources.PlantillaVenta.ToString();
+                string texto_html = Properties.Resources.PlantillaVenta2.ToString();
                 CE_Comercio oComercio = new CN_Comercio().Leer();
 
                 // --- Logo ---
@@ -153,7 +153,13 @@ namespace CapaPresentacion.Formularios
                 {
                     ConverterProperties converterProperties = new ConverterProperties();
                     PdfDocument pdf = new PdfDocument(new PdfWriter(fs));
-                    Document pdfDoc = new Document(pdf, PageSize.A6);
+
+                    // --- En caso querer usar una impresora de tickets ---
+                    //PageSize ticketSize = new PageSize(226.77f, 850.39f);
+                    //Document document = new Document(pdf, ticketSize);
+                    //document.SetMargins(0, 0, 0, 0);
+
+                    Document pdfDoc = new Document(pdf, PageSize.A4); // Tamaño A4 (ELIMINAR LINEA SI ES TICKET)
                     HtmlConverter.ConvertToPdf(texto_html, pdf, converterProperties);
                 }
 

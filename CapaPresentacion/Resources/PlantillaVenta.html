@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plantilla_venta</title>
     <style>
         * {
@@ -11,10 +10,21 @@
             font-family: Arial, sans-serif;
         }
 
+        @page {
+            size: A4;
+            margin: 10mm;
+        }
+
+        .ticket {
+            width: 80mm; /* 58mm, 80mm o 100mm son las medidas comunes */
+            margin: 0 auto; /* centrado */
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
         body {
-            width: 20cm;
-            min-height: 27cm;
-            max-height: 29.7cm;
+            margin: 0;
+            padding: 0;
             font-size: 10px;
         }
 
@@ -31,99 +41,103 @@
         }
 
         table {
-            border-collapse: collapse;
             width: 100%;
+            border-collapse: collapse;
+            page-break-inside: avoid;
         }
     </style>
 </head>
 <body>
-    <div class="wrapper floating-mid" style="margin: 0 auto; text-align: center;">
-        <img src="@Logo" alt="Logo" style="max-width:50px;max-height:50px;display:block;margin:auto;" />
+    <div class="ticket">
+        <div class="wrapper floating-mid" style="margin: 0 auto; text-align: center;">
+            <img src="@Logo" alt="Logo" style="max-width:50px;max-height:50px;display:block;margin:auto;" />
+        </div>
+        <h1 style="text-align: center;">ABDE</h1>
+        <p>
+            @RazonSocial<br />
+            CUIT: @Cuit<br />
+            INGR. BRUTOS: @IngresosBrutos<br />
+            DOM COM. @Direccion<br />
+            CP: @CodigoPostal - @Localidad - @Provincia<br />
+            TEL: @TelefonoComercio<br />
+            INICIO ACTIVIDAD: @InicioActividad<br />
+            @RespIVA
+        </p>
+        <p>---------------------------------------------------------------------------------------</p>
+        <table style="height: 54px; width: 100%; border-collapse: collapse; border-style: none;">
+            <tbody>
+                <tr style="height: 18px;">
+                    <td style="width: 50%; height: 18px; text-align: left;">@FechaVenta</td>
+                    <td style="width: 50%; height: 18px; text-align: right;">NRO. COMP: @NroVenta</td>
+                </tr>
+                <tr style="height: 18px;">
+                    <td style="width: 50%; height: 18px; text-align: left;">P.V.: @PuntoVenta</td>
+                    <td style="width: 50%; height: 18px; text-align: right;">CAJERO: @codUsuario</td>
+                </tr>
+                <tr style="height: 18px;">
+                    <td style="width: 50%; height: 18px; text-align: left;">COND. VENTA: CONTADO</td>
+                    <td style="width: 50%; height: 18px;">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="text-align: left;">---------------------------------------------------------------------------------------</p>
+        <p style="text-align: center;"><strong>FACTURA @TipoFactura</strong><br />@ClienteRespIVA</p>
+        <p style="text-align: left;">---------------------------------------------------------------------------------------</p>
+        <!--<table style="height: 36px; width: 100%; border-collapse: collapse;">
+            <tbody>
+                <tr style="height: 18px;">
+                    <td style="width: 80.1136%; height: 18px; text-align: left;"><strong>YOGURT ENTERO FIRME 120 Gr</strong> (21,00%)</td>
+                    <td style="width: 19.8864%; height: 18px;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td style="width: 80.1136%; text-align: left;">2 x 70,84</td>
+                    <td style="width: 19.8864%; text-align: right;"><strong>141,68</strong></td>
+                </tr>
+                <tr style="height: 18px;">
+                    <td style="width: 80.1136%; height: 18px; text-align: left;"><strong>MANZANAS 1 Kg</strong> (10,50%)</td>
+                    <td style="width: 19.8864%; height: 18px; text-align: right;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td style="width: 80.1136%; text-align: left;">1 x 85,99</td>
+                    <td style="width: 19.8864%; text-align: right;"><strong>85,99</strong></td>
+                </tr>
+            </tbody>
+        </table>-->
+        <!-- LISTADO DE PRODUCTOS -->
+        <table style="margin-top: 5px;">
+            <!--<thead>
+                <tr>
+                    <th class="text-left">Codigo</th>
+                    <th class="text-left">Descripcion</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unit.</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>-->
+            <tbody>
+                @Filas
+            </tbody>
+        </table>
+        <p>---------------------------------------------------------------------------------------</p>
+        <table style="height: 54px; width: 100%; border-collapse: collapse;">
+            <tbody>
+                <tr style="height: 18px;">
+                    <td style="width: 80%; height: 18px; text-align: left;"><strong>TOTAL</strong></td>
+                    <td style="width: 20%; height: 18px; text-align: right;"><strong>@Total</strong></td>
+                </tr>
+                <tr style="height: 18px;">
+                    <td style="width: 80%; height: 18px; text-align: left;">EFECTIVO</td>
+                    <td style="width: 20%; height: 18px; text-align: right;">@Pago</td>
+                </tr>
+                <tr style="height: 18px;">
+                    <td style="width: 80%; height: 18px; text-align: left;">SU VUELTO</td>
+                    <td style="width: 20%; height: 18px; text-align: right;">@Vuelto</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>---------------------------------------------------------------------------------------</p>
+        <p style="text-align: center;"><strong>GRACIAS POR SU COMPRA</strong></p>
     </div>
-    <h1 style="text-align: center;">ABDE</h1>
-    <p>
-        @RazonSocial<br />
-        CUIT: @Cuit<br />
-        INGR. BRUTOS: @IngresosBrutos<br />
-        DOM COM. @Direccion<br />
-        CP: @CodigoPostal - @Localidad - @Provincia<br />
-        TEL: @TelefonoComercio<br />
-        INICIO ACTIVIDAD: @InicioActividad<br />
-        @RespIVA
-    </p>
-    <p>---------------------------------------------------------------------------------------</p>
-    <table style="height: 54px; width: 100%; border-collapse: collapse; border-style: none;">
-        <tbody>
-            <tr style="height: 18px;">
-                <td style="width: 50%; height: 18px; text-align: left;">@FechaVenta</td>
-                <td style="width: 50%; height: 18px; text-align: right;">NRO. COMP: @NroVenta</td>
-            </tr>
-            <tr style="height: 18px;">
-                <td style="width: 50%; height: 18px; text-align: left;">P.V.: @PuntoVenta</td>
-                <td style="width: 50%; height: 18px; text-align: right;">CAJERO: @codUsuario</td>
-            </tr>
-            <tr style="height: 18px;">
-                <td style="width: 50%; height: 18px; text-align: left;">COND. VENTA: CONTADO</td>
-                <td style="width: 50%; height: 18px;">&nbsp;</td>
-            </tr>
-        </tbody>
-    </table>
-    <p style="text-align: left;">---------------------------------------------------------------------------------------</p>
-    <p style="text-align: center;"><strong>FACTURA @TipoFactura</strong><br />@ClienteRespIVA</p>
-    <p style="text-align: left;">---------------------------------------------------------------------------------------</p>
-    <!--<table style="height: 36px; width: 100%; border-collapse: collapse;">
-        <tbody>
-            <tr style="height: 18px;">
-                <td style="width: 80.1136%; height: 18px; text-align: left;"><strong>YOGURT ENTERO FIRME 120 Gr</strong> (21,00%)</td>
-                <td style="width: 19.8864%; height: 18px;">&nbsp;</td>
-            </tr>
-            <tr>
-                <td style="width: 80.1136%; text-align: left;">2 x 70,84</td>
-                <td style="width: 19.8864%; text-align: right;"><strong>141,68</strong></td>
-            </tr>
-            <tr style="height: 18px;">
-                <td style="width: 80.1136%; height: 18px; text-align: left;"><strong>MANZANAS 1 Kg</strong> (10,50%)</td>
-                <td style="width: 19.8864%; height: 18px; text-align: right;">&nbsp;</td>
-            </tr>
-            <tr>
-                <td style="width: 80.1136%; text-align: left;">1 x 85,99</td>
-                <td style="width: 19.8864%; text-align: right;"><strong>85,99</strong></td>
-            </tr>
-        </tbody>
-    </table>-->
-    <!-- LISTADO DE PRODUCTOS -->
-    <table style="margin-top: 5px;">
-        <!--<thead>
-            <tr>
-                <th class="text-left">Codigo</th>
-                <th class="text-left">Descripcion</th>
-                <th>Cantidad</th>
-                <th>Precio Unit.</th>
-                <th>Subtotal</th>
-            </tr>
-        </thead>-->
-        <tbody>
-            @Filas
-        </tbody>
-    </table>
-    <p>---------------------------------------------------------------------------------------</p>
-    <table style="height: 54px; width: 100%; border-collapse: collapse;">
-        <tbody>
-            <tr style="height: 18px;">
-                <td style="width: 80%; height: 18px; text-align: left;"><strong>TOTAL</strong></td>
-                <td style="width: 20%; height: 18px; text-align: right;"><strong>@Total</strong></td>
-            </tr>
-            <tr style="height: 18px;">
-                <td style="width: 80%; height: 18px; text-align: left;">EFECTIVO</td>
-                <td style="width: 20%; height: 18px; text-align: right;">@Pago</td>
-            </tr>
-            <tr style="height: 18px;">
-                <td style="width: 80%; height: 18px; text-align: left;">SU VUELTO</td>
-                <td style="width: 20%; height: 18px; text-align: right;">@Vuelto</td>
-            </tr>
-        </tbody>
-    </table>
-    <p>---------------------------------------------------------------------------------------</p>
-    <p style="text-align: center;"><strong>GRACIAS POR SU COMPRA</strong></p>
+
 </body>
 </html>

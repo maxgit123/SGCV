@@ -342,6 +342,7 @@
     <Compile Include="Utilidades\UtilidadesForm.cs" />
     <Compile Include="Utilidades\UtilidadesModal.cs" />
     <Compile Include="Utilidades\UtilidadesTextBox.cs" />
+    <None Include="Resources\PlantillaVenta2.html" />
     <None Include="Resources\PlantillaVenta.html" />
     <None Include="Resources\subtract_32.png" />
     <None Include="Resources\pdf-32.png" />
@@ -374,6 +375,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmCompra.resx">
       <DependentUpon>frmCompra.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmCompraDetalle.resx">
       <DependentUpon>frmCompraDetalle.cs</DependentUpon>

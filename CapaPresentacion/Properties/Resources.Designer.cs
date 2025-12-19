@@ -247,7 +247,7 @@ namespace CapaPresentacion.Properties {
         ///            width: 21cm;
         ///            min-height: 27cm;
         ///            max-height: 29.7cm;
-        ///            font-size: 13px;
+        ///            font-size: 10px;
         ///        }
         ///
         ///        .wrapper {
@@ -269,21 +269,70 @@ namespace CapaPresentacion.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html lang=&quot;es&quot;&gt;
+        ///&lt;html &gt;
         ///&lt;head&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-        ///    &lt;title&gt;Ticket&lt;/title&gt;
-        ///    &lt;link href=&quot;index.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
-        ///&lt;/head&gt;
-        ///&lt;body&gt;
-        ///&lt;h1 style=&quot;text-align: center;&quot;&gt;AEM&lt;/h1&gt;
-        ///&lt;p&gt;AEM S.A.&lt;br /&gt;CUIT: 30-11111111-2&lt;br /&gt;INGR. BRUTOS: 11111111-00&lt;br /&gt;AV. 9 DE JULIO 2070&lt;br /&gt;CP: 3228 - CHAJARI - ENTRE RIOS&lt;br /&gt;TEL: (3456) 42-0701&lt;br  [rest of string was truncated]&quot;;.
+        ///    &lt;title&gt;Plantilla_venta&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        * {
+        ///            box-sizing: border-box;
+        ///            font-family: Arial, sans-serif;
+        ///        }
+        ///
+        ///        @page {
+        ///            size: A4;
+        ///            margin: 10mm;
+        ///        }
+        ///
+        ///        .ticket {
+        ///            width: 80mm; /* 58mm, 80mm o 100mm son las medidas comunes */
+        ///            margin: 0 auto; /* centrado */
+        ///            word [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string PlantillaVenta {
             get {
                 return ResourceManager.GetString("PlantillaVenta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
+        ///    &lt;title&gt;Plantilla Venta&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        @page {
+        ///            size: A4;
+        ///            margin: 10mm;
+        ///        }
+        ///
+        ///		* {
+        ///			box-sizing: border-box;
+        ///			font-family: Arial, sans-serif;
+        ///		}
+        ///
+        ///		body {
+        ///			margin: 0;
+        ///			padding: 0;
+        ///			font-size: 10px;
+        ///		}
+        ///
+        ///		.ticket {
+        ///			width: 80mm;
+        ///			margin: 0 auto;
+        ///			word-wrap: break-word;
+        ///			overflow-wrap: break-word;
+        ///		}
+        ///
+        ///		.text-left { text-align: left; }
+        ///		.text-center { text- [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string PlantillaVenta2 {
+            get {
+                return ResourceManager.GetString("PlantillaVenta2", resourceCulture);
             }
         }
         
