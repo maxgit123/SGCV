@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using CapaEntidad;
@@ -15,6 +16,7 @@ namespace CapaPresentacion.Formularios
     {
         private bool _datosCargados = false;
         private int _usuarioId = 0;
+        private List<CE_VentaDetalle> _ventaDetalleList = new List<CE_VentaDetalle>();
 
         public frmVentaDetalle()
         {
@@ -134,20 +136,28 @@ namespace CapaPresentacion.Formularios
 
                 // --- Detalle de productos ---
                 string filas = string.Empty;
-                foreach (DataGridViewRow fila in dgvProductos.Rows)
+                decimal ivaTotal = 0;
+
+                foreach (CE_VentaDetalle vd in _ventaDetalleList)
                 {
                     filas += "<tr>";
-                    filas += $"<td class=\"text-left\">{fila.Cells["descripcion"].Value}</td>";
+                    filas += $"<td class=\"text-left\">{vd.oProducto.Descripcion}</td>";
+                    filas += $"<td class=\"text-right\">({vd.oProducto.oCategoria.oAlicuotaIVA.Porcentaje:N2})</td>";
                     filas += "</tr>";
+
                     filas += "<tr>";
-                    filas += $"<td class=\"text-left\">{fila.Cells["cantidad"].Value}x{Convert.ToDecimal(fila.Cells["precioUnit"].Value):N2} / {fila.Cells["codigo"].Value}</td>";
-                    filas += $"<td class=\"text-right\">{Convert.ToDecimal(fila.Cells["subtotal"].Value):N2}</td>";
+                    filas += $"<td class=\"text-left\">{vd.Cantidad}x{vd.PrecioVentaUnitario:N2} / {vd.oProducto.Codigo}</td>";
+                    filas += $"<td class=\"text-right\">{vd.Subtotal:N2}</td>";
                     filas += "</tr>";
+
+                    decimal ivaProducto = vd.Subtotal * (vd.oProducto.oCategoria.oAlicuotaIVA.Porcentaje / 100);
+                    ivaTotal += ivaProducto;
                 }
                 texto_html = texto_html.Replace("@Filas", filas);
                 texto_html = texto_html.Replace("@Total", txtTotal.Text);
                 texto_html = texto_html.Replace("@Pago", txtPago.Text);
                 texto_html = texto_html.Replace("@Vuelto", txtVuelto.Text);
+                texto_html = texto_html.Replace("@MontoIVAContenido", ivaTotal.ToString("N2"));
 
                 using (FileStream fs = new FileStream(saveFile.FileName, FileMode.Create))
                 {
@@ -184,6 +194,8 @@ namespace CapaPresentacion.Formularios
             }
 
             _usuarioId = oVenta.oUsuario.Id;
+            _ventaDetalleList = oVenta.oVentaDetalle;
+
             txtNroVenta.SetErrorState(false);
             txtNroVenta.Text = oVenta.Id.ToString();
             txtFechaVenta.Text = oVenta.FechaVenta.ToString("dd/MM/yyyy");

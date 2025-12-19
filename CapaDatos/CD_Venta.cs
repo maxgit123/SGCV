@@ -135,10 +135,13 @@ namespace CapaDatos
             using (SqlConnection oConexion = new SqlConnection(Conexion.cadenaDB))
             using (SqlCommand cmd = new SqlCommand(@"
                     SELECT
-	                    p.codigo, p.descripcion,
-                        vd.precioVentaUnitario, vd.cantidad, vd.subtotal  
+                        p.codigo, p.descripcion,
+                        vd.precioVentaUnitario, vd.cantidad, vd.subtotal,
+	                    a.porcentaje AS alicuotaIVA
                     FROM VentaDetalle vd
                     INNER JOIN Producto p ON p.id_producto = vd.producto_id
+                    INNER JOIN Categoria c ON c.id_categoria = p.categoria_id
+                    INNER JOIN cAlicuotaIVA a ON a.id_alicuotaIVA = c.alicuotaIVA_id
                     WHERE vd.venta_id = @idVenta;", oConexion))
             {
                 cmd.Parameters.AddWithValue("@idVenta", idVenta);
@@ -154,7 +157,14 @@ namespace CapaDatos
                                 oProducto = new CE_Producto()
                                 {
                                     Codigo = reader["codigo"].ToString(),
-                                    Descripcion = reader["descripcion"].ToString()
+                                    Descripcion = reader["descripcion"].ToString(),
+                                    oCategoria = new CE_Categoria()
+                                    {
+                                        oAlicuotaIVA = new CE_AlicuotaIVA()
+                                        {
+                                            Porcentaje = Convert.ToDecimal(reader["alicuotaIVA"])
+                                        }
+                                    }
                                 },
                                 PrecioVentaUnitario = Convert.ToDecimal(reader["precioVentaUnitario"]),
                                 Cantidad = Convert.ToInt32(reader["cantidad"]),

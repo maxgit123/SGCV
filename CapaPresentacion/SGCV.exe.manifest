@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CapaDatos.dll" size="45568">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CapaDatos.dll" size="46080">
       <assemblyIdentity name="CapaDatos" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ztlEJnlVlGIsikeykm14a4ZqqeE0PagVWbyzp2VNDQs=</dsig:DigestValue>
+        <dsig:DigestValue>kWxvvbWTVkSnx+W95RCqvHqpIXyHnhIiNgKsnzXDoV4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -415,14 +415,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SGCV.exe" size="469504">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SGCV.exe" size="470016">
       <assemblyIdentity name="SGCV" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>WKhVH9BcJb5kGooqkat8uiG6osF7wvpsEteZGR+1te4=</dsig:DigestValue>
+        <dsig:DigestValue>DJk2JGgh8M1d2FJmhV9uzVbsUuaa65v9YcixUzqYth0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

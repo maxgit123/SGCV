@@ -397,7 +397,5 @@ namespace CapaPresentacion.Formularios
 
             return true;
         }
-
-
     }
 }
